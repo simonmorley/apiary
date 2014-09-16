@@ -22,7 +22,9 @@ A single Location's statistical objects
 
             {"password": "random-passy"}
 
+
 # Group Locations
+
 Locations related resources of the **Locations API**
 
 ## Locations Collection [/api/v1/locations]
@@ -1112,5 +1114,23 @@ Restore an archived location to it's former glory.
 
             { "message": "Your location has been unarchived" } 
 
+
+# Group Walled Gardens
+
+Walled Gardens related resources of the **Walled Gardens API**. Walled gardens are a nested in a location. You cannot currently list all your walled gardens without specifying a location id (slug).
+
+## Walled Gardens Collection [/api/v1/locations/{location_id}/walledgardens]
+
++ Parameters
+
+    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+
+### List all Locations [GET]
+
++ Request (application/json)
+
+            { "location_id": "derby-council", }
+
++ Response 200 (application/json)
 
 
