@@ -22,7 +22,6 @@ A single Location's statistical objects
 
             {"password": "random-passy"}
 
-
 # Group Locations
 
 Locations related resources of the **Locations API**
@@ -1106,7 +1105,7 @@ Restore an archived location to it's former glory.
 
 + Request (application/json)
 
-            { "id": "derby-council", }
+            { "id": "derby-council" }
 
 + Response 200 (application/json)
 
@@ -1119,18 +1118,79 @@ Restore an archived location to it's former glory.
 
 Walled Gardens related resources of the **Walled Gardens API**. Walled gardens are a nested in a location. You cannot currently list all your walled gardens without specifying a location id (slug).
 
+Adding a walled garden to a location will allow unlimited access to the url specified. Users will not have to login to browse these sites.
+
 ## Walled Gardens Collection [/api/v1/locations/{location_id}/walledgardens]
 
 + Parameters
 
     + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
 
-### List all Locations [GET]
+### List all Walled Gardens [GET]
 
 + Request (application/json)
 
-            { "location_id": "derby-council", }
+            { "location_id": "derby-council" }
 
 + Response 200 (application/json)
 
+
+    + Body
+    
+            [{
+                
+                {
+                    "id": 75,
+                    "location_id": 870,
+                    "url": "polkaspots.com",
+                    "created_at": "2014-09-16T23:50:42.000+01:00",
+                    "updated_at": "2014-09-16T23:50:42.000+01:00"
+                },
+                {
+                    "id": 76,
+                    "location_id": 870,
+                    "url": "google.com",
+                    "created_at": "2014-09-16T23:50:47.000+01:00",
+                    "updated_at": "2014-09-16T23:50:47.000+01:00"
+                },
+                {
+                    "id": 77,
+                    "location_id": 870,
+                    "url": "peaceandharmony.com",
+                    "created_at": "2014-09-16T23:51:03.000+01:00",
+                    "updated_at": "2014-09-16T23:51:03.000+01:00"
+                }
+                
+            }]
+
+## Walled Garden Create [/api/v1/locations/{location_id}/walledgardens{?url}]
+
+### Create a Walled Garden [POST]
+
+There's two ways to create a walled garden. You can either post directly with a location id or you update the resource when updating a location. Please see the section within the location's group for more information. 
+
+**CAUSES SYNC**
+
+Please note, creating a new walled garden will force all your boxes to reload their networks. This *will* log users off.
+
+*TODO: Implement the batch create process.*
+
++ Parameters
+
+    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + url (required, string, `polkaspots.com`) ... URL `url` of the Location to whitelist. Please don't include the protocol (http or https).
+
++ Request (application/json)
+
+        { "url": "polkaspots.com" }
+
++ Response 201 (application/json)
+
+        {
+            "id": 7,
+            "location_id": 1636,
+            "url": "polkaspots.com",
+            "created_at": "2014-09-17T00:15:57.239+01:00",
+            "updated_at": "2014-09-17T00:15:57.239+01:00"
+        }
 
