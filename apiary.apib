@@ -1,0 +1,1116 @@
+FORMAT: 1A
+HOST: https://api.polkaspots.com
+
+# polkaspots
+Cucumber Tony's API provides a way to control your Wireless hotspots programatically.
+
+# Group Accounts
+Locations related resources of the **Accounts API**
+
+## Accounts Collection [/api/v1/accounts]
+
+
+
+## Generate Password [/accounts/generate_password]
+
+A single Location's statistical objects
+
+### Retrieve a Location's Statistics [POST]
++ Response 200 (application/json)
+
+    + Body
+
+            {"password": "random-passy"}
+
+# Group Locations
+Locations related resources of the **Locations API**
+
+## Locations Collection [/api/v1/locations]
+
+### List all Locations [GET]
+
++ Response 200 (application/json)
+
+
+        [{
+            "id": 1687,
+            "location_name": "Cafe International",
+            "slug": "cafe-international-f84e1979-52e4-49ff-8d6e-ed808578b36a",
+            "created_at": "May 6 2014 11:47:08",
+            "network_name": "PolkaSpots",
+            "location_address": "12 High Lane",
+            "street": "12 High Lane",
+            "phone1": "02071831471",
+            "location_website": null,
+            "location_type": null,
+            "nas_count": 1,
+            "archived": false,
+            "development_mode": "Production",
+            "daily_limit": true
+        },
+        {
+            "id": 870,
+            "location_name": "Derby - City Council",
+            "slug": "derby-city-council",
+            "created_at": "August 19 2013 11:50:04",
+            "network_name": "Meraki",
+            "location_address": "Corporation Street Derby ",
+            "street": "",
+            "phone1": "01332293111",
+            "location_website": "www.surfthecity.co.uk",
+            "location_type": "186",
+            "nas_count": 5,
+            "archived": false,
+            "development_mode": "Production",
+            "daily_limit": true
+        }]
+
+## Locations Search [/api/v1/locations?q={search}]
+
+### Search for locations [GET]
+
++ Request (application/json)
+
+        { "q": "derby" }
+
++ Response 200 (application/json)
+
+        [
+        {
+            "id": 870,
+            "location_name": "Derby - City Council",
+            "slug": "derby-city-council",
+            "created_at": "August 19 2013 11:50:04",
+            "network_name": "Meraki",
+            "location_address": "Corporation Street Derby ",
+            "street": "",
+            "phone1": "01332293111",
+            "location_website": "www.surfthecity.co.uk",
+            "location_type": "186",
+            "nas_count": 5,
+            "archived": false,
+            "development_mode": "Production",
+            "daily_limit": true
+        }]
+
+## Locations Short List [/api/v1/locations?short={yep}]
+Returns a mini-list of your locations. Is good for search, copy logins, stuff where you don't need much info.
+
+### Search for locations [GET]
+
++ Request (application/json)
+
+        { "short": "yep" }
+
++ Response 200 (application/json)
+
+        [
+        {
+            "location_name": "Derby - City Council",
+            "slug": "derby-city-council",
+            "unique_id": "7379871298798717"
+        }]
+
+
+### Create a Location [POST]
++ Request (application/json)
+
+        { "title": "Buy cheese and bread for breakfast." }
+
++ Response 201 (application/json)
+
+        { "id": 3, "title": "Buy cheese and bread for breakfast." }
+
+
+## Location [/location/{id}]
+A single Location object with all its details
+
++ Parameters
+    + id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+
+### Retrieve a Location [GET]
++ Response 200 (application/json)
+
+    + Header
+
+            X-My-Header: The Value
+
+    + Body
+
+            {
+                "id": 870,
+                "location_name": "Derby City Council",
+                "unique_id": "xxx",
+                "slug": "derby-city-council",
+                "created_at": "August 19 2013 11:50:04",
+                "updated_at": "September 8 2014 14:41:58",
+                "location_info": "This Wi-Fi service is provided by Derby City Council.",
+                "location_info_two": "",
+                "location_address": "The High Street",
+                "street": "Derby",
+                "postcode": "DE1 2FS",
+                "town": "Derby",
+                "country": "United Kingdom",
+                "website": null,
+                "geocode": null,
+                "email_owner": "",
+                "phone1": "02071831471",
+                "location_website": "www.surfthecity.co.uk",
+                "sanitised_website": "surfthecity.co.uk",
+                "created_by": null,
+                "location_notes": null,
+                "success_url": "",
+                "network_name": "Meraki",
+                "average_spend": null,
+                "api_token": "xxx",
+                "state": "stage_6",
+                "archived": false,
+                "newsletter_enabled": false,
+                "newsletter_list_id": null,
+                "newsletter_type": "0",
+                "newsletter_api_token": null,
+                "location_twitter": "derbymuseums",
+                "latitude": null,
+                "longitude": null,
+                "gmaps": false,
+                "passwd_change_day": null,
+                "passwd_auto_gen": false,
+                "ssid": "PolkaSpots Supafly Wi-Fi",
+                "channel": "auto",
+                "whitelist_mac": null,
+                "uampass": null,
+                "chilli_network": "192.168.4.0",
+                "chilli_netmask": "255.255.255.0",
+                "chilli_uamlisten": "192.168.4.1",
+                "chilli_uamport": "3990",
+                "chilli_dns1": "208.67.222.222",
+                "chilli_dns2": "208.67.220.220",
+                "chilli_radius": "cluster-1.polkaspots.co",
+                "chilli_radius1": "cluster-2.polkaspots.co",
+                "chilli_uamallow": "8.8.8.8,208.67.222.222,208.67.220.220",
+                "chilli_uamsecret": "xxx",
+                "encryption": "none",
+                "encryption_key": null,
+                "encryption_private": "psk",
+                "encryption_private_key": "406c6e9b4dbe",
+                "ssid_private": "PolkaSpots Private",
+                "ssid_disabled": false,
+                "ssid_private_disabled": true,
+                "network_private": "private",
+                "network": "lan",
+                "network_country": "GB",
+                "ssid_hidden": false,
+                "ssid_private_hidden": false,
+                "tx_power_2": "20",
+                "tx_power_5": "20",
+                "ht_mode_2": "HT20",
+                "ht_mode_5": "HT20",
+                "channel_5": "auto",
+                "lan_ipaddr": "192.168.210.1",
+                "lan_dhcp_start": 2,
+                "lan_dhcp_end": 150,
+                "lan_dhcp_lease": "12h",
+                "wan_mtu": 1500,
+                "development_mode": "Production",
+                "network_settings": 1,
+                "block_access_to_local": true,
+                "enforce_limit": null,
+                "authorised_domain": "mywifi",
+                "content_filter": "Security",
+                "wisp_id": 1,
+                "product_order_id": null,
+                "access_password": "a0da85",
+                "shop_active": false,
+                "access_type_description": "",
+                "login_screens_disabled": false,
+                "timed_access": true,
+                "daily_limit": true,
+                "weekly_limit": false,
+                "monthly_limit": false,
+                "secondary_access_active": false,
+                "auto_login": true,
+                "auto_login_time": 0,
+                "fb_login_on": true,
+                "fb_login_checkin_req": false,
+                "fb_login_checkin_allow": false,
+                "fb_login_leave_msg": false,
+                "facebook_cover_id": null,
+                "facebook_cover_url": null,
+                "social_login_vouchers": false,
+                "use_ps_twillio": true,
+                "twillio_from_number": null,
+                "twillio_username": null,
+                "twillio_token": null,
+                "default_currency": "GBP",
+                "foursq_id": "4b9fb6e4f964a520c13737e3",
+                "foursq_category": null,
+                "foursq_name": null,
+                "foursq_verified": false,
+                "foursq_url": null,
+                "facebook_products": null,
+                "facebook_username": "derbymuseums",
+                "facebook_id": "",
+                "facebook_link": "http://facebook.com/derbymuseums",
+                "facebook_hours": null,
+                "google_url": null,
+                "google_hours": null,
+                "google_reference": null,
+                "add_to_global_map": true,
+                "login_header_image": 2,
+                "login_background_image": 2,
+                "login_css_heading_text_colour": "#ffffff",
+                "login_css_body_text_colour": "#796f66",
+                "login_css_border_colour": "#9dd8dd",
+                "login_css_link_colour": "#ffffff",
+                "login_css_container_colour": "#9dd8dd",
+                "login_css_container_transparency": "1",
+                "login_css_button_colour": "#000000",
+                "login_css_header_colour": "#5F7883",
+                "login_css_error_colour": "#a12c6c",
+                "login_terms_url": "http://polkaspots.com/wifi-terms",
+                "location_image_file_name": "STC.png",
+                "logo_file_name": "",
+                "logo_content_type": "image/png",
+                "body_background_color": "#9dd8dd",
+                "background_file_name": "white.jpg",
+                "login_design": 1,
+                "login_words_position": "Left",
+                "login_logo_position": "Left",
+                "custom_css": null,
+                "login_container_inner_width": "95%",
+                "login_bg_dimension": "full",
+                "login_css_heading_text_size": "40px",
+                "login_css_heading_2_text_size": "18px",
+                "login_css_heading_2_text_colour": "#796f66",
+                "login_css_heading_3_text_size": "18px",
+                "login_css_heading_3_text_colour": "#796f66",
+                "login_button_text": "Login Now",
+                "fsq_login_checkin_allow": false,
+                "font_family": "'Helvetica Neue',sans-serif",
+                "login_btn_font_size": "18px",
+                "login_btn_font_colour": "#d396c3",
+                "container_width": "600px",
+                "logins_forgot_password": false,
+                "external_css_url": null,
+                "skip_user_registration": false,
+                "remove_registration_link": false,
+                "logins_redirect_url": null,
+                "font_size": "15px",
+                "location_header": "Welcome to Surf the City",
+                "li_login_on": false,
+                "flume_enabled": false,
+                "meraki_validator": null,
+                "attr_generated": true,
+                "location_categories": "Government Building"
+                
+            }
+
+### Update a Location [PATCH]
++ Response 200 (application/json)
+
+    + Header
+
+            X-My-Header: The Value
+
+    + Body
+
+### Remove a Location [DELETE]
++ Response 204
+
+
+
+## Location Statistics [/location/{id}/stats]
+A single Location's statistical objects
+
++ Parameters
+    + id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+
+### Retrieve a Location's Statistics [GET]
++ Response 200 (application/json)
+
+    + Header
+
+            X-My-Header: The Value
+
+    + Body
+
+            {
+                "slug": "derby-city-council",
+                "lat": null,
+                "lon": null,
+                "sessions": 0,
+                "uniques": 0,
+                "minutes_online": 0,
+                "downloads": 0,
+                "busiest_hr": null,
+                "busiest_day": null,
+                "total_sales": 0,
+                "qnty_sales": 0,
+                "range": "07/28/2014 - 09/08/2014",
+                "chart_series": {
+                    "Sessions": "[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]",
+                    "Unique users": "[0,16,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14,18,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]"
+                },
+                "audience": [],
+                "loyalty": {
+                    "new": 0,
+                    "returning": null
+                },
+                "geojson": [
+                    {
+                        "lat": null,
+                        "lon": null,
+                        "title": "Derby City Council 6",
+                        "slug": "xxx",
+                        "colour": "#DE2AE5",
+                        "network": "meraki",
+                        "description": "Derby City Council 6",
+                        "mac": "00-18-0A-XX-XX-XX",
+                        "sessions": null,
+                        "heartbeat": null
+                    },
+                    {
+                        "lat": "28.15303332447874",
+                        "lon": "-60.83188607793834",
+                        "title": "Derby City Council",
+                        "slug": "xxx",
+                        "colour": "#DE2AE5",
+                        "network": "meraki",
+                        "description": "Derby City Council",
+                        "mac": "00-18-0A-XX-XX-XX",
+                        "sessions": null,
+                        "heartbeat": null
+                    },
+                    {
+                        "lat": "-24.1850770453765",
+                        "lon": "-162.5053433148802",
+                        "title": "Derby City Council",
+                        "slug": "xxx",
+                        "colour": "#DE2AE5",
+                        "network": "meraki",
+                        "description": "Derby City Council",
+                        "mac": "00-18-0A-XX-XX-XX",
+                        "sessions": null,
+                        "heartbeat": null
+                    },
+                    {
+                        "lat": "-39.74956573964626",
+                        "lon": "176.4442398543561",
+                        "title": "Derby Council 2",
+                        "slug": "xxx",
+                        "colour": "#DE2AE5",
+                        "network": "meraki",
+                        "description": "Derby Council 2",
+                        "mac": "00-18-0A-XX-XX-XX",
+                        "sessions": null,
+                        "heartbeat": null
+                    },
+                    {
+                        "lat": null,
+                        "lon": null,
+                        "title": "Derby - City Council 6",
+                        "slug": "xxx",
+                        "colour": "#DE2AE5",
+                        "network": "meraki",
+                        "description": "Derby - City Council 6",
+                        "mac": "00-18-0A-XX-XX-XX",
+                        "sessions": null,
+                        "heartbeat": null
+                    }
+                ],
+                "top_boxes": []
+            }
+                
+                
+## Location Access Settings [/location/{id}/access]
+A single Location's access settings. Use this to adjust the type of login screens you want to offer, download speeds or even activate social logins.
+
+The list of parameters you can update using this action are listed below. If you need to update those not listed, use vanilla **update**.
++ Parameters
+    + id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+
+
+### Retrieve a Location's Access Settings [GET]
++ Response 200 (application/json)
+
+    + Header
+
+            X-My-Header: The Value
+
+    + Body
+
+            {
+                "slug": "derby-city-council",
+                "location_name": "Derby City Centre",
+                "timed_access": true,
+                "passwd_auto_gen": true,
+                "email_owner": "bob@ps.com",
+                "access_password": "a0da85",
+                "passwd_change_day": [
+                    "0",
+                    "1",
+                    "2"
+                ],
+                "daily_limit": false,
+                "weekly_limit": false,
+                "monthly_limit": true,
+                "logins_forgot_password": false,
+                "fb_login_on": true,
+                "li_login_on": false,
+                "facebook_id": "derbymuseums",
+                "facebook_username": "derbymuseums",
+                "fb_page_cache_processing": false,
+                "fb_login_checkin_allow": false,
+                "shop_allowed": true,
+                "shop_active": false,
+                "secondary_access_active": true,
+                "secondary_access_allowed": true,
+                "access_types": {
+                    "primary_access": {
+                        "name": "Social",
+                        "id": 7
+                    },
+                    "secondary_access": {
+                        "name": "Password",
+                        "id": 1
+                    }
+                },
+                "policy": {
+                    "id": 1189,
+                    "maximum_data_rate_upstream": 1024,
+                    "maximum_data_rate_downstream": 8448,
+                    "max_daily_session": 60,
+                    "max_weekly_session": 22,
+                    "max_monthly_session": 604,
+                    "session_timeout": 1440,
+                    "idle_timeout": 120,
+                    "simultaneous_use": 22
+                },
+                "shop": {
+                    "id": 2,
+                    "shop_name": "The Bridge Street Collective Wi-Fi",
+                    "unique_id": "ssss7876xs"
+                },
+                "facebook_page_valid": false,
+                "sms_details_valid": [],
+                "available_access_types": [
+                    {
+                        "name": "Password",
+                        "id": 1
+                    },
+                    {
+                        "name": "Vouchers",
+                        "id": 2
+                    },
+                    {
+                        "name": "Clickthrough",
+                        "id": 3
+                    },
+                    {
+                        "name": "Facebook",
+                        "id": 6
+                    },
+                    {
+                        "name": "Social",
+                        "id": 7
+                    }
+                ],
+                "available_secondary_access": [
+                    {
+                        "name": "Password",
+                        "id": 1
+                    },
+                    {
+                        "name": "Vouchers",
+                        "id": 2
+                    },
+                    {
+                        "name": "Clickthrough",
+                        "id": 3
+                    },
+                    {
+                        "name": "Facebook",
+                        "id": 6
+                    },
+                    {
+                        "name": "Social",
+                        "id": 7
+                    }
+                ]
+            }
+            
+### Update a Location's Access Settings [PATCH]
++ Request (application/json)
+
+    time_limit == ['daily', 'weekly', 'monthly']
+
+    + Body
+    
+            { "location": 
+                {
+                    "slug": "derby-city-council",
+                    "location_name": "Derby City Centre",
+                    "timed_access": true,
+                    "passwd_auto_gen": true,
+                    "email_owner": "simon@ps.com",
+                    "access_password": "a0da85",
+                    "passwd_change_day": [
+                        "0",
+                        "1",
+                        "2"
+                    ],
+                    "time_limit": 'daily',
+                    "logins_forgot_password": false,
+                    "fb_login_on": true,
+                    "li_login_on": false,
+                    "facebook_id": "derbymuseums",
+                    "facebook_username": "derbymuseums",
+                    "fb_login_checkin_allow": false,
+                    "fb_login_leave_msg": false,
+                    "secondary_access_active": true,
+                    "secondary_access_allowed": true,
+                    "shop_active": true,
+                    "access_types": {
+                        "primary_access": {
+                            "name": "Social",
+                            "id": 7
+                        },
+                        "secondary_access": {
+                            "name": "Password",
+                            "id": 1
+                        }
+                    },
+                    "available_access_types": [
+                        {
+                            "name": "Password",
+                            "id": 1
+                        },
+                        {
+                            "name": "Vouchers",
+                            "id": 2
+                        },
+                        {
+                            "name": "Clickthrough",
+                            "id": 3
+                        },
+                        {
+                            "name": "Facebook",
+                            "id": 6
+                        },
+                        {
+                            "name": "Social",
+                            "id": 7
+                        }
+                    ],
+                    "available_secondary_access": [
+                        {
+                            "name": "Password",
+                            "id": 1
+                        },
+                        {
+                            "name": "Vouchers",
+                            "id": 2
+                        },
+                        {
+                            "name": "Clickthrough",
+                            "id": 3
+                        },
+                        {
+                            "name": "Facebook",
+                            "id": 6
+                        },
+                        {
+                            "name": "Social",
+                            "id": 7
+                        }
+                    ]
+                    "policy": {
+                        "maximum_data_rate_upstream": 1024,
+                        "maximum_data_rate_downstream": 8448,
+                        "max_daily_session": 60,
+                        "max_weekly_session": 22,
+                        "max_monthly_session": 604,
+                        "session_timeout": 1440,
+                        "idle_timeout": 120,
+                        "simultaneous_use": 22
+                    },
+                    "shop": {
+                        "shop_name": "The Bridge Street Collective Wi-Fi",
+                        "unique_id": "2927039401028770904"
+                    },
+                }
+            }
+
++ Response 200 (application/json)
+
+    + Header
+
+            X-My-Header: The Value
+
+    + Body
+
+            { }
+
+            
+## Verify a Facebook Page [/location/{id}/fb_verify_page?page_id={page_id}]
+Checks if your Facebook page is valid or not. Will return a 422 Unprocessable Entity if it's not a valid page.
+
++ Parameters
+    + id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + page_id (required, string, `derbycouncil`) ... Page ID `page_id` of the page you want to test. Has example value.
+
+### Determines if your Facebook page id is valid [POST]
++ Request (application/json)
+
+    + Body { "id": "derby-council", page_id: "123123123" }
+    
++ Response 200 (application/json)
+
+    + Body
+    
+            { "message": "This is a valid page" }
+
+## Get a list of your Facebook Pages [/location/{id}/fb_get_pages?auth={authResponse}]
+This will create a background job to get a list of your Facebook page ids. The first request will create the job - you will receive a 422 error if you post again within 5 minutes while the job's processing. Once we've collected your pages, we'll return them as a JSON object.
+
+You need to send us your Facebook accessToken for us to get these. We recommend using the FB JS SDK to get this. **We do not have a public API to generate these details.**
+
++ Parameters
+    + id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + auth (required, json, `{"accessToken": "your_facebook_auth_token", "userId": "your_id", "expiresIn": 86400}`) ... A JSON object containing a accessToken, userId and expiresIn values. These come straight from the FB api.
+    
+### Gets a list of your Facebook pages [POST]
+
++ Response 200 (application/json)
+
+    + Header
+
+            X-My-Header: The Value
+
+    + Body
+    
+            { "message": "Getting a list of your pages" }
+
++ Response 201 (application/json)
+
+    + Header
+
+            X-My-Header: The Value
+
+    + Body
+    
+            { 
+                "pages": [
+                    {
+                        "category": "Internet/software",
+                        "category_list": [
+                            {
+                                "id": "2256",
+                                "name": "Internet/Software"
+                            }
+                        ],
+                        "name": "PolkaSpots",
+                        "access_token": "xxx",
+                        "perms": [
+                            "ADMINISTER",
+                            "EDIT_PROFILE",
+                            "CREATE_CONTENT",
+                            "MODERATE_CONTENT",
+                            "CREATE_ADS",
+                            "BASIC_ADMIN"
+                        ],
+                        "id": "185269478190861"
+                    },
+                    {
+                        "category": "Community",
+                        "name": "Public Wi-Fi",
+                        "access_token": "xxx",
+                        "perms": [
+                            "ADMINISTER",
+                            "EDIT_PROFILE",
+                            "CREATE_CONTENT",
+                            "MODERATE_CONTENT",
+                            "CREATE_ADS",
+                            "BASIC_ADMIN"
+                        ],
+                        "id": "138118009562188"
+                    },
+                    {
+                        "category": "Product/service",
+                        "name": "Smart Wi-Fi",
+                        "access_token": "xxx",
+                        "perms": [
+                            "ADMINISTER",
+                            "EDIT_PROFILE",
+                            "CREATE_CONTENT",
+                            "MODERATE_CONTENT",
+                            "CREATE_ADS",
+                            "BASIC_ADMIN"
+                        ],
+                        "id": "148495501855997"
+                    }
+                ]
+            }
+
++ Response 422 (application/json)
+
+    + Header
+
+            X-My-Header: The Value
+
+    + Body
+    
+            { "message": "Already processing a request." }
+
+
+## Location layouts [/location/{id}/layout]
+
+Some params that are just required for the login pages. You may also use the standard location#show method however this is optimised for speed and includes only the attributes you need. Update the settings with a standard PATCH UPDATE.
+
+Remarkably, you can send any image reference back as url. Either you use our content delivery network (CDN) by uploading a photo using Cucumber Tony. Or, just post a valid URL back. And then make sure you've added the domain to your walled gardens.
+
++ Parameters
+    + id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+
+### Retrieve a Location's Layout Settings [GET]
+
++ Response 200 (application/json)
+
+    + Header
+
+            X-My-Header: The Value
+
+    + Body
+
+            {
+                "location_name": "Derby City Centre",
+                "slug": "derby-city-council",
+                "unique_id": "8798727298729872",
+                "login_design": 1,
+                "login_header_image": 1,
+                "login_logo_position": "Left",
+                "login_background_image": 1,
+                "body_background_color": "#FFFFFF",
+                "clone_logins_processing": false,
+                "logo_file_name": null,
+                "background_file_name": null,
+                "location_header": "Welcome to Surf the City Poo",
+                "location_info": "This Wi-Fi service is provided by Derby City Council.",
+                "location_info_two": "",
+                "location_website": "www.surfthecity.co.uk",
+                "address_string": "12 Big Lane",
+                "login_css_heading_text_colour": "#5c7883",
+                "login_css_heading_2_text_colour": "#333333",
+                "login_css_heading_3_text_colour": "#333333",
+                "login_css_body_text_colour": "#575757",
+                "login_css_border_colour": "#cccccc",
+                "login_css_link_colour": "#381515",
+                "login_css_container_colour": "#ffffff",
+                "login_css_container_transparency": "1",
+                "login_css_button_colour": "#000000",
+                "login_css_header_colour": "#5F7883",
+                "login_css_error_colour": "#ed561b",
+                "font_family": "'Courier New', Courier, monospace",
+                "login_btn_font_size": "18px",
+                "login_btn_font_colour": "#000000",
+                "container_width": "600px",
+                "login_container_inner_width": "95%",
+                "login_bg_dimension": "full",
+                "login_css_heading_text_size": "24px",
+                "login_css_heading_2_text_size": "18px",
+                "login_css_heading_3_text_size": "15px",
+                "font_size": "15px",
+                "login_button_text": "Login Now",
+                "login_container_float": "Center",
+                "external_css_allowed": true
+            }
+        
+        
+## Duplicate / Clone Login Pages [/location/{id}/duplicate_logins?location_ids={location_ids}]
+
+Clone the login design from the location to another one of your locations. Location IDS of the locations to receive the new designs can be passed as an array in the query string.
+
++ Parameters
+    + id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + location_ids (required, array, `[123,456,798]`) ... Array `location_ids` of the locations you want to *get* the new designs. Has example value.
+
+### Retrieve a Location's Layout Settings [POST]
+
++ Response 200 (application/json)
+
+    + Header
+
+            X-My-Header: The Value
+
+    + Body
+
+            {"message": "Your logins have been queued for duplication. This may take a few minutes."}
+
+
+## Get Location Users [/location/{id}/users]
+
+Get a list of all the users who have access to your location. The output will include four keys - **owner, admins, invites, watchers**
+
+- The owners object contains details of the primary user's plan.
+- The admin users object contains all users will admin rights to the location.
+- The invites object represents and invitations which have been sent recently.
+- The watchers object containts non-admin, read only users for the location
+
++ Parameters
+    + id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+
+### Get a list of location users and watchers [GET]
+
++ Request (application/json)
+
+        { "id": "derby-city-council" }
+
++ Response 200 (application/json)
+
+    + Header
+
+            X-My-Header: The Value
+
+    + Body
+
+            {
+                "location_name": "Derby City Centre",
+                "unique_id": "432692681892998301233",
+                "slug": "derby-city-council",
+                "admin_users": {
+                    "admins": [
+                        {
+                            "email": "bob@derby.gov.uk",
+                            "username": "Bob Marley",
+                            "unique_id": "29789523",
+                            "slug": "bob-marley"
+                        },
+                        {
+                            "email": "support@polkaspots.com",
+                            "username": "Steve Jobs",
+                            "unique_id": "82052203",
+                            "slug": "steve-jobs"
+                        }
+                    ],
+                    "watchers": [
+                        {
+                            "name": "Simon Stanley",
+                            "token": "e598110e2109b4189d61d3629aec21f5b69c5b375659d8401f9f4274367ecb50",
+                            "id": 103,
+                            "unique_id": "HKJHSH86"
+                        }
+                    ],
+                    "owner": {
+                        "username": "Barry White",
+                        "slug": "barry-white",
+                        "unique_id": "206923464",
+                        "email": "barry@derby.gov.uk",
+                        "plan_name": "Enterprise",
+                        "max_location_users": 10
+                    },
+                    "invites": [
+                        {
+                            "token": "e7adddb4e68a6f250a57b3f7b1dd31e3",
+                            "email": "user@polkaspots.com",
+                            "created_at": "1410737982"
+                        },
+                        {
+                            "token": "e924c0ae9ea4a462a55dbd7be6d0ee23",
+                            "email": "user2@polkaspots.com",
+                            "created_at": "1410737979"
+                        },
+                        {
+                            "token": "a863527a40c694173d59ef5c5201d307",
+                            "email": "user3@polkaspots.com",
+                            "created_at": "1410737976"
+                        }
+                    ]
+                }
+            }
+
+## Add a user to a location [/location/{id}/users?email={email}]
+
+The number of users you can add to a location depends on the primary user's plan. You can't add the same user twice.
+
+If you invite a user who's already got a Cucumber Tony account, the location you add them too will be added to their account and they will receieve an email with these details.
+
+For new users (those without an account), they will receive an invitation to join CT. **They have three days to accept this invitation**, after which, you will need to invite them again.
+
++ Parameters
+
+    + id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + email (required, string, `user@address.com`) ... Email `email` of the user you want to add to the location.
+    
+### Add a new user to a location [POST]
+
++ Request (application/json)
+
+        { "email": "steveo@ps.com" }
+
++ Response 200 (application/json)
+
+
+    + Body
+
+            { "message": "Congrats, you've successfully invited stevo@ps.com" } 
+
+## Delete an admin user from a  location [/location/{id}/users?user_id={user_id}&token={token}]
+
+Only admins (owners) can do this. It's not possible to delete yourself.
+
+You can either send a user_id of an admin user or the token of an invited user. Use the token if you want to revoke a recent invitation to a user who's not already signed up.
+
++ Parameters
+
+    + id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + user_id (string, `918273918723`) ... Unique ID `unique_id` of the user you want to delete from the location.
+    + token (string, `HGVSGSKJHHA87&Ah`) ... Token of a recently invited user
+    
+### Add a new user to a location [POST]
+
++ Request (application/json)
+
+        { "user_id": "1298391827391827" }
+
++ Response 200 (application/json)
+
+
+    + Body
+
+            { "message": "Successfully deleted user" } 
+
++ Response 422 (application/json)
+
+    + Body
+
+            { "message": "You cannot delete yourself from this location" } 
+
+## Watch a specific location [/location/{id}/watchers?{?user_ids}]
+
+You can add users to a location who have no rights and can only observe. These users can receive alerts but cannot make changes.
+
+This job is processed in the background and you may have to wait a few moments for the change to occur.
+
+A status attribute is set called **watchers_processing** which is available using the show action. It will either be:
+
+- Removing
+- Adding
+- False
+
++ Parameters
+
+    + id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + user_ids (required, string, `918273918723`) ... An array of user's unique_ids that you want to add to the watchers list.
+
+### List watchers for a location [GET]
+
++ Request (application/json)
+
+            {}
+            
++ Response 200 (application/json)
+
+
+    + Body
+
+            {  } 
+
+### Add a new watchers to a location [POST]
+
++ Request (application/json)
+
+        { "user_ids": "918273918273" }
+
++ Response 200 (application/json)
+
+
+    + Body
+
+            { "message": "Congrats, you've successfully invited stevo@ps.com" } 
+
+
+### Remove a watcher from a location [DELETE]
+
++ Request (application/json)
+
+        { "user_ids": "918273918273" }
+
++ Response 200 (application/json)
+
+    + Body
+
+            { "message": "Your request has been queued" } 
+
+## Clone a specific location [/location/{id}/duplicate{?location_name,address,users}]
+
+Create a carbon copy of a location.
+
+This job is processed in the background and you can't copy a location while there's already a clone in process. To check for the clone status, use the show action and attribute **clone_processing**. This will be true if there's a job underway.
++ Parameters
+
+    + id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + location_name (required, string, `My New Site`) ... The name of the new location.
+    + address (required, string, `12 High Road, Derby D11`) ... The address of the new location, also required.
+    + users (not-required, string, `true`) ... You can also copy existing admin users to the new location by setting this flag.
+
+### Duplicate a location [POST]
+
++ Request (application/json)
+
+            {
+                "id": "derby-council",
+                "location_name": "My New Site",
+                "address": "12 High Road, Derby D1",
+                "users": 'any-value'
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            { "message": "Your location has been queued for duplication. This may take a few minutes." } 
+
+
+## Archive a specific location [/location/{id}/archive]
+
+If you don't want to delete a location permanently, you can choose to archive it instead. Archived locations don't count towards your quota and you cannot use an archived location for public access.
+
++ Parameters
+
+    + id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+
+### Archive a location [POST]
+
++ Request (application/json)
+
+            { "id": "derby-council", }
+
++ Response 200 (application/json)
+
+    + Body
+
+            { "message": "Your location has been archived" } 
+
+
+## Restore / Unarchive a specific location [/location/{id}/unarchive]
+
+Restore an archived location to it's former glory.
+
++ Parameters
+
+    + id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+
+### Archive a location [POST]
+
++ Request (application/json)
+
+            { "id": "derby-council", }
+
++ Response 200 (application/json)
+
+    + Body
+
+            { "message": "Your location has been unarchived" } 
+
+
+
