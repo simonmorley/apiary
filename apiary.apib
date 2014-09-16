@@ -1184,12 +1184,81 @@ Please note, creating a new walled garden will force all your boxes to reload th
 
         { "url": "polkaspots.com" }
 
-+ Response 201 (application/json)
++ Response 200 (application/json)
 
         {
             "id": 7,
             "location_id": 1636,
             "url": "polkaspots.com",
+            "created_at": "2014-09-17T00:15:57.239+01:00",
+            "updated_at": "2014-09-17T00:15:57.239+01:00"
+        }
+
+
+## Walled Garden Update [/api/v1/locations/{location_id}/walledgardens/{id}?walledgarden={?url}]
+
+### Update a Walled Garden [PATCH]
+
+You can also update a walled garden url by using the location's update method.
+
+**CAUSES SYNC**
+
+Please note, creating a new walled garden will force all your boxes to reload their networks. This *will* log users off.
+
+
++ Parameters
+
+    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + id (required, integer, `1`) ... ID of the walled garden you wish to update.
+    + url (required, string, `polkaspots.com`) ... URL `url` of the Location to whitelist. Please don't include the protocol (http or https).
+
++ Request (application/json)
+
+        {   
+            "location_id": "derby-council",
+            "id": 123,
+            "walledgarden: {
+                "url": "google.com"
+            }
+        }
+
++ Response 200 (application/json)
+
+        {
+            "id": 7,
+            "location_id": 1636,
+            "url": "google.com",
+            "created_at": "2014-09-17T00:15:57.239+01:00",
+            "updated_at": "2014-09-17T00:15:57.239+01:00"
+        }
+
+## Walled Garden Delete [/api/v1/locations/{location_id}/walledgardens/{id}]
+
+### Delete a Walled Garden [DELETE]
+
+**CAUSES SYNC**
+
+Please note, creating a new walled garden will force all your boxes to reload their networks. This *will* log users off.
+
+
++ Parameters
+
+    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + id (required, integer, `1`) ... ID of the walled garden you wish to update.
+
++ Request (application/json)
+
+        {   
+            "location_id": "derby-council",
+            "id": 123,
+        }
+
++ Response 200 (application/json)
+
+        {
+            "id": 7,
+            "location_id": 1636,
+            "url": "google.com",
             "created_at": "2014-09-17T00:15:57.239+01:00",
             "updated_at": "2014-09-17T00:15:57.239+01:00"
         }
