@@ -1114,6 +1114,161 @@ Restore an archived location to it's former glory.
             { "message": "Your location has been unarchived" } 
 
 
+# Group Networks
+
+Networks related resources of the **Networks API**. Networks are a nested in a location. 
+
+## Networks Collection [/api/v1/locations/{location_id}/networks]
+
++ Parameters
+
+    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+
+### List all Networks [GET]
+
++ Request (application/json)
+
+            { "location_id": "derby-council" }
+
++ Response 200 (application/json)
+
+
+    + Body
+        
+            [{
+                {
+                    "id": 5737,
+                    "network_name": "public",
+                    "description": "Primary network",
+                    "position": 1,
+                    "active": true,
+                    "network_radio_mode": null,
+                    "switch_ports_enabled": null,
+                    "vlan_type": null,
+                    "interface_id": null,
+                    "interface_name": "tun0",
+                    "interface_type": null,
+                    "interface_proto": null,
+                    "interface_ipaddr": "192.168.4.1",
+                    "interface_netmask": "24",
+                    "vlan_id": null,
+                    "dhcp_start": 100,
+                    "dhcp_end": 250,
+                    "dhcp_lease": null,
+                    "dhcp_limit": null,
+                    "captive_portal_url": null,
+                    "captive_portal_network": "192.168.4.0",
+                    "captive_portal_netmask": "255.255.255.0",
+                    "captive_portal_gateway": "192.168.4.1",
+                    "captive_portal_port": 3990,
+                    "captive_portal_dns_1": "208.67.222.222",
+                    "captive_portal_dns_2": "208.67.220.220",
+                    "captive_portal_uamsecret": "163de366f42a21b1b4d7de655eae1c7d",
+                    "captive_portal_allowed_hosts": "8.8.8.8,208.67.222.222,208.67.220.220",
+                    "captive_portal_allowed_macs": "",
+                    "radius_host_1": "cluster-1.polkaspots.co",
+                    "radius_host_2": "cluster-2.polkaspots.co",
+                    "radius_secret_1": "b2ea72c68d50",
+                    "radius_secret_2": "b2ea72c68d50",
+                    "ssid": "PolkaSpots Supafly Wi-Fi",
+                    "radio_channel_0": "auto",
+                    "radio_channel_1": "auto",
+                    "encryption_type": "psk2",
+                    "encryption_key": "asdfasdfasd",
+                    "ssid_disabled": false,
+                    "ssid_hidden": true,
+                    "created_at": "2014-09-16T19:38:22.000+01:00",
+                    "dhcp_enabled": true,
+                    "dhcp_relay_on": true,
+                    "config_type_bridge": false,
+                    "bridge_to_switch_ports": false
+                },
+                {
+                    "id": 5738,
+                    "network_name": "private",
+                    "description": "Secondary network",
+                    "position": 2,
+                    "active": true,
+                    "network_radio_mode": null,
+                    "switch_ports_enabled": null,
+                    "vlan_type": null,
+                    "interface_id": null,
+                    "interface_name": "br-private",
+                    "interface_type": null,
+                    "interface_proto": null,
+                    "interface_ipaddr": "192.168.210.1",
+                    "interface_netmask": "24",
+                    "vlan_id": null,
+                    "dhcp_start": 2,
+                    "dhcp_end": 150,
+                    "dhcp_lease": null,
+                    "dhcp_limit": null,
+                    "captive_portal_url": null,
+                    "captive_portal_network": "192.168.4.0",
+                    "captive_portal_netmask": "255.255.255.0",
+                    "captive_portal_gateway": "192.168.4.1",
+                    "captive_portal_port": 3990,
+                    "captive_portal_dns_1": "198.153.192.40",
+                    "captive_portal_dns_2": "198.153.194.50",
+                    "captive_portal_uamsecret": null,
+                    "captive_portal_allowed_hosts": null,
+                    "captive_portal_allowed_macs": null,
+                    "radius_host_1": "radius-1.polkaspots.co",
+                    "radius_host_2": "radius-2.polkaspots.co",
+                    "radius_secret_1": null,
+                    "radius_secret_2": null,
+                    "ssid": "PolkaSpots Private",
+                    "radio_channel_0": "auto",
+                    "radio_channel_1": "auto",
+                    "encryption_type": "psk2",
+                    "encryption_key": "406c6e9b4dbe",
+                    "ssid_disabled": null,
+                    "ssid_hidden": null,
+                    "created_at": "2014-09-16T19:38:22.000+01:00",
+                    "dhcp_enabled": true,
+                    "dhcp_relay_on": true,
+                    "config_type_bridge": false,
+                    "bridge_to_switch_ports": false
+                }
+            }]
+        
+
+## Network Update [/api/v1/locations/{location_id}/networks/{id}{?location_network}]
+
+### Update a Network [PATCH]
+
+**CAUSES SYNC**
+
+Please note, updating a network will force all your boxes to reload their networks. This *will* log users off.
+
++ Parameters
+
+    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + id (required, integer, `1`) ... ID of the network you wish to update.
+    + location_network (required, object) ... A full list of parameters you wish to update.
+
++ Request (application/json)
+
+        {   
+            "location_id": "derby-council",
+            "id": 123,
+            "location_network: {
+                "ssid_hidden": true,
+                "config_type_bridge": false,
+                "radio_channel_0": "auto"
+            }
+        }
+
++ Response 200 (application/json)
+
+        {
+            "id": 7,
+            "location_id": 1636,
+            "url": "google.com",
+            "created_at": "2014-09-17T00:15:57.239+01:00",
+            "updated_at": "2014-09-17T00:15:57.239+01:00"
+        }
+
 # Group Walled Gardens
 
 Walled Gardens related resources of the **Walled Gardens API**. Walled gardens are a nested in a location. You cannot currently list all your walled gardens without specifying a location id (slug).
@@ -1253,4 +1408,3 @@ Please note, creating a new walled garden will force all your boxes to reload th
         }
 
 + Response 204 (application/json)
-
