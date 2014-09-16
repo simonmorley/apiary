@@ -1,8 +1,37 @@
 FORMAT: 1A
 HOST: https://api.polkaspots.com
 
-# polkaspots
+# PolkaSpots API Documentation for Cucumber Tony.
+
+##I'm doing it with Tony, are you?##
+
 Cucumber Tony's API provides a way to control your Wireless hotspots programatically.
+
+Our API is based on REST principles, all you need to use it is your Cucumber Tony account. You must be authenticated and call HTTPs requests on the URLs listed below. 
+
+Please create an application in Cucumber Tony and use your access token in all requests. More documentation will follow.
+
+>**Note:** Some resources trigger updates to your boxes. Sending invalid data can cause your boxes to crash.
+
+##Allowed HTTPs requests:
+
+- `POST` - Creates or updates a resource
+- `PUT` - Updates a resource
+- `GET` - Retrieves a resource or list of resources
+- `DELETE` - Delete a resource
+
+##Typical Server Responses
+
+- 200 `OK` - The request was successful (some API calls may return 201 instead).
+- 201 `Created` - The request was successful and a resource was created.
+- 204 `No Content` - The request was successful but there is no representation to return (that is, the response is empty).
+- 400 `Bad Request` - The request could not be understood or was missing required parameters.
+- 401 `Unauthorized` - Authentication failed or user does not have permissions for the requested operation.
+- 403 `Forbidden` - Access denied.
+- 404 `Not Found` - Resource was not found.
+- 405 `Method Not Allowed` - Requested method is not supported for the specified resource.
+- 429 `Too Many Requests` - Exceeded GoodData API limits. Pause requests, wait one minute, and try again. 
+- 503 `Service Unavailable` - The service is temporary unavailable (e.g. scheduled Platform Maintenance). Try again later.
 
 # Group Accounts
 Locations related resources of the **Accounts API**
@@ -1118,6 +1147,12 @@ Restore an archived location to it's former glory.
 
 Networks related resources of the **Networks API**. Networks are a nested in a location. 
 
+##Allowed HTTPs requests:
+
+- `PUT` - Updates a resource
+- `GET` - Retrieves a resource or list of resources
+- `DELETE` - Delete a resource
+
 ## Networks Collection [/api/v1/locations/{location_id}/networks]
 
 + Parameters
@@ -1274,6 +1309,11 @@ Please note, updating a network will force all your boxes to reload their networ
 Walled Gardens related resources of the **Walled Gardens API**. Walled gardens are a nested in a location. You cannot currently list all your walled gardens without specifying a location id (slug).
 
 Adding a walled garden to a location will allow unlimited access to the url specified. Users will not have to login to browse these sites.
+
+- `POST` - Creates or updates a resource
+- `PUT` - Updates a resource
+- `GET` - Retrieves a resource or list of resources
+- `DELETE` - Delete a resource
 
 ## Walled Gardens Collection [/api/v1/locations/{location_id}/walledgardens]
 
