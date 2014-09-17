@@ -115,8 +115,11 @@ There's two ways to create a blacklisted device, either using this API or the lo
 + Request (application/json)
 
         {
-            "mac": "00:22:22:11:22:33",
-            "expires_at": "September 20 2015 00:00:00"
+            "blacklisted": 
+                {
+                    "mac": "00:22:22:11:22:33",
+                    "expires_at": "September 20 2015 00:00:00"
+                }
         }
 
 + Response 200 (application/json)
@@ -2019,6 +2022,221 @@ Please note, updating a network will force all your boxes to reload their networ
             "created_at": "2014-09-17T00:15:57.239+01:00",
             "updated_at": "2014-09-17T00:15:57.239+01:00"
         }
+
+
+
+# Group Payloads
+
+Payloads reference the **Payloads API**. 
+
+Payloads can be applied directly to a box (see Box API) or events. There's two types of events:
+
+1. Available to schedule
+2. PolkaSpots only
+
+PolkaSpots only payloads should not be run on non-ps boxes. For example, you cannot schedule a Xirrus to reboot using the paylods. However, you may disable the Xirrus login screens. PolkaSpots only payloads are suitable for boxes running the Stinky Panda firmware only.
+
+##Allowed HTTPs requests:
+
+- `GET` - Retrieves a resource or list of resources
+
+##Allowed HTTPs requests for non-customers:
+
+- `POST` - Creates or updates a resource
+- `PATCH` - Updates a resource
+- `DELETE` - Delete a resource
+
+## Payloads Collection [/api/v1/payloads]
+
+### List all Payloads [GET]
+
++ Response 200 (application/json)
+
+    + Body
+                
+            [
+                {
+                    "id": 34,
+                    "payload_description": "Reboot my access point ",
+                    "payload_name": "Reboot Access Points",
+                    "payload_command": "/sbin/reboot",
+                    "can_schedule": true,
+                    "only_polkaspots": true
+                },
+                {
+                    "id": 35,
+                    "payload_description": "Disable My Login Screens",
+                    "payload_name": "Disable Login Screens",
+                    "payload_command": "",
+                    "can_schedule": true,
+                    "only_polkaspots": false
+                },
+                {
+                    "id": 36,
+                    "payload_description": "Enable My Login Screens",
+                    "payload_name": "Enable Login Screens",
+                    "payload_command": "",
+                    "can_schedule": true,
+                    "only_polkaspots": false
+                },
+                {
+                    "id": 37,
+                    "payload_description": "Disable my private Wi-Fi network completely",
+                    "payload_name": "Disable Private Wi-Fi Network",
+                    "payload_command": "",
+                    "can_schedule": true,
+                    "only_polkaspots": true
+                },
+                {
+                    "id": 38,
+                    "payload_description": "Enable my private Wi-Fi network",
+                    "payload_name": "Enable Private Wi-Fi Network",
+                    "payload_command": "",
+                    "can_schedule": true,
+                    "only_polkaspots": true
+                },
+                {
+                    "id": 39,
+                    "payload_description": "Hide my public Wi-Fi network",
+                    "payload_name": "Hide Public Wi-Fi Network",
+                    "payload_command": "",
+                    "can_schedule": true,
+                    "only_polkaspots": true
+                },
+                {
+                    "id": 40,
+                    "payload_description": "Show my public Wi-Fi network",
+                    "payload_name": "Show Public Wi-Fi Network",
+                    "payload_command": "",
+                    "can_schedule": true,
+                    "only_polkaspots": true
+                },
+                {
+                    "id": 41,
+                    "payload_description": "Disable all Wi-Fi networks",
+                    "payload_name": "Wi-Fi Down Completely",
+                    "payload_command": "",
+                    "can_schedule": true,
+                    "only_polkaspots": true
+                },
+                {
+                    "id": 42,
+                    "payload_description": "Enable all Wi-Fi networks",
+                    "payload_name": "Wi-Fi Up Completely",
+                    "payload_command": "",
+                    "can_schedule": true,
+                    "only_polkaspots": true
+                }
+            ]
+            
+## Payloads Create [/api/v1/payloads{?payload}]
+
+### Create a payload [POST]
+
++ Request 200 (application/json)
+
+            {
+                "payload": 
+                    {
+                        "payload_description": "Reboot my access point ",
+                        "payload_name": "Reboot Access Points",
+                        "payload_command": "/sbin/reboot",
+                        "can_schedule": true,
+                        "only_polkaspots": true
+                    }
+            }
+
+
++ Response 200 (application/json)
+
+    + Body
+        
+            {
+                "id": 34,
+                "payload_description": "Reboot my access point ",
+                "payload_name": "Reboot Access Points",
+                "payload_command": "/sbin/reboot",
+                "can_schedule": true,
+                "only_polkaspots": true
+            }
+        
+
+## Payload Details [/api/v1/payloads/:id]
+
+### Update a Payload [GET]
+
+
++ Parameters
+
+    + id (required, integer, `1`) ... ID of the payload you wish to update.
+
++ Request (application/json)
+
+        {"id": 34}
+
++ Response 200 (application/json)
+
+    + Body
+        
+            {
+                "id": 34,
+                "payload_description": "Reboot my access point ",
+                "payload_name": "Reboot Access Points",
+                "payload_command": "/sbin/reboot",
+                "can_schedule": false,
+                "only_polkaspots": true
+            }
+        
+## Payload Update [/api/v1/payloads/:id{?payload}]
+
+### Update a Payload [PATCH]
+
++ Parameters
+
+    + id (required, integer, `1`) ... ID of the payload you wish to update.
+    + payload (required, params, `{some: params, included: here}`) ... An object with the parameters you want to update.
+
++ Request (application/json)
+
+        {
+            "payload": {
+                "payload_description": "Reboot my access point ",
+                "payload_name": "Reboot Access Points",
+                "payload_command": "/sbin/reboot",
+                "can_schedule": false,
+                "only_polkaspots": true
+            }
+        }
+
++ Response 200 (application/json)
+
+    + Body
+        
+            {
+                "id": 34,
+                "payload_description": "Reboot my access point ",
+                "payload_name": "Reboot Access Points",
+                "payload_command": "/sbin/reboot",
+                "can_schedule": false,
+                "only_polkaspots": true
+            }
+        
+
+## Payload Delete [/api/v1/payloads/{id}]
+
+### Delete a Payload [DELETE]
+
++ Parameters
+
+    + id (required, integer, `1`) ... ID of the payload you wish to update.
+
++ Request (application/json)
+
+        {   
+            "id": 123,
+        }
+
++ Response 204 (application/json)
 
 
 # Group Walled Gardens
