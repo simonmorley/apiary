@@ -39,12 +39,16 @@ Locations related resources of the **Accounts API**
 ## Accounts Collection [/api/v1/accounts]
 
 
-
 ## Generate Password [/accounts/generate_password]
 
 A single Location's statistical objects
 
 ### Retrieve a Location's Statistics [POST]
+
++ Request (application/json)
+
+            Accept: application/json
+
 + Response 200 (application/json)
 
     + Body
@@ -59,8 +63,13 @@ Locations related resources of the **Locations API**
 
 ### List all Locations [GET]
 
-+ Response 200 (application/json)
++ Request (application/json)
 
+    + Header
+
+            Accept: application/json
+
++ Response 200 (application/json)
 
         [{
             "id": 1687,
@@ -101,12 +110,17 @@ Locations related resources of the **Locations API**
 
 + Request (application/json)
 
-        { "q": "derby" }
+    + Headers
+
+            Accept: application/json
+
+    + Body
+
+            { "q": "derby" }
 
 + Response 200 (application/json)
 
-        [
-        {
+        [{
             "id": 870,
             "location_name": "Derby - City Council",
             "slug": "derby-city-council",
@@ -130,12 +144,17 @@ Returns a mini-list of your locations. Is good for search, copy logins, stuff wh
 
 + Request (application/json)
 
-        { "short": "yep" }
+    + Headers
+    
+            Accept: application/json
+
+    + Body
+
+            { "short": "yep" }
 
 + Response 200 (application/json)
 
-        [
-        {
+        [{
             "location_name": "Derby - City Council",
             "slug": "derby-city-council",
             "unique_id": "7379871298798717"
@@ -143,6 +162,7 @@ Returns a mini-list of your locations. Is good for search, copy logins, stuff wh
 
 
 ### Create a Location [POST]
+
 + Request (application/json)
 
         { "title": "Buy cheese and bread for breakfast." }
@@ -153,6 +173,7 @@ Returns a mini-list of your locations. Is good for search, copy logins, stuff wh
 
 
 ## Location [/location/{id}]
+
 A single Location object with all its details
 
 + Parameters
@@ -163,7 +184,7 @@ A single Location object with all its details
 
     + Header
 
-            X-My-Header: The Value
+            Accept: application/json
 
     + Body
 
@@ -340,7 +361,7 @@ A single Location object with all its details
 
     + Header
 
-            X-My-Header: The Value
+            Accept: application/json
 
     + Body
 
@@ -360,7 +381,7 @@ A single Location's statistical objects
 
     + Header
 
-            X-My-Header: The Value
+            Accept: application/json
 
     + Body
 
@@ -461,11 +482,12 @@ The list of parameters you can update using this action are listed below. If you
 
 
 ### Retrieve a Location's Access Settings [GET]
+
 + Response 200 (application/json)
 
     + Header
 
-            X-My-Header: The Value
+            Accept: application/json
 
     + Body
 
@@ -570,9 +592,15 @@ The list of parameters you can update using this action are listed below. If you
             }
             
 ### Update a Location's Access Settings [PATCH]
+
 + Request (application/json)
 
     time_limit == ['daily', 'weekly', 'monthly']
+
+    + Header
+    
+                Accept: application/json
+
 
     + Body
     
@@ -675,7 +703,7 @@ The list of parameters you can update using this action are listed below. If you
 
     + Header
 
-            X-My-Header: The Value
+            Accept: application/json
 
     + Body
 
@@ -683,16 +711,25 @@ The list of parameters you can update using this action are listed below. If you
 
             
 ## Verify a Facebook Page [/location/{id}/fb_verify_page?page_id={page_id}]
+
 Checks if your Facebook page is valid or not. Will return a 422 Unprocessable Entity if it's not a valid page.
 
 + Parameters
+
     + id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
     + page_id (required, string, `derbycouncil`) ... Page ID `page_id` of the page you want to test. Has example value.
 
 ### Determines if your Facebook page id is valid [POST]
+
 + Request (application/json)
 
-    + Body { "id": "derby-council", page_id: "123123123" }
+    + Headers
+    
+            Accept: application/json
+
+    + Body 
+    
+            { "id": "derby-council", page_id: "123123123" }
     
 + Response 200 (application/json)
 
@@ -715,7 +752,7 @@ You need to send us your Facebook accessToken for us to get these. We recommend 
 
     + Header
 
-            X-My-Header: The Value
+            Accept: application/json
 
     + Body
     
@@ -725,7 +762,7 @@ You need to send us your Facebook accessToken for us to get these. We recommend 
 
     + Header
 
-            X-My-Header: The Value
+            Accept: application/json
 
     + Body
     
@@ -786,7 +823,7 @@ You need to send us your Facebook accessToken for us to get these. We recommend 
 
     + Header
 
-            X-My-Header: The Value
+            Accept: application/json
 
     + Body
     
@@ -800,6 +837,7 @@ Some params that are just required for the login pages. You may also use the sta
 Remarkably, you can send any image reference back as url. Either you use our content delivery network (CDN) by uploading a photo using Cucumber Tony. Or, just post a valid URL back. And then make sure you've added the domain to your walled gardens.
 
 + Parameters
+
     + id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
 
 ### Retrieve a Location's Layout Settings [GET]
@@ -808,7 +846,7 @@ Remarkably, you can send any image reference back as url. Either you use our con
 
     + Header
 
-            X-My-Header: The Value
+            Accept: application/json
 
     + Body
 
@@ -870,7 +908,7 @@ Clone the login design from the location to another one of your locations. Locat
 
     + Header
 
-            X-My-Header: The Value
+            Accept: application/json
 
     + Body
 
@@ -893,13 +931,19 @@ Get a list of all the users who have access to your location. The output will in
 
 + Request (application/json)
 
-        { "id": "derby-city-council" }
+    + Headers
+    
+            Accept: application/json
+
+    + Body
+    
+            { "id": "derby-city-council" }
 
 + Response 200 (application/json)
 
     + Header
 
-            X-My-Header: The Value
+            Accept: application/json
 
     + Body
 
@@ -1000,10 +1044,15 @@ You can either send a user_id of an admin user or the token of an invited user. 
 
 + Request (application/json)
 
-        { "user_id": "1298391827391827" }
+    + Headers
+    
+            Accept: application/json
+
+    + Body    
+
+            { "user_id": "1298391827391827" }
 
 + Response 200 (application/json)
-
 
     + Body
 
@@ -1049,10 +1098,19 @@ A status attribute is set called **watchers_processing** which is available usin
 
 + Request (application/json)
 
-        { "user_ids": "918273918273" }
+    + Headers
+    
+            Accept: application/json
+
+    + Body
+
+            { "user_ids": "918273918273" }
 
 + Response 200 (application/json)
 
+    + Headers
+    
+            Accept: application/json
 
     + Body
 
@@ -1063,9 +1121,20 @@ A status attribute is set called **watchers_processing** which is available usin
 
 + Request (application/json)
 
-        { "user_ids": "918273918273" }
+    + Headers
+    
+            Accept: application/json
+
+    + Body 
+    
+            { "user_ids": "918273918273" }
+
 
 + Response 200 (application/json)
+
+    + Headers
+    
+            Accept: application/json
 
     + Body
 
@@ -1076,6 +1145,7 @@ A status attribute is set called **watchers_processing** which is available usin
 Create a carbon copy of a location.
 
 This job is processed in the background and you can't copy a location while there's already a clone in process. To check for the clone status, use the show action and attribute **clone_processing**. This will be true if there's a job underway.
+
 + Parameters
 
     + id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
@@ -1087,6 +1157,12 @@ This job is processed in the background and you can't copy a location while ther
 
 + Request (application/json)
 
+    + Headers
+    
+            Accept: application/json
+
+    + Body
+    
             {
                 "id": "derby-council",
                 "location_name": "My New Site",
@@ -1113,6 +1189,12 @@ If you don't want to delete a location permanently, you can choose to archive it
 
 + Request (application/json)
 
+    + Headers
+    
+            Accept: application/json
+
+    + Body
+    
             { "id": "derby-council", }
 
 + Response 200 (application/json)
@@ -1134,6 +1216,12 @@ Restore an archived location to it's former glory.
 
 + Request (application/json)
 
+    + Headers
+    
+            Accept: application/json
+
+    + Body
+          
             { "id": "derby-council" }
 
 + Response 200 (application/json)
@@ -1163,6 +1251,12 @@ Networks related resources of the **Networks API**. Networks are a nested in a l
 
 + Request (application/json)
 
+    + Headers
+    
+            Accept: application/json
+
+    + Body
+    
             { "location_id": "derby-council" }
 
 + Response 200 (application/json)
@@ -1267,6 +1361,83 @@ Networks related resources of the **Networks API**. Networks are a nested in a l
                 }
             }]
         
+## Network Details [/api/v1/locations/{location_id}/networks/{id}]
+
+### Update a Network [GET]
+
++ Parameters
+
+    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + id (required, integer, `1`) ... ID of the network you wish to update.
+
++ Request (application/json)
+
+    + Headers
+    
+            Accept: application/json
+    
+    + Body
+    
+            {   
+                "location_id": "derby-council",
+                "id": 123
+            }
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "100": null,
+                "id": 610,
+                "location_id": 1759,
+                "description": "Primary network",
+                "position": 1,
+                "network_name": "public",
+                "active": true,
+                "network_radio_mode": null,
+                "switch_ports_enabled": null,
+                "vlan_type": null,
+                "interface_id": null,
+                "interface_name": "tun0",
+                "interface_type": null,
+                "interface_proto": null,
+                "interface_ipaddr": "192.168.4.1",
+                "interface_netmask": "24",
+                "vlan_id": null,
+                "dhcp_start": 100,
+                "dhcp_end": 250,
+                "dhcp_lease": null,
+                "12h": null,
+                "dhcp_limit": null,
+                "captive_portal_url": null,
+                "captive_portal_network": "192.168.4.0",
+                "captive_portal_netmask": "255.255.255.0",
+                "captive_portal_gateway": "192.168.4.1",
+                "captive_portal_port": 3990,
+                "captive_portal_dns_1": "208.67.222.222",
+                "captive_portal_dns_2": "208.67.220.220",
+                "captive_portal_uamsecret": "52ea627a236c7043adc36bbd463d6bf4",
+                "captive_portal_allowed_hosts": "8.8.8.8,208.67.222.222,208.67.220.220",
+                "captive_portal_allowed_macs": null,
+                "radius_host_1": "rad-1.polkaspots.com",
+                "radius_host_2": "rad-1.polkaspots.com",
+                "radius_secret_1": "3543f9e498e8",
+                "radius_secret_2": "3543f9e498e8",
+                "ssid": "PolkaSpots Supafly Wi-Fi",
+                "radio_channel_0": "auto",
+                "radio_channel_1": "auto",
+                "encryption_type": "none",
+                "encryption_key": null,
+                "ssid_disabled": false,
+                "ssid_hidden": false,
+                "created_at": "2014-09-17T01:09:45.000+01:00",
+                "updated_at": "2014-09-17T01:09:45.000+01:00",
+                "dhcp_enabled": true,
+                "dhcp_relay_on": true,
+                "config_type_bridge": false,
+                "bridge_to_switch_ports": false
+            }
 
 ## Network Update [/api/v1/locations/{location_id}/networks/{id}{?location_network}]
 
