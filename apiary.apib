@@ -76,7 +76,7 @@ You can either create, read, update and destroy your blacklists via the blacklis
 
     + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
 
-### List all Walled Gardens [GET]
+### List all Blacklists [GET]
 
 + Request (application/json)
 
@@ -101,62 +101,53 @@ You can either create, read, update and destroy your blacklists via the blacklis
             }]
     
     
-## Walled Garden Create [/api/v1/locations/{location_id}/walledgardens{?url}]
+## Blacklists Create [/api/v1/locations/{location_id}/blacklists{?blacklisted,mac}]
 
-### Create a Walled Garden [POST]
+### Create a Blacklisted device [POST]
 
-There's two ways to create a walled garden. You can either post directly with a location id or you update the resource when updating a location. Please see the section within the location's group for more information. 
-
-**CAUSES SYNC**
-
-Please note, creating a new walled garden will force all your boxes to reload their networks. This *will* log users off.
-
-*TODO: Implement the batch create process.*
+There's two ways to create a blacklisted device, either using this API or the location's API as a nested resource.
 
 + Parameters
 
     + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
-    + url (required, string, `polkaspots.com`) ... URL `url` of the Location to whitelist. Please don't include the protocol (http or https).
+    + blacklisted (required, params, `mac and optional expired_at`) ... Mac address of the device to block and an optional expires_at date.
 
 + Request (application/json)
 
-        { "url": "polkaspots.com" }
+        {
+            "mac": "00:22:22:11:22:33",
+            "expires_at": "September 20 2015 00:00:00"
+        }
 
 + Response 200 (application/json)
 
         {
             "id": 7,
-            "location_id": 1636,
-            "url": "polkaspots.com",
-            "created_at": "2014-09-17T00:15:57.239+01:00",
+            "mac": "00:22:22:11:22:33",
+            "expires_at": "2015-09-20T00:00:00.239+01:00",
             "updated_at": "2014-09-17T00:15:57.239+01:00"
         }
 
 
-## Walled Garden Update [/api/v1/locations/{location_id}/walledgardens/{id}?walledgarden={?url}]
+## Update a blacklist [/api/v1/locations/{location_id}/blacklists/{id}?blacklisted={params}]
 
-### Update a Walled Garden [PATCH]
-
-You can also update a walled garden url by using the location's update method.
-
-**CAUSES SYNC**
-
-Please note, creating a new walled garden will force all your boxes to reload their networks. This *will* log users off.
+### Update a blacklisted device [PATCH]
 
 
 + Parameters
 
     + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
-    + id (required, integer, `1`) ... ID of the walled garden you wish to update.
-    + url (required, string, `polkaspots.com`) ... URL `url` of the Location to whitelist. Please don't include the protocol (http or https).
+    + id (required, integer, `1`) ... ID of the blacklisted device you wish to update.
+    + params (required, object, `1`) ... Mac and optional expiration date
+
 
 + Request (application/json)
 
         {   
             "location_id": "derby-council",
-            "id": 123,
-            "walledgarden: {
-                "url": "google.com"
+            "id": 7,
+            "blacklisted: {
+                "mac": "00:22:22:11:22:33"
             }
         }
 
@@ -164,24 +155,19 @@ Please note, creating a new walled garden will force all your boxes to reload th
 
         {
             "id": 7,
-            "location_id": 1636,
-            "url": "google.com",
-            "created_at": "2014-09-17T00:15:57.239+01:00",
+            "mac": "00:22:22:11:22:33",
+            "expires_at": "2015-09-20T00:00:00.239+01:00",
             "updated_at": "2014-09-17T00:15:57.239+01:00"
         }
 
-## Walled Garden Delete [/api/v1/locations/{location_id}/walledgardens/{id}]
+## Blacklisted Delete [/api/v1/locations/{location_id}/blacklisted/{id}]
 
-### Delete a Walled Garden [DELETE]
-
-**CAUSES SYNC**
-
-Please note, creating a new walled garden will force all your boxes to reload their networks. This *will* log users off.
+### Delete a blacklisted device [DELETE]
 
 + Parameters
 
     + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
-    + id (required, integer, `1`) ... ID of the walled garden you wish to update.
+    + id (required, integer, `1`) ... ID of the blacklisted device you wish to update.
 
 + Request (application/json)
 
