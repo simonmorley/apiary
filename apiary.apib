@@ -57,6 +57,141 @@ Create a unique password for your captive portal. This doesn't save anything, it
 
             {"password": "random-passy"}
 
+# Group Blacklists
+
+Related resources of the **Blacklists API**. Blacklists belong to a location. You cannot currently list all your blacklists without specifying a location id (slug).
+
+You can either create, read, update and destroy your blacklists via the blacklists API or you may update with a location.
+
+##Allowed HTTPs requests:
+
+- `POST` - Creates or updates a resource
+- `PATCH` - Updates a resource
+- `GET` - Retrieves a resource or list of resources
+- `DELETE` - Delete a resource
+
+## Blacklists Collection [/api/v1/locations/{location_id}/blacklists]
+
++ Parameters
+
+    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+
+### List all Walled Gardens [GET]
+
++ Request (application/json)
+
+            { "location_id": "derby-council" }
+
++ Response 200 (application/json)
+
+
+    + Body
+    
+            [{
+                "id": 57,
+                "mac": "11-22-33-44-55-66",
+                "expires_at": null,
+                "created_at": "September 17 2014 13:49:43"
+            },
+            {
+                "id": 58,
+                "mac": "22-33-22-11-33-44",
+                "expires_at": "September 20 2014 00:00:00",
+                "created_at": "September 17 2014 13:49:43"
+            }]
+    
+    
+## Walled Garden Create [/api/v1/locations/{location_id}/walledgardens{?url}]
+
+### Create a Walled Garden [POST]
+
+There's two ways to create a walled garden. You can either post directly with a location id or you update the resource when updating a location. Please see the section within the location's group for more information. 
+
+**CAUSES SYNC**
+
+Please note, creating a new walled garden will force all your boxes to reload their networks. This *will* log users off.
+
+*TODO: Implement the batch create process.*
+
++ Parameters
+
+    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + url (required, string, `polkaspots.com`) ... URL `url` of the Location to whitelist. Please don't include the protocol (http or https).
+
++ Request (application/json)
+
+        { "url": "polkaspots.com" }
+
++ Response 200 (application/json)
+
+        {
+            "id": 7,
+            "location_id": 1636,
+            "url": "polkaspots.com",
+            "created_at": "2014-09-17T00:15:57.239+01:00",
+            "updated_at": "2014-09-17T00:15:57.239+01:00"
+        }
+
+
+## Walled Garden Update [/api/v1/locations/{location_id}/walledgardens/{id}?walledgarden={?url}]
+
+### Update a Walled Garden [PATCH]
+
+You can also update a walled garden url by using the location's update method.
+
+**CAUSES SYNC**
+
+Please note, creating a new walled garden will force all your boxes to reload their networks. This *will* log users off.
+
+
++ Parameters
+
+    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + id (required, integer, `1`) ... ID of the walled garden you wish to update.
+    + url (required, string, `polkaspots.com`) ... URL `url` of the Location to whitelist. Please don't include the protocol (http or https).
+
++ Request (application/json)
+
+        {   
+            "location_id": "derby-council",
+            "id": 123,
+            "walledgarden: {
+                "url": "google.com"
+            }
+        }
+
++ Response 200 (application/json)
+
+        {
+            "id": 7,
+            "location_id": 1636,
+            "url": "google.com",
+            "created_at": "2014-09-17T00:15:57.239+01:00",
+            "updated_at": "2014-09-17T00:15:57.239+01:00"
+        }
+
+## Walled Garden Delete [/api/v1/locations/{location_id}/walledgardens/{id}]
+
+### Delete a Walled Garden [DELETE]
+
+**CAUSES SYNC**
+
+Please note, creating a new walled garden will force all your boxes to reload their networks. This *will* log users off.
+
++ Parameters
+
+    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + id (required, integer, `1`) ... ID of the walled garden you wish to update.
+
++ Request (application/json)
+
+        {   
+            "location_id": "derby-council",
+            "id": 123,
+        }
+
++ Response 204 (application/json)
+
 # Group Firewall Rules
 
 Firewall Rules related resources of the **Firewall Rules API**. Firewalls are a nested in a location. You cannot currently list all your walled gardens without specifying a location id (slug).
@@ -1786,7 +1921,7 @@ You have four options for content filtering / DNS. If you pass one of the three 
 
 These are case insenstive.
 
-If you want to set your own DNS, please pass 'None' as a content filter parameter. If you set the DNS to nil values, they will be reset to 8.8.8.8 and 8.8.4.4
+If you want to set your own DNS, please pass 'None' as a content filtering parameter. If you set the DNS to nil values, they will be reset to 8.8.8.8 and 8.8.4.4
 
 + Parameters
 
