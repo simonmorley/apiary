@@ -34,14 +34,15 @@ Please create an application in Cucumber Tony and use your access token in all r
 - 503 `Service Unavailable` - The service is temporary unavailable (e.g. scheduled Platform Maintenance). Try again later.
 
 # Group Accounts
-Locations related resources of the **Accounts API**
+
+Accounts related resources of the **Accounts API**
 
 ## Accounts Collection [/api/v1/accounts]
 
 
 ## Generate Password [/accounts/generate_password]
 
-A single Location's statistical objects
+Create a unique password for your captive portal.
 
 ### Retrieve a Location's Statistics [POST]
 
@@ -54,6 +55,202 @@ A single Location's statistical objects
     + Body
 
             {"password": "random-passy"}
+
+# Group Firewall Rules
+
+Firewall Rules related resources of the **Firewall Rules API**. Firewalls are a nested in a location. You cannot currently list all your walled gardens without specifying a location id (slug).
+
+##Allowed HTTPs requests:
+
+- `POST` - Creates or updates a resource
+- `PUT` - Updates a resource
+- `GET` - Retrieves a resource or list of resources
+- `DELETE` - Delete a resource
+
+## Firewall Rules Collection [/api/v1/locations/{location_id}/firewall_rules]
+
++ Parameters
+
+    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+
+### List all Firewall Rules [GET]
+
++ Request (application/json)
+
+            { "location_id": "derby-council" }
+
++ Response 200 (application/json)
+
+
+    + Body
+    
+            [{
+                
+                {
+                    "id": 75,
+                    "location_id": 870,
+                    "url": "polkaspots.com",
+                    "created_at": "2014-09-16T23:50:42.000+01:00",
+                    "updated_at": "2014-09-16T23:50:42.000+01:00"
+                },
+                {
+                    "id": 76,
+                    "location_id": 870,
+                    "url": "google.com",
+                    "created_at": "2014-09-16T23:50:47.000+01:00",
+                    "updated_at": "2014-09-16T23:50:47.000+01:00"
+                },
+                {
+                    "id": 77,
+                    "location_id": 870,
+                    "url": "peaceandharmony.com",
+                    "created_at": "2014-09-16T23:51:03.000+01:00",
+                    "updated_at": "2014-09-16T23:51:03.000+01:00"
+                }
+                
+            }]
+
+
+## Firewall Rule Create [/api/v1/locations/{location_id}/firewall_rules{?firewall_rule}]
+
+### Create a Firewall Rule [POST]
+
+There's two ways to create a firewall rule. You can either post directly with a location id or you update the resource when updating a location. Please see the section within the location's group for more information. 
+
+**CAUSES SYNC**
+
+Please note, creating a new firewall rule will force all your boxes to reload their networks. This *will* log users off.
+
++ Parameters
+
+    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + firewall_rule (required, object) ... A list of parameters you want to use to create the firewall rule.
+
++ Request (application/json)
+
+        { "firewall_rule": 
+            {
+                "chain": "FORWARD",
+                "rule_spec": "I",
+                "protocol": null,
+                "source_ip": "192.168.1.4/24",
+                "source_port": null,
+                "source_interface": null,
+                "out_interface": null,
+                "dest_ip": null,
+                "dest_port": null,
+                "target": "DROP",
+                "limit": null,
+                "c_state": null,
+                "log_level": null
+            }
+        }
+        
+
++ Response 200 (application/json)
+
+        {
+            "id": 594,
+            "chain": "FORWARD",
+            "rule_spec": "I",
+            "protocol": null,
+            "source_ip": "192.168.1.4/24",
+            "source_port": null,
+            "source_interface": null,
+            "out_interface": null,
+            "dest_ip": null,
+            "dest_port": null,
+            "target": "DROP",
+            "limit": null,
+            "c_state": null,
+            "log_level": null,
+            "location_id": 2213,
+            "position": null,
+            "created_at": "2014-09-17T02:10:34.708+01:00",
+            "updated_at": "2014-09-17T02:10:34.708+01:00"
+        }
+
+## Firewall Rule Update [/api/v1/locations/{location_id}/firewall_rules/{id}?firewall_rule={?params}]
+
+### Update a Firewall Rule [PATCH]
+
+You can also update a firewall rule url by using the location's update method.
+
+**CAUSES SYNC**
+
+Please note, updating a firewall rule will force all your boxes to reload their networks. This *will* log users off.
+
++ Parameters
+
+    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + id (required, integer, `1`) ... ID of the walled garden you wish to update.
+    + params (required, string, `params hash`) ... A list of parameters you wish to update.
+
++ Request (application/json)
+
+        { "firewall_rule": 
+            {
+                "id": "594",
+                "chain": "FORWARD",
+                "rule_spec": "I",
+                "protocol": null,
+                "source_ip": "192.168.0.4/24",
+                "source_port": null,
+                "source_interface": null,
+                "out_interface": null,
+                "dest_ip": null,
+                "dest_port": null,
+                "target": "DROP",
+                "limit": null,
+                "c_state": null,
+                "log_level": null
+            }
+        }
+
++ Response 200 (application/json)
+
+        {
+            "id": 594,
+            "chain": "FORWARD",
+            "rule_spec": "I",
+            "protocol": null,
+            "source_ip": "192.168.0.4/24",
+            "source_port": null,
+            "source_interface": null,
+            "out_interface": null,
+            "dest_ip": null,
+            "dest_port": null,
+            "target": "DROP",
+            "limit": null,
+            "c_state": null,
+            "log_level": null,
+            "location_id": 2213,
+            "position": null,
+            "created_at": "2014-09-17T02:10:34.708+01:00",
+            "updated_at": "2014-09-17T02:10:34.708+01:00"
+        }
+
+## Walled Garden Delete [/api/v1/locations/{location_id}/walledgardens/{id}]
+
+### Delete a Walled Garden [DELETE]
+
+**CAUSES SYNC**
+
+Please note, creating a new walled garden will force all your boxes to reload their networks. This *will* log users off.
+
++ Parameters
+
+    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + id (required, integer, `1`) ... ID of the walled garden you wish to update.
+
++ Request (application/json)
+
+        {   
+            "location_id": "derby-council",
+            "id": 123,
+        }
+
++ Response 204 (application/json)
 
 # Group Locations
 
