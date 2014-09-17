@@ -34,7 +34,6 @@ Please create an application in Cucumber Tony and use your access token in all r
 - 503 `Service Unavailable` - The service is temporary unavailable (e.g. scheduled Platform Maintenance). Try again later.
 
 
-
 # Group Accounts
 
 Accounts related resources of the **Accounts API**
@@ -1705,6 +1704,7 @@ Networks related resources of the **Networks API**. Networks are a nested in a l
                     "captive_portal_dns_2": "208.67.220.220",
                     "captive_portal_uamsecret": "163de366f42a21b1b4d7de655eae1c7d",
                     "captive_portal_allowed_hosts": "8.8.8.8,208.67.222.222,208.67.220.220",
+                    "content_filter": "Security"
                     "captive_portal_allowed_macs": "",
                     "radius_host_1": "cluster-1.polkaspots.co",
                     "radius_host_2": "cluster-2.polkaspots.co",
@@ -1721,7 +1721,7 @@ Networks related resources of the **Networks API**. Networks are a nested in a l
                     "dhcp_enabled": true,
                     "dhcp_relay_on": true,
                     "config_type_bridge": false,
-                    "bridge_to_switch_ports": false
+                    "bridge_to_switch_ports": false,
                 },
                 {
                     "id": 5738,
@@ -1753,6 +1753,7 @@ Networks related resources of the **Networks API**. Networks are a nested in a l
                     "captive_portal_uamsecret": null,
                     "captive_portal_allowed_hosts": null,
                     "captive_portal_allowed_macs": null,
+                    "content_filter": "Security"
                     "radius_host_1": "radius-1.polkaspots.co",
                     "radius_host_2": "radius-2.polkaspots.co",
                     "radius_secret_1": null,
@@ -1775,6 +1776,15 @@ Networks related resources of the **Networks API**. Networks are a nested in a l
 ## Network Details [/api/v1/locations/{location_id}/networks/{id}]
 
 ### Update a Network [GET]
+
+You have four options for content filtering / DNS. If you pass one of the three options with the content filter, your DNS settings will be overriden:
+
+- Security
+- Family
+- Danger
+- Adult
+
+If you want to set your own DNS, please pass 'None' as a content filter parameter. If you set the DNS to nil values, they will be reset to 8.8.8.8 and 8.8.4.4
 
 + Parameters
 
@@ -1831,6 +1841,7 @@ Networks related resources of the **Networks API**. Networks are a nested in a l
                 "captive_portal_uamsecret": "52ea627a236c7043adc36bbd463d6bf4",
                 "captive_portal_allowed_hosts": "8.8.8.8,208.67.222.222,208.67.220.220",
                 "captive_portal_allowed_macs": null,
+                "content_filter": "Off"
                 "radius_host_1": "rad-1.polkaspots.com",
                 "radius_host_2": "rad-1.polkaspots.com",
                 "radius_secret_1": "3543f9e498e8",
