@@ -84,32 +84,134 @@ Firewall Rules related resources of the **Firewall Rules API**. Firewalls are a 
 
     + Body
     
-            [{
-                
+            [
                 {
-                    "id": 75,
+                    "id": 4145,
+                    "chain": "FORWARD",
+                    "rule_spec": "A",
+                    "string_patch": null,
+                    "protocol": null,
+                    "source_ip": "192.168.4.1/24",
+                    "source_port": null,
+                    "source_interface": null,
+                    "out_interface": null,
+                    "dest_ip": "local",
+                    "dest_port": null,
+                    "target": "DROP",
+                    "limit": null,
+                    "c_state": null,
+                    "log_level": null,
                     "location_id": 870,
-                    "url": "polkaspots.com",
-                    "created_at": "2014-09-16T23:50:42.000+01:00",
-                    "updated_at": "2014-09-16T23:50:42.000+01:00"
+                    "position": 1,
+                    "created_at": "February 15 2014 19:27:05",
+                    "updated_at": "February 15 2014 19:27:05"
                 },
                 {
-                    "id": 76,
+                    "id": 4146,
+                    "chain": "FORWARD",
+                    "rule_spec": "A",
+                    "string_patch": null,
+                    "protocol": null,
+                    "source_ip": "192.168.210.1/24",
+                    "source_port": null,
+                    "source_interface": null,
+                    "out_interface": null,
+                    "dest_ip": "local",
+                    "dest_port": null,
+                    "target": "DROP",
+                    "limit": null,
+                    "c_state": null,
+                    "log_level": null,
                     "location_id": 870,
-                    "url": "google.com",
-                    "created_at": "2014-09-16T23:50:47.000+01:00",
-                    "updated_at": "2014-09-16T23:50:47.000+01:00"
+                    "position": 2,
+                    "created_at": "February 15 2014 19:27:05",
+                    "updated_at": "February 15 2014 19:27:05"
                 },
                 {
-                    "id": 77,
+                    "id": 5848,
+                    "chain": "FORWARD",
+                    "rule_spec": "I",
+                    "string_patch": null,
+                    "protocol": null,
+                    "source_ip": "192.168.4.1/24",
+                    "source_port": null,
+                    "source_interface": null,
+                    "out_interface": null,
+                    "dest_ip": "local",
+                    "dest_port": null,
+                    "target": "DROP",
+                    "limit": null,
+                    "c_state": null,
+                    "log_level": null,
                     "location_id": 870,
-                    "url": "peaceandharmony.com",
-                    "created_at": "2014-09-16T23:51:03.000+01:00",
-                    "updated_at": "2014-09-16T23:51:03.000+01:00"
+                    "position": 1,
+                    "created_at": "September 16 2014 17:53:15",
+                    "updated_at": "September 16 2014 17:53:15"
+                },
+                {
+                    "id": 5849,
+                    "chain": "FORWARD",
+                    "rule_spec": "I",
+                    "string_patch": null,
+                    "protocol": null,
+                    "source_ip": "192.168.210.1/24",
+                    "source_port": null,
+                    "source_interface": null,
+                    "out_interface": null,
+                    "dest_ip": "local",
+                    "dest_port": null,
+                    "target": "DROP",
+                    "limit": null,
+                    "c_state": null,
+                    "log_level": null,
+                    "location_id": 870,
+                    "position": 2,
+                    "created_at": "September 16 2014 17:53:15",
+                    "updated_at": "September 16 2014 17:53:15"
+                },
+                {
+                    "id": 5850,
+                    "chain": "FORWARD",
+                    "rule_spec": "I",
+                    "string_patch": null,
+                    "protocol": null,
+                    "source_ip": "192.168.4.1/24",
+                    "source_port": null,
+                    "source_interface": null,
+                    "out_interface": null,
+                    "dest_ip": "local",
+                    "dest_port": null,
+                    "target": "DROP",
+                    "limit": null,
+                    "c_state": null,
+                    "log_level": null,
+                    "location_id": 870,
+                    "position": 1,
+                    "created_at": "September 16 2014 17:53:49",
+                    "updated_at": "September 16 2014 17:53:49"
+                },
+                {
+                    "id": 5851,
+                    "chain": "FORWARD",
+                    "rule_spec": "I",
+                    "string_patch": null,
+                    "protocol": null,
+                    "source_ip": "192.168.210.1/24",
+                    "source_port": null,
+                    "source_interface": null,
+                    "out_interface": null,
+                    "dest_ip": "local",
+                    "dest_port": null,
+                    "target": "DROP",
+                    "limit": null,
+                    "c_state": null,
+                    "log_level": null,
+                    "location_id": 870,
+                    "position": 2,
+                    "created_at": "September 16 2014 17:53:49",
+                    "updated_at": "September 16 2014 17:53:49"
                 }
-                
-            }]
-
+            ]
 
 ## Firewall Rule Create [/api/v1/locations/{location_id}/firewall_rules{?firewall_rule}]
 
