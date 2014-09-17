@@ -1545,6 +1545,9 @@ To delete a rule, simply set the _destroy field to 1.
 
 By sending the ID of the firewall rule, we will assume you're going to update the values.
 
+**NOTES**
+
+Whilst it's ok to send the whole location object back when updating the firewall rules, your response times will be faster if you reduce the size. We'd recommend sending only the required location params back, id, slug and any others you may want to update.
 + Parameters
 
     + id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
