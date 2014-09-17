@@ -60,6 +60,8 @@ Create a unique password for your captive portal.
 
 Firewall Rules related resources of the **Firewall Rules API**. Firewalls are a nested in a location. You cannot currently list all your walled gardens without specifying a location id (slug).
 
+Not all the parameters listed in this spec are supported yet.
+
 ##Allowed HTTPs requests:
 
 - `POST` - Creates or updates a resource
@@ -665,17 +667,21 @@ A single Location object with all its details
     + Body
 
 ### Remove a Location [DELETE]
+
+ TBC
+
 + Response 204
 
-
-
 ## Location Statistics [/location/{id}/stats]
+
 A single Location's statistical objects
 
 + Parameters
+
     + id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
 
 ### Retrieve a Location's Statistics [GET]
+
 + Response 200 (application/json)
 
     + Header
@@ -1528,6 +1534,107 @@ Restore an archived location to it's former glory.
     + Body
 
             { "message": "Your location has been unarchived" } 
+
+## Update a locations firewall rules [/api/v1/location/{id}{?location,firewall_rules_attributes,params}]
+
+You can either create firewall rules directly with the Firewall Rules API or you may update, create and delete when updating a location.
+
+You must wrap the firewall_rules_attributes params in the location params. 
+
+To delete a rule, simply set the _destroy field to 1.
+
+By sending the ID of the firewall rule, we will assume you're going to update the values.
+
++ Parameters
+
+    + id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + location (required, object ) ... An object which contains the firewall rule attributes
+    + firewall_rules_attributes (required, object ) ... An object of firewall rule attributes
+
+    
+### Update your firewall rules [PATCH]
+
++ Request (application/json)
+
+    + Headers
+    
+            Accept: application/json
+
+    + Body
+    
+            {"location":
+                {
+                    "slug": "derby-city-council",
+                    "id": 870,
+                    "block_access_to_local": true,
+                    "firewall_rules_attributes": [
+                        {
+                            "id": 5850,
+                            "chain": "FORWARD",
+                            "rule_spec": "I",
+                            "string_patch": null,
+                            "protocol": null,
+                            "source_ip": "192.168.4.124",
+                            "source_port": 12,
+                            "source_interface": null,
+                            "out_interface": null,
+                            "dest_ip": "local",
+                            "dest_port": 34,
+                            "target": "ACCEPT",
+                            "limit": null,
+                            "c_state": null,
+                            "log_level": null,
+                            "location_id": 870,
+                            "position": 1
+                        },
+                        {
+                            "id": 5851,
+                            "chain": "FORWARD",
+                            "rule_spec": "I",
+                            "string_patch": null,
+                            "protocol": null,
+                            "source_ip": "192.168.210.124",
+                            "source_port": null,
+                            "source_interface": null,
+                            "out_interface": null,
+                            "dest_ip": "local",
+                            "dest_port": null,
+                            "target": "ACCEPT",
+                            "limit": null,
+                            "c_state": null,
+                            "log_level": null,
+                            "location_id": 870,
+                            "position": 2
+                        },
+                        {
+                            "id": 5852,
+                            "chain": "FORWARD",
+                            "rule_spec": "A",
+                            "string_patch": null,
+                            "protocol": null,
+                            "source_ip": "192.168.4.124",
+                            "source_port": 1212,
+                            "source_interface": null,
+                            "out_interface": null,
+                            "dest_ip": "local",
+                            "dest_port": 1212,
+                            "target": "ACCEPT",
+                            "limit": null,
+                            "c_state": null,
+                            "log_level": null,
+                            "location_id": 870,
+                            "position": null,
+                            "_destroy": "1"
+                        }
+                    ]
+                }
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            { "message": "You have updated Derby Council" } 
 
 
 # Group Networks
