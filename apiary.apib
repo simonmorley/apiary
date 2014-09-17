@@ -33,6 +33,8 @@ Please create an application in Cucumber Tony and use your access token in all r
 - 429 `Too Many Requests` - Exceeded GoodData API limits. Pause requests, wait one minute, and try again. 
 - 503 `Service Unavailable` - The service is temporary unavailable (e.g. scheduled Platform Maintenance). Try again later.
 
+
+
 # Group Accounts
 
 Accounts related resources of the **Accounts API**
@@ -42,9 +44,9 @@ Accounts related resources of the **Accounts API**
 
 ## Generate Password [/accounts/generate_password]
 
-Create a unique password for your captive portal.
+Create a unique password for your captive portal. This doesn't save anything, it's just a nice little end-point to use.
 
-### Retrieve a Location's Statistics [POST]
+### Generate a one time password [POST]
 
 + Request (application/json)
 
