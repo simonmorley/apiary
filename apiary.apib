@@ -181,6 +181,111 @@ There's two ways to create a blacklisted device, either using this API or the lo
 
 + Response 204 (application/json)
 
+# Group Events
+
+Events related resources of the **Events API**. Events run at predefined intervals on your location's boxes.
+
+You can, for example, disable the login screens at lunch or reboot your access point in the evening.
+
+All events run on PolkaSpots boxes (running Stinky Panda). Third party boxes may only receive a selection of events.
+
+##Allowed HTTPs requests:
+
+- `POST` - Creates or updates a resource
+- `GET` - Retrieves a resource or list of resources
+- `DELETE` - Delete a resource
+
+## Events Collection [/api/v1/locations/{location_id}/events]
+
++ Parameters
+
+    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+
+### List all Events for a location [GET]
+
++ Request (application/json)
+
+            { "location_id": "derby-council" }
+
++ Response 200 (application/json)
+
+
+    + Body
+    
+            [
+                {
+                    "id": 115,
+                    "location_id": 870,
+                    "event_hour": "09:00",
+                    "event_frequency": "Daily",
+                    "payload_id": 34,
+                    "description": "Reboot my access point ",
+                    "unique_id": "6717550402069326522",
+                    "slug": null,
+                    "command_hash": null,
+                    "experimental": false,
+                    "premium": false,
+                    "active": true,
+                    "created_at": "2014-09-17T18:48:23.000+01:00",
+                    "updated_at": "2014-09-17T18:48:23.000+01:00"
+                }
+            ]
+
+## Create an Event [/api/v1/locations/{location_id}/events{?event}]
+
+### Create an Event [POST]
+
++ Parameters
+
+    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + event (required, params, `polkaspots.com`) ... parameters required for the creation of the event.
+
++ Request (application/json)
+
+            {
+                "event_hour": "09:00",
+                "event_frequency": "Daily",
+                "payload_id": 34,
+                "description": "Reboot my access point ",
+            }
+
++ Response 200 (application/json)
+
+            {
+                "id": 115,
+                "location_id": 870,
+                "event_hour": "09:00",
+                "event_frequency": "Daily",
+                "payload_id": 34,
+                "description": "Reboot my access point ",
+                "unique_id": "6717550402069326522",
+                "slug": null,
+                "command_hash": null,
+                "experimental": false,
+                "premium": false,
+                "active": true,
+                "created_at": "2014-09-17T18:48:23.000+01:00",
+                "updated_at": "2014-09-17T18:48:23.000+01:00"
+            }
+
+## Delete Event [/api/v1/locations/{location_id}/events/{id}]
+
+### Delete an Event [DELETE]
+
++ Parameters
+
+    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + id (required, integer, `1`) ... ID of the event you wish to delete.
+
++ Request (application/json)
+
+        {   
+            "location_id": "derby-council",
+            "id": 123,
+        }
+
++ Response 204 (application/json)
+
 # Group Firewall Rules
 
 Firewall Rules related resources of the **Firewall Rules API**. Firewalls are a nested in a location. You cannot currently list all your walled gardens without specifying a location id (slug).
