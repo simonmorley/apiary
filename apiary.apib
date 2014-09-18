@@ -40,7 +40,6 @@ Accounts related resources of the **Accounts API**
 
 ## Accounts Collection [/api/v1/accounts]
 
-
 ## Generate Password [/accounts/generate_password]
 
 Create a unique password for your captive portal. This doesn't save anything, it's just a nice little end-point to use.
@@ -100,7 +99,6 @@ You can either create, read, update and destroy your blacklists via the blacklis
                 "created_at": "September 17 2014 13:49:43"
             }]
     
-    
 ## Blacklists Create [/api/v1/locations/{location_id}/blacklists{?blacklisted,mac}]
 
 ### Create a Blacklisted device [POST]
@@ -130,7 +128,6 @@ There's two ways to create a blacklisted device, either using this API or the lo
             "expires_at": "2015-09-20T00:00:00.239+01:00",
             "updated_at": "2014-09-17T00:15:57.239+01:00"
         }
-
 
 ## Update a blacklist [/api/v1/locations/{location_id}/blacklists/{id}?blacklisted={params}]
 
@@ -294,10 +291,10 @@ Not all the parameters listed in this spec are supported yet.
 
 ##Allowed HTTPs requests:
 
-- `POST` - Creates or updates a resource
-- `PATCH` - Updates a resource
-- `GET` - Retrieves a resource or list of resources
-- `DELETE` - Delete a resource
+    - `POST` - Creates or updates a resource
+    - `PATCH` - Updates a resource
+    - `GET` - Retrieves a resource or list of resources
+    - `DELETE` - Delete a resource
 
 ## Firewall Rules Collection [/api/v1/locations/{location_id}/firewall_rules]
 
@@ -692,7 +689,6 @@ Returns a mini-list of your locations. Is good for search, cloning the logins, s
             "unique_id": "7379871298798717"
         }]
 
-
 ### Create a Location [POST]
 
 + Request (application/json)
@@ -702,7 +698,6 @@ Returns a mini-list of your locations. Is good for search, cloning the logins, s
 + Response 201 (application/json)
 
         { "id": 3, "title": "Buy cheese and bread for breakfast." }
-
 
 ## Location [/location/{id}]
 
@@ -1011,14 +1006,12 @@ A single Location's statistical objects
                 "top_boxes": []
             }
                 
-                
 ## Location Access Settings [/location/{id}/access]
 A single Location's access settings. Use this to adjust the type of login screens you want to offer, download speeds or even activate social logins.
 
 The list of parameters you can update using this action are listed below. If you need to update those not listed, use vanilla **update**.
 + Parameters
     + id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
-
 
 ### Retrieve a Location's Access Settings [GET]
 
@@ -1247,7 +1240,6 @@ The list of parameters you can update using this action are listed below. If you
     + Body
 
             { }
-
             
 ## Verify a Facebook Page [/location/{id}/fb_verify_page?page_id={page_id}]
 
@@ -1370,7 +1362,6 @@ You need to send us your Facebook accessToken for us to get these. We recommend 
     
             { "message": "Already processing a request." }
 
-
 ## Location layouts [/location/{id}/layout]
 
 Some params that are just required for the login pages. You may also use the standard location#show method however this is optimised for speed and includes only the attributes you need. Update the settings with a standard PATCH UPDATE.
@@ -1433,7 +1424,6 @@ Remarkably, you can send any image reference back as url. Either you use our con
                 "login_container_float": "Center",
                 "external_css_allowed": true
             }
-        
         
 ## Duplicate / Clone Login Pages [/location/{id}/duplicate_logins?location_ids={location_ids}]
 
