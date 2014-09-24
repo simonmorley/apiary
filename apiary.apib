@@ -727,6 +727,8 @@ Please note, creating a new walled garden will force all your boxes to reload th
 
 Locations related resources of the **Locations API**
 
+TO DO: Add a list of parameters we can access.
+
 ## Locations Collection [/api/v1/locations]
 
 ### List all Locations [GET]
@@ -829,15 +831,52 @@ Returns a mini-list of your locations. Is good for search, cloning the logins, s
             "unique_id": "7379871298798717"
         }]
 
+## Create a location [/api/v1/locations{?location}]
+
+Default required params include:
+
+- location_name
+- address
+- town
+- postcode
+
+You may send an array of mac addresses to create boxes associated with the location. This must follow the following convention:
+
+    { "boxes": { "ap_mac": ["00:22:22:11:22:33", "66:22:11:22:33:44"] }
+
+You can also send a facebook_id with your request. Doing so will cause CT to totally ignore the data you've sent. Instead, Cucumber Tony will contact Facebook and grab the information from them instead.
+
+    { "location": { "facebook_id": "valid-fb-id" } }
++ Parameters
+
+    + location (required, JSON object, `location_name: derby-city-council`) ... JSON object of all the parameters you wish to create your location with.
+
 ### Create a Location [POST]
 
 + Request (application/json)
 
-        { "title": "Buy cheese and bread for breakfast." }
+        "location":
+            {
+                "location_name": "Derby Council",
+                "address": "1 Really Long Road",
+                "town": "A far away land",
+                "postcode": "EC1M",
+                "phone1": '01604 134 1679',
+                "facebook_id": "187263871623"
+            },
+        "boxes":
+            { "ap_mac": ["AA:BB:CC:DD:EE:FF:11"] }
 
-+ Response 201 (application/json)
++ Response 200 (application/json)
 
-        { "id": 3, "title": "Buy cheese and bread for breakfast." }
+        {
+            "id": 1768,
+            "slug": "derby-ff3b5382-baa5-4ecd-945a-526427e057a1",
+            "created_at": "September24201419: 07: 09",
+            "attr_generated": false,
+            "location_address": "62 Britton Street",
+            "location_name": "PolkaSpots"
+        }
 
 ## Location [/location/{id}]
 
