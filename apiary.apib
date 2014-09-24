@@ -33,7 +33,6 @@ Please create an application in Cucumber Tony and use your access token in all r
 - 429 `Too Many Requests` - Exceeded our API limits of 60 per minute. 
 - 503 `Service Unavailable` - The service is temporary unavailable. Try again later.
 
-
 # Group Accounts
 
 Accounts related resources of the **Accounts API**
@@ -168,6 +167,148 @@ There's two ways to create a blacklisted device, either using this API or the lo
 
     + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
     + id (required, integer, `1`) ... ID of the blacklisted device you wish to update.
+
++ Request (application/json)
+
+        {   
+            "location_id": "derby-council",
+            "id": 123,
+        }
+
++ Response 204 (application/json)
+
+# Group Boxes
+
+Boxes belong to locations and whilst you can read, update, destroy and perform other non-restful actions on a box (or boxes), you are not permitted to create a box without specifiying a location_id with the parameters.
+
+##Allowed HTTPs requests:
+
+- `POST` - Creates or updates a resource
+- `PATCH` - Updates a resource
+- `GET` - Retrieves a resource or list of resources
+- `DELETE` - Delete a resource
+
+## Boxes Collection [/api/v1/boxes]
+
+Lists all your boxes globally.
+
+### List all Boxes [GET]
+
++ Response 200 (application/json)
+
+
+    + Body
+    
+            [{
+                "id": 57,
+                "mac": "11-22-33-44-55-66",
+                "expires_at": null,
+                "created_at": "September 17 2014 13:49:43"
+            },
+            {
+                "id": 58,
+                "mac": "22-33-22-11-33-44",
+                "expires_at": "September 20 2014 00:00:00",
+                "created_at": "September 17 2014 13:49:43"
+            }]
+    
+## Location Boxes Collection [/api/v1/locations/{location_id}/boxes]
+
++ Parameters
+
+    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+
+### List all Location Boxes [GET]
+
++ Request (application/json)
+
+            { "location_id": "derby-council" }
+
++ Response 200 (application/json)
+
+
+    + Body
+    
+            [{
+                "id": 57,
+                "mac": "11-22-33-44-55-66",
+                "expires_at": null,
+                "created_at": "September 17 2014 13:49:43"
+            },
+            {
+                "id": 58,
+                "mac": "22-33-22-11-33-44",
+                "expires_at": "September 20 2014 00:00:00",
+                "created_at": "September 17 2014 13:49:43"
+            }]
+    
+## Box Create [/api/v1/boxes{?calledstationid,description,location_id}]
+
+### Create a Box [POST]
+
+Don't forget, you must send the location_id with your request IN the box params. The following params are required:
+
++ Parameters
+
+    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + calledstationid (required, string, `mac`) ... Mac address of the box.
+    + description (required, text, `Upstairs, in the loft`) ... A description of the box.
+    
+
++ Request (application/json)
+
+        {
+            "blacklisted": 
+                {
+                    "mac": "00:22:22:11:22:33",
+                    "expires_at": "September 20 2015 00:00:00"
+                }
+        }
+
++ Response 200 (application/json)
+
+        {
+            "id": 7,
+            "mac": "00:22:22:11:22:33",
+            "expires_at": "2015-09-20T00:00:00.239+01:00",
+            "updated_at": "2014-09-17T00:15:57.239+01:00"
+        }
+
+## Update a box [/api/v1/boxes/{id}{?params}]
+
+### Update a box [PATCH]
+
++ Parameters
+
+    + id (required, integer, `1`) ... ID of the blacklisted device you wish to update.
+    + params (required, object, `1`) ... Any information about the box. A full list of params can be seen above.
+
++ Request (application/json)
+
+        {   
+            "location_id": "derby-council",
+            "id": 7,
+            "blacklisted: {
+                "mac": "00:22:22:11:22:33"
+            }
+        }
+
++ Response 200 (application/json)
+
+        {
+            "id": 7,
+            "mac": "00:22:22:11:22:33",
+            "expires_at": "2015-09-20T00:00:00.239+01:00",
+            "updated_at": "2014-09-17T00:15:57.239+01:00"
+        }
+
+## Box Delete [/api/v1/boxes/{id}]
+
+### Delete a box [DELETE]
+
++ Parameters
+
+    + id (required, integer, `1`) ... ID of the box you wish to delete.
 
 + Request (application/json)
 
