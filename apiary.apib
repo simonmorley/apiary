@@ -400,12 +400,11 @@ Don't forget, you must send the location_id with your request IN the box params.
 
 + Response 200 (application/json)
 
-        {
-            "id": 7,
-            "mac": "00:22:22:11:22:33",
-            "expires_at": "2015-09-20T00:00:00.239+01:00",
-            "updated_at": "2014-09-17T00:15:57.239+01:00"
-        }
+        { response: "Please allow 2-3 minute for the device to reboot" }
+
++ Response 400 (application/json)
+
+        { status: "unprocessable_entity" }
 
 # Group Events
 
