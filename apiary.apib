@@ -189,28 +189,67 @@ Boxes belong to locations and whilst you can read, update, destroy and perform o
 
 ## Boxes Collection [/api/v1/boxes]
 
+
 Lists all your boxes globally.
 
 ### List all Boxes [GET]
+
++ Request (application/json)
+
+            { "location_id": "derby-council" }
 
 + Response 200 (application/json)
 
 
     + Body
-    
-            [{
-                "id": 57,
-                "mac": "11-22-33-44-55-66",
-                "expires_at": null,
-                "created_at": "September 17 2014 13:49:43"
-            },
-            {
-                "id": 58,
-                "mac": "22-33-22-11-33-44",
-                "expires_at": "September 20 2014 00:00:00",
-                "created_at": "September 17 2014 13:49:43"
-            }]
-    
+
+            [
+                {
+                    "nasname": "10.85.10.162",
+                    "slug": "JCyK7Zwh0ON_ZOWso8Mhuw",
+                    "calledstationid": "DC-9F-DB-3D-AC-49",
+                    "last_heartbeat": "August 21 2014 01:12:07",
+                    "label_name": "success",
+                    "location_id": 53,
+                    "machine_type": "Ubiquiti AirRouter",
+                    "location_name": "PolkaSpots Office",
+                    "state": "Online"
+                },
+                {
+                    "nasname": "10.85.13.238",
+                    "slug": "bzwZif_WftBTFkPDfjfJfA",
+                    "calledstationid": "24-A4-3C-7C-FC-0A",
+                    "last_heartbeat": "August 21 2014 01:12:07",
+                    "label_name": "info",
+                    "location_id": 53,
+                    "machine_type": "Ubiquiti UniFi",
+                    "location_name": "PolkaSpots Office",
+                    "state": "Queued"
+                },
+                {
+                    "nasname": "2.5.6.7",
+                    "slug": "BFU1ZP9QeN0k3NSIIz8UQQ",
+                    "calledstationid": "00-27-22-50-5C-E1",
+                    "last_heartbeat": "August 21 2014 01:12:07",
+                    "label_name": "info",
+                    "location_id": 53,
+                    "machine_type": null,
+                    "location_name": "PolkaSpots Office",
+                    "state": "Queued"
+                },
+                {
+                    "nasname": "10.85.18.146",
+                    "slug": "fUMJ89X6s4MM1AajUHl-fQ",
+                    "calledstationid": "24-A4-3C-02-37-67",
+                    "last_heartbeat": "August 21 2014 01:12:07",
+                    "label_name": "info",
+                    "location_id": 53,
+                    "machine_type": "Ubiquiti UniFi AP Pro",
+                    "location_name": "PolkaSpots Office",
+                    "state": "Queued"
+                }
+            ]    
+
 ## Location Boxes Collection [/api/v1/locations/{location_id}/boxes]
 
 + Parameters
