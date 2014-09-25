@@ -424,6 +424,32 @@ Don't forget, you must send the location_id with your request IN the box params.
 
         { status: "unprocessable_entity" }
 
+## Send a payload to a box or boxes [/api/v1/boxes/payloads{?payload_id,box_ids}]
+
+### Send a payload to a box [POST]
+
++ Parameters
+
+    + payload_id (string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Unique ID of the payload you want to send to the box.
+    + box_ids (array / string, `HSKJHKJH,HSJAJTR`) ... The slugs of the devices you want to receive the payloads.
+
++ Request (application/json)
+
+        { "box":
+                {
+                    "payload_id": "JCyK7Zwh0ON_ZOWso8Mhuw",
+                    "box_ids": [ID, ID2, ID3]
+                }
+        }
+
++ Response 200 (application/json)
+
+        { response: "Please allow 2-3 minute for the device to reboot" }
+
++ Response 400 (application/json)
+
+        { status: "unprocessable_entity" }
+
 # Group Events
 
 Events related resources of the **Events API**. Events run at predefined intervals on your location's boxes.
