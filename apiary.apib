@@ -431,7 +431,7 @@ Don't forget, you must send the location_id with your request IN the box params.
 + Parameters
 
     + payload_id (string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Unique ID of the payload you want to send to the box.
-    + box_ids (array / string, `HSKJHKJH,HSJAJTR`) ... The slugs of the devices you want to receive the payloads.
+    + box_ids (array / string, `HSKJHKJH,BMBCKJHS`) ... The slugs of the devices you want to receive the payloads.
 
 + Request (application/json)
 
@@ -444,11 +444,12 @@ Don't forget, you must send the location_id with your request IN the box params.
 
 + Response 200 (application/json)
 
-        { response: "Please allow 2-3 minute for the device to reboot" }
+        { message: "Device payload initiated." }
 
-+ Response 400 (application/json)
++ Response 422 (application/json)
 
         { status: "unprocessable_entity" }
+
 
 # Group Events
 
