@@ -55,6 +55,36 @@ Create a unique password for your captive portal. This doesn't save anything, it
 
             {"password": "random-passy"}
 
+# Group Alerts
+
+A resource within boxes. 
+
+- `PATCH` - Updates a resource
+
+
+## Update the alerts for a box [/api/v1/boxes/{box_id}/alerts{?alerts}]
+
+
+### Enable / Disable alerts for a box [PATCH]
+
++ Parameters
+
+    + box_id (required, string, `"JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` of the box to perform action with. Has example value.
+    + alerts (required, boolean, `"true`) ... True or false depending on whether you want alerts on or off.
+
++ Request (application/json)
+    
+        { "box_id": "JCyK7Zwh0ON_ZOWso8Mhuw" }
+
++ Response 200 (application/json)
+
+        { message: "Device payload initiated." }
+
++ Response 422 (application/json)
+
+        { status: "unprocessable_entity" }
+
+
 # Group Blacklists
 
 Related resources of the **Blacklists API**. Blacklists belong to a location. You cannot currently list all your blacklists without specifying a location id (slug).
@@ -447,6 +477,26 @@ Don't forget, you must send the location_id with your request IN the box params.
         { message: "Device payload initiated." }
 
 + Response 422 (application/json)
+
+        { status: "unprocessable_entity" }
+
+## Reset a box [/api/v1/boxes/{id}/reset]
+
+### Reset a box [POST]
+
++ Parameters
+
+    + id (required, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... ID (we use the slug) of the device you want to reboot.
+
++ Request (application/json)
+
+        { "id": "JCyK7Zwh0ON_ZOWso8Mhuw" }
+
++ Response 200 (application/json)
+
+        { response: "Please allow 2-3 minute for the device to reboot" }
+
++ Response 400 (application/json)
 
         { status: "unprocessable_entity" }
 
