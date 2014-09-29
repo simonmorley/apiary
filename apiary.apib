@@ -365,7 +365,7 @@ Lists all your boxes globally.
 
     + id (required, string, `a-long-slug`) ... Slug `slug` of the box to perform action with. Has example value.
 
-### Get a box [GET]
+### Box [GET]
 
 + Request (application/json)
 
@@ -440,6 +440,17 @@ Lists all your boxes globally.
                     "location_slug": "polkaspots-office"
                 }
 
+### Delete a box [DELETE]
+
++ Parameters
+
+    + id (required, integer, `1`) ... ID of the box you wish to delete.
+
++ Request (application/json)
+
+        {   "id": 'JCyK7Zwh0ON_ZOWso8Mhuw'  }
+
++ Response 204 (application/json)
 
 
 ## Box Create [/api/v1/boxes{?calledstationid,description,location_id}]
@@ -504,20 +515,6 @@ Don't forget, you must send the location_id with your request IN the box params.
         }
 
 
-### Delete a box [DELETE]
-
-+ Parameters
-
-    + id (required, integer, `1`) ... ID of the box you wish to delete.
-
-+ Request (application/json)
-
-        {   
-            "location_id": "derby-council",
-            "id": 123,
-        }
-
-+ Response 204 (application/json)
 
 ## Reboot a box [/api/v1/boxes/{id}/reboot]
 
