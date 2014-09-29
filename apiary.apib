@@ -359,6 +359,87 @@ Lists all your boxes globally.
                 }
             ]
 
+## Box Show [/api/v1/boxes/{id}]
+
++ Parameters
+
+    + id (required, string, `a-long-slug`) ... Slug `slug` of the box to perform action with. Has example value.
+
+### Get a box [GET]
+
++ Request (application/json)
+
+            { "id": "JCyK7Zwh0ON_ZOWso8Mhuw" }
+
++ Response 200 (application/json)
+
+
+    + Body
+
+                {
+                    "id": 2217,
+                    "slug": "JCyK7Zwh0ON_ZOWso8Mhuw",
+                    "created_at": "March 29 2014 10:54:59",
+                    "device_icon": "ubiquiti-airrouter-icon.png",
+                    "uptime": "",
+                    "location_id": 53,
+                    "gmaps_zoom": 10,
+                    "last_heartbeat": "August 21 2014 01:12:07",
+                    "description": "In the washing room",
+                    "calledstationid": "DC-9F-DB-3D-AC-49",
+                    "nasname": "10.85.10.162",
+                    "wan_ip": "192.168.1.64",
+                    "wan_proto": "static",
+                    "public_ip": "86.29.244.37",
+                    "state": "queued",
+                    "installer_id": 1,
+                    "fail_count": 0,
+                    "secret": "f797ef11f80f2737e07de1bae056",
+                    "serial_number": "1601-9532-9289-6598",
+                    "system_type": "Atheros AR7241",
+                    "error_code": 0,
+                    "access_token": "3db9e053-fabb-422d-a5b1-18b275af5236",
+                    "machine_type": "Ubiquiti AirRouter",
+                    "gubbins_version": "1.3",
+                    "latitude": "51.54462696721446",
+                    "longitude": "-0.053558349609375",
+                    "current_packages": null,
+                    "wan_ipaddr": "192.168.1.1",
+                    "firmware_version": "p_140511_00",
+                    "wan_netmask": "255.255.255.0",
+                    "wan_gateway": "192.168.1.1",
+                    "wan_dns_1": "8.8.8.8",
+                    "wan_dns_2": "8.8.4.4",
+                    "channel": "04",
+                    "channel_5": "auto",
+                    "tx_power_2": "19",
+                    "tx_power_5": "20",
+                    "ht_mode_2": "HT40+",
+                    "ht_mode_5": "HT20",
+                    "device_id": 115,
+                    "updated_at": "September 29 2014 17:13:56",
+                    "development_mode": "Beta",
+                    "sync_id": "ad4a940a0bef034509dfc306a54f66c46bd9",
+                    "is_monitored": false,
+                    "dns_hostname": null,
+                    "pppoe_username": "user@polkaspots.com",
+                    "pppoe_password": "pass",
+                    "radiusnasid": "6c06c176-61ce-4484-87ff-9f55b4",
+                    "last_disconnect_reason": null,
+                    "upgrade_throttle": null,
+                    "next_firmware_name": "Stinky Panda\t (p_140522_00)",
+                    "current_firmware_name": "Stinky Panda (p_140511_00)",
+                    "device_is_online": false,
+                    "fw_upgrade_scheduled": null,
+                    "dual_band": false,
+                    "iwinfo": null,
+                    "avg_speedtest": 0,
+                    "wan_mtu": 1500,
+                    "is_upgrading": false,
+                    "can_reboot": true,
+                    "location_slug": "polkaspots-office"
+                }
+
 ## Box Create [/api/v1/boxes{?calledstationid,description,location_id}]
 
 ### Create a Box [POST]
