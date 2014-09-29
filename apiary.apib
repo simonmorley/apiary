@@ -61,7 +61,6 @@ A resource within boxes. Enables / disables alerts for a specific box. Alerts ar
 
 - `PATCH` - Updates a resource
 
-
 ## Update the alerts for a box [/api/v1/boxes/{box_id}/alerts{?alerts}]
 
 ### Enable / Disable alerts for a box [PATCH]
@@ -688,6 +687,37 @@ Popular Payloads include rebooting a box, disabling login screens and running fi
         { message: "Device payload initiated." }
 
 + Response 422 (application/json)
+
+        { status: "unprocessable_entity" }
+        
+    
+## Transfer a box [/api/v1/boxes/{id}/transfer{?transfer_to}]
+
+Creates a transfer to move a box to a different location. Please note, this cannot be reversed, if you enter the incorrect location_id to transfer to, you may lose the box forever :(
+
+This does not happen immediately and will be queued for transfer. This might take a few seconds to complete.
+
+Please note, this will also reset your box to reflect the settings of the new location.
+
+### Transfer a box [POST]
+
++ Parameters
+
+    + id (required, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... ID (we use the slug) of the device you want to reboot.
+    + transfer_to (required, string, `759275635389093876`) ... The Unique ID of the location you want to transfer the device to.
+
++ Request (application/json)
+
+        { 
+            "id": "JCyK7Zwh0ON_ZOWso8Mhuw",
+            "transfer_to": "759275635389093876",
+        }
+
++ Response 200 (application/json)
+
+        { response: "Please allow 2-3 minute for the device to transfer" }
+
++ Response 400 (application/json)
 
         { status: "unprocessable_entity" }
 
@@ -1559,6 +1589,7 @@ A single Location's statistical objects
             }
                 
 ## Location Access Settings [/location/{id}/access]
+
 A single Location's access settings. Use this to adjust the type of login screens you want to offer, download speeds or even activate social logins.
 
 The list of parameters you can update using this action are listed below. If you need to update those not listed, use vanilla **update**.
