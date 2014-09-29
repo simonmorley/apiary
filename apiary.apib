@@ -460,7 +460,6 @@ Don't forget, you must send the location_id with your request IN the box params.
     + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
     + calledstationid (required, string, `mac`) ... Mac address of the box.
     + description (required, text, `Upstairs, in the loft`) ... A description of the box.
-    
 
 + Request (application/json)
 
@@ -616,7 +615,6 @@ If you update any fields related to the network settings, you will reboot your b
                     "pppoe_password": "pass"
                 }
 
-
 ## Reboot a box [/api/v1/boxes/{id}/reboot]
 
 ### Reboot a box [POST]
@@ -688,7 +686,6 @@ Popular Payloads include rebooting a box, disabling login screens and running fi
 + Response 422 (application/json)
 
         { status: "unprocessable_entity" }
-
 
 # Group Events
 
