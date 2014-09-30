@@ -3054,7 +3054,102 @@ Remember, creating a speedtest only creates a temporary result. Permanent result
 + Response 200 (application/json)
 
             { "message": "Speedtest queued for processing." }
+
+# Group Versions
+
+You can access the change history for both your Boxes and Locations using the Versions API. Versioning allows you to rollback where you've made mistakes and also check who's updated a setting. You'll see the username of the person Whodunnit.
+
+##Allowed HTTPs requests:
+
+- `GET` - Retrieves a resource or list of resources
+- `POST` - Restore a version
+
+## Versions Collection [/api/v1/boxes/{box_id}/versions]
+
+(Also available on /locations/{location_id})
+
++ Parameters
+
+    + box_id (required, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` of the Box to perform action on.
+
+### List all Versions for a Box [GET]
+
++ Request (application/json)
+
+            { "box_id": "JCyK7Zwh0ON_ZOWso8Mhuw" }
+
++ Response 200 (application/json)
+
+    +    body 
+        
             
+            [{
+                "id": 67808,
+                "event": "update",
+                "whodunnit": "bob-marley",
+                "changeset": {
+                    "is_monitored": [
+                        false,
+                        true
+                    ],
+                    "slug": [
+                        "JCyK7Zwh0ON_ZOWso8Mhuw",
+                        null
+                    ]
+                },
+                "created_at": "September 30 2014 23:39:34"
+            },
+            {
+                "id": 67747,
+                "event": "update",
+                "whodunnit": "1",
+                "changeset": {
+                    "wan_proto": [
+                        "static",
+                        "dhcp"
+                    ]
+                },
+                "created_at": "September 29 2014 16:55:05"
+            },
+            {
+                "id": 67744,
+                "event": "update",
+                "whodunnit": "1",
+                "changeset": {
+                    "wan_proto": [
+                        "pppoe",
+                        "static"
+                    ],
+                    "wan_ipaddr": [
+                        "",
+                        "192.168.1.1"
+                    ],
+                    "wan_gateway": [
+                        "",
+                        "192.168.1.1"
+                    ]
+                },
+                "created_at": "September 29 2014 16:23:53"
+            },
+            {
+                "id": 64266,
+                "event": "update",
+                "whodunnit": null,
+                "changeset": {
+                    "address": [
+                        null,
+                        "62 Britton Street, EC1M 5UY, United Kingdom"
+                    ],
+                    "description": [
+                        null,
+                        "A new box"
+                    ]
+                },
+                "created_at": "March 29 2014 10:55:48"
+            }]
+        
+           
+        
 # Group Walled Gardens
 
 Walled Gardens related resources of the **Walled Gardens API**. Walled gardens are a nested in a location. You cannot currently list all your walled gardens without specifying a location id (slug).
