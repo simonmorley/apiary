@@ -3035,6 +3035,20 @@ The creation of a speedtest is meant to be an ephemeral and quick connection che
             }]
 
 
+### Create a Speedtest [POST]
+
++ Parameters
+
+    + box_id (required, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` of the Box to perform action with. Has example value.
+
++ Request (application/json)
+
+            { "box_id": "JCyK7Zwh0ON_ZOWso8Mhuw" }
+
++ Response 200 (application/json)
+
+            { "message": "Speedtest queued for processing." }
+            
 # Group Walled Gardens
 
 Walled Gardens related resources of the **Walled Gardens API**. Walled gardens are a nested in a location. You cannot currently list all your walled gardens without specifying a location id (slug).
