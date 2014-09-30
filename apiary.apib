@@ -2955,6 +2955,85 @@ PolkaSpots only payloads should not be run on non-ps boxes. For example, you can
 
 + Response 204 (application/json)
 
+# Group Speedtests
+
+Speedtests belong to boxes and are a nested resource. You can only create and list speedtests per device. Creating a speedtest **DOES NOT** store it permanently. Only speedtests which run automatically in the middle of the night are stored.
+
+The creation of a speedtest is meant to be an ephemeral and quick connection check. The results from the creation of a speedtest can be seen in the Box object. Use the Boxes API to get this information.
+
+##Allowed HTTPs requests:
+
+- `POST` - Creates or updates a resource
+- `GET` - Retrieves a list of speedtests
+
+## Speedtests Collection [/api/v1/boxes/{box_id}/speedtests]
+
++ Parameters
+
+    + box_id (required, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` of the Box to perform action with. Has example value.
+
+### List all Speedtests [GET]
+
++ Request (application/json)
+
+            { "box_id": "JCyK7Zwh0ON_ZOWso8Mhuw" }
+
++ Response 200 (application/json)
+
+
+    + Body
+
+            [{
+                "download_speed": "1680.0",
+                "created_at": "September 30 2014 00:59:57",
+                "box_id": 2217
+            },
+            {
+                "download_speed": "2236.0",
+                "created_at": "September 29 2014 00:59:57",
+                "box_id": 2217
+            },
+            {
+                "download_speed": "783732.0",
+                "created_at": "September 28 2014 00:59:57",
+                "box_id": 2217
+            },
+            {
+                "download_speed": "1190397.0",
+                "created_at": "September 27 2014 00:59:57",
+                "box_id": 2217
+            },
+            {
+                "download_speed": "1067134.0",
+                "created_at": "September 26 2014 00:59:58",
+                "box_id": 2217
+            },
+            {
+                "download_speed": "987708.0",
+                "created_at": "September 25 2014 00:59:58",
+                "box_id": 2217
+            },
+            {
+                "download_speed": "819041.0",
+                "created_at": "September 24 2014 00:59:58",
+                "box_id": 2217
+            },
+            {
+                "download_speed": "0.0",
+                "created_at": "September 23 2014 00:59:58",
+                "box_id": 2217
+            },
+            {
+                "download_speed": "0.0",
+                "created_at": "September 22 2014 00:59:58",
+                "box_id": 2217
+            },
+            {
+                "download_speed": "0.0",
+                "created_at": "September 21 2014 00:59:58",
+                "box_id": 2217
+            }]
+
 
 # Group Walled Gardens
 
