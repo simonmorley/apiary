@@ -3037,6 +3037,10 @@ The creation of a speedtest is meant to be an ephemeral and quick connection che
 
 ### Create a Speedtest [POST]
 
+You can't run two speedtests at the same time. You will receieve a 422 response if you try before the speedtest has completed. Speedtests are queued - should a job fail, we'll pause for 120 seconds before allowing another one to run.
+
+Remember, creating a speedtest only creates a temporary result. Permanent results are collected at the same time daily.
+
 + Parameters
 
     + box_id (required, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` of the Box to perform action with. Has example value.
