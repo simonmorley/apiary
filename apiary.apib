@@ -691,20 +691,6 @@ Please note, this will also reset your box to reflect the settings of the new lo
 
         { status: "unprocessable_entity" }
 
-# Group Events
-
-Events related resources of the **Events API**. Events run at predefined intervals on your location's boxes.
-
-You can, for example, disable the login screens at lunch or reboot your access point in the evening.
-
-All events run on PolkaSpots boxes (running Stinky Panda). Third party boxes may only receive a selection of events.
-
-##Allowed HTTPs requests:
-
-- `POST` - Creates or updates a resource
-- `GET` - Retrieves a resource or list of resources
-- `DELETE` - Delete a resource
-
 # Group Commands
 
 Commands reference the **Commands API**. 
@@ -930,6 +916,21 @@ Only PolkaSpots staff are able to create, modify and delete commands at the mome
         }
 
 + Response 204 (application/json)
+
+
+# Group Events
+
+Events related resources of the **Events API**. Events run at predefined intervals on your location's boxes.
+
+You can, for example, disable the login screens at lunch or reboot your access point in the evening.
+
+All events run on PolkaSpots boxes (running Stinky Panda). Third party boxes may only receive a selection of events.
+
+##Allowed HTTPs requests:
+
+- `POST` - Creates or updates a resource
+- `GET` - Retrieves a resource or list of resources
+- `DELETE` - Delete a resource
 
 ## Events Collection [/api/v1/locations/{location_id}/events]
 
