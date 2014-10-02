@@ -660,37 +660,7 @@ Restores things to factory defaults.
 
         { status: "unprocessable_entity" }
 
-## Send a payload [/api/v1/boxes/payloads{?payload_id,box_ids}]
 
-Payloads are commands you can run on boxes. Payloads are preset - a list of which can be discovered using the Payloads API. 
-
-Popular Payloads include rebooting a box, disabling login screens and running firmware updates.
-
-### Send a payload [POST]
-
-+ Parameters
-
-    + payload_id (string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Unique ID of the payload you want to send to the box.
-    + box_ids (array / string, `HSKJHKJH,BMBCKJHS`) ... The slugs of the devices you want to receive the payloads.
-
-+ Request (application/json)
-
-        { "box":
-                {
-                    "payload_id": "JCyK7Zwh0ON_ZOWso8Mhuw",
-                    "box_ids": ['ID', 'ID2', 'ID3']
-                }
-        }
-
-+ Response 200 (application/json)
-
-        { message: "Device payload initiated." }
-
-+ Response 422 (application/json)
-
-        { status: "unprocessable_entity" }
-        
-    
 ## Transfer a box [/api/v1/boxes/{id}/transfer{?transfer_to}]
 
 Creates a transfer to move a box to a different location. Please note, this cannot be reversed, if you enter the incorrect location_id to transfer to, you may lose the box forever :(
@@ -734,6 +704,232 @@ All events run on PolkaSpots boxes (running Stinky Panda). Third party boxes may
 - `POST` - Creates or updates a resource
 - `GET` - Retrieves a resource or list of resources
 - `DELETE` - Delete a resource
+
+# Group Commands
+
+Commands reference the **Commands API**. 
+
+Commands can be applied directly to a box (see Payloads API) or events. There's two types of events:
+
+1. Available to schedule
+2. PolkaSpots only
+
+PolkaSpots only commands should not be run on non-ps boxes. For example, you cannot schedule a Xirrus to reboot using the paylods.
+
+However, you may disable the Xirrus login screens. PolkaSpots only commands are suitable for boxes running the Stinky Panda firmware only.
+
+Only PolkaSpots staff are able to create, modify and delete commands at the moment.
+
+##Allowed HTTPs requests:
+
+- `GET` - Retrieves a resource or list of resources
+
+##Allowed HTTPs requests for non-customers:
+
+- `POST` - Creates or updates a resource
+- `PATCH` - Updates a resource
+- `DELETE` - Delete a resource
+
+## Commands Collection [/api/v1/commands]
+
+### List all Commands [GET]
+
++ Response 200 (application/json)
+
+    + Body
+                
+            [
+                {
+                    "id": 34,
+                    "unique_id": "9328ce1-c7c4-49a2-bee1-c2a2d6234a9d",
+                    "payload_description": "Reboot my access point ",
+                    "payload_name": "Reboot Access Points",
+                    "payload_command": "/sbin/reboot",
+                    "can_schedule": true,
+                    "only_polkaspots": true
+                },
+                {
+                    "id": 35,
+                    "unique_id": "9328ce1-c7c4-49a2-bee1-c2a2d6234a9d",
+                    "payload_description": "Disable My Login Screens",
+                    "payload_name": "Disable Login Screens",
+                    "payload_command": "",
+                    "can_schedule": true,
+                    "only_polkaspots": false
+                },
+                {
+                    "id": 36,
+                    "unique_id": "9328ce1-c7c4-49a2-bee1-c2a2d6234a9d",
+                    "payload_description": "Enable My Login Screens",
+                    "payload_name": "Enable Login Screens",
+                    "payload_command": "",
+                    "can_schedule": true,
+                    "only_polkaspots": false
+                },
+                {
+                    "id": 37,
+                    "unique_id": "9328ce1-c7c4-49a2-bee1-c2a2d6234a9d",
+                    "payload_description": "Disable my private Wi-Fi network completely",
+                    "payload_name": "Disable Private Wi-Fi Network",
+                    "payload_command": "",
+                    "can_schedule": true,
+                    "only_polkaspots": true
+                },
+                {
+                    "id": 38,
+                    "unique_id": "9328ce1-c7c4-49a2-bee1-c2a2d6234a9d",
+                    "payload_description": "Enable my private Wi-Fi network",
+                    "payload_name": "Enable Private Wi-Fi Network",
+                    "payload_command": "",
+                    "can_schedule": true,
+                    "only_polkaspots": true
+                },
+                {
+                    "id": 39,
+                    "unique_id": "9328ce1-c7c4-49a2-bee1-c2a2d6234a9d",
+                    "payload_description": "Hide my public Wi-Fi network",
+                    "payload_name": "Hide Public Wi-Fi Network",
+                    "payload_command": "",
+                    "can_schedule": true,
+                    "only_polkaspots": true
+                },
+                {
+                    "id": 40,
+                    "unique_id": "9328ce1-c7c4-49a2-bee1-c2a2d6234a9d",
+                    "payload_description": "Show my public Wi-Fi network",
+                    "payload_name": "Show Public Wi-Fi Network",
+                    "payload_command": "",
+                    "can_schedule": true,
+                    "only_polkaspots": true
+                },
+                {
+                    "id": 41,
+                    "unique_id": "9328ce1-c7c4-49a2-bee1-c2a2d6234a9d",
+                    "payload_description": "Disable all Wi-Fi networks",
+                    "payload_name": "Wi-Fi Down Completely",
+                    "payload_command": "",
+                    "can_schedule": true,
+                    "only_polkaspots": true
+                },
+                {
+                    "id": 42,
+                    "unique_id": "9328ce1-c7c4-49a2-bee1-c2a2d6234a9d",
+                    "payload_description": "Enable all Wi-Fi networks",
+                    "payload_name": "Wi-Fi Up Completely",
+                    "payload_command": "",
+                    "can_schedule": true,
+                    "only_polkaspots": true
+                }
+            ]
+            
+## Commands Create [/api/v1/commands{?command}]
+
+### Create a command [POST]
+
++ Request 200 (application/json)
+
+            {
+                "command": 
+                    {
+                        "payload_description": "Reboot my access point ",
+                        "payload_name": "Reboot Access Points",
+                        "payload_command": "/sbin/reboot",
+                        "can_schedule": true,
+                        "only_polkaspots": true
+                    }
+            }
+
+
++ Response 200 (application/json)
+
+    + Body
+        
+            {
+                "id": 34,
+                "payload_description": "Reboot my access point ",
+                "payload_name": "Reboot Access Points",
+                "payload_command": "/sbin/reboot",
+                "can_schedule": true,
+                "only_polkaspots": true
+            }
+        
+
+## Command Details [/api/v1/commands/:id]
+
+### Update a Command [GET]
+
+
++ Parameters
+
+    + id (required, integer, `1`) ... ID of the command you wish to update.
+
++ Request (application/json)
+
+        {"id": 34}
+
++ Response 200 (application/json)
+
+    + Body
+        
+            {
+                "id": 34,
+                "payload_description": "Reboot my access point ",
+                "payload_name": "Reboot Access Points",
+                "payload_command": "/sbin/reboot",
+                "can_schedule": false,
+                "only_polkaspots": true
+            }
+        
+## Command Update [/api/v1/commands/:id{?command}]
+
+### Update a Command [PATCH]
+
++ Parameters
+
+    + id (required, integer, `1`) ... ID of the command you wish to update.
+    + command (required, params, `{some: params, included: here}`) ... An object with the parameters you want to update.
+
++ Request (application/json)
+
+        {
+            "command": {
+                "payload_description": "Reboot my access point ",
+                "payload_name": "Reboot Access Points",
+                "payload_command": "/sbin/reboot",
+                "can_schedule": false,
+                "only_polkaspots": true
+            }
+        }
+
++ Response 200 (application/json)
+
+    + Body
+        
+            {
+                "id": 34,
+                "payload_description": "Reboot my access point ",
+                "payload_name": "Reboot Access Points",
+                "payload_command": "/sbin/reboot",
+                "can_schedule": false,
+                "only_polkaspots": true
+            }
+        
+
+## Command Delete [/api/v1/commands/{id}]
+
+### Delete a Command [DELETE]
+
++ Parameters
+
+    + id (required, integer, `1`) ... ID of the command you wish to update.
+
++ Request (application/json)
+
+        {   
+            "id": 123,
+        }
+
++ Response 204 (application/json)
 
 ## Events Collection [/api/v1/locations/{location_id}/events]
 
@@ -2731,230 +2927,54 @@ Please note, updating a network will force all your boxes to reload their networ
             "updated_at": "2014-09-17T00:15:57.239+01:00"
         }
 
-
-
 # Group Payloads
 
-Payloads reference the **Payloads API**. 
+Payloads are commands which run remotely on boxes. You must specify a valid command's unique id / slug for them to run.
 
-Payloads can be applied directly to a box (see Box API) or events. There's two types of events:
+There's several ways to run command on a box and you can run payloads on multiple boxes at a time.
 
-1. Available to schedule
-2. PolkaSpots only
+Commands are usually run on boxes directly using the nested payloads resource. However, if you want to run on multiple boxes, you may use the root resource. More information in a moment.
 
-PolkaSpots only payloads should not be run on non-ps boxes. For example, you cannot schedule a Xirrus to reboot using the paylods. However, you may disable the Xirrus login screens. PolkaSpots only payloads are suitable for boxes running the Stinky Panda firmware only.
+You can:
 
-##Allowed HTTPs requests:
+- Run a single command on a box.
+- Run a single command on many boxes.
+- Run a firmware update on a single box.
+- Run a firmware update on many boxes.
+- Schedule a firmware update to run on a single box.
+- Schedule a firmware update to run on many boxes.
 
-- `GET` - Retrieves a resource or list of resources
+## Send a payload [/api/v1/boxes/payloads{?payload_id,box_ids}]
 
-##Allowed HTTPs requests for non-customers:
+Payloads are commands you can run on boxes. Payloads are preset - a list of which can be discovered using the Payloads API. 
 
-- `POST` - Creates or updates a resource
-- `PATCH` - Updates a resource
-- `DELETE` - Delete a resource
+Popular Payloads include rebooting a box, disabling login screens and running firmware updates.
 
-## Payloads Collection [/api/v1/payloads]
+### Send a payload [POST]
 
-### List all Payloads [GET]
++ Parameters
 
-+ Response 200 (application/json)
+    + payload_id (string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Unique ID of the payload you want to send to the box.
+    + box_ids (array / string, `HSKJHKJH,BMBCKJHS`) ... The slugs of the devices you want to receive the payloads.
 
-    + Body
-                
-            [
++ Request (application/json)
+
+        { "box":
                 {
-                    "id": 34,
-                    "unique_id": "9328ce1-c7c4-49a2-bee1-c2a2d6234a9d",
-                    "payload_description": "Reboot my access point ",
-                    "payload_name": "Reboot Access Points",
-                    "payload_command": "/sbin/reboot",
-                    "can_schedule": true,
-                    "only_polkaspots": true
-                },
-                {
-                    "id": 35,
-                    "unique_id": "9328ce1-c7c4-49a2-bee1-c2a2d6234a9d",
-                    "payload_description": "Disable My Login Screens",
-                    "payload_name": "Disable Login Screens",
-                    "payload_command": "",
-                    "can_schedule": true,
-                    "only_polkaspots": false
-                },
-                {
-                    "id": 36,
-                    "unique_id": "9328ce1-c7c4-49a2-bee1-c2a2d6234a9d",
-                    "payload_description": "Enable My Login Screens",
-                    "payload_name": "Enable Login Screens",
-                    "payload_command": "",
-                    "can_schedule": true,
-                    "only_polkaspots": false
-                },
-                {
-                    "id": 37,
-                    "unique_id": "9328ce1-c7c4-49a2-bee1-c2a2d6234a9d",
-                    "payload_description": "Disable my private Wi-Fi network completely",
-                    "payload_name": "Disable Private Wi-Fi Network",
-                    "payload_command": "",
-                    "can_schedule": true,
-                    "only_polkaspots": true
-                },
-                {
-                    "id": 38,
-                    "unique_id": "9328ce1-c7c4-49a2-bee1-c2a2d6234a9d",
-                    "payload_description": "Enable my private Wi-Fi network",
-                    "payload_name": "Enable Private Wi-Fi Network",
-                    "payload_command": "",
-                    "can_schedule": true,
-                    "only_polkaspots": true
-                },
-                {
-                    "id": 39,
-                    "unique_id": "9328ce1-c7c4-49a2-bee1-c2a2d6234a9d",
-                    "payload_description": "Hide my public Wi-Fi network",
-                    "payload_name": "Hide Public Wi-Fi Network",
-                    "payload_command": "",
-                    "can_schedule": true,
-                    "only_polkaspots": true
-                },
-                {
-                    "id": 40,
-                    "unique_id": "9328ce1-c7c4-49a2-bee1-c2a2d6234a9d",
-                    "payload_description": "Show my public Wi-Fi network",
-                    "payload_name": "Show Public Wi-Fi Network",
-                    "payload_command": "",
-                    "can_schedule": true,
-                    "only_polkaspots": true
-                },
-                {
-                    "id": 41,
-                    "unique_id": "9328ce1-c7c4-49a2-bee1-c2a2d6234a9d",
-                    "payload_description": "Disable all Wi-Fi networks",
-                    "payload_name": "Wi-Fi Down Completely",
-                    "payload_command": "",
-                    "can_schedule": true,
-                    "only_polkaspots": true
-                },
-                {
-                    "id": 42,
-                    "unique_id": "9328ce1-c7c4-49a2-bee1-c2a2d6234a9d",
-                    "payload_description": "Enable all Wi-Fi networks",
-                    "payload_name": "Wi-Fi Up Completely",
-                    "payload_command": "",
-                    "can_schedule": true,
-                    "only_polkaspots": true
+                    "payload_id": "JCyK7Zwh0ON_ZOWso8Mhuw",
+                    "box_ids": ['ID', 'ID2', 'ID3']
                 }
-            ]
-            
-## Payloads Create [/api/v1/payloads{?payload}]
-
-### Create a payload [POST]
-
-+ Request 200 (application/json)
-
-            {
-                "payload": 
-                    {
-                        "payload_description": "Reboot my access point ",
-                        "payload_name": "Reboot Access Points",
-                        "payload_command": "/sbin/reboot",
-                        "can_schedule": true,
-                        "only_polkaspots": true
-                    }
-            }
-
-
-+ Response 200 (application/json)
-
-    + Body
-        
-            {
-                "id": 34,
-                "payload_description": "Reboot my access point ",
-                "payload_name": "Reboot Access Points",
-                "payload_command": "/sbin/reboot",
-                "can_schedule": true,
-                "only_polkaspots": true
-            }
-        
-
-## Payload Details [/api/v1/payloads/:id]
-
-### Update a Payload [GET]
-
-
-+ Parameters
-
-    + id (required, integer, `1`) ... ID of the payload you wish to update.
-
-+ Request (application/json)
-
-        {"id": 34}
-
-+ Response 200 (application/json)
-
-    + Body
-        
-            {
-                "id": 34,
-                "payload_description": "Reboot my access point ",
-                "payload_name": "Reboot Access Points",
-                "payload_command": "/sbin/reboot",
-                "can_schedule": false,
-                "only_polkaspots": true
-            }
-        
-## Payload Update [/api/v1/payloads/:id{?payload}]
-
-### Update a Payload [PATCH]
-
-+ Parameters
-
-    + id (required, integer, `1`) ... ID of the payload you wish to update.
-    + payload (required, params, `{some: params, included: here}`) ... An object with the parameters you want to update.
-
-+ Request (application/json)
-
-        {
-            "payload": {
-                "payload_description": "Reboot my access point ",
-                "payload_name": "Reboot Access Points",
-                "payload_command": "/sbin/reboot",
-                "can_schedule": false,
-                "only_polkaspots": true
-            }
         }
 
 + Response 200 (application/json)
 
-    + Body
+        { message: "Device payload initiated." }
+
++ Response 422 (application/json)
+
+        { status: "unprocessable_entity" }
         
-            {
-                "id": 34,
-                "payload_description": "Reboot my access point ",
-                "payload_name": "Reboot Access Points",
-                "payload_command": "/sbin/reboot",
-                "can_schedule": false,
-                "only_polkaspots": true
-            }
-        
-
-## Payload Delete [/api/v1/payloads/{id}]
-
-### Delete a Payload [DELETE]
-
-+ Parameters
-
-    + id (required, integer, `1`) ... ID of the payload you wish to update.
-
-+ Request (application/json)
-
-        {   
-            "id": 123,
-        }
-
-+ Response 204 (application/json)
-
+    
 # Group Speedtests
 
 Speedtests belong to boxes and are a nested resource. You can only create and list speedtests per device. Creating a speedtest **DOES NOT** store it permanently. Only speedtests which run automatically in the middle of the night are stored.
