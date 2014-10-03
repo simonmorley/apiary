@@ -3304,6 +3304,14 @@ Can be called on the root resource alone **/api/v1/sessions** or within a locati
 
 ## Sessions Collection [/api/v1/sessions{?q,location_id,box_id,page,size}]
 
+Limited to 1,000 records per query. Pagination is available.
+
+Alongside the standard fields, you will see some fields for pagination:
+
+- _current_page
+- _next_page
+- _total_pages
+
 ### List all sessions [GET]
 
 + Parameters
