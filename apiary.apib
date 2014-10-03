@@ -2934,7 +2934,11 @@ Payloads are commands which run remotely on boxes. You must specify a valid comm
 
 There's several ways to run command on a box and you can run payloads on multiple boxes at a time.
 
-Commands are usually run on boxes directly using the nested payloads resource. However, if you want to run on multiple boxes, you may use the root resource. More information in a moment.
+Commands are usually run on boxes directly using the nested payloads resource. However, if you want to run on multiple boxes, you may send in box_ids as an array. More information in a moment.
+
+Use the Commands API to get a list of commands.
+
+Popular Payloads include rebooting a box, disabling login screens and running firmware updates.
 
 You can:
 
@@ -2945,29 +2949,38 @@ You can:
 - Schedule a firmware update to run on a single box.
 - Schedule a firmware update to run on many boxes.
 
-## Send a payload [/api/v1/boxes/payloads{?payload_id,box_ids}]
+- `POST` - Creates or updates a resource
+- `GET` - Retrieves a resource or list of resources
+- `DELETE` - Delete a resource
 
-Payloads are commands you can run on boxes. Payloads are preset - a list of which can be discovered using the Payloads API. 
+Optionally, you can choose to save the output of a command in a BLOB >!*. Just send the **save** parameter with your POST request.
 
-Popular Payloads include rebooting a box, disabling login screens and running firmware updates.
+## Send a payload to a box [/api/v1/boxes/{id}/payloads{?command_id,box_ids,upgrade,scheduled}]
 
 ### Send a payload [POST]
 
+If you pass in an array of boxes, your payload will not run on the box you're using to authorise the request. In this case, the box with {id}.
 + Parameters
 
-    + payload_id (string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Unique ID of the payload you want to send to the box.
+    + id (required, string, `ZOWso8MhuwYTrdh`) ... Slug `slug` of the Box to perform action with. Has example value.
+    + command_id (string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Unique ID of the command you want to send to the box.
     + box_ids (array / string, `HSKJHKJH,BMBCKJHS`) ... The slugs of the devices you want to receive the payloads.
+    + upgrade (boolean `true`) ... Send a true value and we will upgrade all the boxes you have sent and ignore the command.
+    + scheduled (string `12am tomorrow`) ... Send the time you want the upgrade to occur. Applies to upgrades only.
+
 
 + Request (application/json)
 
-        { "box":
+        { "payload":
                 {
-                    "payload_id": "JCyK7Zwh0ON_ZOWso8Mhuw",
-                    "box_ids": ['ID', 'ID2', 'ID3']
+                    "command_id": "JCyK7Zwh0ON_ZOWso8Mhuw",
+                    "box_ids": ['ID', 'ID2', 'ID3'],
+                    "upgrade": true,
+                    "scheduled": "Tonight at 4pm"
                 }
         }
 
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
         { message: "Device payload initiated." }
 
@@ -2975,7 +2988,7 @@ Popular Payloads include rebooting a box, disabling login screens and running fi
 
         { status: "unprocessable_entity" }
         
-    
+
 # Group Speedtests
 
 Speedtests belong to boxes and are a nested resource. You can only create and list speedtests per device. Creating a speedtest **DOES NOT** store it permanently. Only speedtests which run automatically in the middle of the night are stored.
