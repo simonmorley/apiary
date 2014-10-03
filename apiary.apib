@@ -3304,8 +3304,11 @@ Can be called on the root resource alone **/api/v1/sessions** or within a locati
 ## Sessions Collection [/api/v1/sessions{?page,q,location_id,box_id}]
 
     + box_id (integer, `1`) ... The numeric ID of the box you want to filter results for
+
     + location_id (integer, `1`) ... The numeric ID of the location you want to filter results for
+
     + page (integer, `1`) ... For pagination purposes. 
+
     + size (integer, `1`) ... The number of records you want to return. Max. value is 1000.
     
 Limited to 1,000 records per query. Pagination is available.
@@ -3403,8 +3406,6 @@ Alongside the standard fields, you will see some fields for pagination:
                 "_next_page": 124,
                 "_total_pages": 18365
             }]        
-
-
 
 # Group State Events
 
