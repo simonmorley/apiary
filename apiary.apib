@@ -1513,6 +1513,7 @@ You may send an array of mac addresses to create boxes associated with the locat
 You can also send a facebook_id with your request. Doing so will cause CT to totally ignore the data you've sent. Instead, Cucumber Tony will contact Facebook and grab the information from them instead.
 
     { "location": { "facebook_id": "valid-fb-id" } }
+    
 + Parameters
 
     + location (required, JSON object, `location_name: derby-city-council`) ... JSON object of all the parameters you wish to create your location with.
@@ -1549,6 +1550,7 @@ You can also send a facebook_id with your request. Doing so will cause CT to tot
 A single Location object with all its details
 
 + Parameters
+
     + id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
 
 ### Retrieve a Location [GET]
