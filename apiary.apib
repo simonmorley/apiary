@@ -1477,11 +1477,15 @@ TO DO: Add a list of parameters we can access.
             "daily_limit": true
         }]
 
-## Locations Short List [/api/v1/locations?short={yep}]
+## Locations Short List [/api/v1/locations?short=yep{?q}]
 
 Returns a mini-list of your locations. Is good for search, cloning the logins, stuff where you don't need much info.
 
-### Search for locations [GET]
+### A consolodated list of locations [GET]
+
++ Parameters
+
+    + q (optional, string, `Some Search Text`) ... What are you looking for?
 
 + Request (application/json)
 
