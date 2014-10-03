@@ -3216,6 +3216,84 @@ Remember, creating a speedtest only creates a temporary result. Permanent result
 
             { "message": "Speedtest queued for processing." }
 
+# Group State Events
+
+These represent the state changes of the boxes. You generally see these occuring each minute although you will see a record of the device being rebooted, installing etc.
+
+Please note, these are not the actuall device heartbeats.
+
+State events are an ephemeral overview of what the box is doing.
+
+They are a nested resource in the Boxes API.
+
+##Allowed HTTPs requests:
+
+- `GET` - Retrieves a resource or list of resources
+
+## State Events Collection [/api/v1/boxes/{box_id}/state_events]
+
+### List State Changes [GET]
+
++ Parameters
+
+    + box_id (required, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` of the Box to perform action with. Has example value.
+
++ Response 200 (application/json)
+
+    + Body
+    
+         
+            [{
+                "timestamp": 1412122931,
+                "state": "rebooting"
+            },
+            {
+                "timestamp": 1411696416,
+                "state": "rebooting"
+            },
+            {
+                "timestamp": 1411692346,
+                "state": "rebooting"
+            },
+            {
+                "timestamp": 1411691945,
+                "state": "rebooting"
+            },
+            {
+                "timestamp": 1411691880,
+                "state": "rebooting"
+            },
+            {
+                "timestamp": 1411691864,
+                "state": "rebooting"
+            },
+            {
+                "timestamp": 1411691783,
+                "state": "rebooting"
+            },
+            {
+                "timestamp": 1411691765,
+                "state": "rebooting"
+            },
+            {
+                "timestamp": 1411691722,
+                "state": "rebooting"
+            },
+            {
+                "timestamp": 1411685736,
+                "state": "rebooting"
+            },
+            {
+                "timestamp": 1411685633,
+                "state": "online"
+            },
+            {
+                "timestamp": 1411684031,
+                "state": "online"
+            }]
+
+
+
 # Group Versions
 
 You can access the change history for both your Boxes and Locations using the Versions API. Versioning allows you to rollback where you've made mistakes and also check who's updated a setting. You'll see the username of the person Whodunnit.
