@@ -1514,11 +1514,12 @@ You can also send a facebook_id with your request. Doing so will cause CT to tot
 
     { "location": { "facebook_id": "valid-fb-id" } }
     
+
+### Create a Location [POST]
+
 + Parameters
 
     + location (required, JSON object, `location_name: derby-city-council`) ... JSON object of all the parameters you wish to create your location with.
-
-### Create a Location [POST]
 
 + Request (application/json)
 
@@ -1532,6 +1533,7 @@ You can also send a facebook_id with your request. Doing so will cause CT to tot
                 "facebook_id": "187263871623"
             },
         "boxes":
+        
             { "ap_mac": ["AA:BB:CC:DD:EE:FF:11"] }
 
 + Response 200 (application/json)
