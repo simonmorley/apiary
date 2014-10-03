@@ -3302,7 +3302,7 @@ Can be called on the root resource alone **/api/v1/sessions** or within a locati
 
 **Please note, we do not provide the mac address of the end-user's device. Intead you can find a unique_id which is a hashed digest of the mac.**
 
-## Sessions Collection [/api/v1/sessions{?q,location_id,box_id,page}]
+## Sessions Collection [/api/v1/sessions{?q,location_id,box_id,page,size}]
 
 ### List all sessions [GET]
 
@@ -3312,7 +3312,7 @@ Can be called on the root resource alone **/api/v1/sessions** or within a locati
     + location_id (optional, integer, `872`) ... The numeric ID of the location you want to filter results for.
     + page (optional, integer, `1`) ... For pagination purposes. 
     + size (optional, integer, `500`) ... The number of records you want to return. Max. value is 1000.
-    + query (optional, string, `search query`) ... Search through the results as you query the API.
+    + q (optional, string, `search query`) ... Search through the results as you query the API.
 
 + Response 200 (application/json)
 
