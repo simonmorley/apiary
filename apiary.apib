@@ -3304,7 +3304,9 @@ Can be called on the root resource alone **/api/v1/sessions** or within a locati
 ## Sessions Collection [/api/v1/sessions{?page,q,location_id,box_id}]
 
     + location_id (optional, integer, `1`) ... The numeric ID of the location you want to filter results for.
-    
+    + box_id (optional, integer, `1`) ... The numeric ID of the box you want to filter results for.
+
+
 Limited to 1,000 records per query. Pagination is available.
 
 Alongside the standard fields, you will see some fields for pagination:
