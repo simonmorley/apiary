@@ -3006,11 +3006,12 @@ Optionally, you can choose to save the output of a command in a BLOB >!*. Just s
                 "body": "uptime 12 days, 1 min, load 1 2 3"
             }
 
-## Send a payload to a box [/api/v1/boxes/{box_id}/payloads{?command_id,box_ids,upgrade,scheduled}]
+## Create payload a box [/api/v1/boxes/{box_id}/payloads{?command_id,box_ids,upgrade,scheduled}]
 
 ### Send a payload [POST]
 
-If you pass in an array of boxes, your payload will not run on the box you're using to authorise the request. In this case, the box with {id}.
+If you pass in an array of box ids, your payload will not run on the box you're using to authorise the request. In this case, the box with {id}.
+
 + Parameters
 
     + box_id (required, string, `ZOWso8IMhuwYTrdh`) ... Slug `slug` of the Box to perform action with. Has example value.
@@ -3018,7 +3019,6 @@ If you pass in an array of boxes, your payload will not run on the box you're us
     + box_ids (array / string, `HSKJHKJH,BMBCKJHS`) ... The slugs of the devices you want to receive the payloads.
     + upgrade (boolean `true`) ... Send a true value and we will upgrade all the boxes you have sent and ignore the command.
     + scheduled (string `12am tomorrow`) ... Send the time you want the upgrade to occur. Applies to upgrades only.
-
 
 + Request (application/json)
 
@@ -3038,7 +3038,6 @@ If you pass in an array of boxes, your payload will not run on the box you're us
 + Response 422 (application/json)
 
         { status: "unprocessable_entity" }
-
 
 # Group Speedtests
 
