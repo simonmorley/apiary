@@ -2957,14 +2957,63 @@ The available options include:
 
 Optionally, you can choose to save the output of a command in a BLOB >!*. Just send the **save** parameter with your POST request.
 
-## Send a payload to a box [/api/v1/boxes/{id}/payloads{?command_id,box_ids,upgrade,scheduled}]
+## Payloads collection [/api/v1/boxes/{box_id}/payloads]
+
+### List payload [GET]
+
++ Parameters
+
+    + box_id (required, string, `ABCDEF`) ... Slug / ID of the box you want to request payloads for. Has example value.
+
+    
++ Response 200 (application/json)
+    
+    + Body
+    
+            [{
+                "created_at": "April 5 2014 23:34:42",
+                "body": "[ 0.000000] Linux version 3.3.8
+            },
+            {
+                "created_at": "May2201323: 22: 22",
+                "body": "rebootedat9am"
+            },
+            {
+                "created_at": "Jan5201403: 34: 28",
+                "body": "No output"
+            }]
+
+## View Payload [/api/v1/boxes/{box_id}/payloads/{id}]
+
+### Get a payload [GET]
+
++ Parameters
+
+    + id (required, integer, `123`) ... ID of the payload you want to view. Has example value.
+    + box_id (array / string, `BMBCKJHS`) ... The slugs of the device you want to view payload for.
+
+
++ Request (application/json)
+
+        { "id": "123" }
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "created_at": "April 5 2014 23:34:22",
+                "body": "uptime 12 days, 1 min, load 1 2 3"
+            }
+
+## Send a payload to a box [/api/v1/boxes/{box_id}/payloads{?command_id,box_ids,upgrade,scheduled}]
 
 ### Send a payload [POST]
 
 If you pass in an array of boxes, your payload will not run on the box you're using to authorise the request. In this case, the box with {id}.
 + Parameters
 
-    + id (required, string, `ZOWso8MhuwYTrdh`) ... Slug `slug` of the Box to perform action with. Has example value.
+    + box_id (required, string, `ZOWso8IMhuwYTrdh`) ... Slug `slug` of the Box to perform action with. Has example value.
     + command_id (string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Unique ID of the command you want to send to the box.
     + box_ids (array / string, `HSKJHKJH,BMBCKJHS`) ... The slugs of the devices you want to receive the payloads.
     + upgrade (boolean `true`) ... Send a true value and we will upgrade all the boxes you have sent and ignore the command.
@@ -2978,7 +3027,7 @@ If you pass in an array of boxes, your payload will not run on the box you're us
                     "command_id": "JCyK7Zwh0ON_ZOWso8Mhuw",
                     "box_ids": ['ID', 'ID2', 'ID3'],
                     "upgrade": true,
-                    "scheduled": "Tonight at 4pm"
+                    "scheduled": "Tonight at 4pm",
                 }
         }
 
@@ -2989,7 +3038,7 @@ If you pass in an array of boxes, your payload will not run on the box you're us
 + Response 422 (application/json)
 
         { status: "unprocessable_entity" }
-        
+
 
 # Group Speedtests
 
