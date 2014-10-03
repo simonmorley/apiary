@@ -1323,6 +1323,72 @@ Please note, creating a new walled garden will force all your boxes to reload th
 
 + Response 204 (application/json)
 
+# Group Heartbeats
+
+The main device heartbeats API which records when your boxes went offline and online.
+
+Other interesting information included in this API is the last possible disconnect reason.
+
+This will either be:
+
+- Lost connection - no Internet found / cable disconnected
+- Lost power - someone had turned it off or disconnected power.
+
+They are a nested resource in the Boxes API.
+
+##Allowed HTTPs requests:
+
+- `GET` - Retrieves a resource or list of resources
+
+## Heartbeats Collection [/api/v1/boxes/{box_id}/heartbeats]
+
+### List Heartbeats [GET]
+
++ Parameters
+
+    + box_id (required, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` of the Box to perform action with. Has example value.
+
++ Response 200 (application/json)
+
+    + Body
+        
+            [{
+                "box_id": 2217,
+                "created_at": "March 29 2014 11:00:45",
+                "disconnect": 'connection',
+                "online": false
+            },
+            {
+                "box_id": 2217,
+                "created_at": "April 2 2014 17:51:32",
+                "disconnect": 'connection',
+                "online": true
+            },
+            {
+                "box_id": 2217,
+                "created_at": "April 5 2014 13:17:46",
+                "disconnect": 'connection',
+                "online": false
+            },
+            {
+                "box_id": 2217,
+                "created_at": "April 6 2014 07:35:02",
+                "disconnect": 'connection',
+                "online": true
+            },
+            {
+                "box_id": 2217,
+                "created_at": "April 6 2014 07:28:38",
+                "disconnect": 'power',
+                "online": false
+            },
+            {
+                "box_id": 2217,
+                "created_at": "April 8 2014 13:31:36",
+                "disconnect": 'connection',
+                "online": true
+            }]
+
 # Group Locations
 
 Locations related resources of the **Locations API**
