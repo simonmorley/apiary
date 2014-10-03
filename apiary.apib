@@ -2670,6 +2670,83 @@ This entails calling either the MailChimp or Campaign Monitor APIs and adding an
             "status": "processing"
         }
         
+# Group Jobs
+
+Jobs, or events as they should really be named, are things that happen to your boxes. Jobs include device heartbeats, payload commands and more. 
+
+They are a nested resource in the Boxes API.
+
+##Allowed HTTPs requests:
+
+- `GET` - Retrieves a resource or list of resources
+
+## Jobs Collection [/api/v1/boxes/{box_id}/jobs]
+
+You can filter the log_level betweeen 1 and 3.
+
+### List Box jobs [GET]
+
++ Parameters
+
+    + box_id (required, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` of the Box to perform action with. Has example value.
+
++ Response 200 (application/json)
+
+    + Body
+    
+            [{
+                "resource": "nas",
+                "log_level": 1,
+                "private": null,
+                "event_id": "a563101c78f51a1c308b1bb3b0d1d9f3",
+                "user_id": null,
+                "data": {
+                    "timestamp": 1412212262,
+                    "resource_id": "JCyK7Zwh0ON_ZOWso8Mhuw",
+                    "message": "device heartbeat",
+                    "mac": null,
+                    "type": "state_event",
+                    "nas": {
+                        "state": null
+                    }
+                }
+            },
+            {
+                "resource": "nas",
+                "log_level": 3,
+                "private": null,
+                "event_id": "fbaafd9701de91b50d40fd60ca184a1f",
+                "user_id": null,
+                "data": {
+                    "timestamp": 1412212261,
+                    "resource_id": "JCyK7Zwh0ON_ZOWso8Mhuw",
+                    "message": "Box with mac DC-9F-DB-3D-AC-49 went queued",
+                    "mac": "DC-9F-DB-3D-AC-49",
+                    "type": "state_event",
+                    "nas": {
+                        "state": "queued"
+                    }
+                }
+            },
+            {
+                "resource": "nas",
+                "log_level": 3,
+                "private": null,
+                "event_id": "1bf3e698075d27366eb6476de15dced3",
+                "user_id": null,
+                "data": {
+                    "timestamp": 1412212261,
+                    "resource_id": "JCyK7Zwh0ON_ZOWso8Mhuw",
+                    "message": "Box with mac DC-9F-DB-3D-AC-49 went queued",
+                    "mac": "DC-9F-DB-3D-AC-49",
+                    "type": "state_event",
+                    "nas": {
+                        "state": "queued"
+                    }
+                }
+            }]
+        
+
 # Group Networks
 
 Networks related resources of the **Networks API**. Networks are a nested in a location. 
@@ -2959,7 +3036,7 @@ Optionally, you can choose to save the output of a command in a BLOB >!*. Just s
 
 ## Payloads collection [/api/v1/boxes/{box_id}/payloads]
 
-### List payload [GET]
+### List payloads [GET]
 
 + Parameters
 
@@ -2983,7 +3060,7 @@ Optionally, you can choose to save the output of a command in a BLOB >!*. Just s
                 "body": "No output"
             }]
 
-## View Payload [/api/v1/boxes/{box_id}/payloads/{id}]
+## View a Payload [/api/v1/boxes/{box_id}/payloads/{id}]
 
 ### Get a payload [GET]
 
