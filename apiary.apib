@@ -3301,11 +3301,14 @@ Can be called on the root resource alone **/api/v1/sessions** or within a locati
 
 **Please note, we do not provide the mac address of the end-user's device. Intead you can find a unique_id which is a hashed digest of the mac.**
 
-## Sessions Collection [/api/v1/sessions?page]
+## Sessions Collection [/api/v1/sessions{?q,location_id,box_id,page}]
 
-    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
-    + box_id (required, string, `derbycouncil`) ... Page ID `page_id` of the page you want to test. Has example value.
-
+    + box_id (optional, integer, `1`) ... The numeric ID of the box you want to filter results for.
+    + location_id (optional, integer, `1`) ... The numeric ID of the location you want to filter results for.
+    + page (optional, integer, `1`) ... For pagination purposes. 
+    + size (optional, integer, `1`) ... The number of records you want to return. Max. value is 1000.
+    + query (optional, string, `search query`) ... Search through the results as you query the API.
+    
 Limited to 1,000 records per query. Pagination is available.
 
 Alongside the standard fields, you will see some fields for pagination:
