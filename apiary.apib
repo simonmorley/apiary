@@ -3303,9 +3303,9 @@ Can be called on the root resource alone **/api/v1/sessions** or within a locati
 
 ## Sessions Collection [/api/v1/sessions{?page,q,location_id,box_id}]
 
-    + location_id (optional, integer, `1`) ... The numeric ID of the location you want to filter results for.
-    + box_id (optional, integer, `1`) ... The numeric ID of the box you want to filter results for.
 
+    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + box_id (required, string, `derbycouncil`) ... Page ID `page_id` of the page you want to test. Has example value.
 
 Limited to 1,000 records per query. Pagination is available.
 
