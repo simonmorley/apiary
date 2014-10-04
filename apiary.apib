@@ -4160,7 +4160,7 @@ They are a nested resource in the Boxes API.
 
 Represents the technologies API. An overview of the technologies in use across your network. Data derives currently from the login screens only.
 
-## Technologies Collection [/api/v1/technologies{?q}]
+## Technologies Collection [/api/v1/technologies{?q,start,end}]
 
 A list of all the technologies. You may search by passing q=search_string. Results will be filtered accordingly.
 
@@ -4169,6 +4169,8 @@ A list of all the technologies. You may search by passing q=search_string. Resul
 + Parameters
 
     + q (optional, string, `Search data`) ... Search through your list of tech..
+    + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 12 weeks ago.
+    + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to now.
 
 + Response 200 (application/json)
     
