@@ -3648,7 +3648,75 @@ Returns the aggregated unique clients for the specified range.
                 }
             }
         
-        
+
+## Top Boxes [/api/v1/sessions{?box_uniques,start,end}]
+
+Returns the aggregated sessions per box in your network.
+
+### Top boxes aggregates [GET]
+
++ Parameters
+
+    + box_uniques (required, boolean, `true`) ... Using uniques = true to provide unique box session aggregates.
+    + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 12 weeks ago.
+    + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to 12 weeks ago.
+
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "boxes": {
+                    "_type": "terms",
+                    "missing": 0,
+                    "total": 483442,
+                    "other": 389931,
+                    "terms": [
+                        {
+                            "term": "00-27-22-54-DE-79",
+                            "count": 16506
+                        },
+                        {
+                            "term": "00-27-22-50-33-26",
+                            "count": 15324
+                        },
+                        {
+                            "term": "00-27-22-54-FF-D4",
+                            "count": 11345
+                        },
+                        {
+                            "term": "DC-9F-DB-B0-A1-36",
+                            "count": 8604
+                        },
+                        {
+                            "term": "00-25-22-2F-AF-65",
+                            "count": 8265
+                        },
+                        {
+                            "term": "DC-9F-DB-2A-33-D4",
+                            "count": 7933
+                        },
+                        {
+                            "term": "24-A4-3C-D2-41-6C",
+                            "count": 6995
+                        },
+                        {
+                            "term": "24-A4-3C-0E-00-DE",
+                            "count": 6876
+                        },
+                        {
+                            "term": "24-A4-3C-98-00-D6",
+                            "count": 6609
+                        },
+                        {
+                            "term": "00-27-22-50-12-2F",
+                            "count": 5054
+                        }
+                    ]
+                }
+            }      
+            
 # Group State Events
 
 These represent the state changes of the boxes. You generally see these occuring each minute although you will see a record of the device being rebooted, installing etc.
