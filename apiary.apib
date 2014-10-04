@@ -3579,8 +3579,66 @@ Returns the aggregated sessions per day for the specified range.
                     }
                 ]
             }
+            
+## Uniques Timeline [/api/v1/{?uniques_timeline,interval,start,end}]
 
-## Who's onine [/api/v1/sessions{?online}]
+Returns aggregated data for the unique users by mac address (not provided) on a daily basis.
+
+### Uniques timeline [GET]
+
++ Parameters
+
+    + uniques_timeline (required, boolean, `true`) ... Using uniques_timeline = true to provide a unique users per day, week, month.
+    + interval (optional, string, `week`) ... Set the interval for the query. Options include day, week or month. Leave blank and results are grouped daily.
+    + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 12 weeks ago.
+    + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to now.
+
++ Response 200 (application/json)
+
+    + Body
+            
+            {
+                "uniques_timeline": [
+                    {
+                        "time": 1406329200000,
+                        "count": 1680
+                    },
+                    {
+                        "time": 1406415600000,
+                        "count": 1376
+                    },
+                    {
+                        "time": 1406502000000,
+                        "count": 2042
+                    },
+                    {
+                        "time": 1406588400000,
+                        "count": 2257
+                    },
+                    {
+                        "time": 1406674800000,
+                        "count": 2170
+                    },
+                    {
+                        "time": 1406761200000,
+                        "count": 2225
+                    },
+                    {
+                        "time": 1406847600000,
+                        "count": 2235
+                    },
+                    {
+                        "time": 1406934000000,
+                        "count": 1613
+                    },
+                    {
+                        "time": 1408057200000,
+                        "count": 29
+                    }
+                ]
+            }
+
+## Who's Online [/api/v1/sessions{?online}]
 
 Returns a list of users currently connected and logged in. This table is cleared every five minutes. During this time, you may see a non-blank stoptime. This will mean the user has disconnected and will be accompanied by a stopreason.
 
@@ -3702,7 +3760,7 @@ A _links object is also available with the pagination defailts
             }
 
 
-## Unique clients [/api/v1/sessions{?uniques,start,end}]
+## Unique clients [/api/v1/sessions{?uniques,start,end,interval}]
 
 Returns the aggregated unique clients for the specified range.
 
@@ -3711,8 +3769,9 @@ Returns the aggregated unique clients for the specified range.
 + Parameters
 
     + uniques (required, boolean, `true`) ... Using uniques = true to provide unique client aggregates.
+    + interval (optional, string, `week`) ... Set the interval for the query. Options include day, week or month. Leave blank and results are grouped daily.
     + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 12 weeks ago.
-    + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to 12 weeks ago.
+    + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to today.
 
 
 + Response 200 (application/json)
