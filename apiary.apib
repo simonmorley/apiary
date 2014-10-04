@@ -3717,6 +3717,42 @@ Returns the aggregated sessions per box in your network.
                 }
             }      
             
+## Session stats [/api/v1/sessions{?stats,start,end}]
+
+Returns statistical information on your sessions. Includes:
+
+- Number of sessions
+- Total minutes online
+- Min, max and mean values
+- Standard deviation and variance
+
+### Session statistics [GET]
+
++ Parameters
+
+    + stats (required, boolean, `true`) ... Using stats = true to provide session statistics.
+    + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 12 weeks ago.
+    + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to 12 weeks ago.
+
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "stats": {
+                    "_type": "statistical",
+                    "count": 483442,
+                    "total": 2033487829,
+                    "min": 0,
+                    "max": 488313,
+                    "mean": 4206.270512284825,
+                    "sum_of_squares": 78037412978587,
+                    "variance": 143727713.1204451,
+                    "std_deviation": 11988.649345128295
+                }
+            }
+            
 # Group State Events
 
 These represent the state changes of the boxes. You generally see these occuring each minute although you will see a record of the device being rebooted, installing etc.
