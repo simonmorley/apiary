@@ -3585,6 +3585,7 @@ Returns the aggregated sessions per day for the specified range.
 Returns a list of users currently connected and logged in. This table is cleared every five minutes. During this time, you may see a non-blank stoptime. This will mean the user has disconnected and will be accompanied by a stopreason.
 
 A _links object is also available with the pagination defailts
+
 ### List online [GET]
 
 + Parameters
@@ -3645,6 +3646,61 @@ A _links object is also available with the pagination defailts
                     "total_entries": 42
                 }
             }
+
+## Client aggregates [/api/v1/sessions{?clients}]
+
+An aggregated list of clients with session data grouped by their unique id.
+
+A _links object is also available with the pagination defailts
+
+### List online [GET]
+
++ Parameters
+
+    + clients (required, boolean, `true`) ... Using clients = true to provide a list of clients.
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "clients": [
+                    {
+                        "unique_id": "324f726a19920f9c50e1603ce5be7a1d",
+                        "username": "2f969274b6d034c6cb03f2e62359f971643d3d51",
+                        "last_seen": "2014-07-26T11:29:06.000+01:00",
+                        "count": 1,
+                        "manufacturer": "Apple",
+                        "downloads": 231074,
+                        "online": false
+                    },
+                    {
+                        "unique_id": "a7eb678617ddf92744c8a3d317e4ff98",
+                        "username": "784ffefc-74c4-44b0-b769-7b0e1fd1e5c7",
+                        "last_seen": "2014-07-26T11:22:36.000+01:00",
+                        "count": 2,
+                        "manufacturer": "Murata Manufactuaring Co.,Ltd.",
+                        "downloads": 0,
+                        "online": false
+                    },
+                    {
+                        "unique_id": "9907d8ed918ff118a06dfa0fd23ca7e5",
+                        "username": "4db35152-f2b9-4930-a010-1559a418993a",
+                        "last_seen": "2014-07-26T10:35:34.000+01:00",
+                        "count": 23,
+                        "manufacturer": "Apple",
+                        "downloads": 5907801,
+                        "online": false
+                    }
+                ],
+                "_links": {
+                    "current_page": 1,
+                    "total_pages": 1,
+                    "next_page": null,
+                    "total_entries": 10
+                }
+            }
+
 
 ## Unique clients [/api/v1/sessions{?uniques,start,end}]
 
