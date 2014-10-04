@@ -3715,7 +3715,7 @@ Returns the aggregated unique clients for the specified range.
             }
         
 
-## Top Boxes [/api/v1/sessions{?box_uniques,start,end}]
+## Top Boxes [/api/v1/sessions{?boxes,start,end}]
 
 Returns the aggregated sessions per box in your network.
 
@@ -3723,7 +3723,7 @@ Returns the aggregated sessions per box in your network.
 
 + Parameters
 
-    + box_uniques (required, boolean, `true`) ... Using uniques = true to provide unique box session aggregates.
+    + boxes (required, boolean, `true`) ... Using boxes = true to provide unique box session aggregates.
     + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 12 weeks ago.
     + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to 12 weeks ago.
 
@@ -3782,6 +3782,71 @@ Returns the aggregated sessions per box in your network.
                     ]
                 }
             }      
+          
+## Top Locations [/api/v1/sessions{?locations,start,end}]
+
+Returns the aggregated sessions per location in your network.
+
+The results will include a term field which is the ID of the location.
+
+### Top locations aggregates [GET]
+
++ Parameters
+
+    + locations (required, boolean, `true`) ... Using locations = true to provide location aggregates by session.
+    + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 12 weeks ago.
+    + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to 12 weeks ago.
+
+
++ Response 200 (application/json)
+
+    + Body
+             
+             {
+                "locations": [
+                    {
+                        "term": "46",
+                        "count": 54427
+                    },
+                    {
+                        "term": "1099",
+                        "count": 28056
+                    },
+                    {
+                        "term": "1170",
+                        "count": 22318
+                    },
+                    {
+                        "term": "800",
+                        "count": 16718
+                    },
+                    {
+                        "term": "1196",
+                        "count": 8604
+                    },
+                    {
+                        "term": "1853",
+                        "count": 8491
+                    },
+                    {
+                        "term": "24",
+                        "count": 8300
+                    },
+                    {
+                        "term": "471",
+                        "count": 7933
+                    },
+                    {
+                        "term": "1809",
+                        "count": 6995
+                    },
+                    {
+                        "term": "1870",
+                        "count": 5312
+                    }
+                ]
+            }
+            
             
 ## Session stats [/api/v1/sessions{?stats,start,end}]
 
