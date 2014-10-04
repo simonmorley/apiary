@@ -3580,6 +3580,67 @@ Returns the aggregated sessions per day for the specified range.
                 ]
             }
 
+## Who's onine [/api/v1/sessions{?online}]
+
+Returns the aggregated sessions per day for the specified range.
+
+### List online [GET]
+
++ Parameters
+
+    + online (required, boolean, `true`) ... Using online = true to provide a list of online users.
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "online": [
+                    {
+                        "calledstationidclean": "00:11:22:33:44:55",
+                        "unique_id": "e8840311f8054efb51edae464bff66e2",
+                        "starttime": "2014-08-14T11:31:46.000+01:00",
+                        "stoptime": null,
+                        "location_id": 11,
+                        "download": 981273987,
+                        "upload": 1231232
+                    },
+                    {
+                        "calledstationidclean": "00:11:22:33:44:55",
+                        "unique_id": "a06f0133050966f39e52ef50410ab487",
+                        "starttime": "2014-08-14T11:14:28.000+01:00",
+                        "stoptime": null,
+                        "location_id": 0,
+                        "download": 9919191,
+                        "upload": 817266
+                    },
+                    {
+                        "calledstationidclean": "00:11:22:33:44:55",
+                        "unique_id": "e8840311f8054efb51edae464bff66e2",
+                        "starttime": "2014-08-14T11:31:41.000+01:00",
+                        "stoptime": null,
+                        "location_id": 28,
+                        "download": 82398723,
+                        "upload": 283749
+                    },
+                    {
+                        "calledstationidclean": "00:11:22:33:44:55",
+                        "unique_id": "bb10c2c4d6ff9ccec57481e8a8ac3c33",
+                        "starttime": "2014-08-15T00:23:16.000+01:00",
+                        "stoptime": null,
+                        "location_id": 99,
+                        "download": 34534534,
+                        "upload": 89739487
+                    }
+                ],
+                "_links": {
+                    "current_page": 1,
+                    "total_pages": 2,
+                    "next_page": 2,
+                    "total_entries": 42
+                }
+            }
+
 ## Unique clients [/api/v1/sessions{?uniques,start,end}]
 
 Returns the aggregated unique clients for the specified range.
@@ -3753,7 +3814,7 @@ Returns statistical information on your sessions. Includes:
                 }
             }
             
-## Session data transfer stats [/api/v1/sessions{?data,start,end}]
+## Session data stats [/api/v1/sessions{?data,start,end}]
 
 Returns statistical information on your sessions. Includes:
 
