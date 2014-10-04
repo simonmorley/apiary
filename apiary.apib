@@ -3582,7 +3582,7 @@ Returns the aggregated sessions per day for the specified range.
 
 ## Who's onine [/api/v1/sessions{?online}]
 
-Returns the aggregated sessions per day for the specified range.
+Returns a list of users currently connected and logged in. This table is cleared every five minutes. During this time, you may see a non-blank stoptime. This will mean the user has disconnected and will be accompanied by a stopreason.
 
 ### List online [GET]
 
