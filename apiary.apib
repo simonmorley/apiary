@@ -3312,6 +3312,8 @@ Can be called on the root resource alone /api/v1/sessions or within a location o
 - /api/v1/locations/{id}/sessions
 - /api/v1/boxes/{id}/sessions
 
+All sessions queries are cached for ten minutes from the initial request unless a search parameter is passed.
+
 **Please note, we do not provide the mac address of the end-user's device. Intead you can find a unique_id which is a hashed digest of the mac.**
 
 ## Sessions Collection [/api/v1/sessions{?q,location_id,box_id,page,size}]
@@ -3642,7 +3644,7 @@ Returns aggregated data for the unique users by mac address (not provided) on a 
 
 Returns a list of users currently connected and logged in. This table is cleared every five minutes. During this time, you may see a non-blank stoptime. This will mean the user has disconnected and will be accompanied by a stopreason.
 
-A _links object is also available with the pagination defailts
+A _links object is also available with the pagination details.
 
 ### List online [GET]
 
@@ -3711,7 +3713,7 @@ An aggregated list of clients with session data grouped by their unique id.
 
 If the client is currently online, the online parameter will be set to true.
 
-A _links object is also available with the pagination defailts
+A _links object is also available with the pagination details.
 
 ### List clients [GET]
 
