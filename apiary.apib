@@ -3584,6 +3584,7 @@ Returns the aggregated sessions per day for the specified range.
 
 Returns a list of users currently connected and logged in. This table is cleared every five minutes. During this time, you may see a non-blank stoptime. This will mean the user has disconnected and will be accompanied by a stopreason.
 
+A _links object is also available with the pagination defailts
 ### List online [GET]
 
 + Parameters
@@ -3601,6 +3602,7 @@ Returns a list of users currently connected and logged in. This table is cleared
                         "unique_id": "e8840311f8054efb51edae464bff66e2",
                         "starttime": "2014-08-14T11:31:46.000+01:00",
                         "stoptime": null,
+                        "stopreason": null,
                         "location_id": 11,
                         "download": 981273987,
                         "upload": 1231232
@@ -3610,6 +3612,7 @@ Returns a list of users currently connected and logged in. This table is cleared
                         "unique_id": "a06f0133050966f39e52ef50410ab487",
                         "starttime": "2014-08-14T11:14:28.000+01:00",
                         "stoptime": null,
+                        "stopreason": null,
                         "location_id": 0,
                         "download": 9919191,
                         "upload": 817266
@@ -3619,6 +3622,7 @@ Returns a list of users currently connected and logged in. This table is cleared
                         "unique_id": "e8840311f8054efb51edae464bff66e2",
                         "starttime": "2014-08-14T11:31:41.000+01:00",
                         "stoptime": null,
+                        "stopreason": null,
                         "location_id": 28,
                         "download": 82398723,
                         "upload": 283749
@@ -3628,6 +3632,7 @@ Returns a list of users currently connected and logged in. This table is cleared
                         "unique_id": "bb10c2c4d6ff9ccec57481e8a8ac3c33",
                         "starttime": "2014-08-15T00:23:16.000+01:00",
                         "stoptime": null,
+                        "stopreason": "Idle-Timeout",
                         "location_id": 99,
                         "download": 34534534,
                         "upload": 89739487
