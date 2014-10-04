@@ -4241,6 +4241,190 @@ A list of all the technologies. You may search by passing q=search_string. Resul
                 ]
             }
 
+## Technologies Aggregations [/api/v1/technologies{?aggs,q,start,end}]
+
+Get grouped / aggregated stats about the technologies in use in your networks.
+
+### Technologies aggregrates [GET]
+
++ Parameters
+
+    + aggs (required, boolean, `true`) ... Set this parameter to request aggregated tech. stats.
+    + q (optional, string, `Search data`) ... Search through your list of tech..
+    + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 12 weeks ago.
+    + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to now.
+
++ Response 200 (application/json)
+    
+    + Body
+
+            {
+                "stats": {
+                    "request_uri": {
+                        "_type": "terms",
+                        "missing": 0,
+                        "total": 1763,
+                        "other": 0,
+                        "terms": [
+                            {
+                                "term": "polkaspots.my-wifi.co",
+                                "count": 1538
+                            },
+                            {
+                                "term": "polkaspots.wirelessisp.co",
+                                "count": 225
+                            }
+                        ]
+                    },
+                    "request_ip": {
+                        "_type": "terms",
+                        "missing": 0,
+                        "total": 1763,
+                        "other": 583,
+                        "terms": [
+                            {
+                                "term": "10.34.132.2",
+                                "count": 160
+                            },
+                            {
+                                "term": "10.37.133.179",
+                                "count": 135
+                            },
+                            {
+                                "term": "10.34.186.222",
+                                "count": 130
+                            },
+                            {
+                                "term": "10.65.17.122",
+                                "count": 128
+                            },
+                            {
+                                "term": "10.104.0.113",
+                                "count": 127
+                            },
+                            {
+                                "term": "10.37.140.97",
+                                "count": 114
+                            },
+                            {
+                                "term": "10.238.130.165",
+                                "count": 112
+                            },
+                            {
+                                "term": "46.37.49.254",
+                                "count": 101
+                            },
+                            {
+                                "term": "78.32.125.243",
+                                "count": 87
+                            },
+                            {
+                                "term": "10.39.42.110",
+                                "count": 86
+                            }
+                        ]
+                    },
+                    "request_os": {
+                        "_type": "terms",
+                        "missing": 0,
+                        "total": 29344,
+                        "other": 15620,
+                        "terms": [
+                            {
+                                "term": "mozilla",
+                                "count": 1570
+                            },
+                            {
+                                "term": "5.0",
+                                "count": 1570
+                            },
+                            {
+                                "term": "gecko",
+                                "count": 1507
+                            },
+                            {
+                                "term": "like",
+                                "count": 1487
+                            },
+                            {
+                                "term": "khtml",
+                                "count": 1474
+                            },
+                            {
+                                "term": "applewebkit",
+                                "count": 1474
+                            },
+                            {
+                                "term": "safari",
+                                "count": 1451
+                            },
+                            {
+                                "term": "mobile",
+                                "count": 1312
+                            },
+                            {
+                                "term": "version",
+                                "count": 1112
+                            },
+                            {
+                                "term": "os",
+                                "count": 767
+                            }
+                        ]
+                    },
+                    "platform": {
+                        "_type": "terms",
+                        "missing": 240,
+                        "total": 1523,
+                        "other": 0,
+                        "terms": [
+                            {
+                                "term": "iphone",
+                                "count": 753
+                            },
+                            {
+                                "term": "linux",
+                                "count": 446
+                            },
+                            {
+                                "term": "windows",
+                                "count": 104
+                            },
+                            {
+                                "term": "macintosh",
+                                "count": 83
+                            },
+                            {
+                                "term": "ipad",
+                                "count": 62
+                            },
+                            {
+                                "term": "blackberry",
+                                "count": 58
+                            },
+                            {
+                                "term": "x11",
+                                "count": 12
+                            },
+                            {
+                                "term": "android",
+                                "count": 4
+                            },
+                            {
+                                "term": "ipod",
+                                "count": 1
+                            }
+                        ]
+                    },
+                    "browser": {
+                        "_type": "terms",
+                        "missing": 1763,
+                        "total": 0,
+                        "other": 0,
+                        "terms": []
+                    }
+                }
+            }
 
 # Group Versions
 
