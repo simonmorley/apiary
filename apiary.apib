@@ -3580,6 +3580,75 @@ Returns the aggregated sessions per day for the specified range.
                 ]
             }
 
+## Unique clients [/api/v1/sessions{?uniques,start,end}]
+
+Returns the aggregated unique clients for the specified range.
+
+### Unique clients aggregate [GET]
+
++ Parameters
+
+    + uniques (required, boolean, `true`) ... Using uniques = true to provide unique client aggregates.
+    + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 12 weeks ago.
+    + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to 12 weeks ago.
+
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "uniques": {
+                    "_type": "terms",
+                    "missing": 0,
+                    "total": 483442,
+                    "other": 465273,
+                    "terms": [
+                        {
+                            "term": "5d1614670b13a11762f97b9f0d0ec247",
+                            "count": 2192
+                        },
+                        {
+                            "term": "e64995d427e856aedf54c6098250d085",
+                            "count": 2126
+                        },
+                        {
+                            "term": "68e6b8941e05cefbca7b09b24e0f3d48",
+                            "count": 2087
+                        },
+                        {
+                            "term": "7f90d57fe9b94f2a3b16af582bedbad8",
+                            "count": 2001
+                        },
+                        {
+                            "term": "bf1bf04c73a3337ac9c3088df62e415e",
+                            "count": 1977
+                        },
+                        {
+                            "term": "f89928645900cbd226d0db5d3a198399",
+                            "count": 1777
+                        },
+                        {
+                            "term": "63fcc15ce2536ac4cc75b370e8b7903c",
+                            "count": 1739
+                        },
+                        {
+                            "term": "b95f55a51a4434db2426cacdf713541b",
+                            "count": 1665
+                        },
+                        {
+                            "term": "7a22cb356c155319150ceabf2b88a603",
+                            "count": 1660
+                        },
+                        {
+                            "term": "1e9bd1869e99b33f7e7860c58630f353",
+                            "count": 945
+                        }
+                    ]
+                }
+            }
+        
+        
 # Group State Events
 
 These represent the state changes of the boxes. You generally see these occuring each minute although you will see a record of the device being rebooted, installing etc.
