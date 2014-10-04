@@ -4050,7 +4050,25 @@ Returns statistical information on your sessions. Includes:
                 }
             }
             
-            
+    
+## Top Manufacturers [/api/v1/sessions{?manufacturers,start,end}]
+
+Returns the aggregated manufacturers in your network.
+
+### Top boxes aggregates [GET]
+
++ Parameters
+
+    + manufacturers (required, boolean, `true`) ... Using manufacturers = true to provide manufacturer aggregates.
+    + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 12 weeks ago.
+    + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to 12 weeks ago.
+
+
++ Response 200 (application/json)
+
+    + Body
+
+        
 # Group State Events
 
 These represent the state changes of the boxes. You generally see these occuring each minute although you will see a record of the device being rebooted, installing etc.
