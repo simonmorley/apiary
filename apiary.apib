@@ -3753,6 +3753,56 @@ Returns statistical information on your sessions. Includes:
                 }
             }
             
+## Session data transfer stats [/api/v1/sessions{?data,start,end}]
+
+Returns statistical information on your sessions. Includes:
+
+- Number of sessions
+- Total data download and uploaded
+- Min, max and mean values for data transfer
+- Standard deviation and variance
+
+### Session data statistics [GET]
+
++ Parameters
+
+    + data (required, boolean, `true`) ... Using data = true to provide session data usage statistics.
+    + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 12 weeks ago.
+    + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to 12 weeks ago.
+
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "data": {
+                    "downloads": {
+                        "_type": "statistical",
+                        "count": 483442,
+                        "total": 30615204960418,
+                        "min": 0,
+                        "max": 11766394118,
+                        "mean": 63327565.58267176,
+                        "sum_of_squares": 4.221603241186846e+22,
+                        "variance": 83313501954548110,
+                        "std_deviation": 288640783.5953681
+                    },
+                    "uploads": {
+                        "_type": "statistical",
+                        "count": 483442,
+                        "total": 5204021009171,
+                        "min": 0,
+                        "max": 5613961670,
+                        "mean": 10764519.857958142,
+                        "sum_of_squares": 5.023311701172294e+21,
+                        "variance": 10274847683233648,
+                        "std_deviation": 101364923.33758087
+                    }
+                }
+            }
+            
+            
 # Group State Events
 
 These represent the state changes of the boxes. You generally see these occuring each minute although you will see a record of the device being rebooted, installing etc.
