@@ -3330,6 +3330,10 @@ Alongside the standard fields, you will see some fields for pagination:
 
 - username
 
+##Allowed HTTPs requests:
+
+- `GET` - Retrieves a resource or list of resources
+
 ### List all sessions [GET]
 
 + Parameters
@@ -3604,7 +3608,7 @@ Returns aggregated data for the unique users by mac address (not provided) on a 
                 ]
             }
 
-## Who's Online [/api/v1/sessions{?online}]
+## Who's Online [/api/v1/sessions{?online,page,size}]
 
 Returns a list of users currently connected and logged in. This table is cleared every five minutes. During this time, you may see a non-blank stoptime. This will mean the user has disconnected and will be accompanied by a stopreason.
 
@@ -3615,6 +3619,8 @@ A _links object is also available with the pagination details.
 + Parameters
 
     + online (required, boolean, `true`) ... Using online = true to provide a list of online users.
+    + page (optional, integer, `1`) ... For pagination purposes. 
+    + size (optional, integer, `500`) ... The number of records you want to return. Max. value is 1000.
 
 + Response 200 (application/json)
 
@@ -3671,7 +3677,7 @@ A _links object is also available with the pagination details.
                 }
             }
 
-## Client aggregates [/api/v1/sessions{?clients}]
+## Client aggregates [/api/v1/sessions{?clients,page,size}]
 
 An aggregated list of clients with session data grouped by their unique id.
 
@@ -3684,6 +3690,8 @@ A _links object is also available with the pagination details.
 + Parameters
 
     + clients (required, boolean, `true`) ... Using clients = true to provide a list of clients.
+    + page (optional, integer, `1`) ... For pagination purposes. 
+    + size (optional, integer, `500`) ... The number of records you want to return. Max. value is 1000.
 
 + Response 200 (application/json)
 
@@ -4160,7 +4168,11 @@ They are a nested resource in the Boxes API.
 
 Represents the technologies API. An overview of the technologies in use across your network. Data derives currently from the login screens only.
 
-## Technologies Collection [/api/v1/technologies{?q,start,end}]
+##Allowed HTTPs requests:
+
+- `GET` - Retrieves a resource or list of resources
+
+## Technologies Collection [/api/v1/technologies{?q,start,end,page,size}]
 
 A list of all the technologies. You may search by passing q=search_string. Results will be filtered accordingly.
 
@@ -4171,7 +4183,9 @@ A list of all the technologies. You may search by passing q=search_string. Resul
     + q (optional, string, `Search data`) ... Search through your list of tech..
     + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 12 weeks ago.
     + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to now.
-
+    + page (optional, integer, `1`) ... For pagination purposes. 
+    + size (optional, integer, `500`) ... The number of records you want to return. Max. value is 1000.
+    
 + Response 200 (application/json)
     
     + Body
@@ -4238,7 +4252,13 @@ A list of all the technologies. You may search by passing q=search_string. Resul
                         "request_lon": -1.47423,
                         "request_user": null
                     }
-                ]
+                ],
+                "_links": {
+                    "current_page": 1,
+                    "total_pages": 71,
+                    "next_page": 2,
+                    "total_entries": 1763
+                }
             }
 
 ## Aggregations [/api/v1/technologies{?aggs,q,start,end}]
