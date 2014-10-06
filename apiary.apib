@@ -13,7 +13,7 @@ Please create an application in Cucumber Tony and use your access token in all r
 
 >**Note:** Some resources trigger updates to your boxes. Sending invalid data can cause your boxes to crash.
 
-##Allowed HTTPs requests:
+## Generally Allowed HTTPs requests:
 
 - `POST` - Creates or updates a resource
 - `PATCH` - Updates a resource
@@ -32,6 +32,12 @@ Please create an application in Cucumber Tony and use your access token in all r
 - 422 `Bad Request` - The request could not be understood or was missing required parameters.
 - 429 `Too Many Requests` - Exceeded our API limits of 60 per minute. 
 - 503 `Service Unavailable` - The service is temporary unavailable. Try again later.
+
+##Oauth2 
+
+To make use of the Cucumber Tony API, you will need an access token (and refresh token if building a more persistent application).
+
+For more information how to generate this, please visit the support centre (TBC).
 
 # Group Accounts
 
@@ -2824,6 +2830,23 @@ You can filter the log_level betweeen 1 and 3.
                 }
             }]
         
+# Group Metrics
+
+Numerous end-points are provided which provide aggregated reporting data about your networks and usage.
+
+Some are only available to enterprise users or those using the sense service.
+
+##Allowed HTTPs requests:
+
+- `GET` - Retrieves a resource or list of resources
+
+## Dwell Times [/api/v1/metrics/{?dwell}]
+
+## Dwell Times [/api/v1/metrics/{?dwell}]
+
+## Dwell Times [/api/v1/metrics/{?dwell}]
+
+## Dwell Times [/api/v1/metrics/{?dwell}]
 
 # Group Networks
 
