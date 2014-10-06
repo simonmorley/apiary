@@ -644,15 +644,18 @@ If you update any fields related to the network settings, you will reboot your b
 
         { status: "unprocessable_entity" }
 
-## Reset a box [/api/v1/boxes/{id}/reset]
+## Reset a box [/api/v1/boxes/{id}/reset{?soft}]
 
 Restores things to factory defaults.
+
+Sending the parameter 'soft', will perform a soft reset of the box. This doesn't reset any certificates etc, it just resets the basic attributes.
 
 ### Reset a box [POST]
 
 + Parameters
 
     + id (required, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... ID (we use the slug) of the device you want to reboot.
+    + soft (optional, string, `true`) ... Soft reset the box by sending the soft=true parameter.
 
 + Request (application/json)
 
