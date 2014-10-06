@@ -2854,7 +2854,6 @@ Displays a list of average dwell times for all your locations. Filter results by
 
     + Body
     
-    
 ## Location Dwells [/api/v1/metrics/{?dwell_location,location_id}]
 
 A summary table providing aggregated stats ordered by location. 
@@ -2886,6 +2885,20 @@ A summary table providing aggregated stats ordered by day.
 ## Aggregrated Daily [/api/v1/metrics/{?dwell_aggs,location_id}]
 
 Similar to the above, this request provides aggregated daily dwell times. 
+
++ Parameters
+
+    + location_id (optional, integer, `1,2,3`) ... Array of location IDs to filter the results.
+
+### Average dwell times [GET]
+
++ Response 200 (application/json)
+
+    + Body
+
+## Sense [/api/v1/metrics/{?sense,location_id}]
+
+Raw sense data (Meraki, Xirrus). 
 
 + Parameters
 
