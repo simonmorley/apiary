@@ -2847,6 +2847,8 @@ Some are only available to enterprise users or those using the sense service.
 
 Displays a list of average dwell times for all your locations. Filter results by passing the location_id parameter in as an array of your location ids.
 
+The results _id parameter is equivalent to the mac address of the box. avgStay is in seconds.
+
 + Parameters
 
     + location_id (optional, integer, `1,2,3`) ... Array of location IDs to filter the results.
@@ -2856,7 +2858,24 @@ Displays a list of average dwell times for all your locations. Filter results by
 + Response 200 (application/json)
 
     + Body
-    
+
+            {
+                "dwells": [
+                    {
+                        "_id": "00-22-0A-21-8D-14",
+                        "avgStay": 872636.987
+                    },
+                    {
+                        "_id": "00-18-0A-21-8D-14",
+                        "avgStay": 872636
+                    },
+                    {
+                        "_id": "11-22-33-44-55-99",
+                        "avgStay": 6774
+                    }
+                ]
+            }    
+
 ## Location Dwells [/api/v1/metrics/{?dwell_location,location_id}]
 
 A summary table providing aggregated stats ordered by location. 
