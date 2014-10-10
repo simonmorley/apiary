@@ -2892,7 +2892,7 @@ A summary table providing aggregated stats ordered by location.
     
 ## Daily Dwells [/api/v1/metrics/{?dwell_daily,location_id}]
 
-A summary table providing aggregated stats ordered by day. 
+A summary table providing aggregated stats ordered by day (number, 0 first - Sunday). 
 
 + Parameters
 
@@ -2903,6 +2903,10 @@ A summary table providing aggregated stats ordered by day.
 + Response 200 (application/json)
 
     + Body
+
+            {
+                "daily": "[678, 1322, 9873, 1923, 234, 1238, 982]"
+            }
 
 ## Sense [/api/v1/metrics/{?sense,location_id}]
 
