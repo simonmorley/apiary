@@ -2851,6 +2851,7 @@ The results _id parameter is equivalent to the mac address of the box. avgStay i
 
 + Parameters
 
+    + dwell (required, boolean, `true`) ... Required to filter aggregations.
     + location_id (optional, integer, `1,2,3`) ... Array of location IDs to filter the results.
 
 ### Average dwell times [GET]
@@ -2882,6 +2883,7 @@ A summary table providing aggregated stats ordered by location.
 
 + Parameters
 
+    + dwell_location (required, boolean, `true`) ... Required to filter aggregations by location.
     + location_id (optional, integer, `1,2,3`) ... Array of location IDs to filter the results.
 
 ### Average dwell times [GET]
@@ -2896,6 +2898,7 @@ A summary table providing aggregated stats ordered by day (number, 0 first - Sun
 
 + Parameters
 
+    + dwell_daily (required, boolean, `true`) ... Required to filter aggregations daily.
     + location_id (optional, integer, `1,2,3`) ... Array of location IDs to filter the results.
 
 ### Average dwell times [GET]
@@ -2907,6 +2910,7 @@ A summary table providing aggregated stats ordered by day (number, 0 first - Sun
             {
                 "daily": "[678, 1322, 9873, 1923, 234, 1238, 982]"
             }
+
 
 ## Sense [/api/v1/metrics/{?sense,location_id}]
 
