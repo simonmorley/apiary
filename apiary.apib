@@ -2865,18 +2865,20 @@ You may pass in various parameters to filter the results in different ways. See 
 
 - `GET` - Retrieves a resource or list of resources
 
-## Average Dwells [/api/v1/metrics/{?dwell,location_id}]
+## Count of Stays [/api/v1/metrics/{?stays,location_id,start,end}]
 
-Displays a list of average dwell times for all your locations. Filter results by passing the location_id parameter in as an array of your location ids.
+Displays a list of total stays (the count of the stays) for all your locations. Filter results by passing the location_id parameter in as an array of your location ids.
 
 The results _id parameter is equivalent to the mac address of the box. avgStay is in seconds.
 
 + Parameters
 
-    + dwell (required, boolean, `true`) ... Required to filter aggregations.
-    + location_id (optional, integer, `1,2,3`) ... Array of location IDs to filter the results.
-
-### Average dwell times [GET]
+    + stays (required, boolean, `true`) ... Required to filter aggregations.
+    + location_id (optional, integer, `1,2,3`) ... Comma separated list of location IDs to filter the results.
+    + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 100 days ago.
+    + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to now.
+    
+### Total stays by location [GET]
 
 + Response 200 (application/json)
 
@@ -2885,55 +2887,191 @@ The results _id parameter is equivalent to the mac address of the box. avgStay i
             {
                 "dwells": [
                     {
-                        "_id": "00-22-0A-21-8D-14",
-                        "avgStay": 872636.98732
+                        "_id": 1533,
+                        "total_stays": 37650
                     },
                     {
-                        "_id": "00-18-0A-21-8D-14",
-                        "avgStay": 872636.32636
-                    },
-                    {
-                        "_id": "11-22-33-44-55-99",
-                        "avgStay": 6774.9987982
+                        "_id": 1294,
+                        "total_stays": 2517
                     }
                 ]
-            }    
+            }
+            
+            
+## Count of Stays by Day [/api/v1/metrics/{?stays,location_id,start,end,daily}]
 
-## Location Dwells [/api/v1/metrics/{?dwell_location,location_id}]
-
-A summary table providing aggregated stats ordered by location. 
+Count the stays per location and group these by the day of the week. 0 is Sunday.
 
 + Parameters
 
-    + dwell_location (required, boolean, `true`) ... Required to filter aggregations by location.
-    + location_id (optional, integer, `1,2,3`) ... Array of location IDs to filter the results.
+    + stays (required, boolean, `true`) ... Required to filter aggregations.
+    + daily (required, boolean, `true`) ... Required to filter aggregations daily.
+    + location_id (optional, integer, `1,2,3`) ... Comma separated list of location IDs to filter the results.
+    + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 100 days ago.
+    + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to now.
 
-### Average dwell times [GET]
+### Count of stays grouped daily [GET]
 
 + Response 200 (application/json)
 
     + Body
     
-## Daily Dwells [/api/v1/metrics/{?dwell_daily,location_id}]
+            {
+                "dwells": [
+                    {
+                        "_id": 6,
+                        "total_stays": 18519
+                    },
+                    {
+                        "_id": 0,
+                        "total_stays": 8298
+                    },
+                    {
+                        "_id": 1,
+                        "total_stays": 7227
+                    },
+                    {
+                        "_id": 5,
+                        "total_stays": 6123
+                    }
+                ]
+            }
+            
+## Average Stays Per Location [/api/v1/metrics/{?stays,location_id,start,end,avg}]
 
-A summary table providing aggregated stats ordered by day (number, 0 first - Sunday). 
+Get the average dwell number of stays at each of your locations.
 
 + Parameters
 
-    + dwell_daily (required, boolean, `true`) ... Required to filter aggregations daily.
-    + location_id (optional, integer, `1,2,3`) ... Array of location IDs to filter the results.
+    + stays (required, boolean, `true`) ... Required to filter aggregations.
+    + avg (required, boolean, `true`) ... Required to get mean (average) aggregations.
+    + location_id (optional, integer, `1,2,3`) ... Comma separated list of location IDs to filter the results.
+    + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 100 days ago.
+    + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to now.
 
-### Average dwell times [GET]
+### Average stays per location [GET]
 
 + Response 200 (application/json)
 
     + Body
 
             {
-                "daily": "[678, 1322, 9873, 1923, 234, 1238, 982]"
+                "dwells": [
+                    {
+                        "_id": 1533,
+                        "mean": 1.925338788033751
+                    },
+                    {
+                        "_id": 1294,
+                        "mean": 1.4684947491248541
+                    }
+                ]
             }
 
+## Total Dwell Times [/api/v1/metrics/{?stays,location_id,start,end,dwells}]
 
+Get the sum of the mean values at your locations. It is better to use this with the avg parameter which calculates the average dwell time per location for you.
+
++ Parameters
+
+    + stays (required, boolean, `true`) ... Required to filter aggregations.
+    + dwells (required, boolean, `true`) ... Required to get total dwell times.
+    + location_id (optional, integer, `1,2,3`) ... Comma separated list of location IDs to filter the results.
+    + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 100 days ago.
+    + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to now.
+
+### Average stays per location [GET]
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "dwells": [
+                    {
+                        "_id": 1533,
+                        "total_dwells": 16395553.877127469
+                    },
+                    {
+                        "_id": 1294,
+                        "total_dwells": 4345037.9463120205
+                    }
+                ]
+            }
+
+## Average Dwell Times [/api/v1/metrics/{?stays,location_id,start,end,dwells,avg}]
+
+Calculates the average dwell time per location for you.
+
++ Parameters
+
+    + stays (required, boolean, `true`) ... Required to filter aggregations.
+    + dwells (required, boolean, `true`) ... Required to get total dwell times.
+    + avg (required, boolean, `true`) ... Required to get total dwell times.
+    + location_id (optional, integer, `1,2,3`) ... Comma separated list of location IDs to filter the results.
+    + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 100 days ago.
+    + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to now.
+
+### Average dwell times per location [GET]
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "dwells": [
+                    {
+                        "_id": 1294,
+                        "mean": 2535.027973344236
+                    },
+                    {
+                        "_id": 1533,
+                        "mean": 838.4328241947056
+                    }
+                ]
+            }
+
+## Average Daily Dwell Times [/api/v1/metrics/{?stays,location_id,start,end,dwells,avg,daily}]
+
+Calculates the average dwell time per location for you and groups daily. Sunday is 0.
+
++ Parameters
+
+    + stays (required, boolean, `true`) ... Required to filter aggregations.
+    + dwells (required, boolean, `true`) ... Required to get total dwell times.
+    + avg (required, boolean, `true`) ... Required to get total dwell times.
+    + daily (required, boolean, `true`) ... Required to get total dwell times and group daily.
+    + location_id (optional, integer, `1,2,3`) ... Comma separated list of location IDs to filter the results.
+    + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 100 days ago.
+    + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to now.
+
+### Average dwell times per location [GET]
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "dwells": [
+                    {
+                        "_id": 5,
+                        "mean": 1419.2884279601392
+                    },
+                    {
+                        "_id": 0,
+                        "mean": 1056.8719921665768
+                    },
+                    {
+                        "_id": 1,
+                        "mean": 985.5163218011563
+                    },
+                    {
+                        "_id": 6,
+                        "mean": 759.7329739934518
+                    }
+                ]
+            }
+            
 ## Sense [/api/v1/metrics/{?sense,location_id}]
 
 Raw sense data (Meraki, Xirrus). 
