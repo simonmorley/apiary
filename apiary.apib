@@ -2839,6 +2839,20 @@ Numerous end-points are provided which provide aggregated reporting data about y
 
 Some are only available to enterprise users or those using the sense service.
 
+The only end-point currently in use is **stays**. A stay is a representation of a completed visit on a specific box. Stays are used to deterime the dwell times.
+
+A stay has a start time and an end tim on a specific box. A stay is considered complete when the device has not been seen for greater than 30 minutes.
+
+For example, a device is first seen at 10am. The device is seen every minute until 11am. After which they leave the area. Cucumber Tony will automatically mark this as a completed. This may not be completed immediately.
+
+Should they come back after 30 minutes have passed, we will start a new stay for them.
+
+If the device is seen only once, we consider the device to have passed through - this does not affect your dwell times.
+
+An end-point to query pass throughs and the fully visitor model will be activated soon.
+
+Stays currently consider both associated and unassociated clients.
+
 ##Allowed HTTPs requests:
 
 - `GET` - Retrieves a resource or list of resources
