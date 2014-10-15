@@ -3459,6 +3459,26 @@ If you pass in an array of box ids, your payload will not run on the box you're 
 
         { status: "unprocessable_entity" }
 
+# Group Port Forwards
+
+Port Forwards related resources of the **Port Forwards API**. Networks are a nested in a box and are not accessible anywhere else. 
+
+You may create and update the port forwards directly or as a nested resource within a box.
+
+##Allowed HTTPs requests:
+
+- `POST` - Creates a resource
+- `PATCH` - Updates a resource
+- `GET` - Retrieves a resource or list of resources
+- `DELETE` - Delete a resource
+
+## Port Forwards Collection [/api/v1/boxes/{box_id}/port_forwards]
+
++ Parameters
+
+    + box_id (required, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` of the Box to perform action with. Has example value.
+
+
 # Group Speedtests
 
 Speedtests belong to boxes and are a nested resource. You can only create and list speedtests per device. Creating a speedtest **DOES NOT** store it permanently. Only speedtests which run automatically in the middle of the night are stored.
