@@ -3474,10 +3474,46 @@ You may create and update the port forwards directly or as a nested resource wit
 
 ## Port Forwards Collection [/api/v1/boxes/{box_id}/port_forwards]
 
+### List all port forwards for a box [GET]
+
 + Parameters
 
     + box_id (required, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` of the Box to perform action with. Has example value.
 
++ Response 200 (application/json)
+
+
+    + Body
+    
+            [{
+                "id": 7,
+                "source": "1.2.3.4/16",
+                "destination_port": 80,
+                "destination_ip": "",
+                "target": "",
+                "forward_to_ip": "1.1.2.9",
+                "forward_to_port": 443
+            },
+            {
+                "id": 12,
+                "source": "12.1.2.3/232",
+                "destination_port": 80,
+                "destination_ip": "",
+                "target": "",
+                "forward_to_ip": "1.2.3.4",
+                "forward_to_port": 22
+            },
+            {
+                "id": 13,
+                "source": "1.2.3.4/232",
+                "destination_port": 23,
+                "destination_ip": "",
+                "target": "",
+                "forward_to_ip": "12.12.12.12",
+                "forward_to_port": 2223
+            }]
+        
+        
 
 # Group Speedtests
 
