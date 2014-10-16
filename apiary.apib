@@ -3596,7 +3596,7 @@ Please use the Unique Id to update a port forward.
             }
             
           
-## Update a Port Forward Item [/api/v1/boxes/{box_id}/port_forwards/{unique_id}{?port_forward}]
+## Modify a Port Forward Item [/api/v1/boxes/{box_id}/port_forwards/{unique_id}{?port_forward}]
 
 ### Update a single port forward item [PATCH]
 
@@ -3644,10 +3644,6 @@ Please use the Unique Id to update a port forward.
             
 
 ### Delete a port forward [DELETE]
-
-**CAUSES SYNC**
-
-Please note, creating a new walled garden will force all your boxes to reload their networks. This *will* log users off.
 
 + Parameters
 
