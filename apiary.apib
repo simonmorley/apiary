@@ -3642,7 +3642,6 @@ Please use the Unique Id to update a port forward.
                 "forward_to_port": 22
             }
             
-## Port Forward Delete [/api/v1/boxes/{box_id}/port_forwards/{unique_id}]
 
 ### Delete a port forward [DELETE]
 
@@ -3652,18 +3651,19 @@ Please note, creating a new walled garden will force all your boxes to reload th
 
 + Parameters
 
-    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
-    + id (required, integer, `1`) ... ID of the walled garden you wish to update.
+    + box_id (required, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` of the Box to perform action with. Has example value.
+    + unique_id (required, string, `7281919179187298712`) ... Unique ID of the port forward to perform action with. Has example value.
 
 + Request (application/json)
 
         {   
-            "location_id": "derby-council",
-            "id": 123,
+            "box_id": "JCyK7Zwh0ON_ZOWso8Mhuw",
+            "unique_id": "7281919179187298712",
         }
 
 + Response 204 (application/json)
           
+
 # Group Speedtests
 
 Speedtests belong to boxes and are a nested resource. You can only create and list speedtests per device. Creating a speedtest **DOES NOT** store it permanently. Only speedtests which run automatically in the middle of the night are stored.
