@@ -3469,6 +3469,10 @@ Port forwarding is a way to make the devices within your network accessible to c
 
 Use port forwards to allow access to your tills, CCTV systems and more.
 
+**Please Note**
+
+Adding, removing and updating port forwards will cause your boxes to sync. This may mean you and your clients lose connectivity.
+
 ##Allowed HTTPs requests:
 
 - `POST` - Creates a resource
@@ -3545,7 +3549,53 @@ Get a single port forward item.
                 "forward_to_ip": "1.1.2.9",
                 "forward_to_port": 22
             }
+
+## Create a Port Forward Item [/api/v1/boxes/{box_id}/port_forwards{?port_forward}]
+
+### Create a single port forward item [PATCH]
+
+Please note, source, forward_to_ip, forward_to_port and destination_port are all required and are validated fields.
+
+- Source must be a valid IP in CIDR notation - 10.10.0.1/16
+- forward_to_ip must be a valid IP - 10.1.1.1
+- destination_port and forward_to_port must be numeric and between 1 - 64322
+
+Please use the Unique Id to update a port forward.
+
++ Parameters
+
+    + box_id (required, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` of the Box to perform action with. Has example value.
+    + port_forward (required, params, `source=10.1.2.3/12`) ... Params hash containing values you wish to update.
+
++ Request (application/json)
+
+        { "port_forward":
+                {
+                    "source": "1.2.3.4/16",
+                    "destination_port": 80,
+                    "destination_ip": "",
+                    "target": "",
+                    "forward_to_ip": "192.168.4.3",
+                    "forward_to_port": 22
+                }
+        }
+
++ Response 201 (application/json)
+
+    + Body
+                    
+            {
+                "id": 7,
+                "unique_id": "1815463621122310719",
+                "source": "1.2.3.4/16",
+                "destination_port": 80,
+                "destination_ip": "",
+                "target": "",
+                "forward_to_ip": "192.168.4.3",
+                "forward_to_port": 22
+            }
             
+          
 ## Update a Port Forward Item [/api/v1/boxes/{box_id}/port_forwards/{unique_id}{?port_forward}]
 
 ### Update a single port forward item [PATCH]
@@ -3577,7 +3627,7 @@ Please use the Unique Id to update a port forward.
                 }
         }
 
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
     + Body
                     
@@ -3592,7 +3642,28 @@ Please use the Unique Id to update a port forward.
                 "forward_to_port": 22
             }
             
-            
+## Port Forward Delete [/api/v1/boxes/{box_id}/port_forwards/{unique_id}]
+
+### Delete a port forward [DELETE]
+
+**CAUSES SYNC**
+
+Please note, creating a new walled garden will force all your boxes to reload their networks. This *will* log users off.
+
++ Parameters
+
+    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + id (required, integer, `1`) ... ID of the walled garden you wish to update.
+
++ Request (application/json)
+
+        {   
+            "location_id": "derby-council",
+            "id": 123,
+        }
+
++ Response 204 (application/json)
+          
 # Group Speedtests
 
 Speedtests belong to boxes and are a nested resource. You can only create and list speedtests per device. Creating a speedtest **DOES NOT** store it permanently. Only speedtests which run automatically in the middle of the night are stored.
