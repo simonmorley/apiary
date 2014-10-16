@@ -3491,6 +3491,7 @@ Use port forwards to allow access to your tills, CCTV systems and more.
     
             [{
                 "id": 7,
+                "unique_id": "1815463621122310719",
                 "source": "1.2.3.4/16",
                 "destination_port": 80,
                 "destination_ip": "",
@@ -3500,6 +3501,7 @@ Use port forwards to allow access to your tills, CCTV systems and more.
             },
             {
                 "id": 12,
+                "unique_id": "7272729879261726817",
                 "source": "12.1.2.3/232",
                 "destination_port": 80,
                 "destination_ip": "",
@@ -3509,6 +3511,7 @@ Use port forwards to allow access to your tills, CCTV systems and more.
             },
             {
                 "id": 13,
+                "unique_id": "7281919179187298712",
                 "source": "1.2.3.4/232",
                 "destination_port": 23,
                 "destination_ip": "",
@@ -3517,8 +3520,79 @@ Use port forwards to allow access to your tills, CCTV systems and more.
                 "forward_to_port": 2223
             }]
         
-        
+## Port Forward Item [/api/v1/boxes/{box_id}/port_forwards/{unique_id}]
 
+Get a single port forward item.
+
+### Get a single port forward for a box [GET]
+
++ Parameters
+
+    + box_id (required, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` of the Box to perform action with. Has example value.
+    + unique_id (required, string, `7281919179187298712`) ... Unique ID of the port forward to perform action with. Has example value.
+
++ Response 200 (application/json)
+
+    + Body
+                    
+            {
+                "id": 7,
+                "unique_id": "1815463621122310719",
+                "source": "1.2.3.4/16",
+                "destination_port": 80,
+                "destination_ip": "",
+                "target": "",
+                "forward_to_ip": "1.1.2.9",
+                "forward_to_port": 22
+            }
+            
+## Update a Port Forward Item [/api/v1/boxes/{box_id}/port_forwards/{unique_id}{?port_forward}]
+
+### Update a single port forward item [PATCH]
+
+Please note, source, forward_to_ip, forward_to_port and destination_port are all required and are validated fields.
+
+- Source must be a valid IP in CIDR notation - 10.10.0.1/16
+- forward_to_ip must be a valid IP - 10.1.1.1
+- destination_port and forward_to_port must be numeric and between 1 - 64322
+
+Please use the Unique Id to update a port forward.
+
++ Parameters
+
+    + box_id (required, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` of the Box to perform action with. Has example value.
+    + unique_id (required, string, `7281919179187298712`) ... Unique ID of the port forward to perform action with. Has example value.
+    + port_forward (required, params, `source=10.1.2.3/12`) ... Params hash containing values you wish to update.
+
++ Request (application/json)
+
+        { "port_forward":
+                {
+                    "source": "1.2.3.4/16",
+                    "destination_port": 80,
+                    "destination_ip": "",
+                    "target": "",
+                    "forward_to_ip": "192.168.4.3",
+                    "forward_to_port": 22
+                }
+        }
+
++ Response 200 (application/json)
+
+    + Body
+                    
+            {
+                "id": 7,
+                "unique_id": "1815463621122310719",
+                "source": "1.2.3.4/16",
+                "destination_port": 80,
+                "destination_ip": "",
+                "target": "",
+                "forward_to_ip": "192.168.4.3",
+                "forward_to_port": 22
+            }
+            
+            
 # Group Speedtests
 
 Speedtests belong to boxes and are a nested resource. You can only create and list speedtests per device. Creating a speedtest **DOES NOT** store it permanently. Only speedtests which run automatically in the middle of the night are stored.
