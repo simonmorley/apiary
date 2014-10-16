@@ -926,7 +926,74 @@ Only PolkaSpots staff are able to create, modify and delete commands at the mome
 
 + Response 204 (application/json)
 
+# Group Clients
 
+Clients related resources of the **Clients API**. Events
+
+Clients, when nested in the box resource, represent the currently connected clients on box. This is for public access only right now.
+
+**The clients API is only available for boxes which use the PolkaSpots Firmware.**
+
+The status parameter will be one of two values:
+
+- pass - The user is logged in a browsing
+- dnat - The user is connected to the WiFi but not logged in.
+
+## List Connected Clients [/api/v1/boxes/{box_id}/clients]
+
+List all currently connected clients on a box.
+
+### List all connected clients [GET]
+
++ Parameters
+
+    + box_id (required, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` of the Box to perform action with. Has example value.
+
++ Response 200 (application/json)
+
+    + Body
+
+            [{
+                "mac": "1C-65-9D-83-XX-XX",
+                "ip": "192.168.4.12",
+                "status": "pass",
+                "session_id": "52a7738100000005",
+                "username": "happy_cheese_x-15196",
+                "maxinput": "1/604800",
+                "maxoutput": "36302156/0"
+            },
+                "mac": "XX-XX-XX-XX-XX-XX",
+                "ip": "192.168.4.16",
+                "status": "pass",
+                "session_id": "9827349872323",
+                "username": "happy-online-12312",
+                "maxinput": "1/70400",
+                "maxoutput": "302156/0"
+            ]
+
+## Disconnect a client [/api/v1/boxes/{box_id}/clients/{id}]
+
+You can log a user out using the CLients API quickly.
+
+### Disconnect a user [POST]
+
++ Parameters
+
+    + box_id (required, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` of the Box to perform action with. Has example value.
+    + id (required, string, `52a7738100000005`) ... ID `id` the session ID of the client you wish to disconnect.
+
++ Response 200 (application/json)
+
+    + Body
+        
+            { "message": "The client has been disconnected." }
+        
++ Response 422 (application/json)
+
+    + Body
+        
+            { "message": "There was a problem disconnecting the client." }
+        
 # Group Events
 
 Events related resources of the **Events API**. Events run at predefined intervals on your location's boxes.
