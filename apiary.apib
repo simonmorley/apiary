@@ -2989,9 +2989,7 @@ Summary stats of your network dwell times and stays including the counts, averag
 
 ## Aggregated by location_id [/api/v1/metrics/{?aggs,location_ids,ap_macs,start,end}]
 
-Aggregated summary data grouped by location_id. This provides a summary of dwell times for each invidivual location. Please use the locations api to determine full location information from the id. It is required you pass the search parameter "aggs" to use this end point.
-
-The key is equal to your location_id
+Aggregated summary data grouped by location_id. This provides a summary of dwell times for each invidivual location. Please use the locations api to determine full location information from the id. It is required you pass the search parameter "aggs" to use this end point. The key is equal to your location id
 
 + Parameters
 
@@ -3001,7 +2999,7 @@ The key is equal to your location_id
     + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 100 days ago.
     + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to now.
     
-### Summary stats for dwells, stays and sessions [GET]
+### Aggregated data grouped by location_id [GET]
 
 + Response 200 (application/json)
 
