@@ -3056,6 +3056,57 @@ Pass key=ap_mac with the search params to group by ap_mac.
 
 + Response 200 (application/json)
 
+## Aggregated by manufacturer [/api/v1/metrics/{?aggs,location_ids,ap_macs,start,end,key}]
+
+Aggregated summary data grouped by manufacturer. Pass key=man with query to activate.
+
++ Parameters
+
+    + aggs (required, boolean, `true`) ... Required to provide aggregated results.
+    + key (required, string, `man`) ... Required to provide aggregated results by manufacturer.
+    + location_ids (optional, integer, `1,2,3`) ... Comma separated list of location IDs to filter the results.
+    + ap_macs (optional, string, `11:22:11:22:22:11`) ... Comma separated list of mac addresses to filter the results.
+    + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 100 days ago.
+    + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to now.
+    
+### Aggregated data grouped by location_id [GET]
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "aggs": {
+                    "count": 3,
+                    "locations": [
+                        {
+                            "key": "apple",
+                            "dwells": {
+                                "count": 3,
+                                "min": 1000.0,
+                                "max": 1000.0,
+                                "avg": 1000.0,
+                                "sum": 3000.0
+                            },
+                            "sessions": {
+                                "count": 3,
+                                "min": 1.0,
+                                "max": 1.0,
+                                "avg": 1.0,
+                                "sum": 3.0
+                            },
+                            "stays": {
+                                "count": 3,
+                                "min": 12.0,
+                                "max": 12.0,
+                                "avg": 12.0,
+                                "sum": 36.0
+                            }
+                        }
+                    ]
+                }
+            }            
+
 
 
 ## Networks Collection [/api/v1/locations/{location_id}/networks]
