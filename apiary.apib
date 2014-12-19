@@ -3037,6 +3037,26 @@ Aggregated summary data grouped by location_id. This provides a summary of dwell
                 }
             }            
             
+## Aggregated by ap_mac [/api/v1/metrics/{?aggs,location_ids,ap_macs,start,end,key}]
+
+Aggregated summary data grouped by ap_mac. This provides a summary of dwell times for each invidivual access point. 
+
+Pass key=ap_mac with the search params to group by ap_mac.
+
++ Parameters
+
+    + aggs (required, boolean, `true`) ... Required to provide aggregated results.
+    + key (required, string, `ap_mac`) ... Required to provide aggregated results by mac address of access point.
+    + location_ids (optional, integer, `1,2,3`) ... Comma separated list of location IDs to filter the results.
+    + ap_macs (optional, string, `11:22:11:22:22:11`) ... Comma separated list of mac addresses to filter the results.
+    + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 100 days ago.
+    + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to now.
+    
+### Aggregated data grouped by ap_mac [GET]
+
++ Response 200 (application/json)
+
+
 
 ## Networks Collection [/api/v1/locations/{location_id}/networks]
 
