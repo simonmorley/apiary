@@ -4759,13 +4759,25 @@ Supports:
 - `POST` - Creates a cart
 - `DELETE` - Deletes a cart
 
-## Cart creation [/api/v1/store_carts{?store_id,product_id}]
+## Cart creation [/api/v1/store_carts{?store_id,product_ids}]
 
-This will create a cart and add a product to it. It is not possible to create a cart without a product.
+This will create a cart and add a product to it. It is not possible to create a cart without a product. If you send a null product_ids param to the API, the corresponding cart will be destroyed.
 
-Results are cached for ten minutes to improve load times.
+Use the POST end-point to both create the cart and also update products.
 
-### List technologies [POST]
+ProductIds must be ids from a Store's list of products. 
+
+### Create and update a cart [POST]
+
++ Parameters
+
+    + product_ids (required, array, `[123897128376123,827364876872364A]`) ... Send a list of products that you want to add to the cart
+    + store_id (required, string, `your-store-id`) ... This is the id of the store you're attaching the transation id.
+
++ Response 200 (application/json)
+    
+    + Body
+
 
 + Parameters
 
