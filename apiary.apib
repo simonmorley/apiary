@@ -5161,7 +5161,16 @@ You cannot delete your account currently.
 
 ### View your account information [GET]
 
++ Request (application/json)
 
+            { "slug": "simon-the-boss" }
+
++ Response 200 (application/json)
+
+    +    body 
+
+            {}
+            
 # Group Versions
 
 You can access the change history for both your Boxes and Locations using the Versions API. Versioning allows you to rollback where you've made mistakes and also check who's updated a setting. You'll see the username of the person Whodunnit.
