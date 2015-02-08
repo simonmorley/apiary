@@ -5162,6 +5162,33 @@ A resource within boxes. Enables / disables alerts for a specific box. Alerts ar
     { "message": "Success" }
 
 
+## Update your account [/api/v1/users/{user_id}]
+
+### Update your account [PATCH]
+
++ Parameters
+
+    + user_id (required, string, `"JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` for your account, simon-the-morley.
+
++ Request (application/json)
+    
+        { 
+            "user_id": "simon-morley"
+            "user":
+                {
+                    "current_password": "your-current-secure-passy",
+                    "password": "JCyK7Zwh0ON_ZOWso8Mhuw"
+                }
+
+        }
+
++ Response 200 (application/json)
+
+    +    body 
+
+            { "message" : "Success!" }
+
+
 ## Update your password [/api/v1/users/{user_id}/password{?user}]
 
 ### Update your password [PATCH]
@@ -5186,10 +5213,7 @@ A resource within boxes. Enables / disables alerts for a specific box. Alerts ar
 
     +    body 
 
-            {
-            
-            
-            }
+            { "message" : "Success!" }
 
 
 # Group Versions
