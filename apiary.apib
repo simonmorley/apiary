@@ -1475,6 +1475,51 @@ They are a nested resource in the Boxes API.
                 "online": true
             }]
 
+# Group Invoices
+
+The main device invoices API which displays your service invoices.
+
+Using this API, you can request copies of your invoices to be sent to your billing contacts. Handy.
+
+##Allowed HTTPs requests:
+
+- `GET` - Retrieves a resource or list of resources
+- `POST` - Emails one or more invoices to your billing contacts.
+
+## Invoices Collection [/api/v1/invoices]
+
+### List Invoices [GET]
+
++ Response 200 (application/json)
+
+    + Body
+
+## Display an invoice [/api/v1/invoices/{id}]
+
+### Display Invoices [GET]
+
++ Parameters
+
+    + id (required, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... ID of the invoice you want to retreive.
+
++ Response 200 (application/json)
+
+    + Body
+
+## Email your invoices [/api/v1/invoices/email]
+
+### Emails Invoices [POST]
+
++ Parameters
+
+    + ids (required, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Comma separated list of emails to send via email.
+
++ Response 200 (application/json)
+
+    + Body
+
+
+
 # Group Locations
 
 Locations related resources of the **Locations API**
