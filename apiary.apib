@@ -5148,6 +5148,19 @@ A resource within boxes. Enables / disables alerts for a specific box. Alerts ar
 
 - `PATCH` - Updates a resource
 
+## Account Details [/api/v1/users/{user_id}]
+
+### Fetch account details [GET]
+
++ Parameters
+
+    + user_id (required, string, `"JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` for your account, simon-the-morley.
+
++ Response 200 (application/json)
+
+    { "message": "Success" }
+
+
 ## Update your password [/api/v1/users/{user_id}/password{?user}]
 
 ### Update your password [PATCH]
@@ -5170,14 +5183,12 @@ A resource within boxes. Enables / disables alerts for a specific box. Alerts ar
 
 + Response 200 (application/json)
 
-        {
-            "message": "Success"
-            {
-                "current_password": "your-current-secure-passy",
-                "password": "JCyK7Zwh0ON_ZOWso8Mhuw"
-            }
-        }
+    +    body 
 
+            {
+            
+            
+            }
 
 
 # Group Versions
@@ -5208,8 +5219,7 @@ This is destructive and can cause problems.
 + Response 200 (application/json)
 
     +    body 
-        
-            
+
             [{
                 "id": 67808,
                 "event": "update",
