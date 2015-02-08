@@ -5144,33 +5144,42 @@ Get grouped / aggregated stats about the technologies in use in your networks.
 
 # Group Users
 
-Update your own preferences and settings. We have some non-restful routes for such things as password changes. See below.
+A resource within boxes. Enables / disables alerts for a specific box. Alerts are currently sent by email and can be overridden in your account / settings.
 
-##Allowed HTTPs requests:
+- `PATCH` - Updates a resource
 
-- `GET` - Retrieves your account details
-- `PATCH` - Restore a version
+## Update your password [/api/v1/users/{user_id}/password{?user}]
 
-You cannot delete your account currently.
-
-## You [/api/v1/users/{user_id}]
+### Update your password [PATCH]
 
 + Parameters
 
-    + user_id (required, string, `simon-the-boss` ... The slug for your account.
-    
-### View your account information [GET]
+    + user_id (required, string, `"JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` for your account, simon-the-morley.
 
 + Request (application/json)
+    
+        { 
+            "user_id": "simon-morley"
+            "user":
+                {
+                    "current_password": "your-current-secure-passy",
+                    "password": "JCyK7Zwh0ON_ZOWso8Mhuw"
+                }
 
-    { "slug": "simon-the-boss" }
+        }
 
 + Response 200 (application/json)
 
-    +    body 
+        {
+            "message": "Success"
+            {
+                "current_password": "your-current-secure-passy",
+                "password": "JCyK7Zwh0ON_ZOWso8Mhuw"
+            }
+        }
 
-            {}
-            
+
+
 # Group Versions
 
 You can access the change history for both your Boxes and Locations using the Versions API. Versioning allows you to rollback where you've made mistakes and also check who's updated a setting. You'll see the username of the person Whodunnit.
