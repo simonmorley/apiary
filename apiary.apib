@@ -5142,6 +5142,26 @@ Get grouped / aggregated stats about the technologies in use in your networks.
                 }
             }
 
+# Group Users
+
+Update your own preferences and settings. We have some non-restful routes for such things as password changes. See below.
+
+##Allowed HTTPs requests:
+
+- `GET` - Retrieves your account details
+- `PATCH` - Restore a version
+
+You cannot delete your account currently.
+
+## You [/api/v1/users/{user_id}]
+
++ Parameters
+
+    + user_id (required, string, `simon-the-boss` ... The slug for your account.
+
+### View your account information [GET]
+
+
 # Group Versions
 
 You can access the change history for both your Boxes and Locations using the Versions API. Versioning allows you to rollback where you've made mistakes and also check who's updated a setting. You'll see the username of the person Whodunnit.
