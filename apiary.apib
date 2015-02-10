@@ -1506,7 +1506,7 @@ Using this API, you can request copies of your invoices to be sent to your billi
 
     + Body
 
-## Email your invoices [/api/v1/invoices/email]
+## Email your invoices [/api/v1/invoices/email?{ids}]
 
 ### Emails Invoices [POST]
 
@@ -3032,7 +3032,7 @@ Summary stats of your network dwell times and stays including the counts, averag
                 }
             }            
 
-## Aggregated sessions, dwells and stays [/api/v1/metrics/{?aggs,location_ids,ap_macs,start,end,key}]
+## Aggregated sessions, dwells and stays [/api/v1/metrics/{?aggs,location_ids,start,end,key}]
 
 Aggregated summary data grouped by location_id. This provides a summary of dwell times for each invidivual location. Please use the locations api to determine full location information from the id. It is required you pass the search parameter "aggs" to use this end point. The key is equal to your location id
 
@@ -5204,7 +5204,9 @@ A resource within boxes. Enables / disables alerts for a specific box. Alerts ar
 
 + Response 200 (application/json)
 
-    { "message": "Success" }
+        {
+            "message": "Success"
+        }
 
 
 ## Update your account [/api/v1/users/{user_id}]
@@ -5605,4 +5607,53 @@ Webhooks notify your application when certain events happen. After three failure
 
     + id (required, string, `54da01fa49726f70e8500000`) ... ID of the webhook 
 
+
 + Request (application/json)
+
+        {   
+            "id": "54da01fa49726f70e8500000",
+        }
+
++ Response 200 (application/json)
+        
+        {
+            "user_id": 1,
+            "id": "54da01fa49726f70e8500000",
+            "url": "https://polkaspots.com/fancy-webhook",
+            "updated_at": 1423586447,
+            "alerting": null,
+            "alert_count": null,
+            "disabled": false,
+            "box": {
+                "created": true,
+                "offline": false,
+                "online": false,
+                "reset": true,
+                "transferred": true,
+                "removed": true,
+                "rebooted": true,
+                "upgraded": true
+            },
+            "admin": {
+                "created": true,
+                "removed": true,
+                "accepted": true
+            },
+            "sub": {
+                "created": false,
+                "invoice": true,
+                "cancel": false,
+                "updated": true,
+                "card": true,
+                "failed": true
+            },
+            "venue": {
+                "created": false,
+                "transferred": false,
+                "duplicated": true,
+                "new_client": true,
+                "new_guest": true,
+                "new_email": true,
+                "blocked_user": true
+            }
+        }
