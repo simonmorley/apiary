@@ -5685,7 +5685,6 @@ You must send a valid url - including https.
             }
         }
 
-
 ## Webhook item [/api/v1/webhooks/{id}]
 
 ### Display a specific webhook [GET]
@@ -5814,3 +5813,20 @@ You must send a valid url - including https.
                 "blocked_user": true
             }
         }
+
+### Delete a specific webhook [DELETE]
+
++ Parameters
+
+    + id (required, string, `54da01fa49726f70e8500000`) ... ID of the webhook 
+
+
++ Request (application/json)
+
+        {   
+            "id": "54da01fa49726f70e8500000",
+        }
+
++ Response (application/json)
+
+        { message: true }
