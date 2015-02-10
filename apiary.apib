@@ -5533,3 +5533,66 @@ Please note, creating a new walled garden will force all your boxes to reload th
         }
 
 + Response 204 (application/json)
+
+# Group Webhooks
+
+Webhooks notify your application when certain events happen. 
+
+##Allowed HTTPs requests:
+
+- `POST` - Creates or updates a resource
+- `PATCH` - Updates a resource
+- `GET` - Retrieves a resource or list of resources
+- `DELETE` - Delete a resource
+
+## Webhooks collection [/api/v1/webhooks]
+
+### List all Webhooks for your account [GET]
+
++ Request (application/json)
+
++ Response 200 (application/json)
+
+    + Body
+    
+            [{
+                "user_id": 1,
+                "id": "54da01fa49726f70e8500000",
+                "url": "https://polkaspots.com/fancy-webhook",
+                "updated_at": 1423586447,
+                "alerting": true,
+                "disabled": false,
+                "alert_count": 2,
+                "box": {
+                    "created": true,
+                    "offline": false,
+                    "online": false,
+                    "reset": true,
+                    "transferred": true,
+                    "removed": true,
+                    "rebooted": true,
+                    "upgraded": true
+                },
+                "admin": {
+                    "created": true,
+                    "removed": true,
+                    "accepted": true
+                },
+                "sub": {
+                    "created": false,
+                    "invoice": true,
+                    "cancel": false,
+                    "updated": true,
+                    "card": true,
+                    "failed": true
+                },
+                "venue": {
+                    "created": false,
+                    "transferred": false,
+                    "duplicated": true,
+                    "new_client": true,
+                    "new_guest": true,
+                    "new_email": true,
+                    "blocked_user": true
+                }
+            }]
