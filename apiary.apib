@@ -5536,7 +5536,7 @@ Please note, creating a new walled garden will force all your boxes to reload th
 
 # Group Webhooks
 
-Webhooks notify your application when certain events happen. 
+Webhooks notify your application when certain events happen. After three failures, the webhook will be marked as disabled and will no longer post data to your service. To rectify this, update the url with a working one.
 
 ##Allowed HTTPs requests:
 
@@ -5596,3 +5596,13 @@ Webhooks notify your application when certain events happen.
                     "blocked_user": true
                 }
             }]
+
+## Webhook item [/api/v1/webhooks/{id}]
+
+### Display a specific webhook [GET]
+
++ Parameters
+
+    + id (required, string, `54da01fa49726f70e8500000`) ... ID of the webhook 
+
++ Request (application/json)
