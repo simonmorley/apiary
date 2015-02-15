@@ -2118,7 +2118,9 @@ This job is processed in the background and you can't copy a location while ther
 
 ## Transfer a location [/location/{id}/transfer{?account_id}]
 
-Copy the location to another user.
+Copy the location to another user. If you transfer a location to a user with insufficient quota, the transfer will fail with a 422 error. Equally, a location can only be transferred if it's state is active.
+
+It's really important to note that transferring a location will remove all location users. The new owner will need to re-invite all the users they require to administer the location.
 
 + Parameters
 
