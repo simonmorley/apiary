@@ -3425,6 +3425,83 @@ Remember you can create up to 16 networks. We will respond with the network obje
 
 Represents the individual network. Please note, some fields are currently read only.
 
+### View a Network [GET]
+
++ Parameters
+
+    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + id (required, integer, `1`) ... ID of the network you wish to update.
+
++ Request (application/json)
+
+    + Headers
+    
+            Accept: application/json
+    
+    + Body
+    
+            {   
+                "location_id": "derby-council",
+                "id": 54ee7b1470353c2600
+            }
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "id": "54ee7b1470353c2600",
+                "network_name": "public",
+                "description": "Primary network",
+                "active": true,
+                "network_radio_mode": null,
+                "interface_ipaddr": "192.168.4.1",
+                "interface_netmask": "24",
+                "dhcp_start": 100,
+                "dhcp_end": 250,
+                "dhcp_lease": "12h",
+                "dhcp_limit": 100,
+                "captive_portal_url": "http://polkaspots.my-wifi.co/",
+                "captive_portal_port": 3990,
+                "captive_portal_uamsecret": "3a0e4927c8891d0704cfd006947eb8e3",
+                "captive_portal_allowed_hosts": "8.8.8.8,208.67.222.222,208.67.220.220",
+                "captive_portal_allowed_macs": "",
+                "captive_portal_walledgardens": null,
+                "content_filter": "Security",
+                "radius_host_1": "cluster-1.polkaspots.co",
+                "radius_host_2": "cluster-2.polkaspots.co",
+                "radius_secret_1": null,
+                "radius_secret_2": null,
+                "ssid": "PolkaSpots Supafly WiFi",
+                "encryption_type": "psk2",
+                "encryption_key": "superblue123",
+                "ssid_disabled": false,
+                "ssid_hidden": false,
+                "dhcp_enabled": true,
+                "dhcp_relay_on": true,
+                "config_type_bridge": false,
+                "bridge_to_switch_ports": false,
+                "make_part_of_lan": false,
+                "captive_portal_enabled": true,
+                "radius_8021x_host_1": null,
+                "radius_8021x_secret_1": null,
+                "radius_8021x_port_1": 1812,
+                "radius_8021x_host_2": null,
+                "radius_8021x_secret_2": null,
+                "radius_8021x_port_2": 1812,
+                "radius_8021x_interval": null,
+                "access_type": "open",
+                "captive_portal_ps": true,
+                "use_ps_radius": true,
+                "proxy_server_host": null,
+                "proxy_server_port": null,
+                "dns_1": "8.8.8.8",
+                "dns_2": "8.8.4.4",
+                "vlan_id": null,
+                "zone_ids": [],
+                "job_id": null
+            }
+
 ### Update a Network [GET]
 
 You have four options for content filtering / DNS. If you pass one of the three options with the content filter, your DNS settings will be overriden:
