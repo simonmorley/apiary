@@ -926,37 +926,65 @@ Returns the changeset for a box including the username of the person who made th
 
 
     + Body
+    
+            [
+                {
+                    "id": 102754,
+                    "event": "update",
+                    "whodunnit": null,
+                    "changeset": {
+                        "location_id": [
+                            119,
+                            2586
+                        ]
+                    },
+                    "created_at": 1424212334
+                },
+                {
+                    "id": 102738,
+                    "event": "update",
+                    "whodunnit": null,
+                    "changeset": {
+                        "address": [
+                            null,
+                            "62 Britton Street, London"
+                        ],
+                        "description": [
+                            null,
+                            "Box's House 2"
+                        ]
+                    },
+                    "created_at": 1424207213
+                }
+            ]
 
-        [
-            {
-                "id": 102754,
-                "event": "update",
-                "whodunnit": null,
-                "changeset": {
-                    "location_id": [
-                        119,
-                        2586
-                    ]
-                },
-                "created_at": 1424212334
-            },
-            {
-                "id": 102738,
-                "event": "update",
-                "whodunnit": null,
-                "changeset": {
-                    "address": [
-                        null,
-                        "62 Britton Street, London"
-                    ],
-                    "description": [
-                        null,
-                        "Box's House 2"
-                    ]
-                },
-                "created_at": 1424207213
-            }
-        ]
+## Box Payloads [/api/v1/boxes/{id}/payloads]
+
+Returns the payloads that have recently run on the box. You can set up a payload to run using the payloads api. Payloads can include linux commands, status requests etc. 
+
++ Parameters
+
+    + id (required, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` of the box to perform action with. Has example value.
+
+### List all payloads for a box [GET]
+
++ Request (application/json)
+
+            { "id": "JCyK7Zwh0ON_ZOWso8Mhuw" }
+
++ Response 200 (application/json)
+
+    + Body
+    
+            [
+                {
+                    "created_at": 1424207333,
+                    "body": "Some body of the payload here, truncated.",
+                    "type": "dmesg",
+                    "id": 2324,
+            
+                }
+            ]
 
 # Group Commands
 
