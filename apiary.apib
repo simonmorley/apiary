@@ -1844,12 +1844,66 @@ Returns a mini-list of your locations. Is good for search, cloning the logins, s
 
 + Response 200 (application/json)
 
-        [{
-            "location_name": "Derby - City Council",
-            "slug": "derby-city-council",
-            "unique_id": "7379871298798717"
-        }]
-
+    + Body
+    
+            [
+                {
+                    "id": 2614,
+                    "location_name": "Ski Center",
+                    "slug": "ski-center-8b71-407b-aeb0-fe875bbd3763",
+                    "network_name": "PolkaSpots",
+                    "location_address": null,
+                    "street": null,
+                    "phone1": null,
+                    "location_website": null,
+                    "location_type": null,
+                    "archived": false,
+                    "development_mode": "Production",
+                    "daily_limit": true,
+                    "created_at": 1425115597,
+                    "updated_at": 1425115597,
+                    "user_id": 3363,
+                    "lat": 52.0406,
+                    "lng": -0.759417,
+                    "summary": {
+                        "boxes_alerting": false,
+                        "boxes_count": 0,
+                        "total_sessions": "0",
+                        "total_downloads": 0,
+                        "connected_clients": 0,
+                        "plan": "Little Tony"
+                    }
+                },
+                {
+                    "id": 2613,
+                    "location_name": "Long Heights",
+                    "slug": "long-heights-4b15f473-e99f-4c18-9639-6106e4b3fd2b",
+                    "network_name": "PolkaSpots",
+                    "location_address": null,
+                    "street": null,
+                    "phone1": null,
+                    "location_website": null,
+                    "location_type": null,
+                    "archived": false,
+                    "development_mode": "Production",
+                    "daily_limit": true,
+                    "created_at": 1425049469,
+                    "updated_at": 1425049809,
+                    "user_id": 3362,
+                    "lat": 51.7242,
+                    "lng": -3.36022,
+                    "summary": {
+                        "boxes_alerting": false,
+                        "boxes_count": 0,
+                        "total_sessions": "0",
+                        "total_downloads": 0,
+                        "connected_clients": 0,
+                        "plan": "Little Tony"
+                    }
+                }
+            ]
+            
+            
 ## Create a location [/api/v1/locations{?location}]
 
 Default required params include:
