@@ -1423,12 +1423,27 @@ Any data transmission rates are in bytes.
             }
         }
 
-
 + Response 200 (application/json)
         
         client: {
 
         }
+
+## Disconnect a Client [/api/v1/locations/{location_id}/clients/{id}/logout]
+
+This will immediately disconnect the user from the hotspot, assuming they are actually logged in.
+
+### Disconnect a specific client [POST]
+
++ Parameters
+
+    + location_id (required, string, `le-gaff-wifi`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + id (required, string, `id-123`) ... Id of the client you want to view. Has example value.
+
++ Response 200 (application/json)
+
+    + Body
+            { message: 'Client has been disconnected' }
 
 ## List Box Clients [/api/v1/boxes/{box_id}/clients]
 
