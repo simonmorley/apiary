@@ -5287,6 +5287,192 @@ As you can see from the response, you can control the design and access types us
             ]
         }
 
+### Update a splash page [PATCH]
+
+Changes to the splash pages can be seen immediately. Changes to the speed limits, access types and white / blacklists require you to disconnect the end user first. If you want to add user to the blacklist, please update the splash page first then disconnect them using the Clients API. This way, they will be logged out and will not be able to login again.
+
++ Request (application/json)
+
+    + Headers
+    
+            Accept: application/json
+
++ Response (application/json)
+
+    + Body
+    
+        {
+            "splash_page": {
+                "unique_id": "36710012950163",
+                "active": true,
+                "location_id": 1813,
+                "networks": [
+                    "54efa7654c697a44b2030000"
+                ],
+                "primary_access_id": 1,
+                "secondary_access": false,
+                "secondary_access_id": null,
+                "design_id": 1,
+                "passwd_change_day": null,
+                "passwd_auto_gen": false,
+                "passwd_change_email": null,
+                "success_url": null,
+                "fb_use_ps": true,
+                "fb_app_id": null,
+                "fb_link": null,
+                "fb_login_on": true,
+                "g_login_on": true,
+                "li_login_on": false,
+                "li_api_key": null,
+                "g_api_key": null,
+                "g_use_ps": true,
+                "g_page_id": null,
+                "li_use_ps": true,
+                "g_redirect_to_page": true,
+                "fb_redirect_to_page": true,
+                "fb_checkin": true,
+                "backup_vouchers": false,
+                "fb_page_id": null,
+                "fb_msg": true,
+                "access_restrict": "none",
+                "access_restrict_period": "daily",
+                "access_restrict_mins": 60,
+                "access_restrict_down": 2048,
+                "access_restrict_up": 1024,
+                "whitelisted": null,
+                "blacklisted": null,
+                "available_days": null,
+                "available_start": "00:00",
+                "available_end": "00:00",
+                "auto_login": false,
+                "auto_login_timeout": 0,
+                "skip_user_registration": false,
+                "download_speed": 2048,
+                "upload_speed": 1024,
+                "session_timeout": 60,
+                "idle_timeout": 60,
+                "simultaneous_use": 25,
+                "allow_registration": false,
+                "password": "concerning",
+                "weight": 100,
+                "logo_file_name": null,
+                "background_image_name": "https://d247kqobagyqjh.cloudfront.net/api/file/plDFnqvSKWHGn5i6zUqw",
+                "location_image_name": null,
+                "location_image_name_svg": null,
+                "header_image_name": null,
+                "header_image_name_svg": null,
+                "header_image_type": 1,
+                "header_text": "Welcome to Stuff got real",
+                "info": "This is a generic page, get designing!",
+                "info_two": null,
+                "address": "12 Barry Lane",
+                "error_message_text": null,
+                "website": null,
+                "facebook_name": null,
+                "twitter_name": null,
+                "google_name": null,
+                "linkedin_name": null,
+                "instagram_name": null,
+                "pinterest_name": null,
+                "container_width": "850px",
+                "container_text_align": "center",
+                "body_background_colour": "#ffffff",
+                "heading_text_colour": "#000000",
+                "body_text_colour": "#333333",
+                "border_colour": "#cccccc",
+                "link_colour": "#2b68b6",
+                "container_colour": "#ffffff",
+                "button_colour": "#ffffff",
+                "header_colour": "#FFFFFF",
+                "error_colour": "#ED561B",
+                "container_transparency": 0.8,
+                "container_float": "center",
+                "container_inner_width": "100%",
+                "bg_dimension": "full",
+                "words_position": "right",
+                "logo_position": "left",
+                "font_family": "\"Helvetica Neue\", Arial, Helvetica, sans-serif",
+                "body_font_size": "12px",
+                "heading_text_size": "18px",
+                "heading_2_text_size": "12px",
+                "heading_2_text_colour": "#000000",
+                "heading_3_text_size": "12px",
+                "heading_3_text_colour": "#000000",
+                "btn_text": "Login Now",
+                "btn_font_size": "18px",
+                "btn_font_colour": "#000000",
+                "welcome_text": null,
+                "welcome_timeout": null,
+                "show_welcome": false,
+                "shop_active": true,
+                "remove_registration_link": false,
+                "newsletter_active": false,
+                "newsletter_type": null,
+                "newsletter_api_token": null,
+                "newsletter_list_id": null,
+                "forgot_password_link": true
+            },
+            "access_types": [
+                {
+                    "id": 1,
+                    "name": "Password",
+                    "description": null
+                },
+                {
+                    "id": 2,
+                    "name": "Vouchers",
+                    "description": null
+                },
+                {
+                    "id": 3,
+                    "name": "Clickthrough",
+                    "description": null
+                },
+                {
+                    "id": 6,
+                    "name": "Facebook",
+                    "description": null
+                },
+                {
+                    "id": 7,
+                    "name": "Social",
+                    "description": null
+                }
+            ],
+            "networks": [
+                {
+                    "id": "54f22eeb4c697a2055030000",
+                    "ssid": "Shit got real Wi-Fi"
+                },
+                {
+                    "id": "54f225844c697a2055000000",
+                    "ssid": "Shit got real Wi-Fi"
+                },
+                {
+                    "id": "54efa7654c697a44b2030000",
+                    "ssid": "Bridge"
+                }
+            ]
+        }
+
+### Delete a splash page [DELETE]
+
+Once you have done this, your users will no longer be able to view the page and will receive an error message instead unless you have created a new page. Users will NOT be disconnected and your boxes will not be synced.
+
++ Parameters
+
+    + location_id (required, string, `le-gaff`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + id (required, string, `54f346f57261693b3d000000`) ... ID of the zone to perform action with. Has example value.
+
++ Request (application/json)
+
+        {   
+            "location_id": "le-gaff",
+            "id": "54f346f57261693b3d000000",
+        }
+
++ Response 204 (application/json)
+
 # Group State Events
 
 These represent the state changes of the boxes. You generally see these occuring each minute although you will see a record of the device being rebooted, installing etc.
