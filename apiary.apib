@@ -5970,6 +5970,7 @@ This is a handy end-point which is often required when using Oauth. It provides 
 + Response 200 (application/json)
 
     + Body
+    
             {
                 "email": "bob@marley.com",
                 "username": "Big Chief",
@@ -6001,6 +6002,7 @@ If you want to cancel your account, you must use the Subscriptions API. You are 
 + Response 200 (application/json)
 
     + Body
+    
             {
                 "username": "Big Chief",
                 "email": "bob@marley.com",
@@ -6086,7 +6088,7 @@ If you want to cancel your account, you must use the Subscriptions API. You are 
 
 + Parameters
 
-    + id (required, string, `"bob-marley`) ... Slug `slug` for your account, simon-the-morley.
+    + id (required, string, `bob-marley`) ... Slug `slug` for your account, simon-the-morley.
 
 + Request (application/json)
     
@@ -6116,7 +6118,7 @@ Splash Page view are currently updated nightly.
 
 + Parameters
 
-    + id (required, string, `"bob-marley`) ... Slug `slug` for your account, simon-the-morley.
+    + id (required, string, `bob-marley`) ... Slug `slug` for your account, simon-the-morley.
 
 + Request (application/json)
     
@@ -6155,7 +6157,7 @@ Even your current session will be destroyed.
 
 + Parameters
 
-    + id (required, string, `"bob-marley`) ... Slug `slug` for your account, simon-the-morley.
+    + id (required, string, `bob-marley`) ... Slug `slug` for your account, simon-the-morley.
 
 + Request (application/json)
     
@@ -6183,9 +6185,11 @@ Webhooks that fail three times will be disabled. You will need to update the url
 
 ## Webhooks Collection [/api/v1/webhooks]
 
+
 + Response 200 (application/json)
             
     + Body
+    
             [
                 {
                     "user_id": 1,
@@ -6274,47 +6278,50 @@ You must send a valid url - including https.
 
 + Response 200 (application/json)
         
-        {
-            "user_id": 1,
-            "id": "54da01fa49726f70e8500000",
-            "url": "https://polkaspots.com/fancy-webhook",
-            "updated_at": 1423586447,
-            "alerting": null,
-            "alert_count": null,
-            "disabled": false,
-            "box": {
-                "created": true,
-                "offline": false,
-                "online": false,
-                "reset": true,
-                "transferred": true,
-                "removed": true,
-                "rebooted": true,
-                "upgraded": true
-            },
-            "admin": {
-                "created": true,
-                "removed": true,
-                "accepted": true
-            },
-            "sub": {
-                "created": false,
-                "invoice": true,
-                "cancel": false,
-                "updated": true,
-                "card": true,
-                "failed": true
-            },
-            "venue": {
-                "created": false,
-                "transferred": false,
-                "duplicated": true,
-                "new_client": true,
-                "new_guest": true,
-                "new_email": true,
-                "blocked_user": true
+
+    + Body
+    
+            {
+                "user_id": 1,
+                "id": "54da01fa49726f70e8500000",
+                "url": "https://polkaspots.com/fancy-webhook",
+                "updated_at": 1423586447,
+                "alerting": null,
+                "alert_count": null,
+                "disabled": false,
+                "box": {
+                    "created": true,
+                    "offline": false,
+                    "online": false,
+                    "reset": true,
+                    "transferred": true,
+                    "removed": true,
+                    "rebooted": true,
+                    "upgraded": true
+                },
+                "admin": {
+                    "created": true,
+                    "removed": true,
+                    "accepted": true
+                },
+                "sub": {
+                    "created": false,
+                    "invoice": true,
+                    "cancel": false,
+                    "updated": true,
+                    "card": true,
+                    "failed": true
+                },
+                "venue": {
+                    "created": false,
+                    "transferred": false,
+                    "duplicated": true,
+                    "new_client": true,
+                    "new_guest": true,
+                    "new_email": true,
+                    "blocked_user": true
+                }
             }
-        }
 
 ## Webhook item [/api/v1/webhooks/{id}]
 
@@ -6333,47 +6340,49 @@ You must send a valid url - including https.
 
 + Response 200 (application/json)
         
-        {
-            "user_id": 1,
-            "id": "54da01fa49726f70e8500000",
-            "url": "https://polkaspots.com/fancy-webhook",
-            "updated_at": 1423586447,
-            "alerting": null,
-            "alert_count": null,
-            "disabled": false,
-            "box": {
-                "created": true,
-                "offline": false,
-                "online": false,
-                "reset": true,
-                "transferred": true,
-                "removed": true,
-                "rebooted": true,
-                "upgraded": true
-            },
-            "admin": {
-                "created": true,
-                "removed": true,
-                "accepted": true
-            },
-            "sub": {
-                "created": false,
-                "invoice": true,
-                "cancel": false,
-                "updated": true,
-                "card": true,
-                "failed": true
-            },
-            "venue": {
-                "created": false,
-                "transferred": false,
-                "duplicated": true,
-                "new_client": true,
-                "new_guest": true,
-                "new_email": true,
-                "blocked_user": true
+    + Body
+    
+            {
+                "user_id": 1,
+                "id": "54da01fa49726f70e8500000",
+                "url": "https://polkaspots.com/fancy-webhook",
+                "updated_at": 1423586447,
+                "alerting": null,
+                "alert_count": null,
+                "disabled": false,
+                "box": {
+                    "created": true,
+                    "offline": false,
+                    "online": false,
+                    "reset": true,
+                    "transferred": true,
+                    "removed": true,
+                    "rebooted": true,
+                    "upgraded": true
+                },
+                "admin": {
+                    "created": true,
+                    "removed": true,
+                    "accepted": true
+                },
+                "sub": {
+                    "created": false,
+                    "invoice": true,
+                    "cancel": false,
+                    "updated": true,
+                    "card": true,
+                    "failed": true
+                },
+                "venue": {
+                    "created": false,
+                    "transferred": false,
+                    "duplicated": true,
+                    "new_client": true,
+                    "new_guest": true,
+                    "new_email": true,
+                    "blocked_user": true
+                }
             }
-        }
 
 ### Update a specific webhook [PATCH]
 
@@ -6403,47 +6412,49 @@ You must send a valid url - including https.
 
 + Response 200 (application/json)
         
-        {
-            "user_id": 1,
-            "id": "54da01fa49726f70e8500000",
-            "url": "https://polkaspots.com/new-webhook",
-            "updated_at": 1423586447,
-            "alerting": null,
-            "alert_count": null,
-            "disabled": false,
-            "box": {
-                "created": true,
-                "offline": false,
-                "online": false,
-                "reset": true,
-                "transferred": true,
-                "removed": true,
-                "rebooted": true,
-                "upgraded": true
-            },
-            "admin": {
-                "created": true,
-                "removed": true,
-                "accepted": true
-            },
-            "sub": {
-                "created": false,
-                "invoice": true,
-                "cancel": false,
-                "updated": true,
-                "card": true,
-                "failed": true
-            },
-            "venue": {
-                "created": false,
-                "transferred": false,
-                "duplicated": true,
-                "new_client": true,
-                "new_guest": true,
-                "new_email": true,
-                "blocked_user": true
+    + Body
+    
+            {
+                "user_id": 1,
+                "id": "54da01fa49726f70e8500000",
+                "url": "https://polkaspots.com/new-webhook",
+                "updated_at": 1423586447,
+                "alerting": null,
+                "alert_count": null,
+                "disabled": false,
+                "box": {
+                    "created": true,
+                    "offline": false,
+                    "online": false,
+                    "reset": true,
+                    "transferred": true,
+                    "removed": true,
+                    "rebooted": true,
+                    "upgraded": true
+                },
+                "admin": {
+                    "created": true,
+                    "removed": true,
+                    "accepted": true
+                },
+                "sub": {
+                    "created": false,
+                    "invoice": true,
+                    "cancel": false,
+                    "updated": true,
+                    "card": true,
+                    "failed": true
+                },
+                "venue": {
+                    "created": false,
+                    "transferred": false,
+                    "duplicated": true,
+                    "new_client": true,
+                    "new_guest": true,
+                    "new_email": true,
+                    "blocked_user": true
+                }
             }
-        }
 
 ### Delete a specific webhook [DELETE]
 
@@ -6460,7 +6471,12 @@ You must send a valid url - including https.
 
 + Response (application/json)
 
-        { message: true }
+    + Body
+    
+            { 
+                message: true
+            }
+
 
 # Group Zones
 
