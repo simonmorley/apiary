@@ -799,7 +799,7 @@ Read the box#create section of this documentation to discover how to add boxes.
 
         { status: "unprocessable_entity" }
 
-## Update the alerts for a box [/api/v1/boxes/{box_id}/alerts{?alerts}]
+## Box alerts [/api/v1/boxes/{box_id}/alerts{?alerts}]
 
 ### Enable / Disable alerts for a box [PATCH]
 
@@ -847,6 +847,7 @@ minute, hour, day, week, month, year.
 
 
     + Body
+    
             {
                 "heartbeats": {
                     "1425210780": 1,
@@ -2645,7 +2646,7 @@ Summary stats of your network dwell times and stays including the counts, averag
                 }
             }            
 
-## Aggregated sessions, dwells and stays [/api/v1/metrics/{?aggs,location_ids,start,end,key}]
+## Aggregated sessions, dwells and stays [/api/v1/metrics/{?aggs,location_ids,start,end,key,ap_macs}]
 
 Aggregated summary data grouped by location_id. This provides a summary of dwell times for each invidivual location. Please use the locations api to determine full location information from the id. It is required you pass the search parameter "aggs" to use this end point. The key is equal to your location id
 
