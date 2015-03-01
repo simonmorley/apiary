@@ -5457,7 +5457,7 @@ Changes to the splash pages can be seen immediately. Changes to the speed limits
 
 ### Delete a splash page [DELETE]
 
-Once you have done this, your users will no longer be able to view the page and will receive an error message instead unless you have created a new page. Users will NOT be disconnected and your boxes will not be synced.
+Once you have done this, your users will no longer be able to view the page and will receive an error message instead unless you have created a new one. Users will NOT be disconnected and your boxes will not be synced.
 
 + Parameters
 
@@ -5947,24 +5947,35 @@ Get grouped / aggregated stats about the technologies in use in your networks.
 
 # Group Users
 
-A resource within boxes. Enables / disables alerts for a specific box. Alerts are currently sent by email and can be overridden in your account / settings.
+To view, update, modify your account information including billing, card details etc.
+
+Currently we do not allow you to update your credit card details via the API. You can only do this via the CT main dashboard. Why? We use Stripe to process our payments and their JS api to process your card. Because of this, we do not see your credit card details - instead we exchange them for a token.
+
+You cannot delete your account at the moment.
 
 - `GET` - Gets your account details
 - `PATCH` - Updates a resource
 
-## Account Details [/api/v1/users/{user_id}]
+## Account Details [/api/v1/me]
 
-### Fetch account details [GET]
+This is a handy end-point which is often required when using Oauth. It provides only some account information for yourself.
 
-+ Parameters
-
-    + user_id (required, string, `"JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` for your account, simon-the-morley.
+### Fetch high-level details [GET]
 
 + Response 200 (application/json)
 
-        {
-            "message": "Success"
-        }
+    + Body
+            {
+                "email": "bob@marley.com",
+                "username": "Big Chief",
+                "accountId": "xxx",
+                "createdAt": 1358467200000,
+                "slug": "bob-marley",
+                "key": "xxx",
+                "gravatar": "xxx"
+            }
+
+## Get user object [/api/v1/users/{user_id}]
 
 
 ## Update your account [/api/v1/users/{user_id}]
@@ -6021,134 +6032,8 @@ A resource within boxes. Enables / disables alerts for a specific box. Alerts ar
             { "message" : "Success!" }
 
 
-# Group Versions
 
-You can access the change history for both your Boxes and Locations using the Versions API. Versioning allows you to rollback where you've made mistakes and also check who's updated a setting. You'll see the username of the person Whodunnit.
-
-This is destructive and can cause problems.
-
-##Allowed HTTPs requests:
-
-- `GET` - Retrieves a resource or list of resources
-- `POST` - Restore a version
-
-## Versions Collection [/api/v1/boxes/{box_id}/versions]
-
-(Also available on /locations/{location_id})
-
-+ Parameters
-
-    + box_id (required, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` of the Box to perform action on.
-
-### List all Versions for a Box [GET]
-
-+ Request (application/json)
-
-            { "box_id": "JCyK7Zwh0ON_ZOWso8Mhuw" }
-
-+ Response 200 (application/json)
-
-    +    body 
-
-            [{
-                "id": 67808,
-                "event": "update",
-                "whodunnit": "bob-marley",
-                "changeset": {
-                    "is_monitored": [
-                        false,
-                        true
-                    ],
-                    "slug": [
-                        "JCyK7Zwh0ON_ZOWso8Mhuw",
-                        null
-                    ]
-                },
-                "created_at": "September 30 2014 23:39:34"
-            },
-            {
-                "id": 67747,
-                "event": "update",
-                "whodunnit": "bob-marley",
-                "changeset": {
-                    "wan_proto": [
-                        "static",
-                        "dhcp"
-                    ]
-                },
-                "created_at": "September 29 2014 16:55:05"
-            },
-            {
-                "id": 67744,
-                "event": "update",
-                "whodunnit": "bob-marley",
-                "changeset": {
-                    "wan_proto": [
-                        "pppoe",
-                        "static"
-                    ],
-                    "wan_ipaddr": [
-                        "",
-                        "192.168.1.1"
-                    ],
-                    "wan_gateway": [
-                        "",
-                        "192.168.1.1"
-                    ]
-                },
-                "created_at": "September 29 2014 16:23:53"
-            },
-            {
-                "id": 64266,
-                "event": "update",
-                "whodunnit": null,
-                "changeset": {
-                    "address": [
-                        null,
-                        "62 Britton Street, EC1M 5UY, United Kingdom"
-                    ],
-                    "description": [
-                        null,
-                        "A new box"
-                    ]
-                },
-                "created_at": "March 29 2014 10:55:48"
-            }]
-        
- 
-## Revert [/api/v1/boxes/{box_id}/versions/{id}]
-
-(Also available on /locations/{location_id})
-
-+ Parameters
-
-    + box_id (required, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` of the Box to perform action on.
-    + id (required, integer, `123`) ... ID of the version you want to rollback to.
-
-### Revert / Rollback to a Version [GET]
-
-Occasionally you will get a 422 error when rolling back to a previous version. This is usually caused by the introduction of a validation on the model, in this case the Box. 
-
-For example, if you rollback to an old version is a NULL WAN_MTU, you will receive an error as a validation for a blank WAN_MTU has been introduced.
-
-If you experience this, you must rollback to a later version or manually apply the changes.
-
-+ Request (application/json)
-
-            { "box_id": "JCyK7Zwh0ON_ZOWso8Mhuw", "id": 123 }
-
-+ Response 200 (application/json)
-
-    +    body 
-            
-            { "response": "Succesfully rolledback to version 123" }
-            
-+ Response 422 (application/json)
-
-    +    body 
-            
-            { "response": "There was an error rolling back to version 123" }
-            
+# Group Webhooks
 
 ### Create a new webhook [POST]
 
