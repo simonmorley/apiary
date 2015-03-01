@@ -1217,45 +1217,24 @@ Commands are just templates. Payloads are the way to run them.
 
 # Group Clients
 
-Clients related resources of the **Clients API**. Events
+Clients related resources of the **Clients API**. Clients are devices that have connected to your wireless networks. They can be on any SSID, using the captive portal or not.
 
 Clients, when nested in the box or location resources. When using the box resource, the list shows connected and disconnected clients for box.
 
+You can therefore get an overview of your clients and drill down per box.
+
+You may also send the standard filter parameters we use:
+
+- Interval
+- Distance
+- Start
+- End
+
+These filter parameters allow you to view clients over a pre-set period. 
+
 **The clients API is only available for boxes which use the PolkaSpots Firmware.**
 
-## List Connected Clients [/api/v1/boxes/{box_id}/clients]
-
-List all currently connected clients on a box.
-
-### List all connected clients [GET]
-
-+ Parameters
-
-    + box_id (required, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` of the Box to perform action with. Has example value.
-
-+ Response 200 (application/json)
-
-    + Body
-
-            [{
-                "mac": "1C-65-9D-83-XX-XX",
-                "ip": "192.168.4.12",
-                "status": "pass",
-                "session_id": "52a7738100000005",
-                "username": "happy_cheese_x-15196",
-                "maxinput": "1/604800",
-                "maxoutput": "36302156/0"
-            },
-                "mac": "XX-XX-XX-XX-XX-XX",
-                "ip": "192.168.4.16",
-                "status": "pass",
-                "session_id": "9827349872323",
-                "username": "happy-online-12312",
-                "maxinput": "1/70400",
-                "maxoutput": "302156/0"
-            ]
-
-## List Location Clients [/api/v1/locations/{location_id}/clients]
+## List Location Clients [/api/v1/locations/{location_id}/clients{?distance,interval}]
 
 List all clients that have visited you location. Includes the currently connected clients.
 
@@ -1264,6 +1243,8 @@ List all clients that have visited you location. Includes the currently connecte
 + Parameters
 
     + location_id (required, string, `le-gaff-wifi`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + distance (required, integer, `30`) ... The distance with which you want to filter your results.
+    + interval (required, string, `hour`) ... Filter interval - group your results in convenient categories.
 
 + Response 200 (application/json)
 
@@ -1444,6 +1425,103 @@ Any data transmission rates are in bytes.
         client: {
 
         }
+
+## List Box Clients [/api/v1/boxes/{box_id}/clients]
+
+List all clients on a specific box.
+
+### List all connected clients [GET]
+
++ Parameters
+
+    + box_id (required, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` of the Box to perform action with. Has example value.
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "info": {
+                    "location_id": 2586,
+                    "connected": 1,
+                    "children": 2,
+                    "last_updated": 1424995575
+                },
+                "clients": [
+                    {
+                        "id": "54ec84e261695540ea0000",
+                        "online": false,
+                        "ip": "",
+                        "snr_alert": false,
+                        "ap_mac": "xx-A4-3C-02-37-xx",
+                        "authenticated": true,
+                        "authorized": true,
+                        "client_mac": "xx-EE-BD-9B-A3-xx",
+                        "created_at": 1424786669,
+                        "updated_at": 1424788881,
+                        "device_name": "",
+                        "name": null,
+                        "manufacturer": "HTC Corporation",
+                        "snr": 67,
+                        "ssid": "AND-PU",
+                        "ssids": [
+                            "AND-PU"
+                        ],
+                        "firstseen": 1424786645,
+                        "lastseen": 1424788805,
+                        "txbytes": 829660,
+                        "rxbytes": 923485,
+                        "slug": "7gsv8dtigf08dcsy-sbw",
+                        "description": "Le Gaff 9",
+                        "splash_connected": false,
+                        "splash_status": "dnat",
+                        "splash_session": "54ec84ad00000001",
+                        "splash_username": null,
+                        "splash_usernames": null,
+                        "splash_in": 0,
+                        "splash_out": 0
+                    },
+                    {
+                        "id": "54eef3726169119b4c0400",
+                        "online": true,
+                        "ip": "192.168.210.45",
+                        "snr_alert": true,
+                        "ap_mac": "xx-A4-3C-02-37-xx",
+                        "authenticated": true,
+                        "authorized": true,
+                        "client_mac": "xx-72-40-59-D4-xx",
+                        "created_at": 1424945984,
+                        "updated_at": 1424995575,
+                        "device_name": "iPhone",
+                        "name": null,
+                        "manufacturer": "Apple",
+                        "snr": 11,
+                        "ssid": "AND-PR",
+                        "ssids": [
+                            "AND-PR"
+                        ],
+                        "firstseen": 1424945946,
+                        "lastseen": 1424972345,
+                        "txbytes": 582678185,
+                        "rxbytes": 531322605,
+                        "slug": "7gsv8dtiebgf08dcsy-sbw",
+                        "description": "Le Gaff 9",
+                        "splash_connected": false,
+                        "splash_status": null,
+                        "splash_session": null,
+                        "splash_username": null,
+                        "splash_usernames": null,
+                        "splash_in": 0,
+                        "splash_out": 0
+                    }
+                ],
+                "unique_aps": [
+                    {
+                        "ap_mac": "xx-A4-3C-02-37-xx",
+                        "description": "Le Gaff 9 "
+                    }
+                ]
+            }
 
 # Group Events
 
