@@ -3395,6 +3395,32 @@ After you create, update or destroy a network, we will try and sync your boxes. 
                 }
             ]
 
+### Create a new network [GET]
+
+In order to create a network, there are a required set of parameters including the SSID or network name, an encryption_key if you set the network to password protected. Encryption can be open or PSK2. If you're using radius authentication 802.1x, we will set this attribute for you.
+
+Remember you can create up to 16 networks. We will respond with the network object.
+
++ Request (application/json)
+
+    + Headers
+    
+            Accept: application/json
+    
+    + Body
+    
+            {   
+                "location_id": "derby-council",
+                "id": 54ee7b1470353c2600,
+                network: {
+                    description: 'A new description',
+                    ssid: 'PolkaSpots WiFi',
+                    encryption_type: 'psk2',
+                    encryption_key: 'SecurePassy123'
+                }
+            }
+
+
 ## Network Object [/api/v1/locations/{location_id}/networks/{id}]
 
 Represents the individual network. Please note, some fields are currently read only.
@@ -3412,6 +3438,7 @@ These are case insenstive.
 
 If you want to set your own DNS, please pass 'None' as a content filtering parameter. If you set the DNS to nil values, they will be reset to 8.8.8.8 and 8.8.4.4
 
+If you want to cancel the sync p
 + Parameters
 
     + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
@@ -3427,7 +3454,10 @@ If you want to set your own DNS, please pass 'None' as a content filtering param
     
             {   
                 "location_id": "derby-council",
-                "id": 123
+                "id": 54ee7b1470353c2600,
+                network: {
+                    description: 'A new description'
+                }
             }
 
 + Response 200 (application/json)
@@ -3435,93 +3465,59 @@ If you want to set your own DNS, please pass 'None' as a content filtering param
     + Body
     
             {
-                "100": null,
-                "id": 610,
-                "location_id": 1759,
-                "description": "Primary network",
-                "position": 1,
+                "id": "54ee7b1470353c2600",
                 "network_name": "public",
+                "description": "Primary network",
                 "active": true,
                 "network_radio_mode": null,
-                "switch_ports_enabled": null,
-                "vlan_type": null,
-                "interface_id": null,
-                "interface_name": "tun0",
-                "interface_type": null,
-                "interface_proto": null,
                 "interface_ipaddr": "192.168.4.1",
                 "interface_netmask": "24",
-                "vlan_id": null,
                 "dhcp_start": 100,
                 "dhcp_end": 250,
-                "dhcp_lease": null,
-                "12h": null,
-                "dhcp_limit": null,
-                "captive_portal_url": null,
-                "captive_portal_network": "192.168.4.0",
-                "captive_portal_netmask": "255.255.255.0",
-                "captive_portal_gateway": "192.168.4.1",
+                "dhcp_lease": "12h",
+                "dhcp_limit": 100,
+                "captive_portal_url": "http://polkaspots.my-wifi.co/",
                 "captive_portal_port": 3990,
-                "captive_portal_dns_1": "208.67.222.222",
-                "captive_portal_dns_2": "208.67.220.220",
-                "captive_portal_uamsecret": "52ea627a236c7043adc36bbd463d6bf4",
+                "captive_portal_uamsecret": "3a0e4927c8891d0704cfd006947eb8e3",
                 "captive_portal_allowed_hosts": "8.8.8.8,208.67.222.222,208.67.220.220",
-                "captive_portal_allowed_macs": null,
-                "content_filter": "Off"
-                "radius_host_1": "rad-1.polkaspots.com",
-                "radius_host_2": "rad-1.polkaspots.com",
-                "radius_secret_1": "3543f9e498e8",
-                "radius_secret_2": "3543f9e498e8",
-                "ssid": "PolkaSpots Supafly Wi-Fi",
-                "radio_channel_0": "auto",
-                "radio_channel_1": "auto",
-                "encryption_type": "none",
-                "encryption_key": null,
+                "captive_portal_allowed_macs": "",
+                "captive_portal_walledgardens": null,
+                "content_filter": "Security",
+                "radius_host_1": "cluster-1.polkaspots.co",
+                "radius_host_2": "cluster-2.polkaspots.co",
+                "radius_secret_1": null,
+                "radius_secret_2": null,
+                "ssid": "PolkaSpots Supafly WiFi",
+                "encryption_type": "psk2",
+                "encryption_key": "superblue123",
                 "ssid_disabled": false,
                 "ssid_hidden": false,
-                "created_at": "2014-09-17T01:09:45.000+01:00",
-                "updated_at": "2014-09-17T01:09:45.000+01:00",
                 "dhcp_enabled": true,
                 "dhcp_relay_on": true,
                 "config_type_bridge": false,
-                "bridge_to_switch_ports": false
+                "bridge_to_switch_ports": false,
+                "make_part_of_lan": false,
+                "captive_portal_enabled": true,
+                "radius_8021x_host_1": null,
+                "radius_8021x_secret_1": null,
+                "radius_8021x_port_1": 1812,
+                "radius_8021x_host_2": null,
+                "radius_8021x_secret_2": null,
+                "radius_8021x_port_2": 1812,
+                "radius_8021x_interval": null,
+                "access_type": "open",
+                "captive_portal_ps": true,
+                "use_ps_radius": true,
+                "proxy_server_host": null,
+                "proxy_server_port": null,
+                "dns_1": "8.8.8.8",
+                "dns_2": "8.8.4.4",
+                "vlan_id": null,
+                "zone_ids": [],
+                "job_id": null
             }
+            
 
-## Network Update [/api/v1/locations/{location_id}/networks/{id}{?location_network}]
-
-### Update a Network [PATCH]
-
-**CAUSES SYNC**
-
-Please note, updating a network will force all your boxes to reload their networks. This *will* log users off.
-
-+ Parameters
-
-    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
-    + id (required, integer, `1`) ... ID of the network you wish to update.
-    + location_network (required, object) ... A full list of parameters you wish to update.
-
-+ Request (application/json)
-
-        {   
-            "location_id": "derby-council",
-            "id": 123,
-            "location_network: {
-                "ssid_hidden": true,
-                "config_type_bridge": false,
-                "radio_channel_0": "auto"
-            }
-        }
-
-+ Response 200 (application/json)
-
-        {
-            "id": 7,
-            "location_id": 1636,
-            "url": "google.com",
-            "created_at": "2014-09-17T00:15:57.239+01:00",
-            "updated_at": "2014-09-17T00:15:57.239+01:00"
-        }
 
 # Group Payloads
 
