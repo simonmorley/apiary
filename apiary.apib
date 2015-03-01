@@ -3395,7 +3395,7 @@ After you create, update or destroy a network, we will try and sync your boxes. 
                 }
             ]
 
-### Create a new network [GET]
+### Create a new network [POST]
 
 In order to create a network, there are a required set of parameters including the SSID or network name, an encryption_key if you set the network to password protected. Encryption can be open or PSK2. If you're using radius authentication 802.1x, we will set this attribute for you.
 
@@ -5725,7 +5725,29 @@ You must send a valid url - including https.
 
         { message: true }
 
-# Group Accounts
+# Group Zones
+
+Zones allow you to offer different SSIDs, or networks, on different boxes. For example, you can offer a public SSID on your lobby boxes and then add a private SSID if the box is installed in your office.
+
+Moreover, you can even offer different splash pages per zone. This allows you to offer different types of access in different areas. For example, you might want to offer clickthrough access to guests in the lobby and voucher access upstairs. Consult the Splash Page API for more information.
+
+## Zones Collection [/api/v1/locations/{location_id}/networks]
+
++ Parameters
+
+    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+
+### List all Zones [GET]
+
++ Request (application/json)
+
+    + Headers
+    
+            Accept: application/json
+
+    + Body
+    
+# Group Miscellaneous
 
 Accounts related resources of the **Accounts API**
 
