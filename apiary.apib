@@ -1745,7 +1745,9 @@ The location id is the numeric id of the location you want to invite them to. Pl
 
 You must wrap the request in the invite object.
 
-## Display an invoice [/api/v1/invites/{?email,location_ids}]
+Please also note that invitations are not available on all plans.
+
+## Create an invite [/api/v1/invites/{?email,location_ids}]
 
 + Request (application/json)
 
@@ -1778,6 +1780,45 @@ You must wrap the request in the invite object.
                 "name": "Bob Marley",
                 "id": "54f310674c697a9f2e010000"
             }
+
+### Revoke an invitation [DELETE]
+
+If you want to cancel or remove a user from a location, send a delete request with their email and optionally location_ids.
+
+## Revoke an invite [/api/v1/invites/{?email,location_ids}]
+
++ Request (application/json)
+
+        "invite":
+            
+            {
+                email: 'email-of-person@gmail.com',
+                location_ids: '1,2,3,4'
+            }    
+    
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "parent_id": null,
+                "email": "bob@marley.com",
+                "created_at": 1425215591,
+                "expires": 1425474791,
+                "state": "pending",
+                "location_ids": [
+                    "46",
+                    "53",
+                    "119",
+                    "1778",
+                    "1806",
+                    "1813",
+                    "1816"
+                ],
+                "name": "Bob Marley",
+                "id": "54f310674c697a9f2e010000"
+            }
+
 
 # Group Invoices
 
