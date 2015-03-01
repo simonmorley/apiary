@@ -1352,9 +1352,9 @@ List all clients that have visited you location. Includes the currently connecte
                 ]
             }
 
-## Viewing a Client [/api/v1/locations/{location_id}/clients/{id}]
+## Client Object [/api/v1/locations/{location_id}/clients/{id}]
 
-List all clients that have visited you location. Includes the currently connected clients.
+View and manage individual clients. You can currently only update the name and notes.
 
 Any data transmission rates are in bytes.
 
@@ -1419,6 +1419,31 @@ Any data transmission rates are in bytes.
                 "rxpackets": 2200936,
                 "updated_at": 1424995575
             }
+
+### Updating a specific client [PATCH]
+
++ Parameters
+
+    + location_id (required, string, `le-gaff-wifi`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + id (required, string, `id-123`) ... Id of the client you want to view. Has example value.
+
++ Request (application/json)
+
+        {   
+            "id": 54eef340726169119b4c0400,
+            client: {
+                name: 'Simon',
+                notes: 'Is here a lot these days'
+            
+            }
+        }
+
+
++ Response 200 (application/json)
+        
+        client: {
+
+        }
 
 # Group Events
 
