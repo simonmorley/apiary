@@ -2101,9 +2101,17 @@ Update your location settings and information.
 
 ### Remove a Location [DELETE]
 
- TBC
+You can remove a location as long as it doesn't have any session information associated with it. This is important in order to be compliant with the law if you're offering public access.
 
-+ Response 204
++ Parameters
+
+    + id (required, string, `le-gaff`) ... Slug / ID of the location you want to delete.
+
++ Request (application/json)
+
+        {   "id": 'le-gaff-123'  }
+
++ Response 204 (application/json)
 
 ## Location Statistics [/location/{id}/stats]
 
