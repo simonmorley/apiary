@@ -2220,17 +2220,16 @@ A single Location's statistical objects
                 
 ## Get Location Users [/location/{id}/users]
 
-Get a list of all the users who have access to your location. The output will include four keys - **owner, admins, invites, watchers**
+Get a list of all the users who have access to your location. The output will include four keys - **owner, admins, invites**
 
 - The owners object contains details of the primary user's plan.
 - The admin users object contains all users will admin rights to the location.
 - The invites object represents and invitations which have been sent recently.
-- The watchers object containts non-admin, read only users for the location
 
 + Parameters
     + id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
 
-### Get a list of location users and watchers [GET]
+### Get a list of location users [GET]
 
 + Request (application/json)
 
@@ -2267,14 +2266,6 @@ Get a list of all the users who have access to your location. The output will in
                             "username": "Steve Jobs",
                             "unique_id": "82052203",
                             "slug": "steve-jobs"
-                        }
-                    ],
-                    "watchers": [
-                        {
-                            "name": "Simon Stanley",
-                            "token": "e598110e2109b4189d61d3629aec21f5b69c5b375659d8401f9f4274367ecb50",
-                            "id": 103,
-                            "unique_id": "HKJHSH86"
                         }
                     ],
                     "owner": {
