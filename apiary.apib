@@ -4032,6 +4032,8 @@ Remember, creating a speedtest only creates a temporary result. Permanent result
 
 # Group Sessions
 
+Depreciated. This will be removed soon.
+
 Sessions API provides information on the individual logins per location, box, etc.
 
 Supports:
@@ -4816,6 +4818,45 @@ Returns the aggregated manufacturers in your network.
                 ]
             }
 
+# Group Splash Pages
+
+If you want to offer public Wi-Fi, splash pages are the most secure way to do so currently. We have already integrated our own splash page service but you can use this API to build your own.
+
+Splash Page views count towards your monthly quota. You can view your quota using the Quota API.
+
+You can have multiple splash pages per network and location. This allows you to offer different types of access:
+
+- Periodic - different splash pages depending on the time
+- Usage based -  control how much people are using
+- Zones - each zone can have different splash pages
+- Data - allow per MB users
+- Weight - when one page has expired, roll back to another
+- Tag based - for their party APs, offer access based on SSID / VLAN / tag
+
+For more details on how the splash rules work, please consult with the standard documentation. It can get confusing when you mess up zones, networks etc. as the pages will not display.
+
+Please also note that whitelists / blacklists and availablity is cached for 60 seconds. If you swap from periodic to unlimited, for example, you will notice a slight delay before you can view the page again.
+
+For details on adding social logins, please also read the standard docs. We currently support Facebook, LinkedIn and Google+ for the splash pages. LinkedIn require you to use https.
+
+## Splash Pages Collection [/api/v1/locations/{location_id}/splash_pages]
+
++ Parameters
+
+    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+
+### List all Splash Pages [GET]
+
++ Request (application/json)
+
+    + Headers
+    
+            Accept: application/json
+
++ Response (application/json)
+
+    + Body
+    
 # Group State Events
 
 These represent the state changes of the boxes. You generally see these occuring each minute although you will see a record of the device being rebooted, installing etc.
@@ -5774,7 +5815,7 @@ You need to resync the networks in order for the changes to propagate to the box
 
 ### Create new zone [POST]
 
-When you're creating a zone, you can choose to add networks and boxes. If you dont send either a boxes or network object with an array of ids, we will create an empty zone.
+When you're creating a zone, you can choose to add networks and boxes. If you don't send either a boxes or network object with an array of ids, we will create an empty zone. You can then add to it later.
 
 + Request (application/json)
 
@@ -5928,7 +5969,7 @@ If you just want to update the name, do not send the zones / boxes params.
                     },
                     {
                         "box_id": 3167,
-                        "mac": "xx-A4-3C-7C-FC-xx"
+                        "mac": "xx-xx-3C-7C-FC-xx"
                     }
                 ]
             }
