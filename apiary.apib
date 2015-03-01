@@ -963,8 +963,6 @@ Commands are just templates. Payloads are the way to run them.
                 }
             ]
             
-## Commands Create [/api/v1/commands{?command}]
-
 ### Create a command [POST]
 
 + Request 200 (application/json)
@@ -995,10 +993,9 @@ Commands are just templates. Payloads are the way to run them.
             }
         
 
-## Command Details [/api/v1/commands/:id]
+## Command Object [/api/v1/commands/{id}]
 
-### Update a Command [GET]
-
+### View a Command [GET]
 
 + Parameters
 
@@ -1021,8 +1018,6 @@ Commands are just templates. Payloads are the way to run them.
                 "only_polkaspots": true
             }
         
-## Command Update [/api/v1/commands/:id{?command}]
-
 ### Update a Command [PATCH]
 
 + Parameters
@@ -1055,8 +1050,6 @@ Commands are just templates. Payloads are the way to run them.
                 "only_polkaspots": true
             }
         
-
-## Command Delete [/api/v1/commands/{id}]
 
 ### Delete a Command [DELETE]
 
