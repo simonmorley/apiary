@@ -1,7 +1,7 @@
 FORMAT: 1A
 HOST: https://api.polkaspots.com
 
-# PolkaSpots API Documentation for Cucumber Tony (Alpha).
+# PolkaSpots API Documentation for Cucumber Tony (Beta).
 
 ##I'm doing it with Cucumber Tony's API, are you?##
 
@@ -1302,7 +1302,10 @@ This will immediately disconnect the user from the hotspot, assuming they are ac
 + Response 200 (application/json)
 
     + Body
-            { message: 'Client has been disconnected' }
+    
+            { 
+                message: 'Client has been disconnected'
+            }
 
 ## List Box Clients [/api/v1/boxes/{box_id}/clients]
 
@@ -5951,7 +5954,9 @@ To view, update, modify your account information including billing, card details
 
 Currently we do not allow you to update your credit card details via the API. You can only do this via the CT main dashboard. Why? We use Stripe to process our payments and their JS api to process your card. Because of this, we do not see your credit card details - instead we exchange them for a token.
 
-You cannot delete your account at the moment.
+For more information about events, alerts and other things you can update via the Users API, please consult the standard documentation as this lists the rules and regulations, parameters and options in more detail.
+
+You cannot delete your account.
 
 - `GET` - Gets your account details
 - `PATCH` - Updates a resource
@@ -6166,8 +6171,62 @@ Even your current session will be destroyed.
                 "message": "Ok"
             }
 
-
 # Group Webhooks
+
+Webhooks are a beta feature and will not work on all accounts yet. Webhooks will notify your own application when an event is triggered. 
+
+For example, CT can notify you when a user signs in or when an invitation is accepted.
+
+We will post the data to you as JSON and expect an HTTPS, encrypted end-point. If you're not using SSL, well, shame on you.
+
+## Webhooks Collection [/api/v1/webhooks]
+
++ Response (application/json)
+            
+    + Body
+            [
+                {
+                    "user_id": 1,
+                    "id": "54f35b034c697a9f2e020000",
+                    "url": "https://polkaspots.com/callback.json",
+                    "updated_at": 1425234691,
+                    "alerting": null,
+                    "alert_count": null,
+                    "disabled": false,
+                    "box": {
+                        "created": true,
+                        "offline": true,
+                        "online": true,
+                        "reset": true,
+                        "transferred": true,
+                        "removed": true,
+                        "rebooted": true,
+                        "upgraded": true
+                    },
+                    "admin": {
+                        "created": true,
+                        "removed": true,
+                        "accepted": true
+                    },
+                    "sub": {
+                        "created": true,
+                        "invoice": true,
+                        "cancel": true,
+                        "updated": true,
+                        "card": true,
+                        "failed": true
+                    },
+                    "venue": {
+                        "created": true,
+                        "transferred": true,
+                        "duplicated": true,
+                        "new_client": true,
+                        "new_guest": true,
+                        "new_email": true,
+                        "blocked_user": true
+                    }
+                }
+            ]
 
 ### Create a new webhook [POST]
 
