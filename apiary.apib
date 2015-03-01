@@ -481,7 +481,7 @@ There's some helpers included too which may help you build a beautiful portal. W
 + Response 204 (application/json)
 
 
-## Box Create [/api/v1/boxes{?calledstationid,description,location_id,disovery}]
+## Box Create [/api/v1/boxes{?calledstationid,description,location_id,discovery}]
 
 ### Create a Box [POST]
 
@@ -583,6 +583,8 @@ If you update any fields related to the network settings, you will reboot your b
 - CHANNEL_5
 - PPOE_USERNAME
 
+For a full list of available params, please see the box#show section above. Some fields are read-only and will be ignored. These might include things like the last_heartbeat.
+
 + Parameters
 
     + id (required, integer, `1`) ... ID of the blacklisted device you wish to update.
@@ -621,7 +623,6 @@ If you update any fields related to the network settings, you will reboot your b
                     "pppoe_password": "pass"
                 }
         }
-
 
 + Response 200 (application/json)
 
