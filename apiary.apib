@@ -1781,11 +1781,50 @@ Please also note that invitations are not available on all plans.
                 "id": "54f310674c697a9f2e010000"
             }
 
+### View an invitation [GET]
+
+If you want to cancel or remove a user from a location, send a delete request with their email and optionally location_ids.
+
+## Revoke an invite [/api/v1/invites/{id}]
+
+
++ Response 200 (application/json)
+
+    + Body
+        
+        {
+            "invite": {
+                "email": "bob@marley.com",
+                "name": "Bob Marley",
+                "state": "pending",
+                "timestamp": 1425215591,
+                "expires": 1425474791
+            },
+            "locations": [
+                {
+                    "location_name": "Long Buckby Railway Station (LBK)",
+                    "slug": "long-buckby-railway-station-lbk"
+                },
+                {
+                    "location_name": "The Jerusalem Tavern",
+                    "slug": "the-jerusalem-tavern-109d6397-24e9-493e-9645-36d24def92db"
+                },
+                {
+                    "location_name": "Simon",
+                    "slug": "simon-53dbb7bd-eac7-4860-8dfb-9490d4433ecc"
+                },
+                {
+                    "location_name": "Stuff got real",
+                    "slug": "stuff-got-real-four-1c94fe7e-6823-46c4-8425-160c63c00aea"
+                }
+            ]
+        }
+
 ### Revoke an invitation [DELETE]
 
 If you want to cancel or remove a user from a location, send a delete request with their email and optionally location_ids.
 
-## Revoke an invite [/api/v1/invites/{?email,location_ids}]
+## Revoke an invite [/api/v1/invites/{?email}]
 
 + Request (application/json)
 
