@@ -1221,7 +1221,9 @@ Clients related resources of the **Clients API**. Clients are devices that have 
 
 Clients, when nested in the box or location resources. When using the box resource, the list shows connected and disconnected clients for box.
 
-You can therefore get an overview of your clients and drill down per box.
+You can therefore get an overview of your clients and drill down per box. Clients are updated every minute and will include details on the client device and also data rates.
+
+There is also a signal warning boolean field which you can use to diagnose client problems. An SNR lower than 15 is considered problematic.
 
 You may also send the standard filter parameters we use:
 
@@ -1231,6 +1233,8 @@ You may also send the standard filter parameters we use:
 - End
 
 These filter parameters allow you to view clients over a pre-set period. 
+
+For clients which are currently connected via the captive portal, you can also disconnect them using the same API. Details are found below.
 
 **The clients API is only available for boxes which use the PolkaSpots Firmware.**
 
