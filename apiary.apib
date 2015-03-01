@@ -1219,14 +1219,9 @@ Commands are just templates. Payloads are the way to run them.
 
 Clients related resources of the **Clients API**. Events
 
-Clients, when nested in the box resource, represent the currently connected clients on box. This is for public access only right now.
+Clients, when nested in the box or location resources. When using the box resource, the list shows connected and disconnected clients for box.
 
 **The clients API is only available for boxes which use the PolkaSpots Firmware.**
-
-The status parameter will be one of two values:
-
-- pass - The user is logged in a browsing
-- dnat - The user is connected to the WiFi but not logged in.
 
 ## List Connected Clients [/api/v1/boxes/{box_id}/clients]
 
@@ -1260,29 +1255,171 @@ List all currently connected clients on a box.
                 "maxoutput": "302156/0"
             ]
 
-## Disconnect a client [/api/v1/boxes/{box_id}/clients/{id}]
+## List Location Clients [/api/v1/locations/{location_id}/clients]
 
-You can log a user out using the CLients API quickly.
+List all clients that have visited you location. Includes the currently connected clients.
 
-### Disconnect a user [POST]
+### List all connected clients [GET]
 
 + Parameters
 
-    + box_id (required, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` of the Box to perform action with. Has example value.
-    + id (required, string, `52a7738100000005`) ... ID `id` the session ID of the client you wish to disconnect.
+    + location_id (required, string, `le-gaff-wifi`) ... Slug `slug` of the Location to perform action with. Has example value.
 
 + Response 200 (application/json)
 
     + Body
-        
-            { "message": "The client has been disconnected." }
-        
-+ Response 422 (application/json)
+
+            {
+                "info": {
+                    "location_id": 2586,
+                    "connected": 1,
+                    "children": 2,
+                    "last_updated": 1424995575
+                },
+                "clients": [
+                    {
+                        "id": "54eced7261695540ea0000",
+                        "online": false,
+                        "ip": "",
+                        "snr_alert": false,
+                        "ap_mac": "xx-xx-3C-02-37-26",
+                        "authenticated": true,
+                        "authorized": true,
+                        "client_mac": "xx-xx-BD-9B-A3-45",
+                        "created_at": 1424786669,
+                        "updated_at": 1424788881,
+                        "device_name": "",
+                        "name": null,
+                        "manufacturer": "HTC Corporation",
+                        "snr": 67,
+                        "ssid": "AND-PU",
+                        "ssids": [
+                            "AND-PU"
+                        ],
+                        "firstseen": 1424786645,
+                        "lastseen": 1424788805,
+                        "txbytes": 829660,
+                        "rxbytes": 923485,
+                        "slug": "7gsv8dtiebgf08dcsy-sbw",
+                        "description": "Le Gaff 9",
+                        "splash_connected": false,
+                        "splash_status": "dnat",
+                        "splash_session": "54ec84ad00000001",
+                        "splash_username": null,
+                        "splash_usernames": null,
+                        "splash_in": 0,
+                        "splash_out": 0
+                    },
+                    {
+                        "id": "54efxx340726169119b4c0400",
+                        "online": true,
+                        "ip": "192.168.210.45",
+                        "snr_alert": true,
+                        "ap_mac": "xx-xx-3C-02-37-26",
+                        "authenticated": true,
+                        "authorized": true,
+                        "client_mac": "xx-xx-40-59-D4-C5",
+                        "created_at": 1424945984,
+                        "updated_at": 1424995575,
+                        "device_name": "iPhone",
+                        "name": null,
+                        "manufacturer": "Apple",
+                        "snr": 11,
+                        "ssid": "AND-PR",
+                        "ssids": [
+                            "AND-PR"
+                        ],
+                        "firstseen": 1424945946,
+                        "lastseen": 1424972345,
+                        "txbytes": 582678185,
+                        "rxbytes": 531322605,
+                        "slug": "7gsvdtiebgf08dcsy-sbw",
+                        "description": "Le Gaff 9",
+                        "splash_connected": false,
+                        "splash_status": null,
+                        "splash_session": null,
+                        "splash_username": null,
+                        "splash_usernames": null,
+                        "splash_in": 0,
+                        "splash_out": 0
+                    }
+                ],
+                "unique_aps": [
+                    {
+                        "ap_mac": "xx-A4-3C-02-37-26",
+                        "description": "Le Gaff 9 "
+                    }
+                ]
+            }
+
+## Viewing a Client [/api/v1/locations/{location_id}/clients/{id}]
+
+List all clients that have visited you location. Includes the currently connected clients.
+
+Any data transmission rates are in bytes.
+
+### Viewing a specific client [GET]
+
++ Parameters
+
+    + location_id (required, string, `le-gaff-wifi`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + id (required, string, `id-123`) ... Id of the client you want to view. Has example value.
+
++ Response 200 (application/json)
 
     + Body
-        
-            { "message": "There was a problem disconnecting the client." }
-        
+
+            {
+                "id": "54eef340726169119b4c0400",
+                "online": true,
+                "ap_mac": "xx-A4-3C-02-37-xx",
+                "ip": "192.168.210.45",
+                "authenticated": true,
+                "authorized": true,
+                "capabilities": "5Ghz",
+                "channel": 36,
+                "client_mac": "xx-xx-40-59-D4-xx",
+                "ap_description": "Le Gaff 9",
+                "slug": "7xx8dtiebgf08dcsy-sbw",
+                "device_name": "iPhone",
+                "notes": null,
+                "labels": "red",
+                "name": null,
+                "firstseen": 1424945946,
+                "lastseen": 1424972345,
+                "inactivetime": "229220ms",
+                "interface": "wlan0-1",
+                "location_id": 2586,
+                "manufacturer": "Apple",
+                "noise": -95,
+                "signal": "-84",
+                "signalavg": "-83",
+                "snr": 11,
+                "snr_alert": true,
+                "splash_connected": false,
+                "splash_status": null,
+                "splash_username": null,
+                "splash_usernames": null,
+                "splash_session": null,
+                "splash_in": 0,
+                "splash_out": 0,
+                "ssid": "AND-PR",
+                "ssids": [
+                    "AND-PR"
+                ],
+                "txbps": 96,
+                "txbitrate": "7.2MBit/s",
+                "rxbitrate": "24.0MBit/s",
+                "txbytes": 582678185,
+                "rxbytes": 531322605,
+                "txbytes_session": 27452,
+                "rxbytes_session": 29336,
+                "txfailed": 1152,
+                "txpackets": 1170831,
+                "rxpackets": 2200936,
+                "updated_at": 1424995575
+            }
+
 # Group Events
 
 Events related resources of the **Events API**. Events run at predefined intervals on your location's boxes.
