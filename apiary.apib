@@ -3438,7 +3438,12 @@ These are case insenstive.
 
 If you want to set your own DNS, please pass 'None' as a content filtering parameter. If you set the DNS to nil values, they will be reset to 8.8.8.8 and 8.8.4.4
 
-If you want to cancel the sync p
+If you want to cancel the sync after you create the network (or update it), you can send the param cancel_sync=true. Equally, if you want to resync all your devices, you can send the parameter sync=true.
+
+Sync takes please 60 seconds after you create / destroy a network to give you time to cancel things. However, if you request a sync, this will take place immediately.
+
+You can tell if there is a current job waiting to be processed by checking the job_id param. If this is set, a job will be run in less than 60s.
+
 + Parameters
 
     + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
