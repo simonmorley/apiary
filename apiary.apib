@@ -67,127 +67,6 @@ Create a unique password for your captive portal. This doesn't save anything, it
 
             {"password": "random-passy"}
 
-# Group Blacklists
-
-Related resources of the **Blacklists API**. Blacklists belong to a location. You cannot currently list all your blacklists without specifying a location id (slug).
-
-You can either create, read, update and destroy your blacklists via the blacklists API or you may update with a location.
-
-##Allowed HTTPs requests:
-
-- `POST` - Creates or updates a resource
-- `PATCH` - Updates a resource
-- `GET` - Retrieves a resource or list of resources
-- `DELETE` - Delete a resource
-
-## Blacklists Collection [/api/v1/locations/{location_id}/blacklists]
-
-+ Parameters
-
-    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
-
-### List all Blacklists [GET]
-
-+ Request (application/json)
-
-            { "location_id": "derby-council" }
-
-+ Response 200 (application/json)
-
-
-    + Body
-    
-            [{
-                "id": 57,
-                "mac": "11-22-33-44-55-66",
-                "expires_at": null,
-                "created_at": "September 17 2014 13:49:43"
-            },
-            {
-                "id": 58,
-                "mac": "22-33-22-11-33-44",
-                "expires_at": "September 20 2014 00:00:00",
-                "created_at": "September 17 2014 13:49:43"
-            }]
-    
-## Blacklists Create [/api/v1/locations/{location_id}/blacklists{?blacklisted,mac}]
-
-### Create a Blacklisted device [POST]
-
-There's two ways to create a blacklisted device, either using this API or the location's API as a nested resource.
-
-+ Parameters
-
-    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
-    + blacklisted (required, params, `mac and optional expired_at`) ... Mac address of the device to block and an optional expires_at date.
-
-+ Request (application/json)
-
-        {
-            "blacklisted": 
-                {
-                    "mac": "00:22:22:11:22:33",
-                    "expires_at": "September 20 2015 00:00:00"
-                }
-        }
-
-+ Response 200 (application/json)
-
-        {
-            "id": 7,
-            "mac": "00:22:22:11:22:33",
-            "expires_at": "2015-09-20T00:00:00.239+01:00",
-            "updated_at": "2014-09-17T00:15:57.239+01:00"
-        }
-
-## Update a blacklist [/api/v1/locations/{location_id}/blacklists/{id}?blacklisted={params}]
-
-### Update a blacklisted device [PATCH]
-
-+ Parameters
-
-    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
-    + id (required, integer, `1`) ... ID of the blacklisted device you wish to update.
-    + params (required, object, `1`) ... Mac and optional expiration date
-
-
-+ Request (application/json)
-
-        {   
-            "location_id": "derby-council",
-            "id": 7,
-            "blacklisted: {
-                "mac": "00:22:22:11:22:33"
-            }
-        }
-
-+ Response 200 (application/json)
-
-        {
-            "id": 7,
-            "mac": "00:22:22:11:22:33",
-            "expires_at": "2015-09-20T00:00:00.239+01:00",
-            "updated_at": "2014-09-17T00:15:57.239+01:00"
-        }
-
-## Blacklisted Delete [/api/v1/locations/{location_id}/blacklisted/{id}]
-
-### Delete a blacklisted device [DELETE]
-
-+ Parameters
-
-    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
-    + id (required, integer, `1`) ... ID of the blacklisted device you wish to delete.
-
-+ Request (application/json)
-
-        {   
-            "location_id": "derby-council",
-            "id": 123,
-        }
-
-+ Response 204 (application/json)
-
 # Group Boxes
 
 Boxes belong to locations and whilst you can read, update, destroy and perform other non-restful actions on a box (or boxes), you are not permitted to create a box without specifiying a location_id with the parameters.
@@ -1219,9 +1098,9 @@ Commands are just templates. Payloads are the way to run them.
 
 Clients related resources of the **Clients API**. Clients are devices that have connected to your wireless networks. They can be on any SSID, using the captive portal or not.
 
-Clients, when nested in the box or location resources. When using the box resource, the list shows connected and disconnected clients for box.
+Clients, when nested in the box or location resources. When using the box resource, the list shows connected and disconnected clients for box. You can therefore get an overview of your clients and drill down per box. Clients are updated every minute and will include details on the client device and also data rates.
 
-You can therefore get an overview of your clients and drill down per box. Clients are updated every minute and will include details on the client device and also data rates.
+If you require, you can also pass a Box mac address or addresses with the request to filter by box.
 
 There is also a signal warning boolean field which you can use to diagnose client problems. An SNR lower than 15 is considered problematic.
 
@@ -1231,6 +1110,7 @@ You may also send the standard filter parameters we use:
 - Distance
 - Start
 - End
+- AP Mac
 
 These filter parameters allow you to view clients over a pre-set period. 
 
@@ -1238,7 +1118,7 @@ For clients which are currently connected via the captive portal, you can also d
 
 **The clients API is only available for boxes which use the PolkaSpots Firmware.**
 
-## List Location Clients [/api/v1/locations/{location_id}/clients{?distance,interval}]
+## List Location Clients [/api/v1/locations/{location_id}/clients{?distance,interval,ap_mac}]
 
 List all clients that have visited you location. Includes the currently connected clients.
 
@@ -1249,6 +1129,7 @@ List all clients that have visited you location. Includes the currently connecte
     + location_id (required, string, `le-gaff-wifi`) ... Slug `slug` of the Location to perform action with. Has example value.
     + distance (required, integer, `30`) ... The distance with which you want to filter your results.
     + interval (required, string, `hour`) ... Filter interval - group your results in convenient categories.
+    + ap_mac (required, string, `11:22:33:44:55:66`) ... Filter your results by mac of your boxes.
 
 + Response 200 (application/json)
 
