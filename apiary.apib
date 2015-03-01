@@ -5975,16 +5975,82 @@ This is a handy end-point which is often required when using Oauth. It provides 
                 "gravatar": "xxx"
             }
 
-## Get user object [/api/v1/users/{user_id}]
+## User Object [/api/v1/users/{id}]
 
+You are only permitted to get your own account details and you will need the slug for your account. If you don't know this, use the /me/ end-point which will provide this for you.
 
-## Update your account [/api/v1/users/{user_id}]
+Whilst we store the last4 numbers of your credit-card, we do not store the rest.
+
+The user object contains details of your plan for good measure.
+
+### Full user details [GET]
+
++ Parameters
+
+    + id (required, string, `"bob-marley`) ... Slug `slug` for your account, bob-marley.
+
++ Response 200 (application/json)
+
+    + Body
+            {
+                "username": "Big Chief",
+                "email": "bob@marley.com",
+                "company_name": "PolkaSpots Limted",
+                "mobile_number": "0777777777",
+                "timezone": "London",
+                "country": "United Kingdom",
+                "account_id": "AXXXXX",
+                "last_sign_in_at": "2015-02-28T14:35:16.000+00:00",
+                "last_sign_in_ip": "42.26.113.177",
+                "plan": {
+                    "plan_name": "Uncle Tony",
+                    "plan_description": "For hotels, offices and small franchises",
+                    "location_count": 30,
+                    "hotspot_count": 30,
+                    "voucher_count": 5000,
+                    "email_support": true,
+                    "phone_support": false,
+                    "billing_period": "monthly",
+                    "daily_sessions": 1000,
+                    "shop_allowed": false,
+                    "enterprise_plan": false,
+                    "max_location_users": 5,
+                    "plan_price": "36.0",
+                    "max_networks": 2,
+                    "id": null
+                },
+                "slug": "bob-marley",
+                "credit_card_last4": null,
+                "credit_card_type": null,
+                "credit_card_country": "UK",
+                "credit_card_expiry": "",
+                "billing_email": null,
+                "billing_address": null,
+                "billing_city": null,
+                "billing_postcode": null,
+                "billing_name": null,
+                "tax_rate": "20.0",
+                "subscribing": false,
+                "cancelling": false,
+                "alerts": true,
+                "alerts_window_start": "400",
+                "alerts_window_end": "2330",
+                "alerts_window_days": [
+                    "5",
+                    "6"
+                ],
+                "max_daily_state_events": 10,
+                "admin_users": 5,
+                "invites_remaining": 5,
+                "referral_url": "http://bit.ly/xx",
+                "stripe_id": "123"
+            }
 
 ### Update your account [PATCH]
 
 + Parameters
 
-    + user_id (required, string, `"JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` for your account, simon-the-morley.
+    + id (required, string, `bob-marley`) ... Slug `slug` for your account, bob-marley.
 
 + Request (application/json)
     
