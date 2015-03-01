@@ -3401,6 +3401,8 @@ In order to create a network, there are a required set of parameters including t
 
 Remember you can create up to 16 networks. We will respond with the network object.
 
+For information how to add this network to a zone, please see the Zones API.
+
 + Request (application/json)
 
     + Headers
@@ -3419,7 +3421,6 @@ Remember you can create up to 16 networks. We will respond with the network obje
                     encryption_key: 'SecurePassy123'
                 }
             }
-
 
 ## Network Object [/api/v1/locations/{location_id}/networks/{id}]
 
@@ -3599,7 +3600,23 @@ You can tell if there is a current job waiting to be processed by checking the j
                 "job_id": null
             }
             
+### Delete a network [DELETE]
 
+After deleting a network, we will send a sync event to the boxes to save the changes. This will occur 60 seconds after the network was deleted and will cause the users to disconnect.
+
++ Parameters
+
+    + location_id (required, string, `le-gaff`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + id (required, string, `7281919179187298712`) ... ID of the network to perform action with. Has example value.
+
++ Request (application/json)
+
+        {   
+            "location_id": "derby-council",
+            "id": "7281919179187298712",
+        }
+
++ Response 204 (application/json)
 
 # Group Payloads
 
