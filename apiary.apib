@@ -2529,35 +2529,6 @@ Whilst it's ok to send the whole location object back when updating the firewall
 
             { "message": "You have updated Derby Council" } 
 
-## Test your newsletter settings [/api/v1/locations/{location_id}/newsletter_test]
-
-After you've created your newsletter, we can programatically test if your credentials are correct.
-
-This entails calling either the MailChimp or Campaign Monitor APIs and adding an email. If it's a success, we'll post the results back with the location parameter **newsletter_test_results**. This will be one of the following:
-
-- NULL - test not run or key expired
-- true - test passed, everything is ok
-- false - test failed, please try new credentials
-
-### Test your newsletter settings [POST]
-
-+ Parameters
-
-    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
-
-+ Request (application/json)
-    
-        {
-            "id": "your-id",
-        }
-
-+ Response 200 (application/json)
-
-        {
-            "message": "Successfully created payload to test newsletter.",
-            "status": "processing"
-        }
-        
 # Group Jobs
 
 Jobs, or events as they should really be named, are things that happen to your boxes. Jobs include device heartbeats, payload commands and more. 
