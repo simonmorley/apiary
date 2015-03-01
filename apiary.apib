@@ -5981,7 +5981,11 @@ You are only permitted to get your own account details and you will need the slu
 
 Whilst we store the last4 numbers of your credit-card, we do not store the rest.
 
-The user object contains details of your plan for good measure.
+The user object contains details of your plan for good measure. 
+
+You can pass a string of emails to the billing_email field. Doing so will send an email to each person.
+
+If you want to cancel your account, you must use the Subscriptions API. You are unable to delete your account.
 
 ### Full user details [GET]
 
@@ -6071,18 +6075,18 @@ The user object contains details of your plan for good measure.
             { "message" : "Success!" }
 
 
-## Update your password [/api/v1/users/{user_id}/password{?user}]
+## Update your password [/api/v1/users/{id}/password{?user}]
 
 ### Update your password [PATCH]
 
 + Parameters
 
-    + user_id (required, string, `"JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` for your account, simon-the-morley.
+    + id (required, string, `"bob-marley`) ... Slug `slug` for your account, simon-the-morley.
 
 + Request (application/json)
     
         { 
-            "user_id": "simon-morley"
+            "user_id": "bob-marley"
             "user":
                 {
                     "current_password": "your-current-secure-passy",
@@ -6097,6 +6101,70 @@ The user object contains details of your plan for good measure.
 
             { "message" : "Success!" }
 
+## View usage quotas [/api/v1/users/{id}/quotas]
+
+If you want to see your current usage, including the splash page views or number of locations. You can use this API. 
+
+Splash Page view are currently updated nightly.
+
+### View you usage quotas [GET]
+
++ Parameters
+
+    + id (required, string, `"bob-marley`) ... Slug `slug` for your account, simon-the-morley.
+
++ Request (application/json)
+    
+        { 
+            "id": "bob-marley"
+        }
+
++ Response 200 (application/json)
+
+    +    body 
+
+            {
+                "quota": {
+                    "locations": 100,
+                    "admins": 5,
+                    "boxes": 100,
+                    "vouchers": 5000,
+                    "splash_views": 150,
+                    "free": false
+                },
+                "usage": {
+                    "locations": 10,
+                    "admins": 0,
+                    "boxes": 52,
+                    "splash_views": 1164
+                }
+            }
+
+## Logout all sessions [/api/v1/users/{id}/logout_all]
+
+For security reasons, we will allow you to destroy all current sessions using your account. You might like to use this if you've lost your phone etc.
+
+Even your current session will be destroyed.
+
+### Logout all sessions [POST]
+
++ Parameters
+
+    + id (required, string, `"bob-marley`) ... Slug `slug` for your account, simon-the-morley.
+
++ Request (application/json)
+    
+        { 
+            "id": "bob-marley"
+        }
+
++ Response 200 (application/json)
+
+    +    body 
+
+            {
+                "message": "Ok"
+            }
 
 
 # Group Webhooks
