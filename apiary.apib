@@ -1747,7 +1747,12 @@ You must wrap the request in the invite object.
 
 Please also note that invitations are not available on all plans.
 
-## Create an invite [/api/v1/invites/{?email,location_ids}]
+## Create an invite [/api/v1/invites/{email,location_ids}]
+
++ Parameters
+
+    + email (required, string, `bob@marley.com`) ... Email of the person you want to invite..
+    + location_ids (optional, string, `1,2,3`) ... The numeric ids of the locations you want to invite the user to manage.
 
 + Request (application/json)
 
@@ -1785,7 +1790,11 @@ Please also note that invitations are not available on all plans.
 
 If you want to cancel or remove a user from a location, send a delete request with their email and optionally location_ids.
 
-## Revoke an invite [/api/v1/invites/{id}]
+## View an invite [/api/v1/invites/{id}]
+
++ Parameters
+
+    + id (required, string, `123`) ... ID of the invite you want to view. Has example value.
 
 
 + Response 200 (application/json)
