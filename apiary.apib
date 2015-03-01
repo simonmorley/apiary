@@ -406,7 +406,6 @@ There's some helpers included too which may help you build a beautiful portal. W
 
 + Response 200 (application/json)
 
-
     + Body
 
             {
@@ -1688,6 +1687,98 @@ Please note, creating a new walled garden will force all your boxes to reload th
         }
 
 + Response 204 (application/json)
+
+# Group Invites
+
+Invites related resources of the **Invites API**
+
+This facilitates the addition and removal of admin users. Admin users are able to alter location settings, view reports etc.
+
+## Invites Collection [/api/v1/invites]
+
+You can retrieve a list of all your invites, including the state of the invitation.
+
+When you invite a new user to CT, they will receive an email confirmation and are required to create a new account. Invitations will expire in three days for security reasons.
+
+After they have accepted the invitation, they will be automatically added to locations you invited them to.
+
+You may invite users to all your locations or a single location.
+
+### List all invites [GET]
+
++ Request (application/json)
+
+    + Header
+
+            Accept: application/json
+
++ Response 200 (application/json)
+
+
+    + Body
+    
+            [
+                {
+                    "parent_id": null,
+                    "email": "bob@marley.com",
+                    "created_at": 1425215591,
+                    "expires": 1425474791,
+                    "state": "pending",
+                    "location_ids": [
+                        "46",
+                        "53",
+                        "119",
+                        "1778",
+                        "1806",
+                        "1813",
+                        "1816"
+                    ],
+                    "name": "Bob Marley",
+                    "id": "54f310674c697a9f2e010000"
+                }
+            ]
+
+### Create an invitation [POST]
+
+This is how you invite a user to administer a location or locations. If you do not pass any location_ids, we will assume you want to invite them to all your locations. 
+
+The location id is the numeric id of the location you want to invite them to. Please use the Location API to obtain these.
+
+You must wrap the request in the invite object.
+
+## Display an invoice [/api/v1/invites/{?email,location_ids}]
+
++ Request (application/json)
+
+        "invite":
+            
+            {
+                email: 'email-of-person@gmail.com',
+                location_ids: '1,2,3,4'
+            }    
+    
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "parent_id": null,
+                "email": "bob@marley.com",
+                "created_at": 1425215591,
+                "expires": 1425474791,
+                "state": "pending",
+                "location_ids": [
+                    "46",
+                    "53",
+                    "119",
+                    "1778",
+                    "1806",
+                    "1813",
+                    "1816"
+                ],
+                "name": "Bob Marley",
+                "id": "54f310674c697a9f2e010000"
+            }
 
 # Group Invoices
 
