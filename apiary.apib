@@ -825,9 +825,16 @@ Read the box#create section of this documentation to discover how to add boxes.
 
 ## Box Heartbeats [/api/v1/boxes/{id}/heartbeats]
 
+Returns a list of heartbeats for the box by minute. Please note, this end-point returns a lot of data and can sometimes be a little slow. Results are therefore cached and update every 5 minutes.
+
+You can adjust the interval and distance too. The distance must be numeric and the interval can be one of the following:
+
+minute, hour, day, week, month, year.
+
 + Parameters
 
     + id (required, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` of the box to perform action with. Has example value.
+    + interval (optional, string, `hour`) ... Filter the results by interval.
 
 ### List all heartbeats for a box [GET]
 
@@ -840,6 +847,26 @@ Read the box#create section of this documentation to discover how to add boxes.
 
     + Body
 
+{
+    "heartbeats": {
+        "1425210780": 1,
+        "1425210720": 1,
+        "1425210660": 0,
+        "1425210600": 1,
+        "1425210540": 1,
+        "1425210480": 1,
+        "1425210420": 1,
+        "1425210360": 1,
+        "1425210300": 0,
+        "1425210240": 1,
+        "1425193440": 1,
+        "1425193380": 1,
+        "1425193320": 0,
+        "1425186840": 1,
+        "1425186780": 1,
+        "1425186720": 1
+    }
+}
 
 # Group Commands
 
