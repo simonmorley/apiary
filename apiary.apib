@@ -990,16 +990,20 @@ Returns the payloads that have recently run on the box. You can set up a payload
 
 Commands reference the **Commands API**. 
 
-Commands can be applied directly to a box (see Payloads API) or events. There's two types of events:
+Commands are predefined templates of payloads which can be applied directly to a box. There's two types of events:
 
 1. Available to schedule
 2. PolkaSpots only
 
-PolkaSpots only commands should not be run on non-ps boxes. For example, you cannot schedule a Xirrus to reboot using the paylods.
+PolkaSpots only commands should not be run on non-ps boxes. For example, you cannot schedule a Xirrus to reboot using the paylods API.
 
 However, you may disable the Xirrus login screens. PolkaSpots only commands are suitable for boxes running the Stinky Panda firmware only.
 
 Only PolkaSpots staff are able to create, modify and delete commands at the moment.
+
+You will run a command on a box using the payloads API.
+
+Commands are just templates. Payloads are the way to run them.
 
 ##Allowed HTTPs requests:
 
