@@ -493,7 +493,7 @@ If you are using the magic auto-discovery tool, please use the detect API end po
     + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
     + calledstationid (required, string, `mac`) ... Mac address of the box.
     + description (required, text, `Upstairs, in the loft`) ... A description of the box.
-    + discovery (optional, boolean, true) ... Send this parameter in to override the above options and automatically add discovered boxes.
+    + discovery (optional, boolean, `true`) ... Send this parameter in to override the above options and automatically add discovered boxes.
 
 + Request (application/json)
 
@@ -825,7 +825,7 @@ Read the box#create section of this documentation to discover how to add boxes.
 
 ## Box Heartbeats [/api/v1/boxes/{id}/heartbeats]
 
-Returns a list of heartbeats for the box by minute. Please note, this end-point returns a lot of data and can sometimes be a little slow. Results are therefore cached and update every 5 minutes.
+Returns a list of heartbeats for the box by minute. Please note, this end-point returns a lot of data and can sometimes be a little slow. Results are therefore cached and update every 10 minutes.
 
 You can adjust the interval and distance too. The distance must be numeric and the interval can be one of the following:
 
@@ -834,7 +834,8 @@ minute, hour, day, week, month, year.
 + Parameters
 
     + id (required, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` of the box to perform action with. Has example value.
-    + interval (optional, string, `hour`) ... Filter the results by interval.
+    + interval (optional, string, `hour`) ... Filter the results by interval, see above for full details.
+    + distance (optional, integer, 7) ... How far back you want to get the results for.
 
 ### List all heartbeats for a box [GET]
 
@@ -847,26 +848,26 @@ minute, hour, day, week, month, year.
 
     + Body
 
-{
-    "heartbeats": {
-        "1425210780": 1,
-        "1425210720": 1,
-        "1425210660": 0,
-        "1425210600": 1,
-        "1425210540": 1,
-        "1425210480": 1,
-        "1425210420": 1,
-        "1425210360": 1,
-        "1425210300": 0,
-        "1425210240": 1,
-        "1425193440": 1,
-        "1425193380": 1,
-        "1425193320": 0,
-        "1425186840": 1,
-        "1425186780": 1,
-        "1425186720": 1
-    }
-}
+        {
+            "heartbeats": {
+                "1425210780": 1,
+                "1425210720": 1,
+                "1425210660": 0,
+                "1425210600": 1,
+                "1425210540": 1,
+                "1425210480": 1,
+                "1425210420": 1,
+                "1425210360": 1,
+                "1425210300": 0,
+                "1425210240": 1,
+                "1425193440": 1,
+                "1425193380": 1,
+                "1425193320": 0,
+                "1425186840": 1,
+                "1425186780": 1,
+                "1425186720": 1
+            }
+        }
 
 # Group Commands
 
