@@ -3277,6 +3277,8 @@ If you are upgrading a box, you can send the version of the firmware you want to
 
 If you pass in an array of box ids, your payload will not run on the box you're using to authorise the request. In this case, the box with {id}.
 
+As previously mentioned, upgrading a single box will occur immediately and you'll get an email notification thereafter. If you upgrade multiple boxes, we queue the job.
+
 + Parameters
 
     + box_id (required, string, `ZOWso8IMhuwYTrdh`) ... Slug `slug` of the Box to perform action with. Has example value.
