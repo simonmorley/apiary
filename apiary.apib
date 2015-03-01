@@ -871,7 +871,7 @@ Commands are just templates. Payloads are the way to run them.
 - `PATCH` - Updates a resource
 - `DELETE` - Delete a resource
 
-## Commands Collection [/api/v1/commands]
+## speedllection [/api/v1/commands]
 
 ### List all Commands [GET]
 
@@ -3927,6 +3927,8 @@ Please use the Unique Id to update a port forward.
 + Response 204 (application/json)
 
 # Group Speedtests
+
+Now depreciated in favour of the reports API.
 
 Speedtests belong to boxes and are a nested resource. You can only create and list speedtests per device. Creating a speedtest **DOES NOT** store it permanently. Only speedtests which run automatically in the middle of the night are stored.
 
