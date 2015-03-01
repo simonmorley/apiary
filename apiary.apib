@@ -45,28 +45,6 @@ https://mywifi.polkaspots.com/oauth/applications
 
 SSL is required.
 
-# Group Accounts
-
-Accounts related resources of the **Accounts API**
-
-## Accounts Collection [/api/v1/accounts]
-
-## Generate Password [/accounts/generate_password]
-
-Create a unique password for your captive portal. This doesn't save anything, it's just a nice little end-point to use.
-
-### Generate a one time password [POST]
-
-+ Request (application/json)
-
-            Accept: application/json
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {"password": "random-passy"}
-
 # Group Boxes
 
 Boxes belong to locations and whilst you can read, update, destroy and perform other non-restful actions on a box (or boxes), you are not permitted to create a box without specifiying a location_id with the parameters.
@@ -5792,3 +5770,25 @@ You must send a valid url - including https.
 + Response (application/json)
 
         { message: true }
+
+# Group Accounts
+
+Accounts related resources of the **Accounts API**
+
+## Accounts Collection [/api/v1/accounts]
+
+## Generate Password [/accounts/generate_password]
+
+Create a unique password for your captive portal. This doesn't save anything, it's just a nice little end-point to use.
+
+### Generate a one time password [POST]
+
++ Request (application/json)
+
+            Accept: application/json
+
++ Response 200 (application/json)
+
+    + Body
+
+            {"password": "random-passy"}
