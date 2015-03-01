@@ -349,6 +349,10 @@ Lists all your boxes globally.
 
 ## Box [/api/v1/boxes/{id}]
 
+The box object contains a lot of information relating to both the box and the local networks. Assuming the box is online, you will see a nested object called iwinfo which contains the interface stats, including signal strength and SSID.
+
+For more detailed iwinfo / wireless stats, please use the Interfaces API.
+
 + Parameters
 
     + id (required, string, `a-long-slug`) ... Slug `slug` of the box to perform action with. Has example value.
@@ -364,99 +368,99 @@ Lists all your boxes globally.
 
     + Body
 
-        {
-            "slug": "YZJ6exYhemVwrOfigb-x1w",
-            "created_at": 1404910675,
-            "device_icon": "ubiquiti-unifi-ap-pro-icon.png",
-            "uptime": " 11:34:04 up 12:57,  load average: 0.13, 0.11, 0.14, 46648.23",
-            "location_id": 590,
-            "gmaps_zoom": 17,
-            "last_heartbeat": 1425209644,
-            "description": "Polkaspots Office BOX 2",
-            "calledstationid": "xx-xx-3C-02-37-67",
-            "wan_ip": "10.0.1.250",
-            "wan_proto": "dhcp",
-            "public_ip": "33.33.199.193",
-            "dns_hostname": "33-33-199-193.static.ps.net",
-            "state": "online",
-            "installer_id": 4,
-            "serial_number": "5664-8359-6940-8594",
-            "system_type": "Atheros AR9344",
-            "machine_type": "Ubiquiti UniFi AP Pro",
-            "access_token": "cfe433b0-315c-41e1-972e-73d9652aa6eb",
-            "latitude": "51.5221223564181",
-            "longitude": "-0.104187726974487",
-            "wan_ipaddr": null,
-            "wan_netmask": "255.255.255.0",
-            "wan_gateway": null,
-            "wan_dns_1": "8.8.8.8",
-            "wan_dns_2": "8.8.4.4",
-            "channel": "auto",
-            "channel_5": "auto",
-            "tx_power_2": "20",
-            "tx_power_5": "20",
-            "ht_mode_2": "HT20",
-            "ht_mode_5": "HT20",
-            "updated_at": 1425209654,
-            "development_mode": "Beta",
-            "is_monitored": true,
-            "pppoe_username": null,
-            "pppoe_password": null,
-            "radiusnasid": "XXX-eb38-48ed-99d3-6c3e6e",
-            "last_disconnect_reason": "power",
-            "firmware_version": "B_140812_00",
-            "next_firmware": null,
-            "upgrade_scheduled": null,
-            "upgrade_processing": false,
-            "dual_band": true,
-            "iwinfo": [
-                {
-                    "ssid": "Office-PBP",
-                    "interface": "wlan0",
-                    "noise": -95,
-                    "channel": 36
+            {
+                "slug": "YZJ6exYhemVwrOfigb-x1w",
+                "created_at": 1404910675,
+                "device_icon": "ubiquiti-unifi-ap-pro-icon.png",
+                "uptime": " 11:34:04 up 12:57,  load average: 0.13, 0.11, 0.14, 46648.23",
+                "location_id": 590,
+                "gmaps_zoom": 17,
+                "last_heartbeat": 1425209644,
+                "description": "Polkaspots Office BOX 2",
+                "calledstationid": "xx-xx-3C-02-37-67",
+                "wan_ip": "10.0.1.250",
+                "wan_proto": "dhcp",
+                "public_ip": "33.33.199.193",
+                "dns_hostname": "33-33-199-193.static.ps.net",
+                "state": "online",
+                "installer_id": 4,
+                "serial_number": "5664-8359-6940-8594",
+                "system_type": "Atheros AR9344",
+                "machine_type": "Ubiquiti UniFi AP Pro",
+                "access_token": "cfe433b0-315c-41e1-972e-73d9652aa6eb",
+                "latitude": "51.5221223564181",
+                "longitude": "-0.104187726974487",
+                "wan_ipaddr": null,
+                "wan_netmask": "255.255.255.0",
+                "wan_gateway": null,
+                "wan_dns_1": "8.8.8.8",
+                "wan_dns_2": "8.8.4.4",
+                "channel": "auto",
+                "channel_5": "auto",
+                "tx_power_2": "20",
+                "tx_power_5": "20",
+                "ht_mode_2": "HT20",
+                "ht_mode_5": "HT20",
+                "updated_at": 1425209654,
+                "development_mode": "Beta",
+                "is_monitored": true,
+                "pppoe_username": null,
+                "pppoe_password": null,
+                "radiusnasid": "XXX-eb38-48ed-99d3-6c3e6e",
+                "last_disconnect_reason": "power",
+                "firmware_version": "B_140812_00",
+                "next_firmware": null,
+                "upgrade_scheduled": null,
+                "upgrade_processing": false,
+                "dual_band": true,
+                "iwinfo": [
+                    {
+                        "ssid": "Office-PBP",
+                        "interface": "wlan0",
+                        "noise": -95,
+                        "channel": 36
+                    },
+                    {
+                        "ssid": "Will Young and Rod Stewart",
+                        "interface": "wlan0-1",
+                        "noise": -95,
+                        "channel": 36
+                    },
+                    {
+                        "ssid": "Office-PBP",
+                        "interface": "wlan1",
+                        "noise": -95,
+                        "channel": 11
+                    },
+                    {
+                        "ssid": "Will Young and Rod Stewart",
+                        "interface": "wlan1-1",
+                        "noise": -95,
+                        "channel": 11
+                    }
+                ],
+                "avg_speedtest": 1976458,
+                "wan_mtu": 1492,
+                "speedtest_running": false,
+                "status_colour": "#64AB35",
+                "upgrading": false,
+                "can_reboot": true,
+                "latest_speedtest": {
+                    "result": 1365,
+                    "timestamp": 1425182795
                 },
-                {
-                    "ssid": "Will Young and Rod Stewart",
-                    "interface": "wlan0-1",
-                    "noise": -95,
-                    "channel": 36
-                },
-                {
-                    "ssid": "Office-PBP",
-                    "interface": "wlan1",
-                    "noise": -95,
-                    "channel": 11
-                },
-                {
-                    "ssid": "Will Young and Rod Stewart",
-                    "interface": "wlan1-1",
-                    "noise": -95,
-                    "channel": 11
-                }
-            ],
-            "avg_speedtest": 1976458,
-            "wan_mtu": 1492,
-            "speedtest_running": false,
-            "status_colour": "#64AB35",
-            "upgrading": false,
-            "can_reboot": true,
-            "latest_speedtest": {
-                "result": 1365,
-                "timestamp": 1425182795
-            },
-            "is_online": true,
-            "is_polkaspots": true,
-            "clients_online": "0",
-            "timezone": "London",
-            "auto_upgrades": false,
-            "sockets_hash": "YZJ6eYhemVwrOfigb-x1w",
-            "band_steering": true,
-            "radius_secret": "secret-passy",
-            "sync_id": "0e38ccc6e2b73cc65f14fa3d053385282639",
-            "certs": true,
-            "gubbins_version": "1.3.5"
-        }
+                "is_online": true,
+                "is_polkaspots": true,
+                "clients_online": "0",
+                "timezone": "London",
+                "auto_upgrades": false,
+                "sockets_hash": "YZJ6eYhemVwrOfigb-x1w",
+                "band_steering": true,
+                "radius_secret": "secret-passy",
+                "sync_id": "0e38ccc6e2b73cc65f14fa3d053385282639",
+                "certs": true,
+                "gubbins_version": "1.3.5"
+            }
 
 ### Delete a box [DELETE]
 
