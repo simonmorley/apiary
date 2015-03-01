@@ -67,37 +67,6 @@ Create a unique password for your captive portal. This doesn't save anything, it
 
             {"password": "random-passy"}
 
-# Group Alerts
-
-A resource within boxes. Enables / disables alerts for a specific box. Alerts are currently sent by email and can be overridden in your account / settings.
-
-- `PATCH` - Updates a resource
-
-## Update the alerts for a box [/api/v1/boxes/{box_id}/alerts{?alerts}]
-
-### Enable / Disable alerts for a box [PATCH]
-
-+ Parameters
-
-    + box_id (required, string, `"JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` of the box to perform action with. Has example value.
-    + alerts (required, boolean, `"true`) ... True or false depending on whether you want alerts on or off.
-
-+ Request (application/json)
-    
-        { "box_id": "JCyK7Zwh0ON_ZOWso8Mhuw" }
-
-+ Response 200 (application/json)
-
-        {
-            "is_monitored": true,
-            "slug": "JCyK7Zwh0ON_ZOWso8Mhuw"
-        }
-
-+ Response 422 (application/json)
-
-        { status: "unprocessable_entity" }
-
-
 # Group Blacklists
 
 Related resources of the **Blacklists API**. Blacklists belong to a location. You cannot currently list all your blacklists without specifying a location id (slug).
@@ -685,6 +654,27 @@ Sending the parameter 'soft', will perform a soft reset of the box. This doesn't
 
         { status: "unprocessable_entity" }
 
+## Resync a box [/api/v1/boxes/{id}/resync]
+
+This will cause a full configuration sync of the box sending the networks and wireless configuration files. This will restart all services and can disconnect users.
+
+### Resync a box [POST]
+
++ Parameters
+
+    + id (required, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... ID (we use the slug) of the device you want to reboot.
+
++ Request (application/json)
+
+        { "id": "JCyK7Zwh0ON_ZOWso8Mhuw" }
+
++ Response 200 (application/json)
+
+        { response: "Please allow 2-3 minute for the device to resync" }
+
++ Response 400 (application/json)
+
+        { status: "unprocessable_entity" }
 
 ## Transfer a box [/api/v1/boxes/{id}/transfer{?transfer_to}]
 
@@ -715,6 +705,65 @@ Please note, this will also reset your box to reflect the settings of the new lo
 + Response 400 (application/json)
 
         { status: "unprocessable_entity" }
+
+## Detect new boxes [/api/v1/boxes/detect{?location_id}]
+
+Cucumber can automatically detect boxes with Stinky Panda installed. Once you have detected a box, you can then automatically add the selected once to your location.
+
+The API will also return an array of boxes which have already been added. This is useful in case a previously detected box was added to your locations.
+
+Please note, you must be close to the boxes you want to detect and on the same network. If you want add a box to another location, you must use the standard box create API.
+
+### Detect boxes [POST]
+
++ Parameters
+
+    + location_id (required, string, `759275635389093876`) ... The slug / ID of the location you want to detect and add boxes to.
+
++ Request (application/json)
+
+        { 
+            "location_id": "bobs-house"
+        }
+
++ Response 200 (application/json)
+
+        [
+            {
+                "type": "Ubiquiti AirRouter",
+                "mac": "DC-9F-DB-3D-AA-43",
+                "existing": true
+            }
+        ]
+        
++ Response 400 (application/json)
+
+        { status: "unprocessable_entity" }
+
+## Update the alerts for a box [/api/v1/boxes/{box_id}/alerts{?alerts}]
+
+### Enable / Disable alerts for a box [PATCH]
+
++ Parameters
+
+    + box_id (required, string, `"JCyK7Zwh0ON_ZOWso8Mhuw`) ... Slug `slug` of the box to perform action with. Has example value.
+    + alerts (required, boolean, `"true`) ... True or false depending on whether you want alerts on or off.
+
++ Request (application/json)
+    
+        { "box_id": "JCyK7Zwh0ON_ZOWso8Mhuw" }
+
++ Response 200 (application/json)
+
+        {
+            "is_monitored": true,
+            "slug": "JCyK7Zwh0ON_ZOWso8Mhuw"
+        }
+
++ Response 422 (application/json)
+
+        { status: "unprocessable_entity" }
+
 
 # Group Commands
 
