@@ -443,17 +443,19 @@ Lists all your boxes globally.
 + Response 204 (application/json)
 
 
-## Box Create [/api/v1/boxes{?calledstationid,description,location_id}]
+## Box Create [/api/v1/boxes{?calledstationid,description,location_id,disovery}]
 
 ### Create a Box [POST]
 
-Don't forget, you must send the location_id with your request IN the box params. The following params are required:
+Don't forget, you must send the location_id with your request IN the box params. The following params are available:
 
+If you are using the magic auto-discovery tool, please use the detect API end point before creating a box. Passing the parameter discovery=true will automatically add your discovered devices. If you're using this method, you do not need to send the calledstationid etc.
 + Parameters
 
     + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
     + calledstationid (required, string, `mac`) ... Mac address of the box.
     + description (required, text, `Upstairs, in the loft`) ... A description of the box.
+    + discovery (optional, boolean, true) ...
 
 + Request (application/json)
 
@@ -713,6 +715,10 @@ Cucumber can automatically detect boxes with Stinky Panda installed. Once you ha
 The API will also return an array of boxes which have already been added. This is useful in case a previously detected box was added to your locations.
 
 Please note, you must be close to the boxes you want to detect and on the same network. If you want add a box to another location, you must use the standard box create API.
+
+Once you have detected your boxes, you will start receiving emails whenever a new box is connected in that location. 
+
+Read the box#create section of this documentation to discover how to add boxes.
 
 ### Detect boxes [POST]
 
