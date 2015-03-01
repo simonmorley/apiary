@@ -5727,15 +5727,23 @@ You must send a valid url - including https.
 
 # Group Zones
 
-Zones allow you to offer different SSIDs, or networks, on different boxes. For example, you can offer a public SSID on your lobby boxes and then add a private SSID if the box is installed in your office.
+Zones allow you to offer different SSIDs (networks), on different boxes. For example, you can offer a public SSID on your lobby boxes and then add a private SSID if the box is installed in your office.
 
 Moreover, you can even offer different splash pages per zone. This allows you to offer different types of access in different areas. For example, you might want to offer clickthrough access to guests in the lobby and voucher access upstairs. Consult the Splash Page API for more information.
 
-## Zones Collection [/api/v1/locations/{location_id}/networks]
+You can create up to 16 zones per location.
+
+As soon as you've created a zone, splash users will not able to see the splash pages until you have added the boxes in correctly.
+
+You need to resync the networks in order for the changes to propagate to the boxes.
+
+## Zones Collection [/api/v1/locations/{location_id}/zones{?boxes,zones}]
 
 + Parameters
 
     + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + boxes (required, array, `1,2,3`) ... An array of boxes you want to add to the zone
+    + networks (required, array, `1,2,3`) ... An array of networks you want to add to the zone
 
 ### List all Zones [GET]
 
@@ -5745,8 +5753,75 @@ Moreover, you can even offer different splash pages per zone. This allows you to
     
             Accept: application/json
 
++ Response (application/json)
+
     + Body
     
+            [
+                {
+                    "zone_name": "Lobby, secure LAN",
+                    "zone_description": null,
+                    "id": "54f346f57261693b3d000000",
+                    "created_at": 1425229557
+                },
+                {
+                    "zone_name": "Reception",
+                    "zone_description": null,
+                    "id": "54f346fe7261693b3d010000",
+                    "created_at": 1425229566
+                }
+            ]
+
+### Create new zone [POST]
+
+When you're creating a zone, you can choose to add networks and boxes. If you dont send either a boxes or network object with an array of ids, we will create an empty zone.
+
++ Request (application/json)
+
+    + Headers
+    
+            Accept: application/json
+            
+    + Body
+    
+            { 
+                location_id: 'derby-city-council',
+                zone: {
+                
+
++ Response (application/json)
+
+    + Body   
+
+        
+## Zones Object [/api/v1/locations/{location_id}/zones/{id}]
+
++ Parameters
+
+    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + id (required, string, `54f346f57261693b3d000000`) ... ID of the Zone to perform action with. Has example value.
+
+### Create new zone [POST]
+
+When you're creating a zone, you can choose to add networks and boxes. If you dont send either a boxes or network object with an array of ids, we will create an empty zone.
+
++ Request (application/json)
+
+    + Headers
+    
+            Accept: application/json
+            
+    + Body
+    
+            { 
+                location_id: 'derby-city-council',
+                zone: {
+                
+
++ Response (application/json)
+
+    + Body   
+        
 # Group Miscellaneous
 
 Accounts related resources of the **Accounts API**
