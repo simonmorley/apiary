@@ -2047,8 +2047,8 @@ A single Location object with all its details. Includes information relating to 
             
 ### Update a Location [PATCH]
 
-  TBC
-    
+Update your location settings and information.
+
 + Response 200 (application/json)
 
     + Header
@@ -2056,6 +2056,48 @@ A single Location object with all its details. Includes information relating to 
             Accept: application/json
 
     + Body
+
+            {
+                "id": 2586,
+                "discovering": false,
+                "location_name": "Le Gaff",
+                "unique_id": "xxxx",
+                "slug": "le-gaff",
+                "created_at": 1424212121,
+                "updated_at": 1424942703,
+                "location_address": "Dans Le Rue",
+                "street": null,
+                "postcode": "EC1M 5UY",
+                "town": "London",
+                "country": "United Kingdom",
+                "website": null,
+                "email_owner": null,
+                "phone1": null,
+                "location_website": null,
+                "created_by": null,
+                "location_notes": null,
+                "networktype_id": 2,
+                "api_token": "xxx-c4bb-4375-8acb-329569d85b86",
+                "state": "active",
+                "archived": false,
+                "latitude": 25.5253,
+                "longitude": -33.5597,
+                "development_mode": "Production",
+                "wisp_id": 6,
+                "tagged_logins": false,
+                "flume_enabled": false,
+                "meraki_validator": null,
+                "attr_generated": true,
+                "total_sessions": "171",
+                "plan_name": "Uncle Tony",
+                "address_string": "Dans Le Rue",
+                "full_address": "Dans Le Rue",
+                "setup_fin": true,
+                "logins_fin": false,
+                "access_fin": false,
+                "networks_fin": false,
+                "has_nas": true,
+            }
 
 ### Remove a Location [DELETE]
 
