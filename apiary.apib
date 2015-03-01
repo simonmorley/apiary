@@ -5787,12 +5787,43 @@ When you're creating a zone, you can choose to add networks and boxes. If you do
             { 
                 location_id: 'derby-city-council',
                 zone: {
-                
+                        boxes: [1,2,3],
+                        networks: ['44f228d17261690826000000'],
+                        zone_name: 'Lobby, secure LAN',
+                        zone_description: 'In the cupboard'
+                    }
+            }
+            
 
 + Response (application/json)
 
     + Body   
 
+            {
+                "zone": {
+                    "id": "54f346f57261693b3d000000",
+                    "zone_name": "Lobby, secure LAN",
+                    "zone_description": "In the cupboard",
+                    "created_at": 1425229557
+                },
+                "networks": [
+                    {
+                        "network_id": "44f228d17261690826000000",
+                        "description": "Le Gaff Wi-Fi"
+                    }
+                ],
+                "boxes": [
+                    {
+                        "box_id": 3182,
+                        "mac": "xx-xx-0A-33-2E-xx"
+                    },
+                    {
+                        "box_id": 3167,
+                        "mac": "xx-A4-3C-7C-FC-xx"
+                    }
+                ]
+            }
+        
         
 ## Zones Object [/api/v1/locations/{location_id}/zones/{id}]
 
@@ -5801,9 +5832,7 @@ When you're creating a zone, you can choose to add networks and boxes. If you do
     + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
     + id (required, string, `54f346f57261693b3d000000`) ... ID of the Zone to perform action with. Has example value.
 
-### Create new zone [POST]
-
-When you're creating a zone, you can choose to add networks and boxes. If you dont send either a boxes or network object with an array of ids, we will create an empty zone.
+### Viewing a zone [GET]
 
 + Request (application/json)
 
@@ -5815,13 +5844,111 @@ When you're creating a zone, you can choose to add networks and boxes. If you do
     
             { 
                 location_id: 'derby-city-council',
-                zone: {
+                id: '54f346f57261693b3d000000'
+            }
                 
 
 + Response (application/json)
 
-    + Body   
-        
+   + Body   
+
+            {
+                "zone": {
+                    "id": "54f346f57261693b3d000000",
+                    "zone_name": "Lobby, secure LAN",
+                    "zone_description": "In the cupboard",
+                    "created_at": 1425229557
+                },
+                "networks": [
+                    {
+                        "network_id": "44f228d17261690826000000",
+                        "description": "Le Gaff Wi-Fi"
+                    }
+                ],
+                "boxes": [
+                    {
+                        "box_id": 3182,
+                        "mac": "xx-xx-0A-33-2E-xx"
+                    },
+                    {
+                        "box_id": 3167,
+                        "mac": "xx-A4-3C-7C-FC-xx"
+                    }
+                ]
+            }
+
+### Updating a zone [PATCH]
+
+When you update a zone, ensure you pass the box and network ids in to the zone object as below. If you pass an empty object, we will assume you want to remove the boxes / networks from the zone.
+
+If you just want to update the name, do not send the zones / boxes params.
+
++ Request (application/json)
+
+    + Headers
+    
+            Accept: application/json
+            
+    + Body
+    
+            { 
+                location_id: 'derby-city-council',
+                id: '54f346f57261693b3d000000',
+                zone:
+                    
+                    {
+                        boxes: [1,2,3],
+                        networks: ['44f228d17261690826000000'],
+                        zone_name: 'Lobby, secure LAN',
+                        zone_description: 'In the cupboard'
+                    }
+            }
+                
++ Response (application/json)
+
+   + Body   
+
+            {
+                "zone": {
+                    "id": "54f346f57261693b3d000000",
+                    "zone_name": "Lobby, secure LAN",
+                    "zone_description": "In the cupboard",
+                    "created_at": 1425229557
+                },
+                "networks": [
+                    {
+                        "network_id": "44f228d17261690826000000",
+                        "description": "Le Gaff Wi-Fi"
+                    }
+                ],
+                "boxes": [
+                    {
+                        "box_id": 3182,
+                        "mac": "xx-xx-0A-33-2E-xx"
+                    },
+                    {
+                        "box_id": 3167,
+                        "mac": "xx-A4-3C-7C-FC-xx"
+                    }
+                ]
+            }
+
+### Delete a zone [DELETE]
+
++ Parameters
+
+    + location_id (required, string, `le-gaff`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + id (required, string, `54f346f57261693b3d000000`) ... ID of the zone to perform action with. Has example value.
+
++ Request (application/json)
+
+        {   
+            "location_id": "le-gaff",
+            "id": "54f346f57261693b3d000000",
+        }
+
++ Response 204 (application/json)
+
 # Group Miscellaneous
 
 Accounts related resources of the **Accounts API**
