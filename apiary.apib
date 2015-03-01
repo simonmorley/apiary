@@ -1737,7 +1737,45 @@ You may invite users to all your locations or a single location.
                 }
             ]
 
-## Create an invite [/api/v1/invites/{email,location_ids}]
+## Viewing Invites [/api/v1/invites/{id}]
+
++ Parameters
+
+    + id (required, string, `123`) ... ID of the invite you want to view. Has example value.
+
++ Response 200 (application/json)
+
+    + Body
+        
+        {
+            "invite": {
+                "email": "bob@marley.com",
+                "name": "Bob Marley",
+                "state": "pending",
+                "timestamp": 1425215591,
+                "expires": 1425474791
+            },
+            "locations": [
+                {
+                    "location_name": "Long Buckby Railway Station (LBK)",
+                    "slug": "long-buckby-railway-station-lbk"
+                },
+                {
+                    "location_name": "The Jerusalem Tavern",
+                    "slug": "the-jerusalem-tavern-109d6397-24e9-493e-9645-36d24def92db"
+                },
+                {
+                    "location_name": "Simon",
+                    "slug": "simon-53dbb7bd-eac7-4860-8dfb-9490d4433ecc"
+                },
+                {
+                    "location_name": "Stuff got real",
+                    "slug": "stuff-got-real-four-1c94fe7e-6823-46c4-8425-160c63c00aea"
+                }
+            ]
+        }
+
+## Managing Invites [/api/v1/invites/{email,location_ids}]
 
 ### Create an invitation [POST]
 
@@ -1785,6 +1823,41 @@ Please also note that invitations are not available on all plans.
                 "name": "Bob Marley",
                 "id": "54f310674c697a9f2e010000"
             }
+
+### Revoke an invitation [DELETE]
+
++ Request (application/json)
+
+        "invite":
+
+            {
+                email: 'email-of-person@gmail.com',
+                location_ids: '1,2,3,4'
+            }    
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "parent_id": null,
+                "email": "bob@marley.com",
+                "created_at": 1425215591,
+                "expires": 1425474791,
+                "state": "pending",
+                "location_ids": [
+                    "46",
+                    "53",
+                    "119",
+                    "1778",
+                    "1806",
+                    "1813",
+                    "1816"
+                ],
+                "name": "Bob Marley",
+                "id": "54f310674c697a9f2e010000"
+            }
+
 
 # Group Invoices
 
