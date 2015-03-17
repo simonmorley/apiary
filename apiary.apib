@@ -6176,13 +6176,15 @@ Vouchers related resources of the **Vouchers API**
 
 Vouchers provide time or data based control over your Wireless networks. They're compatible with the captive portal service only.
 
-A voucher designates a group / parent of individual voucher codes. A voucher group must belong to a location and a splash page. You can therefore offer multiple splash pages in a single location, each with it's own group of codes.
+A voucher designates a group (parent) of many individual voucher codes. A voucher group must belong to a location and a splash page. You can therefore offer multiple splash pages in a single location, each with it's own group of codes.
 
 Once you have created a voucher group, we will queue a job to create the individual codes. Once created, you will be emailed a unique link to download the codes as a PDF or CSV.
 
 This link is valid for 20 minutes and is available also in the JSON. You may regenerate the url by updating the batch with the parameter 'regenerate_link' set to true.
 
 Voucher generation is subject to the normal quotas as defined by your plan. Higher plans may request an increase of vouchers.
+
+You can't delete a batch after it's been used.
 
 **A voucher has the following attributes:**
 
