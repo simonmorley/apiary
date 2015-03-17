@@ -6170,6 +6170,63 @@ Even your current session will be destroyed.
                 "message": "Ok"
             }
 
+# Group Vouchers
+
+Vouchers related resources of the **Locations API**
+
+Vouchers provide time or data based control over your Wireless networks. They're compatible with the captive portal service only.
+
+A voucher designates a group / parent of individual voucher codes. A voucher group must belong to a location and a splash page. You can therefore offer multiple splash pages in a single location, each with it's own group of codes.
+
+Once you have created a voucher group, we will queue a job to create the individual codes. Once created, you will emailed a unique link to download the codes as a PDF or CSV. 
+
+This link is valid for 20 minutes and is available also in the JSON. You may regenerate the url by updating the batch with the parameter 'regenerate_link' set to true.
+
+## Vouchers Collection [/api/v1/vouchers]
+
+### List all vouchers [GET]
+
++ Request (application/json)
+
+    + Header
+
+            Accept: application/json
+
++ Response 200 (application/json)
+
+        [{
+            "id": 1687,
+            "location_name": "Cafe International",
+            "slug": "cafe-international-f84e1979-52e4-49ff-8d6e-ed808578b36a",
+            "created_at": "May 6 2014 11:47:08",
+            "network_name": "PolkaSpots",
+            "location_address": "12 High Lane",
+            "street": "12 High Lane",
+            "phone1": "02071831471",
+            "location_website": null,
+            "location_type": null,
+            "nas_count": 1,
+            "archived": false,
+            "development_mode": "Production",
+            "daily_limit": true
+        },
+        {
+            "id": 870,
+            "location_name": "Derby - City Council",
+            "slug": "derby-city-council",
+            "created_at": "August 19 2013 11:50:04",
+            "network_name": "Meraki",
+            "location_address": "Corporation Street Derby ",
+            "street": "",
+            "phone1": "01332293111",
+            "location_website": "www.surfthecity.co.uk",
+            "location_type": "186",
+            "nas_count": 5,
+            "archived": false,
+            "development_mode": "Production",
+            "daily_limit": true
+        }]
+
 # Group Webhooks
 
 Webhooks are a beta feature and will not work on all accounts yet. Webhooks will notify your own application when an event is triggered.
