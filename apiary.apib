@@ -6187,6 +6187,25 @@ Voucher generation is subject to the normal quotas as defined by your plan. High
 **A voucher has the following attributes:**
 
 + unique_id - ready only record identifier.
++ batch_name
++ batch_description - appears on your vouchers
++ created_at - unix timestamp
++ is_active
++ voucher_value - for accounting purposes
++ quantity - number of codes to be created
++ access_type - integer, set 1 for time, 2 for data
++ limit_type - string, set multi-use or single-use
++ location_id
++ splash_page_id
++ session_timeout - integer, minutes before automatic logout
++ idle_timeout - integer, minutes before idle disconnect
++ download_speed - kbps, set the speed of connection
++ upload_speed - kbps
++ validity_minutes - integer, how long the voucher lasts for
++ access_restrict_period - daily, weekly or monthly restrictions
++ expiration - when the voucher will expire in unix time
++ secure_password - choose a simple or secure passy
++ format - alpha, numeric, words. Leave blank for default, alpha-numeric
 
 ## Vouchers Collection [/api/v1/vouchers]
 
@@ -6220,7 +6239,8 @@ Voucher generation is subject to the normal quotas as defined by your plan. High
                 "validity_minutes": null,
                 "access_restrict_period": null,
                 "expiration": null,
-                "secure_password": true
+                "secure_password": true,
+                "format": "words"
             }
         ]
 
