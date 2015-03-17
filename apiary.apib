@@ -5,9 +5,9 @@ HOST: https://api.polkaspots.com
 
 ##I'm doing it with Cucumber Tony's API, are you?##
 
-Cucumber Tony's API provides a way to manage, monitor your Wireless networks and clients programatically. 
+Cucumber Tony's API provides a way to manage, monitor your Wireless networks and clients programatically.
 
-Our API is based on REST principles, all you need to use it is your Cucumber Tony account. You must be authenticated and call HTTPs requests on the URLs listed below. 
+Our API is based on REST principles, all you need to use it is your Cucumber Tony account. You must be authenticated and call HTTPs requests on the URLs listed below.
 
 Please create an application in Cucumber Tony and use your access token in all requests.
 
@@ -15,7 +15,7 @@ The API uses secure Oauth2 to authenicate. You need to create an application bef
 
 This is not the full documentation yet. We are adding as we finalise the sections, expect frequent changes alongside additions.
 
->**Note:** Some resources trigger updates to your boxes. Sending invalid data can cause your boxes to crash.
+>**Note:** Some resources trigger updates to your boxes. Sending invalid data may cause your boxes to crash.
 
 ## Generally Allowed HTTPs requests:
 
@@ -34,10 +34,10 @@ This is not the full documentation yet. We are adding as we finalise the section
 - 404 `Not Found` - Resource was not found.
 - 405 `Method Not Allowed` - Requested method is not supported for the specified resource.
 - 422 `Bad Request` - The request could not be understood or was missing required parameters.
-- 429 `Too Many Requests` - Exceeded our API limits of 60 per minute. 
+- 429 `Too Many Requests` - Exceeded our API limits of 60 per minute.
 - 503 `Service Unavailable` - The service is temporary unavailable. Try again later.
 
-##Oauth2 
+##Oauth2
 
 To make use of the Cucumber Tony API, you will need an access token (and refresh token if building a more persistent application).
 
@@ -390,7 +390,7 @@ If you are using the magic auto-discovery tool, please use the detect API end po
 
 + Request (application/json)
 
-        { 
+        {
             "box":
                 {
                     "location_id": 53,
@@ -422,7 +422,7 @@ If you are using the magic auto-discovery tool, please use the detect API end po
                     "pppoe_password": "pass"
                 }
         }
-        
+
 
 + Response 200 (application/json)
 
@@ -485,7 +485,7 @@ For a full list of available params, please see the box#show section above. Some
 
 + Request (application/json)
 
-        { 
+        {
             "box":
                 {
                     "gmaps_zoom": 10,
@@ -636,7 +636,7 @@ Please note, this will also reset your box to reflect the settings of the new lo
 
 + Request (application/json)
 
-        { 
+        {
             "id": "JCyK7Zwh0ON_ZOWso8Mhuw",
             "transfer_to": "759275635389093876",
         }
@@ -657,7 +657,7 @@ The API will also return an array of boxes which have already been added. This i
 
 Please note, you must be close to the boxes you want to detect and on the same network. If you want add a box to another location, you must use the standard box create API.
 
-Once you have detected your boxes, you will start receiving emails whenever a new box is connected in that location. 
+Once you have detected your boxes, you will start receiving emails whenever a new box is connected in that location.
 
 Read the box#create section of this documentation to discover how to add boxes.
 
@@ -669,7 +669,7 @@ Read the box#create section of this documentation to discover how to add boxes.
 
 + Request (application/json)
 
-        { 
+        {
             "location_id": "bobs-house"
         }
 
@@ -687,7 +687,7 @@ Read the box#create section of this documentation to discover how to add boxes.
                 "existing": false
             }
         ]
-        
+
 + Response 400 (application/json)
 
         { status: "unprocessable_entity" }
@@ -704,7 +704,7 @@ You can selectively enable and disable alerts for a box which will prevent CT fr
     + alerts (required, boolean, `"true`) ... True or false depending on whether you want alerts on or off.
 
 + Request (application/json)
-    
+
         { "box_id": "JCyK7Zwh0ON_ZOWso8Mhuw" }
 
 + Response 200 (application/json)
@@ -744,7 +744,7 @@ A value of 0 represents offline and a value of 1 represents an online box.
 
 
     + Body
-    
+
             {
                 "heartbeats": {
                     "1425210780": 1,
@@ -784,7 +784,7 @@ Returns the changeset for a box including the username of the person who made th
 
 
     + Body
-    
+
             [
                 {
                     "id": 102754,
@@ -818,7 +818,7 @@ Returns the changeset for a box including the username of the person who made th
 
 ## Box Payloads [/api/v1/boxes/{id}/payloads]
 
-Returns the payloads that have recently run on the box. You can set up a payload to run using the payloads api. Payloads can include linux commands, status requests etc. 
+Returns the payloads that have recently run on the box. You can set up a payload to run using the payloads api. Payloads can include linux commands, status requests etc.
 
 + Parameters
 
@@ -833,20 +833,20 @@ Returns the payloads that have recently run on the box. You can set up a payload
 + Response 200 (application/json)
 
     + Body
-    
+
             [
                 {
                     "created_at": 1424207333,
                     "body": "Some body of the payload here, truncated.",
                     "type": "dmesg",
                     "id": 2324,
-            
+
                 }
             ]
 
 # Group Commands
 
-Commands reference the **Commands API**. 
+Commands reference the **Commands API**.
 
 Commands are predefined templates of payloads which can be applied directly to a box. There's two types of events:
 
@@ -880,7 +880,7 @@ Commands are just templates. Payloads are the way to run them.
 + Response 200 (application/json)
 
     + Body
-                
+
             [
                 {
                     "id": 34,
@@ -964,13 +964,13 @@ Commands are just templates. Payloads are the way to run them.
                     "only_polkaspots": true
                 }
             ]
-            
+
 ### Create a command [POST]
 
 + Request 200 (application/json)
 
             {
-                "command": 
+                "command":
                     {
                         "payload_description": "Reboot my access point ",
                         "payload_name": "Reboot Access Points",
@@ -984,7 +984,7 @@ Commands are just templates. Payloads are the way to run them.
 + Response 200 (application/json)
 
     + Body
-        
+
             {
                 "id": 34,
                 "payload_description": "Reboot my access point ",
@@ -993,7 +993,7 @@ Commands are just templates. Payloads are the way to run them.
                 "can_schedule": true,
                 "only_polkaspots": true
             }
-        
+
 
 ## Command Object [/api/v1/commands/{id}]
 
@@ -1010,7 +1010,7 @@ Commands are just templates. Payloads are the way to run them.
 + Response 200 (application/json)
 
     + Body
-        
+
             {
                 "id": 34,
                 "payload_description": "Reboot my access point ",
@@ -1019,7 +1019,7 @@ Commands are just templates. Payloads are the way to run them.
                 "can_schedule": false,
                 "only_polkaspots": true
             }
-        
+
 ### Update a Command [PATCH]
 
 + Parameters
@@ -1042,7 +1042,7 @@ Commands are just templates. Payloads are the way to run them.
 + Response 200 (application/json)
 
     + Body
-        
+
             {
                 "id": 34,
                 "payload_description": "Reboot my access point ",
@@ -1051,7 +1051,7 @@ Commands are just templates. Payloads are the way to run them.
                 "can_schedule": false,
                 "only_polkaspots": true
             }
-        
+
 
 ### Delete a Command [DELETE]
 
@@ -1061,7 +1061,7 @@ Commands are just templates. Payloads are the way to run them.
 
 + Request (application/json)
 
-        {   
+        {
             "id": 123,
         }
 
@@ -1085,7 +1085,7 @@ You may also send the standard filter parameters we use:
 - End
 - AP Mac
 
-These filter parameters allow you to view clients over a pre-set period. 
+These filter parameters allow you to view clients over a pre-set period.
 
 For clients which are currently connected via the captive portal, you can also disconnect them using the same API. Details are found below.
 
@@ -1268,24 +1268,24 @@ Any data transmission rates are in bytes.
 
 + Request (application/json)
 
-        {   
+        {
             "id": 54eef340726169119b4c0400,
             client: {
                 name: 'Simon',
                 notes: 'Is here a lot these days'
-            
+
             }
         }
 
 + Response 200 (application/json)
-        
+
         client: {
 
         }
 
 ## Disconnect a Client [/api/v1/locations/{location_id}/clients/{id}/logout]
 
-This will immediately disconnect the user from the hotspot, assuming they are actually logged in. You can also disconnect the client using the boxes resource. 
+This will immediately disconnect the user from the hotspot, assuming they are actually logged in. You can also disconnect the client using the boxes resource.
 
 ### Disconnect a specific client [POST]
 
@@ -1297,8 +1297,8 @@ This will immediately disconnect the user from the hotspot, assuming they are ac
 + Response 200 (application/json)
 
     + Body
-    
-            { 
+
+            {
                 message: 'Client has been disconnected'
             }
 
@@ -1429,7 +1429,7 @@ All events run on PolkaSpots boxes (running Stinky Panda). Third party boxes may
 
 
     + Body
-    
+
             [
                 {
                     "id": 115,
@@ -1497,7 +1497,7 @@ All events run on PolkaSpots boxes (running Stinky Panda). Third party boxes may
 
 + Request (application/json)
 
-        {   
+        {
             "location_id": "derby-council",
             "id": 123,
         }
@@ -1533,7 +1533,7 @@ Not all the parameters listed in this spec are supported yet.
 
 
     + Body
-    
+
             [
                 {
                     "id": 4145,
@@ -1667,7 +1667,7 @@ Not all the parameters listed in this spec are supported yet.
 
 ### Create a Firewall Rule [POST]
 
-There's two ways to create a firewall rule. You can either post directly with a location id or you update the resource when updating a location. Please see the section within the location's group for more information. 
+There's two ways to create a firewall rule. You can either post directly with a location id or you update the resource when updating a location. Please see the section within the location's group for more information.
 
 **CAUSES SYNC**
 
@@ -1680,7 +1680,7 @@ Please note, creating a new firewall rule will force all your boxes to reload th
 
 + Request (application/json)
 
-        { "firewall_rule": 
+        { "firewall_rule":
             {
                 "chain": "FORWARD",
                 "rule_spec": "I",
@@ -1697,7 +1697,7 @@ Please note, creating a new firewall rule will force all your boxes to reload th
                 "log_level": null
             }
         }
-        
+
 
 + Response 200 (application/json)
 
@@ -1740,7 +1740,7 @@ Please note, updating a firewall rule will force all your boxes to reload their 
 
 + Request (application/json)
 
-        { "firewall_rule": 
+        { "firewall_rule":
             {
                 "id": "594",
                 "chain": "FORWARD",
@@ -1797,7 +1797,7 @@ Please note, creating a new walled garden will force all your boxes to reload th
 
 + Request (application/json)
 
-        {   
+        {
             "location_id": "derby-council",
             "id": 123,
         }
@@ -1831,7 +1831,7 @@ You may invite users to all your locations or a single location.
 + Response 200 (application/json)
 
     + Body
-          
+
             [
                 {
                     "parent_id": null,
@@ -1855,7 +1855,7 @@ You may invite users to all your locations or a single location.
 
 ## Viewing Invites [/api/v1/invites/{id}]
 
-You can view a full invitation include the location details using the following end-point. 
+You can view a full invitation include the location details using the following end-point.
 
 ### View an invite [GET]
 
@@ -1866,7 +1866,7 @@ You can view a full invitation include the location details using the following 
 + Response 200 (application/json)
 
     + Body
-    
+
             {
                 "invite": {
                     "email": "bob@marley.com",
@@ -1900,7 +1900,7 @@ You can view a full invitation include the location details using the following 
 
 ### Create an invitation [POST]
 
-This is how you invite a user to administer a location or locations. If you do not pass any location_ids, we will assume you want to invite them to all your locations. 
+This is how you invite a user to administer a location or locations. If you do not pass any location_ids, we will assume you want to invite them to all your locations.
 
 The location id is the numeric id of the location you want to invite them to. Please use the Location API to obtain these.
 
@@ -1916,12 +1916,12 @@ Please also note that invitations are not available on all plans. Unaccepted inv
 + Request (application/json)
 
         "invite":
-            
+
             {
                 email: 'email-of-person@gmail.com',
                 location_ids: '1,2,3,4'
-            }    
-    
+            }
+
 + Response 200 (application/json)
 
     + Body
@@ -1954,7 +1954,7 @@ Please also note that invitations are not available on all plans. Unaccepted inv
             {
                 email: 'email-of-person@gmail.com',
                 location_ids: '1,2,3,4'
-            }    
+            }
 
 + Response 200 (application/json)
 
@@ -2126,7 +2126,7 @@ Returns a mini-list of your locations. Is good for search, cloning the logins, s
 + Request (application/json)
 
     + Headers
-    
+
             Accept: application/json
 
     + Body
@@ -2136,7 +2136,7 @@ Returns a mini-list of your locations. Is good for search, cloning the logins, s
 + Response 200 (application/json)
 
     + Body
-    
+
             [
                 {
                     "id": 2614,
@@ -2193,8 +2193,8 @@ Returns a mini-list of your locations. Is good for search, cloning the logins, s
                     }
                 }
             ]
-            
-            
+
+
 ## Create a location [/api/v1/locations{?location}]
 
 Default required params include:
@@ -2211,7 +2211,7 @@ You may send an array of mac addresses to create boxes associated with the locat
 You can also send a facebook_id with your request. Doing so will cause CT to totally ignore the data you've sent. Instead, Cucumber Tony will contact Facebook and grab the information from them instead.
 
     { "location": { "facebook_id": "valid-fb-id" } }
-    
+
 ### Create a Location [POST]
 
 + Parameters
@@ -2230,7 +2230,7 @@ You can also send a facebook_id with your request. Doing so will cause CT to tot
                 "facebook_id": "187263871623"
             },
         "boxes":
-        
+
             { "ap_mac": ["AA:BB:CC:DD:EE:FF:11"] }
 
 + Response 200 (application/json)
@@ -2335,7 +2335,7 @@ A single Location object with all its details. Includes information relating to 
                 "clone_processing": false,
                 "beta_mode": false
             }
-            
+
 ### Update a Location [PATCH]
 
 Update your location settings and information.
@@ -2508,7 +2508,7 @@ A single Location's statistical objects
                 ],
                 "top_boxes": []
             }
-                
+
 ## Get Location Users [/location/{id}/users]
 
 Get a list of all the users who have access to your location. The output will include four keys - **owner, admins, invites**
@@ -2527,11 +2527,11 @@ If you want to add users to a location or locations, please use the Invites API.
 + Request (application/json)
 
     + Headers
-    
+
             Accept: application/json
 
     + Body
-    
+
             { "id": "derby-city-council" }
 
 + Response 200 (application/json)
@@ -2607,11 +2607,11 @@ This job is processed in the background and you can't copy a location while ther
 + Request (application/json)
 
     + Headers
-    
+
             Accept: application/json
 
     + Body
-    
+
             {
                 "id": "derby-council",
                 "location_name": "My New Site",
@@ -2623,7 +2623,7 @@ This job is processed in the background and you can't copy a location while ther
 
     + Body
 
-            { "message": "Your location has been queued for duplication. This may take a few minutes." } 
+            { "message": "Your location has been queued for duplication. This may take a few minutes." }
 
 ## Transfer a location [/location/{id}/transfer{?account_id}]
 
@@ -2641,11 +2641,11 @@ It's really important to note that transferring a location will remove all locat
 + Request (application/json)
 
     + Headers
-    
+
             Accept: application/json
 
     + Body
-    
+
             {
                 "id": "derby-council",
                 "account_id": "A111111"
@@ -2655,7 +2655,7 @@ It's really important to note that transferring a location will remove all locat
 
     + Body
 
-            { "message": "Your location is being transferred." } 
+            { "message": "Your location is being transferred." }
 
 ## Archive a specific location [/location/{id}/archive]
 
@@ -2670,18 +2670,18 @@ If you don't want to delete a location permanently, you can choose to archive it
 + Request (application/json)
 
     + Headers
-    
+
             Accept: application/json
 
     + Body
-    
+
             { "id": "derby-council", }
 
 + Response 200 (application/json)
 
     + Body
 
-            { "message": "Your location has been archived" } 
+            { "message": "Your location has been archived" }
 
 ## Restore / Unarchive a specific location [/location/{id}/unarchive]
 
@@ -2696,24 +2696,24 @@ Restore an archived location to it's former glory.
 + Request (application/json)
 
     + Headers
-    
+
             Accept: application/json
 
     + Body
-          
+
             { "id": "derby-council" }
 
 + Response 200 (application/json)
 
     + Body
 
-            { "message": "Your location has been unarchived" } 
+            { "message": "Your location has been unarchived" }
 
 ## Update a Location's firewall rules [/api/v1/location/{id}{?location,firewall_rules_attributes,params}]
 
 You can either create firewall rules directly with the Firewall Rules API or you may update, create and delete when updating a location.
 
-You must wrap the firewall_rules_attributes params in the location params. 
+You must wrap the firewall_rules_attributes params in the location params.
 
 To delete a rule, simply set the _destroy field to 1.
 
@@ -2734,11 +2734,11 @@ Whilst it's ok to send the whole location object back when updating the firewall
 + Request (application/json)
 
     + Headers
-    
+
             Accept: application/json
 
     + Body
-    
+
             {"location":
                 {
                     "slug": "derby-city-council",
@@ -2811,11 +2811,11 @@ Whilst it's ok to send the whole location object back when updating the firewall
 
     + Body
 
-            { "message": "You have updated Derby Council" } 
+            { "message": "You have updated Derby Council" }
 
 # Group Jobs
 
-Jobs, or events as they should really be named, are things that happen to your boxes. Jobs include device heartbeats, payload commands and more. 
+Jobs, or events as they should really be named, are things that happen to your boxes. Jobs include device heartbeats, payload commands and more.
 
 They are a nested resource in the Boxes API.
 
@@ -2836,7 +2836,7 @@ You can filter the log_level betweeen 1 and 3.
 + Response 200 (application/json)
 
     + Body
-    
+
             [{
                 "resource": "nas",
                 "log_level": 1,
@@ -2888,7 +2888,7 @@ You can filter the log_level betweeen 1 and 3.
                     }
                 }
             }]
-        
+
 # Group Metrics
 
 Get aggregated and serial reporting data about your networks and usage.
@@ -2933,7 +2933,7 @@ Summary stats of your network dwell times and stays including the counts, averag
     + ap_macs (optional, string, `11:22:11:22:22:11`) ... Comma separated list of mac addresses to filter the results.
     + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 100 days ago.
     + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to now.
-    
+
 ### Summary stats for dwells, stays and sessions [GET]
 
 + Response 200 (application/json)
@@ -2964,7 +2964,7 @@ Summary stats of your network dwell times and stays including the counts, averag
                         "sum": 57731146
                     }
                 }
-            }            
+            }
 
 ## Aggregated sessions, dwells and stays [/api/v1/metrics/{?aggs,location_ids,start,end,key,ap_macs}]
 
@@ -2978,7 +2978,7 @@ Aggregated summary data grouped by location_id. This provides a summary of dwell
     + ap_macs (optional, string, `11:22:11:22:22:11`) ... Comma separated list of mac addresses to filter the results.
     + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 100 days ago.
     + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to now.
-    
+
 ### Aggregated data grouped by location_id [GET]
 
 + Response 200 (application/json)
@@ -3015,11 +3015,11 @@ Aggregated summary data grouped by location_id. This provides a summary of dwell
                         }
                     ]
                 }
-            }            
-            
+            }
+
 ## Aggregated by ap_mac [/api/v1/metrics/{?aggs,location_ids,ap_macs,start,end,key}]
 
-Aggregated summary data grouped by ap_mac. This provides a summary of dwell times for each invidivual access point. 
+Aggregated summary data grouped by ap_mac. This provides a summary of dwell times for each invidivual access point.
 
 Pass key=ap_mac with the search params to group by ap_mac.
 
@@ -3031,7 +3031,7 @@ Pass key=ap_mac with the search params to group by ap_mac.
     + ap_macs (optional, string, `11:22:11:22:22:11`) ... Comma separated list of mac addresses to filter the results.
     + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 100 days ago.
     + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to now.
-    
+
 ### Aggregated data grouped by ap_mac [GET]
 
 + Response 200 (application/json)
@@ -3048,7 +3048,7 @@ Aggregated summary data grouped by manufacturer. Pass key=man with query to acti
     + ap_macs (optional, string, `11:22:11:22:22:11`) ... Comma separated list of mac addresses to filter the results.
     + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 100 days ago.
     + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to now.
-    
+
 ### Aggregated data grouped by manufacturer [GET]
 
 + Response 200 (application/json)
@@ -3085,7 +3085,7 @@ Aggregated summary data grouped by manufacturer. Pass key=man with query to acti
                         }
                     ]
                 }
-            }            
+            }
 
 ## Aggregated by time [/api/v1/metrics/{?aggs,location_ids,ap_macs,start,end,key}]
 
@@ -3101,13 +3101,13 @@ The key will be the day number or hour.
     + ap_macs (optional, string, `11:22:11:22:22:11`) ... Comma separated list of mac addresses to filter the results.
     + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 100 days ago.
     + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to now.
-    
+
 ### Aggregated data grouped by time [GET]
 
 + Response 200 (application/json)
 
     + Body
-            
+
             {
                 "aggs": {
                     "count": 3,
@@ -3174,13 +3174,13 @@ This provides a timeline of sessions for your locations or aps. Pass timeline = 
     + ap_macs (optional, string, `11:22:11:22:22:11`) ... Comma separated list of mac addresses to filter the results.
     + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 100 days ago.
     + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to now.
-    
+
 ### Timeline data grouped by date [GET]
 
 + Response 200 (application/json)
 
     + Body
-    
+
             {
                 "timeline": {
                     "count": 3,
@@ -3202,16 +3202,16 @@ This provides a timeline of sessions for your locations or aps. Pass timeline = 
                         }
                     ]
                 }
-            }    
+            }
 
 
 # Group Networks
 
 Networks represent SSIDs. You can add up to 16 networks per location however, we rarely recommend doing so. The more networks you add, the lower the performance.
 
-Ideally, you would add no more than 4 per box (depending on the model). 
+Ideally, you would add no more than 4 per box (depending on the model).
 
-Why do we allow 16 then? If you combine networks with the all-powerful zones, you can affectively create 16 individual zones per location, each with a different SSID. 
+Why do we allow 16 then? If you combine networks with the all-powerful zones, you can affectively create 16 individual zones per location, each with a different SSID.
 
 The idea is that you can offer different networks in different parts of your building.
 
@@ -3232,11 +3232,11 @@ After you create, update or destroy a network, we will try and sync your boxes. 
 + Request (application/json)
 
     + Headers
-    
+
             Accept: application/json
 
     + Body
-    
+
             [
                 {
                     "id": "54ee7b1472616970353c2600",
@@ -3404,12 +3404,12 @@ For information how to add this network to a zone, please see the Zones API.
 + Request (application/json)
 
     + Headers
-    
+
             Accept: application/json
-    
+
     + Body
-    
-            {   
+
+            {
                 "location_id": "derby-council",
                 "id": 54ee7b1470353c2600,
                 network: {
@@ -3434,12 +3434,12 @@ Represents the individual network. Please note, some fields are currently read o
 + Request (application/json)
 
     + Headers
-    
+
             Accept: application/json
-    
+
     + Body
-    
-            {   
+
+            {
                 "location_id": "derby-council",
                 "id": 54ee7b1470353c2600
             }
@@ -3447,7 +3447,7 @@ Represents the individual network. Please note, some fields are currently read o
 + Response 200 (application/json)
 
     + Body
-    
+
             {
                 "id": "54ee7b1470353c2600",
                 "network_name": "public",
@@ -3528,12 +3528,12 @@ You can tell if there is a current job waiting to be processed by checking the j
 + Request (application/json)
 
     + Headers
-    
+
             Accept: application/json
-    
+
     + Body
-    
-            {   
+
+            {
                 "location_id": "derby-council",
                 "id": 54ee7b1470353c2600,
                 network: {
@@ -3544,7 +3544,7 @@ You can tell if there is a current job waiting to be processed by checking the j
 + Response 200 (application/json)
 
     + Body
-    
+
             {
                 "id": "54ee7b1470353c2600",
                 "network_name": "public",
@@ -3597,7 +3597,7 @@ You can tell if there is a current job waiting to be processed by checking the j
                 "zone_ids": [],
                 "job_id": null
             }
-            
+
 ### Delete a network [DELETE]
 
 After deleting a network, we will send a sync event to the boxes to save the changes. This will occur 60 seconds after the network was deleted and will cause the users to disconnect.
@@ -3609,7 +3609,7 @@ After deleting a network, we will send a sync event to the boxes to save the cha
 
 + Request (application/json)
 
-        {   
+        {
             "location_id": "derby-council",
             "id": "7281919179187298712",
         }
@@ -3655,11 +3655,11 @@ If you are upgrading a box, you can send the version of the firmware you want to
 
     + box_id (required, string, `ABCDEF`) ... Slug / ID of the box you want to request payloads for. Has example value.
 
-    
+
 + Response 200 (application/json)
-    
+
     + Body
-    
+
             [{
                 "created_at": "April 5 2014 23:34:42",
                 "body": "[ 0.000000] Linux version 3.3.8
@@ -3690,7 +3690,7 @@ If you are upgrading a box, you can send the version of the firmware you want to
 + Response 200 (application/json)
 
     + Body
-    
+
             {
                 "created_at": "April 5 2014 23:34:22",
                 "body": "uptime 12 days, 1 min, load 1 2 3"
@@ -3733,7 +3733,7 @@ As previously mentioned, upgrading a single box will occur immediately and you'l
 
 # Group Port Forwards
 
-Port Forwards related resources of the **Port Forwards API**. Networks are a nested in a box and are not accessible anywhere else. 
+Port Forwards related resources of the **Port Forwards API**. Networks are a nested in a box and are not accessible anywhere else.
 
 You may create and update the port forwards directly or as a nested resource within a box.
 
@@ -3763,7 +3763,7 @@ Adding, removing and updating port forwards will cause your boxes to sync. This 
 + Response 200 (application/json)
 
     + Body
-    
+
             [{
                 "id": 7,
                 "unique_id": "1815463621122310719",
@@ -3794,7 +3794,7 @@ Adding, removing and updating port forwards will cause your boxes to sync. This 
                 "forward_to_ip": "12.12.12.12",
                 "forward_to_port": 2223
             }]
-        
+
 ## Port Forward Item [/api/v1/boxes/{box_id}/port_forwards/{unique_id}]
 
 Get a single port forward item.
@@ -3809,7 +3809,7 @@ Get a single port forward item.
 + Response 200 (application/json)
 
     + Body
-                    
+
             {
                 "id": 7,
                 "unique_id": "1815463621122310719",
@@ -3854,7 +3854,7 @@ Please use the Unique Id to update a port forward.
 + Response 201 (application/json)
 
     + Body
-                    
+
             {
                 "id": 7,
                 "unique_id": "1815463621122310719",
@@ -3865,7 +3865,7 @@ Please use the Unique Id to update a port forward.
                 "forward_to_ip": "192.168.4.3",
                 "forward_to_port": 22
             }
-            
+
 ## Modify a Port Forward Item [/api/v1/boxes/{box_id}/port_forwards/{unique_id}{?port_forward}]
 
 ### Update a single port forward item [PATCH]
@@ -3900,7 +3900,7 @@ Please use the Unique Id to update a port forward.
 + Response 201 (application/json)
 
     + Body
-                    
+
             {
                 "id": 7,
                 "unique_id": "1815463621122310719",
@@ -3911,7 +3911,7 @@ Please use the Unique Id to update a port forward.
                 "forward_to_ip": "192.168.4.3",
                 "forward_to_port": 22
             }
-            
+
 ### Delete a port forward [DELETE]
 
 + Parameters
@@ -3921,7 +3921,7 @@ Please use the Unique Id to update a port forward.
 
 + Request (application/json)
 
-        {   
+        {
             "box_id": "JCyK7Zwh0ON_ZOWso8Mhuw",
             "unique_id": "7281919179187298712",
         }
@@ -4076,14 +4076,14 @@ Alongside the standard fields, you will see some fields for pagination:
 
     + box_id (optional, integer, `153`) ... The numeric ID of the box you want to filter results for.
     + location_id (optional, integer, `872`) ... The numeric ID of the location you want to filter results for.
-    + page (optional, integer, `1`) ... For pagination purposes. 
+    + page (optional, integer, `1`) ... For pagination purposes.
     + size (optional, integer, `500`) ... The number of records you want to return. Max. value is 1000.
     + q (optional, string, `search query`) ... Search through the results as you query the API.
 
 + Response 200 (application/json)
 
     + Body
-        
+
             {
                 "sessions": [
                     {
@@ -4231,8 +4231,8 @@ Returns the aggregated sessions per day for the specified range.
 + Response 200 (application/json)
 
     + Body
-    
-            {        
+
+            {
                 "timeline": [
                     {
                         "time": 1406332800000,
@@ -4280,7 +4280,7 @@ Returns the aggregated sessions per day for the specified range.
                     }
                 ]
             }
-            
+
 ## Uniques Timeline [/api/v1/{?uniques_timeline,interval,start,end}]
 
 Returns aggregated data for the unique users by mac address (not provided) on a daily basis.
@@ -4297,7 +4297,7 @@ Returns aggregated data for the unique users by mac address (not provided) on a 
 + Response 200 (application/json)
 
     + Body
-            
+
             {
                 "uniques_timeline": [
                     {
@@ -4350,7 +4350,7 @@ A _links object is also available with the pagination details.
 + Parameters
 
     + online (required, boolean, `true`) ... Using online = true to provide a list of online users.
-    + page (optional, integer, `1`) ... For pagination purposes. 
+    + page (optional, integer, `1`) ... For pagination purposes.
     + size (optional, integer, `500`) ... The number of records you want to return. Max. value is 1000.
 
 + Response 200 (application/json)
@@ -4421,7 +4421,7 @@ A _links object is also available with the pagination details.
 + Parameters
 
     + clients (required, boolean, `true`) ... Using clients = true to provide a list of clients.
-    + page (optional, integer, `1`) ... For pagination purposes. 
+    + page (optional, integer, `1`) ... For pagination purposes.
     + size (optional, integer, `500`) ... The number of records you want to return. Max. value is 1000.
 
 + Response 200 (application/json)
@@ -4535,7 +4535,7 @@ Returns the aggregated unique clients for the specified range.
                     ]
                 }
             }
-        
+
 
 ## Top Boxes [/api/v1/sessions{?boxes,start,end}]
 
@@ -4603,8 +4603,8 @@ Returns the aggregated sessions per box in your network.
                         }
                     ]
                 }
-            }      
-          
+            }
+
 ## Top Locations [/api/v1/sessions{?locations,start,end}]
 
 Returns the aggregated sessions per location in your network.
@@ -4623,7 +4623,7 @@ The results will include a term field which is the ID of the location.
 + Response 200 (application/json)
 
     + Body
-             
+
              {
                 "locations": [
                     {
@@ -4668,8 +4668,8 @@ The results will include a term field which is the ID of the location.
                     }
                 ]
             }
-            
-            
+
+
 ## Session stats [/api/v1/sessions{?stats,start,end}]
 
 Returns statistical information on your sessions. Includes:
@@ -4705,7 +4705,7 @@ Returns statistical information on your sessions. Includes:
                     "std_deviation": 11988.649345128295
                 }
             }
-            
+
 ## Session data stats [/api/v1/sessions{?data,start,end}]
 
 Returns statistical information on your sessions. Includes:
@@ -4754,8 +4754,8 @@ Returns statistical information on your sessions. Includes:
                     }
                 }
             }
-            
-    
+
+
 ## Top Manufacturers [/api/v1/sessions{?manufacturers,start,end}]
 
 Returns the aggregated manufacturers in your network.
@@ -4849,18 +4849,18 @@ You may also offer paid access via the API. For more details, please read throug
 
 ### List all Splash Pages [GET]
 
-We send only the highlevel params with this request and we also provide the list of available access types. 
+We send only the highlevel params with this request and we also provide the list of available access types.
 
 + Request (application/json)
 
     + Headers
-    
+
             Accept: application/json
 
 + Response (application/json)
 
     + Body
-    
+
             {
                 "splash_pages": [
                     {
@@ -4898,7 +4898,7 @@ We send only the highlevel params with this request and we also provide the list
                         "weight": 100,
                         "shop_active": true,
                         "available_days": [
-                            
+
                         ],
                         "available_start": "00:00",
                         "available_end": "00:00",
@@ -4929,7 +4929,7 @@ We send only the highlevel params with this request and we also provide the list
                     }
                 ]
             }
-            
+
 ### Create new splash page [GET]
 
 A splash page must belong to a network otherwise we can display it to the end user. You can pass the network on create and or update. Simply pass the id of your network in with the network_ids param. NetworkIds must be an array.
@@ -4941,23 +4941,23 @@ We will respond with the full Splash Page Object.
 + Request (application/json)
 
     + Headers
-    
+
             Accept: application/json
 
     + Body
-    
-            { 
+
+            {
                 location_id: 'my-location'
-                splash_page: 
+                splash_page:
                     {
-                        primary_access_id: 1       
+                        primary_access_id: 1
                     }
             }
-            
+
 + Response (application/json)
 
     + Body
-    
+
             {
                 "splash_page": {
                     "unique_id": "36710012950163",
@@ -5126,13 +5126,13 @@ As you can see from the response, you can control the design and access types us
 + Request (application/json)
 
     + Headers
-    
+
             Accept: application/json
 
 + Response (application/json)
 
     + Body
-    
+
         {
             "splash_page": {
                 "unique_id": "36710012950163",
@@ -5294,13 +5294,13 @@ Changes to the splash pages can be seen immediately. Changes to the speed limits
 + Request (application/json)
 
     + Headers
-    
+
             Accept: application/json
 
 + Response (application/json)
 
     + Body
-    
+
         {
             "splash_page": {
                 "unique_id": "36710012950163",
@@ -5466,7 +5466,7 @@ Once you have done this, your users will no longer be able to view the page and 
 
 + Request (application/json)
 
-        {   
+        {
             "location_id": "le-gaff",
             "id": "54f346f57261693b3d000000",
         }
@@ -5498,8 +5498,8 @@ They are a nested resource in the Boxes API.
 + Response 200 (application/json)
 
     + Body
-    
-         
+
+
             [{
                 "timestamp": 1412122931,
                 "state": "rebooting"
@@ -5568,7 +5568,7 @@ This will create a cart and add a product to it. It is not possible to create a 
 
 Use the POST end-point to both create the cart and also update products.
 
-ProductIds must be ids from a Store's list of products. 
+ProductIds must be ids from a Store's list of products.
 
 ### Create and update a cart [POST]
 
@@ -5578,7 +5578,7 @@ ProductIds must be ids from a Store's list of products.
     + store_id (required, string, `your-store-id`) ... This is the id of the store you're attaching the transation id.
 
 + Response 200 (application/json)
-    
+
     + Body
 
 
@@ -5604,7 +5604,7 @@ This will create a cart and add a product to it. It is not possible to create a 
 
 Use the POST end-point to both create the cart and also update products.
 
-ProductIds must be ids from a Store's list of products. 
+ProductIds must be ids from a Store's list of products.
 
 ### Create and update a cart [POST]
 
@@ -5614,7 +5614,7 @@ ProductIds must be ids from a Store's list of products.
     + store_id (required, string, `your-store-id`) ... This is the id of the store you're attaching the transation id.
 
 + Response 200 (application/json)
-    
+
     + Body
 
 
@@ -5641,13 +5641,13 @@ Results are cached for ten minutes to improve load times.
     + q (optional, string, `Search data`) ... Search through your list of tech..
     + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 12 weeks ago.
     + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to now.
-    + page (optional, integer, `1`) ... For pagination purposes. 
+    + page (optional, integer, `1`) ... For pagination purposes.
     + size (optional, integer, `500`) ... The number of records you want to return. Max. value is 1000.
-    
+
 + Response 200 (application/json)
-    
+
     + Body
-    
+
             {
                 "tech": [
                     {
@@ -5733,7 +5733,7 @@ Get grouped / aggregated stats about the technologies in use in your networks.
     + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to now.
 
 + Response 200 (application/json)
-    
+
     + Body
 
             {
@@ -5967,7 +5967,7 @@ This is a handy end-point which is often required when using Oauth. It provides 
 + Response 200 (application/json)
 
     + Body
-    
+
             {
                 "email": "bob@marley.com",
                 "username": "Big Chief",
@@ -5984,7 +5984,7 @@ You are only permitted to get your own account details and you will need the slu
 
 Whilst we store the last4 numbers of your credit-card, we do not store the rest.
 
-The user object contains details of your plan for good measure. 
+The user object contains details of your plan for good measure.
 
 You can pass a string of emails to the billing_email field. Doing so will send an email to each person.
 
@@ -5999,7 +5999,7 @@ If you want to cancel your account, you must use the Subscriptions API. You are 
 + Response 200 (application/json)
 
     + Body
-    
+
             {
                 "username": "Big Chief",
                 "email": "bob@marley.com",
@@ -6061,8 +6061,8 @@ If you want to cancel your account, you must use the Subscriptions API. You are 
     + id (required, string, `bob-marley`) ... Slug `slug` for your account, bob-marley.
 
 + Request (application/json)
-    
-        { 
+
+        {
             "user_id": "simon-morley"
             "user":
                 {
@@ -6074,7 +6074,7 @@ If you want to cancel your account, you must use the Subscriptions API. You are 
 
 + Response 200 (application/json)
 
-    +    body 
+    +    body
 
             { "message" : "Success!" }
 
@@ -6088,8 +6088,8 @@ If you want to cancel your account, you must use the Subscriptions API. You are 
     + id (required, string, `bob-marley`) ... Slug `slug` for your account, simon-the-morley.
 
 + Request (application/json)
-    
-        { 
+
+        {
             "user_id": "bob-marley"
             "user":
                 {
@@ -6101,13 +6101,13 @@ If you want to cancel your account, you must use the Subscriptions API. You are 
 
 + Response 200 (application/json)
 
-    +    body 
+    +    body
 
             { "message" : "Success!" }
 
 ## View usage quotas [/api/v1/users/{id}/quotas]
 
-If you want to see your current usage, including the splash page views or number of locations. You can use this API. 
+If you want to see your current usage, including the splash page views or number of locations. You can use this API.
 
 Splash Page view are currently updated nightly.
 
@@ -6118,14 +6118,14 @@ Splash Page view are currently updated nightly.
     + id (required, string, `bob-marley`) ... Slug `slug` for your account, simon-the-morley.
 
 + Request (application/json)
-    
-        { 
+
+        {
             "id": "bob-marley"
         }
 
 + Response 200 (application/json)
 
-    +    body 
+    +    body
 
             {
                 "quota": {
@@ -6157,14 +6157,14 @@ Even your current session will be destroyed.
     + id (required, string, `bob-marley`) ... Slug `slug` for your account, simon-the-morley.
 
 + Request (application/json)
-    
-        { 
+
+        {
             "id": "bob-marley"
         }
 
 + Response 200 (application/json)
 
-    +    body 
+    +    body
 
             {
                 "message": "Ok"
@@ -6172,7 +6172,7 @@ Even your current session will be destroyed.
 
 # Group Webhooks
 
-Webhooks are a beta feature and will not work on all accounts yet. Webhooks will notify your own application when an event is triggered. 
+Webhooks are a beta feature and will not work on all accounts yet. Webhooks will notify your own application when an event is triggered.
 
 For example, CT can notify you when a user signs in or when an invitation is accepted.
 
@@ -6185,9 +6185,9 @@ Webhooks that fail three times will be disabled. You will need to update the url
 ### List all your webhooks [GET]
 
 + Response 200 (application/json)
-            
+
     + Body
-    
+
             [
                 {
                     "user_id": 1,
@@ -6275,10 +6275,10 @@ You must send a valid url - including https.
         }
 
 + Response 200 (application/json)
-        
+
 
     + Body
-    
+
             {
                 "user_id": 1,
                 "id": "54da01fa49726f70e8500000",
@@ -6327,19 +6327,19 @@ You must send a valid url - including https.
 
 + Parameters
 
-    + id (required, string, `54da01fa49726f70e8500000`) ... ID of the webhook 
+    + id (required, string, `54da01fa49726f70e8500000`) ... ID of the webhook
 
 
 + Request (application/json)
 
-        {   
+        {
             "id": "54da01fa49726f70e8500000",
         }
 
 + Response 200 (application/json)
-        
+
     + Body
-    
+
             {
                 "user_id": 1,
                 "id": "54da01fa49726f70e8500000",
@@ -6386,12 +6386,12 @@ You must send a valid url - including https.
 
 + Parameters
 
-    + id (required, string, `54da01fa49726f70e8500000`) ... ID of the webhook 
+    + id (required, string, `54da01fa49726f70e8500000`) ... ID of the webhook
 
 
 + Request (application/json)
 
-        {   
+        {
             "id": "54da01fa49726f70e8500000",
             "webhook": {
                 "url": "https://polkaspots.com/new-webhook",
@@ -6409,9 +6409,9 @@ You must send a valid url - including https.
         }
 
 + Response 200 (application/json)
-        
+
     + Body
-    
+
             {
                 "user_id": 1,
                 "id": "54da01fa49726f70e8500000",
@@ -6458,20 +6458,20 @@ You must send a valid url - including https.
 
 + Parameters
 
-    + id (required, string, `54da01fa49726f70e8500000`) ... ID of the webhook 
+    + id (required, string, `54da01fa49726f70e8500000`) ... ID of the webhook
 
 
 + Request (application/json)
 
-        {   
+        {
             "id": "54da01fa49726f70e8500000",
         }
 
 + Response (application/json)
 
     + Body
-    
-            { 
+
+            {
                 message: true
             }
 
@@ -6501,13 +6501,13 @@ You need to resync the networks in order for the changes to propagate to the box
 + Request (application/json)
 
     + Headers
-    
+
             Accept: application/json
 
 + Response (application/json)
 
     + Body
-    
+
             [
                 {
                     "zone_name": "Lobby, secure LAN",
@@ -6530,12 +6530,12 @@ When you're creating a zone, you can choose to add networks and boxes. If you do
 + Request (application/json)
 
     + Headers
-    
+
             Accept: application/json
-            
+
     + Body
-    
-            { 
+
+            {
                 location_id: 'derby-city-council',
                 zone: {
                         boxes: [1,2,3],
@@ -6544,11 +6544,11 @@ When you're creating a zone, you can choose to add networks and boxes. If you do
                         zone_description: 'In the cupboard'
                     }
             }
-            
+
 
 + Response (application/json)
 
-    + Body   
+    + Body
 
             {
                 "zone": {
@@ -6574,8 +6574,8 @@ When you're creating a zone, you can choose to add networks and boxes. If you do
                     }
                 ]
             }
-        
-        
+
+
 ## Zones Object [/api/v1/locations/{location_id}/zones/{id}]
 
 + Parameters
@@ -6588,20 +6588,20 @@ When you're creating a zone, you can choose to add networks and boxes. If you do
 + Request (application/json)
 
     + Headers
-    
+
             Accept: application/json
-            
+
     + Body
-    
-            { 
+
+            {
                 location_id: 'derby-city-council',
                 id: '54f346f57261693b3d000000'
             }
-                
+
 
 + Response (application/json)
 
-   + Body   
+   + Body
 
             {
                 "zone": {
@@ -6637,16 +6637,16 @@ If you just want to update the name, do not send the zones / boxes params.
 + Request (application/json)
 
     + Headers
-    
+
             Accept: application/json
-            
+
     + Body
-    
-            { 
+
+            {
                 location_id: 'derby-city-council',
                 id: '54f346f57261693b3d000000',
                 zone:
-                    
+
                     {
                         boxes: [1,2,3],
                         networks: ['44f228d17261690826000000'],
@@ -6654,10 +6654,10 @@ If you just want to update the name, do not send the zones / boxes params.
                         zone_description: 'In the cupboard'
                     }
             }
-                
+
 + Response (application/json)
 
-   + Body   
+   + Body
 
             {
                 "zone": {
@@ -6693,7 +6693,7 @@ If you just want to update the name, do not send the zones / boxes params.
 
 + Request (application/json)
 
-        {   
+        {
             "location_id": "le-gaff",
             "id": "54f346f57261693b3d000000",
         }
