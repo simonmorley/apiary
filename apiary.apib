@@ -3639,7 +3639,7 @@ The available options include:
 - `GET` - Retrieves a resource or list of resources
 - `DELETE` - Delete a resource
 
-Optionally, you can choose to save the output of a command in a BLOB >!*. Just send the **save** parameter with your POST request.
+Optionally, you can choose to save the output of a command in a **BLOB**. Just send the **save** parameter with your POST request.
 
 If you are upgrading a box, you can send the version of the firmware you want to upgrade to and also the time you want the payload to run. Please note that if you upgrade a single device, the upgrade will run immediately. However, if you upgrade more than one box in one go, we will queue the job for processing. Jobs usually get processed within 30 seconds.
 
@@ -3709,15 +3709,6 @@ As previously mentioned, upgrading a single box will occur immediately and you'l
     + scheduled (string `12am tomorrow`) ... Send the time you want the upgrade to occur. Applies to upgrades only.
 
 + Request (application/json)
-
-        { "payload":
-                {
-                    "command_id": "JCyK7Zwh0ON_ZOWso8Mhuw",
-                    "box_ids": ['ID', 'ID2', 'ID3'],
-                    "upgrade": true,
-                    "scheduled": "Tonight at 4pm",
-                }
-        }
 
 + Response 201 (application/json)
 
