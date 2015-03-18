@@ -6325,7 +6325,7 @@ Your codes will be created shortly after the voucher and a link will be sent to 
 
 + Parameters
 
-    + id (required, string, `54da01fa49726f70e8500000`) ... ID of the webhook
+    + id (required, string, `54da01fa49726f70e8500000`) ... ID of the voucher
 
 
 + Request (application/json)
@@ -6369,7 +6369,7 @@ You cannot update the quantity of codes, duration etc. after a voucher has been 
 
 + Parameters
 
-    + id (required, string, `54da01fa49726f70e8500000`) ... ID of the webhook
+    + id (required, string, `54da01fa49726f70e8500000`) ... ID of the voucher
     + regenerate_link (optional, boolean, `true`) ... Regenerate the temporary URL from which you can download the vouchers.
 
 
@@ -6382,6 +6382,30 @@ You cannot update the quantity of codes, duration etc. after a voucher has been 
               "batch_name": "My New Name"
             }
         }
+
+### Delete a specific voucher [DELETE]
+
+You can't delete vouchers with codes that have been activated.
+
++ Parameters
+
+    + id (required, string, `54da01fa49726f70e8500000`) ... ID of the voucher
+
+
++ Request (application/json)
+
+        {
+            "id": "54da01fa49726f70e8500000",
+        }
+
++ Response (application/json)
+
+    + Body
+
+            {
+                message: true
+            }
+
 
 # Group Webhooks
 
