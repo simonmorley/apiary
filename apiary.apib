@@ -6211,6 +6211,7 @@ You can't delete a batch after it's been used.
 + format - alpha, numeric, words. Leave blank for default, alpha-numeric
 + download_limit - the MB a user is allowed to download
 + upload_limit - the MB a user is allowed to upload
++ download_link - the temporary link from which you can download a PDF of your vouchers
 
 ## Vouchers Collection [/api/v1/vouchers]
 
@@ -6252,7 +6253,8 @@ You can't delete a batch after it's been used.
                 "access_restrict_period": null,
                 "expiration": null,
                 "secure_password": true,
-                "format": "words"
+                "format": "words",
+                "download_link": "https://ct-vouchers.s3.amazonaws.com/temp.jpg?AWSAccessKeyId=AKIAITIVZ45US7A&Expires=1426545993&Signature=s"
             }
         ]
 
@@ -6357,8 +6359,29 @@ Your codes will be created shortly after the voucher and a link will be sent to 
                 "secure_password": true,
                 "voucher_format": null,
                 "download_limit": null,
-                "upload_limit": null
+                "upload_limit": null,
+                "download_link": "https://ct-vouchers.s3.amazonaws.com/temp.jpg?AWSAccessKeyId=AKIAITIVZ45US7A&Expires=1426545993&Signature=s"
             }
+
+### Update a specific voucher [PATCH]
+
+You cannot update the quantity of codes, duration etc. after a voucher has been created. If you make a mistake, delete the voucher before anyone has used a code and try again.
+
++ Parameters
+
+    + id (required, string, `54da01fa49726f70e8500000`) ... ID of the webhook
+    + regenerate_link (optional, boolean, `true`) ... Regenerate the temporary URL from which you can download the vouchers.
+
+
++ Request (application/json)
+
+        {
+            "id": "54da01fa49726f70e8500000",
+            "voucher": {
+              "regenerate_link": true,
+              "batch_name": "My New Name"
+            }
+        }
 
 # Group Webhooks
 
