@@ -6269,11 +6269,18 @@ Your codes will be created shortly after the voucher and a link will be sent to 
     + quantity (required, integer, `1000`) ... Min 10 and max 1000. The number of codes you require.
     + location_id (required, integer, `1813`) ... Location ID to which the vouchers belong.
     + splash_page_id (required, string, `12HKJHSKJHHHS`) ...  Vouchers belong to a splash page, make sure to enter this.
+    + validity_minutes (required, integer, `60`) ... How long the voucher should last for.
     + batch_voucher_value (optional, integer, `1000`) ... Optional value for accounting purposes.
     + session_timeout (optional, integer, `60`) ... Default value is 60. This controls how often your splash pages appear.
     + idle_timeout (optional, integer, `60`) ... Default value is 60. This controls how long before the guest is logged out.
     + download_speed (optional, integer, `2048`) ... The download speed restriction. Default 2048. In kbps.
     + upload_speed (optional, integer, `1024`) ... The upload speed restriction. Default 1024. In kbps.
+    + access_period (optional, integer, `180`) ... Specify the time the voucher lasts for. Different to validity mins.
+    + access_restrict_period (optional, string, `weekly`) ... Specify the time period usage is measured.
+    + expiration (optional, string, `1400000`) ... When the voucher should expire, in unix time format please.
+    + secure_password (optional, boolean, `true`) ... When set to false, the password will be a word selected from Alice in Wonderland.
+    + format (optional, string, `words`) ... numeric, alphanumeric, numeric. Specifies the type of username generated. Words are also generated from Alice in Wonderland.
+    + access_type (optional, integer, `1`) ... Defaults to 1 which provides timed access. 2 provides data raccess.
 
 + Response 200 (application/json)
 
