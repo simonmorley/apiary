@@ -6258,9 +6258,15 @@ Your codes will be created shortly after the voucher and a link will be sent to 
 
 + Request (application/json)
 
-        {
-            "id": "bob-marley"
-        }
+    + Header
+
+            Accept: application/json
+
++ Parameters
+
+    + batch_description (required, string, `my batch`) ... The name for the voucher batch.
+    + batch_description (optional, string, `60 minute vouchers`) ... A description - appears on the voucher codes.
+    + batch_voucher_value (optional, integer, `1000`) ... Optional value for accounting purposes.
 
 + Response 200 (application/json)
 
