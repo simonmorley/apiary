@@ -6196,11 +6196,10 @@ The codes generated are a separate object. Use the Codes API to get hold of the 
 + validity_minutes - integer, how long the voucher lasts for
 + access_period - the total minutes the codes are valid for
 + access_restrict_period - daily, weekly or monthly restrictions
++ access_restrict_data - total data limit, can be set daily, weekly, monthly or all time
 + expiration - when the voucher will expire in unix time
 + secure_password - choose a simple or secure passy
 + format - alpha, numeric, words. Leave blank for default, alpha-numeric
-+ download_limit - the MB a user is allowed to download
-+ upload_limit - the MB a user is allowed to upload
 + download_link - the temporary link from which you can download a PDF of your vouchers
 + completed - this will be set when all the codes have been created
 
@@ -6235,13 +6234,12 @@ The codes generated are a separate object. Use the Codes API to get hold of the 
                 "location_id": 1890,
                 "session_timeout": 60,
                 "idle_timeout": 60,
-                "download_limit": null,
-                "upload_limit": null,
                 "download_speed": 1024,
                 "upload_speed": 512,
                 "validity_minutes": 60,
                 "access_period": 1000,
                 "access_restrict_period": null,
+                "access_restrict_data": null,
                 "expiration": null,
                 "secure_password": true,
                 "format": "words",
@@ -6279,8 +6277,7 @@ Your codes will be created shortly after the voucher and a link will be sent to 
     + secure_password (optional, boolean, `true`) ... When set to false, the password will be a word selected from Alice in Wonderland.
     + format (optional, string, `words`) ... numeric, alphanumeric, numeric. Specifies the type of username generated. Words are also generated from Alice in Wonderland.
     + access_type (optional, integer, `1`) ... Defaults to 1 which provides timed access. 2 provides data raccess.
-    + download_limit (optional, integer, `4096`) ... If you've enabled data restrictions, this controls to MB a user can download.
-    + upload_limit (optional, integer, `2048`) ... If you've enabled data restrictions, this controls to MB a user can upload.
+    + access_restrict_data (optional, integer, `4096`) ... If you've enabled data restrictions, this controls to MB a user can download and upload (combined).
 
 + Response 200 (application/json)
 
@@ -6304,11 +6301,10 @@ Your codes will be created shortly after the voucher and a link will be sent to 
                 "upload_speed": null,
                 "validity_minutes": 60,
                 "access_restrict_period": null,
+                "access_restrict_data": null,
                 "expiration": null,
                 "secure_password": true,
                 "voucher_format": null,
-                "download_limit": null,
-                "upload_limit": null,
                 "created": false,
             }
 
@@ -6348,11 +6344,10 @@ Your codes will be created shortly after the voucher and a link will be sent to 
                 "upload_speed": null,
                 "validity_minutes": 60,
                 "access_restrict_period": null,
+                "access_restrict_data": null,
                 "expiration": null,
                 "secure_password": true,
                 "voucher_format": null,
-                "download_limit": null,
-                "upload_limit": null,
                 "created": true,
                 "download_link": "https://ct-vouchers.s3.amazonaws.com/temp.jpg?AWSAccessKeyId=AKIAITIVZ45US7A&Expires=1426545993&Signature=s"
             }
