@@ -3703,10 +3703,11 @@ As previously mentioned, upgrading a single box will occur immediately and you'l
 + Parameters
 
     + box_id (required, string, `ZOWso8IMhuwYTrdh`) ... Slug `slug` of the Box to perform action with. Has example value.
-    + command_id (string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Unique ID of the command you want to send to the box.
-    + box_ids (array / string, `HSKJHKJH,BMBCKJHS`) ... The slugs of the devices you want to receive the payloads.
-    + upgrade (boolean `true`) ... Send a true value and we will upgrade all the boxes you have sent and ignore the command.
-    + scheduled (string `12am tomorrow`) ... Send the time you want the upgrade to occur. Applies to upgrades only.
+    + command_id (optional, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Unique ID of the command you want to send to the box.
+    + box_ids (optsional, string, `HSKJHKJH,BMBCKJHS`) ... The slugs of the devices you want to receive the payloads.
+    + upgrade (optional, boolean, `true`) ... Send a true value and we will upgrade all the boxes you have sent and ignore the command.
+    + version (optional, string, `150112-0A`) ... If you're upgrading your box, you can send the firmware version you want to swap to.
+    + scheduled (optional, string, `12am tomorrow`) ... Send the time you want the upgrade to occur. Applies to upgrades only.
 
 + Request (application/json)
 
