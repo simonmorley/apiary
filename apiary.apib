@@ -6204,6 +6204,7 @@ You can't delete a batch after it's been used.
 + download_speed - kbps, set the speed of connection
 + upload_speed - kbps
 + validity_minutes - integer, how long the voucher lasts for
++ access_period - the total minutes the codes are valid for
 + access_restrict_period - daily, weekly or monthly restrictions
 + expiration - when the voucher will expire in unix time
 + secure_password - choose a simple or secure passy
@@ -6221,7 +6222,7 @@ You can't delete a batch after it's been used.
 
 + Parameters
 
-    + q (optional, string, `my batch`) ... Query string
+    + q (optional, string, `my batch`) ... Optional search query.
 
 + Response 200 (application/json)
 
@@ -6242,7 +6243,8 @@ You can't delete a batch after it's been used.
                 "idle_timeout": 60,
                 "download_speed": 1024,
                 "upload_speed": 512,
-                "validity_minutes": null,
+                "validity_minutes": 60,
+                "access_period": 1000,
                 "access_restrict_period": null,
                 "expiration": null,
                 "secure_password": true,
