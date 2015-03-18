@@ -6209,6 +6209,8 @@ You can't delete a batch after it's been used.
 + expiration - when the voucher will expire in unix time
 + secure_password - choose a simple or secure passy
 + format - alpha, numeric, words. Leave blank for default, alpha-numeric
++ download_limit - the MB a user is allowed to download
++ upload_limit - the MB a user is allowed to upload
 
 ## Vouchers Collection [/api/v1/vouchers]
 
@@ -6241,6 +6243,8 @@ You can't delete a batch after it's been used.
                 "location_id": 1890,
                 "session_timeout": 60,
                 "idle_timeout": 60,
+                "download_limit": null,
+                "upload_limit": null,
                 "download_speed": 1024,
                 "upload_speed": 512,
                 "validity_minutes": 60,
