@@ -6317,6 +6317,49 @@ Your codes will be created shortly after the voucher and a link will be sent to 
                 "upload_limit": null
             }
 
+## Voucher item [/api/v1/vouchers/{id}]
+
+### Display a specific voucher [GET]
+
++ Parameters
+
+    + id (required, string, `54da01fa49726f70e8500000`) ... ID of the webhook
+
+
++ Request (application/json)
+
+        {
+            "id": "54da01fa49726f70e8500000",
+        }
+
++ Response 200 (application/json)
+
+    + Body
+            {
+                "unique_id": "2946826240485203744",
+                "batch_name": "asdfasdf",
+                "batch_description": null,
+                "created_at": 1426643061,
+                "is_active": true,
+                "voucher_value": null,
+                "quantity": 10,
+                "access_type": 1,
+                "limit_type": "multi_use",
+                "splash_page_id": null,
+                "location_id": null,
+                "session_timeout": null,
+                "idle_timeout": null,
+                "download_speed": null,
+                "upload_speed": null,
+                "validity_minutes": 60,
+                "access_restrict_period": null,
+                "expiration": null,
+                "secure_password": true,
+                "voucher_format": null,
+                "download_limit": null,
+                "upload_limit": null
+            }
+
 # Group Webhooks
 
 Webhooks are a beta feature and will not work on all accounts yet. Webhooks will notify your own application when an event is triggered.
