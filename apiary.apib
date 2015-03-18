@@ -243,6 +243,90 @@ Lists all your boxes globally.
                 }
             }
 
+### Create a Box [POST]
+
+Don't forget, you must send the location_id with your request IN the box params. The following params are available:
+
+If you are using the magic auto-discovery tool, please use the detect API end point before creating a box. Passing the parameter discovery=true will automatically add your discovered devices. If you're using this method, you do not need to send the calledstationid etc.
++ Parameters
+
+    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
+    + calledstationid (required, string, `mac`) ... Mac address of the box.
+    + description (required, text, `Upstairs, in the loft`) ... A description of the box.
+    + discovery (optional, boolean, `true`) ... Send this parameter in to override the above options and automatically add discovered boxes.
+
++ Request (application/json)
+
+        {
+            "box":
+                {
+                    "location_id": 53,
+                    "gmaps_zoom": 10,
+                    "description": "In the washing room",
+                    "calledstationid": "DC-9F-DB-3D-AC-49",
+                    "wan_ip": "192.168.1.64",
+                    "wan_proto": "static",
+                    "radius_secret": "f797ef11f80f2737e07de1bae056",
+                    "access_token": "3db9e053-fabb-422d-a5b1-18b275af5236",
+                    "machine_type": "Ubiquiti AirRouter",
+                    "gubbins_version": "1.3",
+                    "latitude": "51.54462696721446",
+                    "longitude": "-0.053558349609375",
+                    "wan_netmask": "255.255.255.0",
+                    "wan_gateway": "192.168.1.1",
+                    "wan_dns_1": "8.8.8.8",
+                    "wan_dns_2": "8.8.4.4",
+                    "channel": "04",
+                    "channel_5": "auto",
+                    "tx_power_2": "19",
+                    "tx_power_5": "20",
+                    "ht_mode_2": "HT40+",
+                    "ht_mode_5": "HT20",
+                    "updated_at": "September 29 2014 17:13:56",
+                    "development_mode": "Beta",
+                    "is_monitored": false,
+                    "pppoe_username": "user@polkaspots.com",
+                    "pppoe_password": "pass"
+                }
+        }
+
+
++ Response 200 (application/json)
+
+                {
+                    "slug": "JCyK7Zwh0ON_ZOWso8Mhuw",
+                    "created_at": "March 29 2014 10:54:59",
+                    "device_icon": "ubiquiti-airrouter-icon.png",
+                    "location_id": 53,
+                    "gmaps_zoom": 10,
+                    "description": "In the washing room",
+                    "calledstationid": "DC-9F-DB-3D-AC-49",
+                    "wan_ip": "192.168.1.64",
+                    "wan_proto": "static",
+                    "radius_secret": "f797ef11f80f2737e07de1bae056",
+                    "access_token": "3db9e053-fabb-422d-a5b1-18b275af5236",
+                    "machine_type": "Ubiquiti AirRouter",
+                    "gubbins_version": "1.3",
+                    "latitude": "51.54462696721446",
+                    "longitude": "-0.053558349609375",
+                    "wan_netmask": "255.255.255.0",
+                    "wan_gateway": "192.168.1.1",
+                    "wan_dns_1": "8.8.8.8",
+                    "wan_dns_2": "8.8.4.4",
+                    "channel": "04",
+                    "channel_5": "auto",
+                    "tx_power_2": "19",
+                    "tx_power_5": "20",
+                    "ht_mode_2": "HT40+",
+                    "ht_mode_5": "HT20",
+                    "updated_at": "September 29 2014 17:13:56",
+                    "development_mode": "Beta",
+                    "is_monitored": false,
+                    "pppoe_username": "user@polkaspots.com",
+                    "pppoe_password": "pass"
+                }
+
+
 ## Box [/api/v1/boxes/{id}]
 
 The box object contains a lot of information relating to both the box and the local networks. Assuming the box is online, you will see a nested object called iwinfo which contains the interface stats, including signal strength and SSID.
@@ -372,93 +456,6 @@ There's some helpers included too which may help you build a beautiful portal. W
         {   "id": 'JCyK7Zwh0ON_ZOWso8Mhuw'  }
 
 + Response 204 (application/json)
-
-
-## Box Create [/api/v1/boxes{?calledstationid,description,location_id,discovery}]
-
-### Create a Box [POST]
-
-Don't forget, you must send the location_id with your request IN the box params. The following params are available:
-
-If you are using the magic auto-discovery tool, please use the detect API end point before creating a box. Passing the parameter discovery=true will automatically add your discovered devices. If you're using this method, you do not need to send the calledstationid etc.
-+ Parameters
-
-    + location_id (required, string, `derby-city-council`) ... Slug `slug` of the Location to perform action with. Has example value.
-    + calledstationid (required, string, `mac`) ... Mac address of the box.
-    + description (required, text, `Upstairs, in the loft`) ... A description of the box.
-    + discovery (optional, boolean, `true`) ... Send this parameter in to override the above options and automatically add discovered boxes.
-
-+ Request (application/json)
-
-        {
-            "box":
-                {
-                    "location_id": 53,
-                    "gmaps_zoom": 10,
-                    "description": "In the washing room",
-                    "calledstationid": "DC-9F-DB-3D-AC-49",
-                    "wan_ip": "192.168.1.64",
-                    "wan_proto": "static",
-                    "radius_secret": "f797ef11f80f2737e07de1bae056",
-                    "access_token": "3db9e053-fabb-422d-a5b1-18b275af5236",
-                    "machine_type": "Ubiquiti AirRouter",
-                    "gubbins_version": "1.3",
-                    "latitude": "51.54462696721446",
-                    "longitude": "-0.053558349609375",
-                    "wan_netmask": "255.255.255.0",
-                    "wan_gateway": "192.168.1.1",
-                    "wan_dns_1": "8.8.8.8",
-                    "wan_dns_2": "8.8.4.4",
-                    "channel": "04",
-                    "channel_5": "auto",
-                    "tx_power_2": "19",
-                    "tx_power_5": "20",
-                    "ht_mode_2": "HT40+",
-                    "ht_mode_5": "HT20",
-                    "updated_at": "September 29 2014 17:13:56",
-                    "development_mode": "Beta",
-                    "is_monitored": false,
-                    "pppoe_username": "user@polkaspots.com",
-                    "pppoe_password": "pass"
-                }
-        }
-
-
-+ Response 200 (application/json)
-
-                {
-                    "slug": "JCyK7Zwh0ON_ZOWso8Mhuw",
-                    "created_at": "March 29 2014 10:54:59",
-                    "device_icon": "ubiquiti-airrouter-icon.png",
-                    "location_id": 53,
-                    "gmaps_zoom": 10,
-                    "description": "In the washing room",
-                    "calledstationid": "DC-9F-DB-3D-AC-49",
-                    "wan_ip": "192.168.1.64",
-                    "wan_proto": "static",
-                    "radius_secret": "f797ef11f80f2737e07de1bae056",
-                    "access_token": "3db9e053-fabb-422d-a5b1-18b275af5236",
-                    "machine_type": "Ubiquiti AirRouter",
-                    "gubbins_version": "1.3",
-                    "latitude": "51.54462696721446",
-                    "longitude": "-0.053558349609375",
-                    "wan_netmask": "255.255.255.0",
-                    "wan_gateway": "192.168.1.1",
-                    "wan_dns_1": "8.8.8.8",
-                    "wan_dns_2": "8.8.4.4",
-                    "channel": "04",
-                    "channel_5": "auto",
-                    "tx_power_2": "19",
-                    "tx_power_5": "20",
-                    "ht_mode_2": "HT40+",
-                    "ht_mode_5": "HT20",
-                    "updated_at": "September 29 2014 17:13:56",
-                    "development_mode": "Beta",
-                    "is_monitored": false,
-                    "pppoe_username": "user@polkaspots.com",
-                    "pppoe_password": "pass"
-                }
-
 
 ## Update a box [/api/v1/boxes/{id}{?params}]
 
