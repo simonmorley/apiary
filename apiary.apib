@@ -66,56 +66,54 @@ Boxes belong to locations and whilst you can read, update, destroy and perform o
 + calledstationid - the mac address of the box
 + wan_ip - the WAN IP address
 + wan_proto - static, pppoe or dhcp protocol of wan
-+ public_ip
-+ dns_hostname
-+ state
++ public_ip - the public IP of the box
++ dns_hostname - rDNS hostname updated automatically
++ state - current state of the box.
 + installer_id
 + serial_number
 + system_type
-+ machine_type
-+ access_token
-+ latitude
-+ longitude
-+ wan_ipaddr
-+ wan_netmask
-+ wan_gateway
-+ wan_dns_1
-+ wan_dns_2
-+ channel
-+ channel_5
-+ tx_power_2
-+ tx_power_5
++ machine_type - type of box
++ access_token - an API token for the box
++ latitude - current latitude
++ longitude - current longitude
++ wan_ipaddr - WAN IP (if static)
++ wan_netmask - WAN netmask (if static)
++ wan_gateway - WAN gateway (if static)
++ wan_dns_1 - WAN dns (if static)
++ wan_dns_2 - WAN dns (if static)
++ channel - 2.4Ghz radio channel
++ channel_5 - 5Ghz channel if dual band
++ tx_power_2 - 2.4Ghz transmit power
++ tx_power_5 - 5Ghz transmit power, if dual band
 + ht_mode_2
 + ht_mode_5
 + updated_at
-+ created_at
 + development_mode
-+ is_monitored
++ is_monitored - should the box send alerts?
 + pppoe_username
 + pppoe_password
-+ radiusnasid
-+ last_disconnect_reason
++ radiusnasid - important for radius sessions
++ last_disconnect_reason - why the box disconnected
 + firmware_version
-+ next_firmware
-+ upgrade_scheduled
-+ upgrade_processing
-+ dual_band
-+ iwinfo
-+ avg_speedtest
-+ wan_mtu
-+ speedtest_running
++ next_firmware - available firmware for the box
++ upgrade_scheduled - whether the box has a firmware scheduled
++ upgrade_processing - is the box processing a job
++ dual_band - if the device has two radios
++ iwinfo - some high-level iw info stats
++ avg_speedtest - avg. speedtest
++ wan_mtu - MTU of the WAN port
++ speedtest_running - whether a speedtest is running
 + status_colour
-+ upgrading
-+ can_reboot
-+ latest_speedtest
-+ is_online
-+ is_polkaspots
-+ clients_online
++ upgrading - whether the box is rebooting
++ can_reboot - can the box reboot?
++ latest_speedtest - the last speedtest result
++ is_online - is the box online?
++ is_polkaspots - is a PolkaSpots box?
++ clients_online - number of clients currently connected
 + timezone
-+ auto_upgrades
-+ sockets_hash
-+ band_steering
-+ radius_secret
++ auto_upgrades - auto upgrades run whenever the box needs them
++ band_steering - enable to force users on the 5Ghz radio if present
++ radius_secret - the secret for radius requests
 
 ##Allowed HTTPs requests:
 
