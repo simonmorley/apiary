@@ -56,17 +56,16 @@ Boxes belong to locations and whilst you can read, update, destroy and perform o
 **A box has the following attributes:**
 
 + slug - ready only record identifier.
-+ slug
-+ created_at
-+ device_icon
-+ uptime
++ created_at - time the box was created
++ device_icon - an icon for the box
++ uptime - the uptime of the device
 + location_id
-+ gmaps_zoom
-+ last_heartbeat
++ gmaps_zoom - zoom level for maps settings
++ last_heartbeat - last time CT heard from the box
 + description
-+ calledstationid
-+ wan_ip
-+ wan_proto
++ calledstationid - the mac address of the box
++ wan_ip - the WAN IP address
++ wan_proto - static, pppoe or dhcp protocol of wan
 + public_ip
 + dns_hostname
 + state
