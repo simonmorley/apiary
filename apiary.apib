@@ -6200,7 +6200,8 @@ The codes generated are a separate object. Use the Codes API to get hold of the 
 + expiration - when the voucher will expire in unix time
 + secure_password - choose a simple or secure passy
 + format - alpha, numeric, words. Leave blank for default, alpha-numeric
-+ download_link - the temporary link from which you can download a PDF of your vouchers
++ pdf_link - the temporary link from which you can download a PDF of your vouchers
++ csv_link - the temporary link from which you can download a CSV of your vouchers
 + completed - this will be set when all the codes have been created
 + username - the name of the user who created the vouchers
 + location_name - the name of the location the vouchers are for
@@ -6246,7 +6247,8 @@ The codes generated are a separate object. Use the Codes API to get hold of the 
                 "secure_password": true,
                 "format": "words",
                 "created": false,
-                "download_link": "https://ct-vouchers.s3.amazonaws.com/temp.jpg?AWSAccessKeyId=AKIAITIVZ45US7A&Expires=1426545993&Signature=s"
+                "pdf_link": "https://ct-vouchers.s3.amazonaws.com/temp.pdf?AWSAccessKeyId=AKIAITIVZ45US7A&Expires=1426545993&Signature=s"
+                "csv_link": "https://ct-vouchers.s3.amazonaws.com/temp.csv?AWSAccessKeyId=AKIAITIVZ45US7A&Expires=1426545993&Signature=s"
             }
         ]
 
@@ -6351,7 +6353,8 @@ Your codes will be created shortly after the voucher and a link will be sent to 
                 "secure_password": true,
                 "voucher_format": null,
                 "created": true,
-                "download_link": "https://ct-vouchers.s3.amazonaws.com/temp.jpg?AWSAccessKeyId=AKIAITIVZ45US7A&Expires=1426545993&Signature=s"
+                "pdf_link": "https://ct-vouchers.s3.amazonaws.com/temp.pdf?AWSAccessKeyId=AKIAITIVZ45US7A&Expires=1426545993&Signature=s"
+                "csv_link": "https://ct-vouchers.s3.amazonaws.com/temp.csv?AWSAccessKeyId=AKIAITIVZ45US7A&Expires=1426545993&Signature=s"
             }
 
 ### Update a specific voucher [PATCH]
