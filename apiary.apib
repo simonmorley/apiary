@@ -906,11 +906,18 @@ Returns the payloads that have recently run on the box. You can set up a payload
 
 Codes related resources of the **Codes API**
 
+Codes or Internet Vouchers represent unique usernames and passwords. They are used to gain access to the Internet via the splash pages (when voucher access is required).
+
+After creating a voucher batch using the **Vouchers API**, a set of Codes will be created for you to distribute. You can download these codes directly from the voucher as a PDF or CSV. 
+
+You may also view the raw codes.
+
 ## Codes Collection [/api/v1/codes]
 
 + Parameters
 
     + voucher_id (optional, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Unique ID of the voucher from which the codes were generated.
+    + active (optional, boolean, `true`) ... filter the results by used or unused values.
 
 ### List all codes for a voucher [GET]
 
