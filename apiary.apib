@@ -906,11 +906,11 @@ Returns the payloads that have recently run on the box. You can set up a payload
 
 Codes related resources of the **Codes API**
 
-Codes or Internet Vouchers represent unique usernames and passwords. They are used to gain access to the Internet via the splash pages (when voucher access is required).
+Codes or Internet Vouchers represent unique usernames and passwords. They are used to gain access to the Internet via the splash pages (when voucher access is offered).
 
-After creating a voucher batch using the **Vouchers API**, a set of Codes will be created for you to distribute. You can download these codes directly from the voucher as a PDF or CSV. 
+After creating a voucher batch using the **Vouchers API**, a set of Codes will be created for you to distribute. You can download these codes directly from the voucher as a PDF or CSV.
 
-You may also view the raw codes.
+You may also view the raw codes using this API.
 
 ## Codes Collection [/api/v1/codes]
 
@@ -963,6 +963,8 @@ You may also view the raw codes.
 ## Generate Random Password [/codes/generate_password]
 
 Create a unique password. This doesn't save anything, it's just a nice little end-point to use.
+
+You will receive one plesant word chosen carefully from Alice in Wonderland.
 
 ### Generate a one time password [POST]
 
