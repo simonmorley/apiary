@@ -902,6 +902,73 @@ Returns the payloads that have recently run on the box. You can set up a payload
                 }
             ]
 
+# Group Code
+
+Codes related resources of the **Codes API**
+
+## Codes Collection [/api/v1/codes]
+
++ Parameters
+
+    + voucher_id (optional, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Unique ID of the voucher from which the codes were generated.
+
+### List all codes for a voucher [GET]
+
++ Request (application/json)
+
+            { "voucher_id": "JCyK7Zwh0ON_ZOWso8Mhuw" }
+
++ Response 200 (application/json)
+
+    + Body
+            {
+                "codes": [
+                    {
+                        "username": "XFgmK",
+                        "password": "6drpH",
+                        "location_id": 1813,
+                        "date_activated": 0,
+                        "serial": 14
+                    },
+                    {
+                        "username": "K6gpS",
+                        "password": "9k9HR",
+                        "location_id": 1813,
+                        "date_activated": 0,
+                        "serial": 13
+                    },
+                    {
+                        "username": "gzM4K",
+                        "password": "9wujt",
+                        "location_id": 1813,
+                        "date_activated": 0,
+                        "serial": 12
+                    },
+                ],
+                "_links": {
+                    "current_page": 1,
+                    "total_pages": 1,
+                    "next_page": null,
+                    "total_entries": 17
+                }
+            }
+
+## Generate Random Password [/codes/generate_password]
+
+Create a unique password. This doesn't save anything, it's just a nice little end-point to use.
+
+### Generate a one time password [POST]
+
++ Request (application/json)
+
+            Accept: application/json
+
++ Response 200 (application/json)
+
+    + Body
+
+            {"password": "random-passy"}
+
 # Group Commands
 
 Commands reference the **Commands API**.
@@ -6962,22 +7029,3 @@ If you just want to update the name, do not send the zones / boxes params.
 
 # Group Miscellaneous
 
-Accounts related resources of the **Accounts API**
-
-## Accounts Collection [/api/v1/accounts]
-
-## Generate Password [/accounts/generate_password]
-
-Create a unique password for your captive portal. This doesn't save anything, it's just a nice little end-point to use.
-
-### Generate a one time password [POST]
-
-+ Request (application/json)
-
-            Accept: application/json
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {"password": "random-passy"}
