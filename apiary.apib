@@ -4165,11 +4165,29 @@ Remember, creating a speedtest only creates a temporary result. Permanent result
 
 # Group Sessions
 
-Depreciated. This will be removed soon.
+The **Sessions API** provides information on the individual splash logins for your locations. This is separate to the clients API which provides wireless statistics about clients on your networks. The sessions API is purely a reporting tool for splash logins.
 
-Sessions API provides information on the individual logins per location, box, etc.
+For example, use this API to get details about voucher codes you have generated, see when they were used, the data transfer etc.
 
-Supports:
+You can filter the data in a number of ways by passing in the following search params:
+
++ username - filters the results by a specific username
++ timeline
++ uniques
++ boxes
++ locations
++ stats
++ data
++ clients
++ manufacturers
++ uniques_timeline
++ stats
++ data
++ online
+
+You can, of course, filter the results further by passing the default search query in 'q=my-search-term'
+
+This is a read-only end-point and supports the following only:
 
 - `GET` - Retrieves a resource or list of resources
 
