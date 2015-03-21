@@ -4191,18 +4191,6 @@ This is a read-only end-point and supports the following only:
 
 - `GET` - Retrieves a resource or list of resources
 
-You may query the data and we have some marginally non-restful resources which offer some filtered and aggregated data. More later.
-
-Can be called on the root resource alone /api/v1/sessions or within a location or box:
-
-- /api/v1/sessions
-- /api/v1/locations/{id}/sessions
-- /api/v1/boxes/{id}/sessions
-
-All sessions queries are cached for ten minutes from the initial request unless a search parameter is passed.
-
-**Please note, we do not provide the mac address of the end-user's device. Intead you can find a unique_id which is a hashed digest of the mac.**
-
 ## Sessions Collection [/api/v1/sessions{?q,location_id,box_id,page,size}]
 
 Limited to 1,000 records per query. Pagination is available.
