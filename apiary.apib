@@ -4172,6 +4172,8 @@ For example, use this API to get details about voucher codes you have generated,
 You can filter the data in a number of ways by passing in the following search params:
 
 + username - filters the results by a specific username
++ guest - search for a guest's sessions by guest_id
++ online - view the currently connected clients (alpha)
 + timeline
 + uniques
 + boxes
@@ -4183,7 +4185,6 @@ You can filter the data in a number of ways by passing in the following search p
 + uniques_timeline
 + stats
 + data
-+ online
 
 You can, of course, filter the results further by passing the default search query in 'q=my-search-term'
 
@@ -4423,6 +4424,8 @@ Returns aggregated data for the unique users by mac address (not provided) on a 
 ## Who's Logged In [/api/v1/sessions{?online,page,size}]
 
 Returns a list of users currently connected and logged in via the splash pages. This table is cleared every five minutes. During this time, you may see a non-blank stoptime. This will mean the user has disconnected and will be accompanied by a stopreason.
+
+Please consider this an Alpha feature as we're working on the accuracy of the information.
 
 A _links object is also available with the pagination details.
 
