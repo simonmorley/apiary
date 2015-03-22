@@ -1945,6 +1945,79 @@ Please note, creating a new walled garden will force all your boxes to reload th
 
 + Response 204 (application/json)
 
+# Group Guests
+
+The **Guests API** provides information about users who have registered to use your WiFi. Typically a guest might register while purchasing an Internet Voucher from your store.
+
+We'll shortly support a guest registration without requiring a voucher purchase.
+
+You may use this API to retrieve a list of your guests as well as specific information on a guest.
+
+The guest object is reasonably light. A guest may belong to one of more locations and the email address is their unique identifier. Their email address will be scrubbed - you are required to use the **Email API** to gather the emails of your customers and users.
+
+Should you require the history for a guest, you are required to use the **Sessions Api**. Simply pass the Guest ID with the request and we'll send you their session data.
+
+There is no search facility for guests at the moment although we'll be introducing this shortly.
+
+This is a read-only end-point and supports the following only:
+
+- `GET` - Retrieves a resource or list of resources
+
+## Guests Collection [/api/v1/guests]
+
+### List all guests for your locations [GET]
+
++ Parameters
+
+    + q (optional, string, `search-query`) ... Search through the results as you query the API. (Coming soon).
+
++ Response 200 (application/json)
+
+    + Body
+            {
+                "guests": [
+                    {
+                        "id": "550f06f84c697a90ae020000",
+                        "username": "matt_emard",
+                        "created_at": 1427048184,
+                        "codes": 2
+                    },
+                    {
+                        "id": "550f06f94c697a90ae090000",
+                        "username": "americo.denesik",
+                        "created_at": 1427046185,
+                        "codes": 8
+                    },
+                ],
+                "_links": {
+                    "current_page": 1,
+                    "total_pages": 3,
+                    "next_page": 2,
+                    "total_entries": 250
+                }
+            }
+
+## Guest Object [/api/v1/invites/{id}]
+
+View all the details about a guest. Should you require a guests session data and usernames, please use the Sesssions API and pass the guest_id as a parameter.
+
+### View an guest [GET]
+
++ Parameters
+
+    + id (required, string, `550f07084c697a90aeea0000`) ... ID of the guest you want to view. Has example value.
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "id": "550f07084c697a90aeea0000",
+                "username": "monroe_huel",
+                "created_at": 1427048200,
+                "codes": 1
+            }
+
 # Group Invites
 
 Invites related resources of the **Invites API**
