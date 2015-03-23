@@ -1025,24 +1025,6 @@ You will receive a single username and password from your chosen batch.
                 }
             }
 
-## Generate Random Password [/codes/generate_password]
-
-Create a unique password. This doesn't save anything, it's just a nice little end-point to use.
-
-You will receive one plesant word chosen carefully from Alice in Wonderland.
-
-### Generate a one time password [POST]
-
-+ Request (application/json)
-
-            Accept: application/json
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {"password": "random-passy"}
-
 ## Code Object [/api/v1/codes/{id}]
 
 The code object will contain two objects:
@@ -1088,6 +1070,24 @@ The code object will contain two objects:
                     "voucher_id": "6487557826733717518"
                 }
             }
+
+## Generate Random Password [/codes/generate_password]
+
+Create a unique password. This doesn't save anything, it's just a nice little end-point to use.
+
+You will receive one plesant word chosen carefully from Alice in Wonderland.
+
+### Generate a one time password [POST]
+
++ Request (application/json)
+
+            Accept: application/json
+
++ Response 200 (application/json)
+
+    + Body
+
+            {"password": "random-passy"}
 
 # Group Commands
 
