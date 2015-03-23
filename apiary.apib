@@ -926,11 +926,69 @@ You will receive a single username and password from your chosen batch.
     + activated (optional, boolean, `true`) ... filter the results by used or unused values.
     + random (optional, boolean, `true`) ... get a random voucher code. To print on till receipts etc.
 
-### List all codes for a voucher [GET]
+### List all codes [GET]
 
 + Request (application/json)
 
-            { "voucher_id": "JCyK7Zwh0ON_ZOWso8Mhuw" }
++ Response 200 (application/json)
+
+    + Body
+            {
+                "codes": [
+                    {
+                        "username": "7f565b57-3819-4bb3-bcd1-032dd7a07588",
+                        "password": "eae435275a270cd87d560fc45e613bac",
+                        "location_id": 1813,
+                        "created_at": 1424646502,
+                        "date_activated": 1427119735,
+                        "serial": 0,
+                        "guest_id": "55105d1f4c697ad62b000000",
+                        "label": "vouchers",
+                        "date_sold": null,
+                        "voucher_value": null,
+                        "mac": null,
+                        "active": true
+                    },
+                    {
+                        "username": "remain-4065",
+                        "password": "pleasant",
+                        "location_id": 1813,
+                        "created_at": 1424646237,
+                        "serial": 0,
+                        "guest_id": null,
+                        "label": "vouchers",
+                        "date_sold": null,
+                        "voucher_value": null,
+                        "mac": null,
+                        "active": true
+                    },
+                    {
+                        "username": "loveliest-682",
+                        "password": "energetic",
+                        "location_id": 1813,
+                        "created_at": 1424524520,
+                        "serial": 0,
+                        "guest_id": null,
+                        "label": "vouchers",
+                        "date_sold": null,
+                        "voucher_value": null,
+                        "mac": null,
+                        "active": true
+                    },
+                ],
+                "_links": {
+                    "current_page": 1,
+                    "total_pages": 1,
+                    "next_page": null,
+                    "total_entries": 12
+                }
+            }
+
+### List all codes for a voucher [GET]
+
++ Parameters
+
+    + voucher_id (required, string, `7f565b57032dd7a07588`) ... ID of voucher batch you want to list all the codes for.
 
 + Response 200 (application/json)
 
@@ -984,6 +1042,52 @@ You will receive one plesant word chosen carefully from Alice in Wonderland.
     + Body
 
             {"password": "random-passy"}
+
+## Code Object [/api/v1/codes/{id}]
+
+The code object will contain two objects:
+
++ Code - a list of the attributes for the voucher code, including any associated guests or orders.
++ Rules - a list of rules that are associated with the user, including speeds, group policies etc.
+
+### View a Code [GET]
+
++ Parameters
+
+    + id (required, string, `remain-4065`) ... Username of the voucher code you're searching for,
+
++ Response 200 (application/json)
+
+    + Body
+            {
+                "code": {
+                    "username": "7f565b57-3819-4bb3-bcd1-032dd7a07588",
+                    "password": "eae435275a270cd87d560fc45e613bac",
+                    "location_id": 1813,
+                    "location_name": "S*** got real",
+                    "location_slug": "s***-got-real-four-1c94fe7e-6823-46c4-8425-160c63c00aea",
+                    "voucher_slug": "6487557826733717518",
+                    "created_at": 1424646502,
+                    "date_activated": 1427119735,
+                    "serial": 0,
+                    "guest_id": "55105d1f4c697ad62b000000",
+                    "label": "vouchers",
+                    "date_sold": null,
+                    "voucher_value": null,
+                    "mac": null,
+                    "active": true
+                },
+                "rules": {
+                    "simultaneous_use": 4,
+                    "validity_minutes": 60,
+                    "download_speed": 2048,
+                    "upload_speed": 1024,
+                    "session_timeout": 3600,
+                    "idle_timeout": 60,
+                    "access_restrict_period": null,
+                    "voucher_id": "6487557826733717518"
+                }
+            }
 
 # Group Commands
 
