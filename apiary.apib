@@ -4015,13 +4015,15 @@ If you are upgrading a box, you can send the version of the firmware you want to
                 "body": "uptime 12 days, 1 min, load 1 2 3"
             }
 
-## Create payload a box [/api/v1/boxes/{box_id}/payloads{?command_id,box_ids,upgrade,scheduled,version}]
+## Create payload for a box [/api/v1/boxes/{box_id}/payloads{?command_id,box_ids,upgrade,scheduled,version}]
 
 ### Send a payload [POST]
 
 If you pass in an array of box ids, your payload will not run on the box you're using to authorise the request. In this case, the box with {id}.
 
 As previously mentioned, upgrading a single box will occur immediately and you'll get an email notification thereafter. If you upgrade multiple boxes, we queue the job.
+
+Please note, the params MUST be passed in the payloads object.
 
 + Parameters
 
@@ -4033,6 +4035,15 @@ As previously mentioned, upgrading a single box will occur immediately and you'l
     + scheduled (optional, string, `12am tomorrow`) ... Send the time you want the upgrade to occur. Applies to upgrades only.
 
 + Request (application/json)
+
+        {
+          payload: {
+            box_id: "ZOWso8IMhuwYTrdh",
+            upgrade: true,
+            scheduled: "Tomorrow at noon"
+          }
+
+        }
 
 + Response 201 (application/json)
 
@@ -5856,7 +5867,6 @@ Currently, we're only supporting PayPal on the login screens but new methods are
 
 **A store order has the following attributes:**
 
-+ id
 + unique_id - a unique id for the order
 + token - the PayPal Express token obtained during the checkout
 + payerId - the PayPal Payer ID also obtained during checkout
@@ -5874,7 +5884,7 @@ Currently, we're only supporting PayPal on the login screens but new methods are
 + refunded_by - the person who refuned the voucher
 + location_id - the ID of the location to which the order is associated
 + revoked - whether the voucher was revoked during the refund process
-+ notes
++ notes - generated during the refund process, not currently editable
 
 TO DO: Notes about refunding
 
