@@ -3032,7 +3032,7 @@ Restore an archived location to it's former glory.
 
             { "message": "Your location has been unarchived" }
 
-## Update a Location's firewall rules [/api/v1/location/{id}{?location,firewall_rules_attributes,params}]
+## Update a Location's firewall rules [/api/v1/location/{id}]
 
 You can either create firewall rules directly with the Firewall Rules API or you may update, create and delete when updating a location.
 
@@ -3055,12 +3055,6 @@ Whilst it's ok to send the whole location object back when updating the firewall
 ### Update your firewall rules [PATCH]
 
 + Request (application/json)
-
-    + Headers
-
-            Accept: application/json
-
-    + Body
 
             {"location":
                 {
@@ -3731,16 +3725,17 @@ For information how to add this network to a zone, please see the Zones API.
             Accept: application/json
 
     + Body
-
-            {
-                "location_id": "derby-council",
-                "id": 54ee7b1470353c2600,
-                network: {
-                    description: 'A new description',
-                    ssid: 'PolkaSpots WiFi',
-                    encryption_type: 'psk2',
-                    encryption_key: 'SecurePassy123'
-                }
+            { network:
+              {
+                  "location_id": "derby-council",
+                  "id": 54ee7b1470353c2600,
+                  network: {
+                      description: 'A new description',
+                      ssid: 'PolkaSpots WiFi',
+                      encryption_type: 'psk2',
+                      encryption_key: 'SecurePassy123'
+                  }
+              }
             }
 
 ## Network Object [/api/v1/locations/{location_id}/networks/{id}]
@@ -4148,7 +4143,7 @@ Get a single port forward item.
                 "forward_to_port": 22
             }
 
-## Create a Port Forward Item [/api/v1/boxes/{box_id}/port_forwards{?port_forward}]
+## Create a Port Forward Item [/api/v1/boxes/{box_id}/port_forwards]
 
 ### Create a single port forward item [PATCH]
 
@@ -4167,7 +4162,8 @@ Please use the Unique Id to update a port forward.
 
 + Request (application/json)
 
-        { "port_forward":
+            {
+              port_forward:
                 {
                     "source": "1.2.3.4/16",
                     "destination_port": 80,
@@ -4176,7 +4172,7 @@ Please use the Unique Id to update a port forward.
                     "forward_to_ip": "192.168.4.3",
                     "forward_to_port": 22
                 }
-        }
+            }
 
 + Response 201 (application/json)
 
@@ -6732,12 +6728,6 @@ The codes generated are a separate object. Use the Codes API to get hold of the 
 
 Your codes will be created shortly after the voucher and a link will be sent to you. The required params are provided below. Default values will be inserted if you leave the others blank.
 
-+ Request (application/json)
-
-    + Header
-
-            Accept: application/json
-
 + Parameters
 
     + batch_description (required, string, `my batch`) ... The name for the voucher batch.
@@ -6758,6 +6748,17 @@ Your codes will be created shortly after the voucher and a link will be sent to 
     + format (optional, string, `words`) ... numeric, alphanumeric, numeric. Specifies the type of username generated. Words are also generated from Alice in Wonderland.
     + access_type (optional, integer, `1`) ... Defaults to 1 which provides timed access. 2 provides data raccess.
     + access_restrict_data (optional, integer, `4096`) ... If you've enabled data restrictions, this controls to MB a user can download and upload (combined).
+
++ Request (application/json)
+
+            {
+              voucher: {
+                quantity: 12,
+                location_id: 1813,
+                splash_page_id: "8768762HAHHSHHS",
+                download_speed: 1024
+              }
+            }
 
 + Response 200 (application/json)
 
