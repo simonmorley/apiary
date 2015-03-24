@@ -6943,11 +6943,10 @@ Webhooks that fail three times will be disabled. You will need to update the url
 
 You must send a valid url - including https.
 
+TBC - add request params
+
 + Request (application/json)
 
-    + Header
-
-            Accept: application/json
 
 + Response 200 (application/json)
 
@@ -7007,9 +7006,9 @@ You must send a valid url - including https.
 
 + Request (application/json)
 
-        {
-            "id": "54da01fa49726f70e8500000",
-        }
+            {
+              "id": "54da01fa49726f70e8500000",
+            }
 
 + Response 200 (application/json)
 
@@ -7066,22 +7065,22 @@ You must send a valid url - including https.
 
 + Request (application/json)
 
-        {
-            "id": "54da01fa49726f70e8500000",
-            "webhook": {
+            {
+              "id": "54da01fa49726f70e8500000",
+              "webhook": {
                 "url": "https://polkaspots.com/new-webhook",
                 "box": {
-                    "created": true,
-                    "offline": false,
-                    "online": false,
-                    "reset": true,
-                    "transferred": true,
-                    "removed": true,
-                    "rebooted": true,
-                    "upgraded": true
+                  "created": true,
+                  "offline": false,
+                  "online": false,
+                  "reset": true,
+                  "transferred": true,
+                  "removed": true,
+                  "rebooted": true,
+                  "upgraded": true
                 }
+              }
             }
-        }
 
 + Response 200 (application/json)
 
@@ -7163,7 +7162,7 @@ As soon as you've created a zone, splash users will not able to see the splash p
 
 You need to resync the networks in order for the changes to propagate to the boxes.
 
-## Zones Collection [/api/v1/locations/{location_id}/zones{?boxes,zones}]
+## Zones Collection [/api/v1/locations/{location_id}/zones]
 
 + Parameters
 
@@ -7204,22 +7203,14 @@ When you're creating a zone, you can choose to add networks and boxes. If you do
 
 + Request (application/json)
 
-    + Headers
-
-            Accept: application/json
-
-    + Body
-
             {
-                location_id: 'derby-city-council',
-                zone: {
-                        boxes: [1,2,3],
-                        networks: ['44f228d17261690826000000'],
-                        zone_name: 'Lobby, secure LAN',
-                        zone_description: 'In the cupboard'
-                    }
+              zone: {
+                boxes: [1,2,3],
+                networks: ['44f228d17261690826000000'],
+                zone_name: 'Lobby, secure LAN',
+                zone_description: 'In the cupboard'
+              }
             }
-
 
 + Response (application/json)
 
@@ -7374,6 +7365,3 @@ If you just want to update the name, do not send the zones / boxes params.
         }
 
 + Response 204 (application/json)
-
-# Group Miscellaneous
-
