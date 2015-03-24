@@ -1695,7 +1695,7 @@ All events run on PolkaSpots boxes (running Stinky Panda). Third party boxes may
                 }
             ]
 
-## Create an Event [/api/v1/locations/{location_id}/events{?event}]
+## Create an Event [/api/v1/locations/{location_id}/events]
 
 ### Create an Event [POST]
 
@@ -1707,10 +1707,12 @@ All events run on PolkaSpots boxes (running Stinky Panda). Third party boxes may
 + Request (application/json)
 
             {
-                "event_hour": "09:00",
-                "event_frequency": "Daily",
-                "payload_id": 34,
-                "description": "Reboot my access point ",
+              event: {
+                  "event_hour": "09:00",
+                  "event_frequency": "Daily",
+                  "payload_id": 34,
+                  "description": "Reboot my access point ",
+              }
             }
 
 + Response 200 (application/json)
@@ -1909,7 +1911,7 @@ Not all the parameters listed in this spec are supported yet.
                 }
             ]
 
-## Firewall Rule Create [/api/v1/locations/{location_id}/firewall_rules{?firewall_rule}]
+## Firewall Rule Create [/api/v1/locations/{location_id}/firewall_rules]
 
 ### Create a Firewall Rule [POST]
 
@@ -1926,24 +1928,23 @@ Please note, creating a new firewall rule will force all your boxes to reload th
 
 + Request (application/json)
 
-        { "firewall_rule":
-            {
-                "chain": "FORWARD",
-                "rule_spec": "I",
-                "protocol": null,
-                "source_ip": "192.168.1.4/24",
-                "source_port": null,
-                "source_interface": null,
-                "out_interface": null,
-                "dest_ip": null,
-                "dest_port": null,
-                "target": "DROP",
-                "limit": null,
-                "c_state": null,
-                "log_level": null
-            }
+        {
+          "firewall_rule": {
+            "chain": "FORWARD",
+            "rule_spec": "I",
+            "protocol": null,
+            "source_ip": "192.168.1.4/24",
+            "source_port": null,
+            "source_interface": null,
+            "out_interface": null,
+            "dest_ip": null,
+            "dest_port": null,
+            "target": "DROP",
+            "limit": null,
+            "c_state": null,
+            "log_level": null
+          }
         }
-
 
 + Response 200 (application/json)
 
@@ -2215,7 +2216,7 @@ You can view a full invitation include the location details using the following 
             }
 
 
-## Managing Invites [/api/v1/invites/{email,location_ids}]
+## Managing Invites [/api/v1/invites/]
 
 ### Create an invitation [POST]
 
@@ -2234,11 +2235,11 @@ Please also note that invitations are not available on all plans. Unaccepted inv
 
 + Request (application/json)
 
-        "invite":
-
             {
+              invite: {
                 email: 'email-of-person@gmail.com',
                 location_ids: '1,2,3,4'
+              }
             }
 
 + Response 200 (application/json)
@@ -2514,7 +2515,7 @@ Returns a mini-list of your locations. Is good for search, cloning the logins, s
             ]
 
 
-## Create a location [/api/v1/locations{?location}]
+## Create a location [/api/v1/locations]
 
 Default required params include:
 
@@ -2539,18 +2540,21 @@ You can also send a facebook_id with your request. Doing so will cause CT to tot
 
 + Request (application/json)
 
-        "location":
             {
+              location: {
                 "location_name": "Derby Council",
                 "address": "1 Really Long Road",
                 "town": "A far away land",
                 "postcode": "EC1M",
                 "phone1": '01604 134 1679',
                 "facebook_id": "187263871623"
+              },
             },
-        "boxes":
-
-            { "ap_mac": ["AA:BB:CC:DD:EE:FF:11"] }
+            {
+              boxes: {
+                "ap_mac": ["AA:BB:CC:DD:EE:FF:11"]
+              }
+            }
 
 + Response 200 (application/json)
 
