@@ -1649,6 +1649,108 @@ List all clients on a specific box. Uses similar format to the location resource
                 ]
             }
 
+# Group Emails
+
+Emails related resources of the **Emails API**. Your splash pages can be set to capture email addresses when your guests are signing-up.
+
+In order to capture emails, you must enable the newsletter in your Splash Page settings or using the Splash API. You can select MailChimp, Campaign Monitor or Internal. The latter will not post the list to any list and will only be available in CT.
+
+After an email is captured, we will post it to your list (MailChimp or Campaign Monitor). A email can only be captured once per email list. If you change your list, you will need to use your provider's service to migrate emails.
+
+If you're using multiple splash pages, then you can capture the email multiple times.
+
+**An email has the following attributes:**
+
++ email - the email of the user
++ created_at - when the email was captured
++ location_id - the location the email belongs to
++ splash_id - the splash_id the email belongs to
++ added - whether we were able to add the email to your list
++ list_id - the MailChimp or Campaign Monitor list id
++ list_type - eiher MailChimp, Campaign Monitor or Internal
+
+##Allowed HTTPs requests:
+
+- `GET` - Retrieves a resource or list of resources
+
+## Emails Collection [/api/v1/emails]
+
+### List all Emails [GET]
+
++ Response 200 (application/json)
+
+    + Body
+            {
+                "emails": [
+                    {
+                        "id": "5512fff54c697a2091000000",
+                        "created_at": 1427308533,
+                        "added": true,
+                        "list_id": null,
+                        "splash_id": null,
+                        "location_id": 1813,
+                        "list_type": null,
+                        "email": "steve@polkaspots.com"
+                    },
+                    {
+                        "id": "551303874c697a2091010000",
+                        "created_at": 1427309447,
+                        "added": false,
+                        "list_id": null,
+                        "splash_id": null,
+                        "location_id": 1163,
+                        "list_type": null,
+                        "email": "mack_gorczany@emardkertzmann.com"
+                    },
+                    {
+                        "id": "551303874c697a2091020000",
+                        "created_at": 1427309447,
+                        "added": true,
+                        "list_id": null,
+                        "splash_id": null,
+                        "location_id": 908,
+                        "list_type": null,
+                        "email": "tracey.abernathy@torp.name"
+                    },
+                    {
+                        "id": "551303884c697a2091030000",
+                        "created_at": 1427309448,
+                        "added": true,
+                        "list_id": null,
+                        "splash_id": null,
+                        "location_id": 1008,
+                        "list_type": null,
+                        "email": "aditya@schowaltercrona.com"
+                    },
+                    {
+                        "id": "551303884c697a2091040000",
+                        "created_at": 1427309448,
+                        "added": false,
+                        "list_id": null,
+                        "splash_id": null,
+                        "location_id": 1664,
+                        "list_type": null,
+                        "email": "deion@ebert.org"
+                    },
+                    {
+                        "id": "551303884c697a2091050000",
+                        "created_at": 1427309448,
+                        "added": false,
+                        "list_id": null,
+                        "splash_id": null,
+                        "location_id": 274,
+                        "list_type": null,
+                        "email": "malcolm.sanford@lang.biz"
+                    },
+                ],
+                "_links": {
+                    "current_page": 1,
+                    "total_pages": 7,
+                    "next_page": 2,
+                    "total_entries": 160
+                }
+            }
+
 # Group Events
 
 Events related resources of the **Events API**. Events run at predefined intervals on your location's boxes.
@@ -1676,7 +1778,6 @@ All events run on PolkaSpots boxes (running Stinky Panda). Third party boxes may
             { "location_id": "derby-council" }
 
 + Response 200 (application/json)
-
 
     + Body
 
