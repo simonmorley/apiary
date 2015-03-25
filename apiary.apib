@@ -6085,6 +6085,108 @@ A list of all the store orders for your locations. Currently we do not the suppo
                 ]
             }
 
+## Store Order Object [/api/v1/store_orders/{id}]
+
+### Full store order object [GET]
+
++ Parameters
+
+    + id (required, string, `"551074c697af22d1`) ... Id of the order in question.
+
++ Response 200 (application/json)
+
+    + Body
+            {
+                "id": "551074c697af22d1",
+                "unique_id": "7f73d716-df84-4bcb-bde5",
+                "token": "EC-xxxxx",
+                "payerId": "xxxxx",
+                "cart_id": "b46a568c-022a-4f8b-9de0",
+                "state": "success",
+                "email": "simon@ps.com",
+                "ip_address": "0.0.0.0",
+                "total": 1232,
+                "authorization": "4JM702196Y410980L",
+                "message": "Success",
+                "params": {
+                    "timestamp": "2015-01-29T19:18:30Z",
+                    "ack": "Success",
+                    "correlation_id": "f9ba04e4a2404",
+                    "version": "72",
+                    "build": "15108941",
+                    "token": "EC-6TT30183P67",
+                    "transaction_id": "4JM702196",
+                    "parent_transaction_id": null,
+                    "receipt_id": null,
+                    "transaction_type": "express-checkout",
+                    "payment_type": "instant",
+                    "payment_date": "2015-01-29T19:18:29Z",
+                    "gross_amount": "12.32",
+                    "gross_amount_currency_id": "GBP",
+                    "fee_amount": "0.68",
+                    "fee_amount_currency_id": "GBP",
+                    "settle_amount": "17.99",
+                    "settle_amount_currency_id": "GBP",
+                    "tax_amount": "0.00",
+                    "tax_amount_currency_id": "GBP",
+                    "exchange_rate": "1.54609",
+                    "payment_status": "Completed",
+                    "pending_reason": "none",
+                    "reason_code": "none",
+                    "protection_eligibility": "Eligible",
+                    "protection_eligibility_type": "ItemNotReceivedEligible,UnauthorizedPaymentEligible",
+                    "secure_merchant_account_id": "43UCXMEXXXX",
+                    "success_page_redirect_requested": "false",
+                    "Token": "EC-XXXXXX",
+                    "PaymentInfo": {
+                        "TransactionID": "4JM70219XXXXX",
+                        "ParentTransactionID": null,
+                        "ReceiptID": null,
+                        "TransactionType": "express-checkout",
+                        "PaymentType": "instant",
+                        "PaymentDate": "2015-01-29T19:18:29Z",
+                        "GrossAmount": "12.32",
+                        "FeeAmount": "0.68",
+                        "SettleAmount": "17.99",
+                        "TaxAmount": "0.00",
+                        "ExchangeRate": "1.54609",
+                        "PaymentStatus": "Completed",
+                        "PendingReason": "none",
+                        "ReasonCode": "none",
+                        "ProtectionEligibility": "Eligible",
+                        "ProtectionEligibilityType": "ItemNotReceivedEligible,UnauthorizedPaymentEligible",
+                        "SellerDetails": {
+                            "SecureMerchantAccountID": "43UCXXXXX"
+                        }
+                    },
+                    "SuccessPageRedirectRequested": "false"
+                },
+                "radcheck_ids": [
+                    303103
+                ],
+                "codes": [
+                    {
+                        "username": "78DAE37D",
+                        "date_activated": null
+                    }
+                ],
+                "line_items": [
+                    {
+                        "value": "0",
+                        "description": null,
+                        "product_id": "55109a174c697af22d120000"
+                    }
+                ],
+                "clientMac": "11:11:11:22:22:22",
+                "refund_reason": null,
+                "refunded_by": null,
+                "location_id": 1813,
+                "location_slug": "stuff-got-real-four-1c94fe7e-6823-46c4-8425-160c63c00aea",
+                "location_name": "S*** got real",
+                "revoked": null,
+                "notes": null
+            }
+
 # Group Technologies
 
 Represents the technologies API. An overview of the technologies in use across your network. Data derives currently from the login screens only.
