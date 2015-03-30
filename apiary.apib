@@ -4358,6 +4358,255 @@ Please use the Unique Id to update a port forward.
 
 + Response 204 (application/json)
 
+# Group Reports
+
+We have bundled a number of statistical end-points into a single API for you to use. The aim was to provide a simple interface to provide a rich set of data for graphing purposes.
+
+You can access the various statistics by appending the following url params as so:
+
+/api/v1/reports?sessions=true
+
+The currently available actions include:
+
++ sessions - splash page usage include session duration and even manufacturers
++ clients - wireless clients on your network
++ impressesions - the number of impressions your splash pages receieve daily
++ codes - voucher code generation and usage
++ financials - a timeline of your online sales
+
+## Analytics and stats [/api/v1/reports]
+
+### Session statistics [GET]
+
++ Parameters
+
+    + sessions (required, boolean, `true`) ... Get the session stats
+    + location_id (optional, integer, `872`) ... The numeric ID of the location you want to filter results for.
+    + username (optional, string, `bob-marley`) ... The username of the session you wish to filter by.
+    + page (optional, integer, `1`) ... For pagination purposes.
+    + q (optional, string, `search-query`) ... Search through the results as you query the API.
+    + start (optional, intger, `1427710664`) ... Unix timestamp defining start of range required.
+    + end (optional, intger, `1427730664`) ... Unix timestamp defining end of range required.
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "timeline": {
+                    "sessions": "[20.0, 24.0, 22.0, 13.0, 23.0, 17.0, 24.0, 27.0, 18.0, 15.0, 13.0, 16.0, 19.0, 23.0, 18.0, 23.0, 19.0, 6.0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]",
+                    "uniques": "[15.0, 16.0, 16.0, 12.0, 19.0, 16.0, 18.0, 22.0, 14.0, 13.0, 12.0, 13.0, 15.0, 16.0, 15.0, 18.0, 16.0, 5.0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]"
+                },
+                "info": {
+                    "uniques": 95,
+                    "total": 340,
+                    "avgVisits": 3.5789473684210527
+                },
+                "durations": {
+                    "avg": 482.64102564102564,
+                    "count": 78,
+                    "max": 3362,
+                    "total": 37646
+                },
+                "_stats": {
+                    "start": 1424908800,
+                    "end": 1427587199,
+                    "interval": "day",
+                    "distance": 7
+                }
+            }
+
+### Client statistics [GET]
+
++ Parameters
+
+    + clients (required, boolean, `true`) ... Get the wireless client stats
+    + location_id (optional, integer, `872`) ... The numeric ID of the location you want to filter results for.
+    + username (optional, string, `bob-marley`) ... The username of the session you wish to filter by.
+    + page (optional, integer, `1`) ... For pagination purposes.
+    + q (optional, string, `search-query`) ... Search through the results as you query the API.
+    + start (optional, intger, `1427710664`) ... Unix timestamp defining start of range required.
+    + end (optional, intger, `1427730664`) ... Unix timestamp defining end of range required.
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "manufacturers": [
+                    [
+                        "Apple",
+                        4535
+                    ],
+                    [
+                        "Samsung Electronics Co.,Ltd",
+                        854
+                    ],
+                    [
+                        "Sony Mobile Communications AB",
+                        400
+                    ],
+                    [
+                        "Apple, Inc.",
+                        398
+                    ],
+                    [
+                        "HTC Corporation",
+                        380
+                    ],
+                    [
+                        "Apple, Inc",
+                        317
+                    ],
+                    [
+                        "Murata Manufactuaring Co.,Ltd.",
+                        288
+                    ],
+                    [
+                        "Samsung Electro Mechanics co., LTD.",
+                        217
+                    ],
+                    [
+                        "LG Electronics",
+                        215
+                    ],
+                    [
+                        "Intel Corporate",
+                        106
+                    ]
+                ],
+                "aps": null,
+                "timeline": {
+                    "devices": "[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 17, 0, 0]",
+                    "throughput": "[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 226391.38461538462, 0, 0, 0, 0, 0, 0, 1491489.5151006712, 0, 0]"
+                },
+                "info": {
+                    "uniques": 11753,
+                    "snr": 16.945846257020705,
+                    "online": 60,
+                    "total": 11929,
+                    "caps": [
+                        [
+                            "2.4ghz",
+                            11912
+                        ],
+                        [
+                            "5ghz",
+                            17
+                        ]
+                    ],
+                    "txAvg": 75841971.48235393,
+                    "txSum": 904718877813
+                },
+                "_stats": {
+                    "interval": "day",
+                    "start": 1424908800,
+                    "end": 1427587199
+                }
+            }
+
+
+### Splash impressions statistics [GET]
+
++ Parameters
+
+    + impressions (required, boolean, `true`) ... Get the stats for your page views / impressesions.
+    + location_id (optional, integer, `872`) ... The numeric ID of the location you want to filter results for.
+    + username (optional, string, `bob-marley`) ... The username of the session you wish to filter by.
+    + page (optional, integer, `1`) ... For pagination purposes.
+    + q (optional, string, `search-query`) ... Search through the results as you query the API.
+    + start (optional, intger, `1427710664`) ... Unix timestamp defining start of range required.
+    + end (optional, intger, `1427730664`) ... Unix timestamp defining end of range required.
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "locations": [
+                    {
+                        "location_name": "The House",
+                        "id": 2624,
+                        "slug": "house-a5fa8ec1-6c39-4b37-ab14-aa8d8c0b2e32",
+                        "total": 2
+                    }
+                ],
+                "timeline": {
+                    "timeline": "[1.0, 0, 0, 0, 1.0, 1.0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]"
+                },
+                "_stats": {
+                    "interval": "day",
+                    "start": 1424995200,
+                    "end": 1427669999
+                }
+            }
+
+
+### Voucher code statistics [GET]
+
++ Parameters
+
+    + codes (required, boolean, `true`) ... Get the stats for your vouchers generated
+    + location_id (optional, integer, `872`) ... The numeric ID of the location you want to filter results for.
+    + username (optional, string, `bob-marley`) ... The username of the session you wish to filter by.
+    + page (optional, integer, `1`) ... For pagination purposes.
+    + q (optional, string, `search-query`) ... Search through the results as you query the API.
+    + start (optional, intger, `1427710664`) ... Unix timestamp defining start of range required.
+    + end (optional, intger, `1427730664`) ... Unix timestamp defining end of range required.
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "timeline": {
+                    "generated": "[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100.0, 0, 110.0, 17.0, 10.0, 0, 0, 0, 0, 0, 0, 0, 0, 0]",
+                    "activated": "[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.0, 1.0, 0, 1.0, 0, 0, 0, 0, 0, 0]"
+                },
+                "info": {
+                    "generated": 237,
+                    "activated": 3
+                },
+                "_stats": {
+                    "interval": "day",
+                    "start": 1424995200,
+                    "end": 1427669999
+                }
+            }
+
+### Store order statistics [GET]
+
++ Parameters
+
+    + orders (required, boolean, `true`) ... Get the stats for any store orders
+    + location_id (optional, integer, `872`) ... The numeric ID of the location you want to filter results for.
+    + username (optional, string, `bob-marley`) ... The username of the session you wish to filter by.
+    + page (optional, integer, `1`) ... For pagination purposes.
+    + q (optional, string, `search-query`) ... Search through the results as you query the API.
+    + start (optional, intger, `1427710664`) ... Unix timestamp defining start of range required.
+    + end (optional, intger, `1427730664`) ... Unix timestamp defining end of range required.
+
++ Response 200 (application/json)
+
+    + Body
+            {
+                "timeline": {
+                    "gross": "[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30.91, 2.81, 14.05, 2.81, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]",
+                    "timeline": "[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11.0, 1.0, 5.0, 1.0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]"
+                },
+                "info": {
+                    "count": 18,
+                    "avg": 281,
+                    "total": 5058,
+                    "uniques": 3
+                },
+                "_stats": {
+                    "interval": "day",
+                    "start": 1422403200,
+                    "end": 1427756399
+                }
+            }
+
 # Group Speedtests
 
 Now depreciated in favour of the reports API.
@@ -4366,7 +4615,7 @@ Speedtests belong to boxes and are a nested resource. You can only create and li
 
 The creation of a speedtest is meant to be an ephemeral and quick connection check. The results from the creation of a speedtest can be seen in the Box object. Use the Boxes API to get this information.
 
-##Allowed HTTPs requests:
+## Allowed HTTPs requests:
 
 - `POST` - Creates or updates a resource
 - `GET` - Retrieves a list of speedtests
