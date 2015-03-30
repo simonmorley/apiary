@@ -4374,7 +4374,7 @@ The currently available actions include:
 + codes - voucher code generation and usage
 + orders - a timeline of your online sales
 
-## Analytics and stats [/api/v1/reports{?sessions,location_id}]
+## Analytics and stats [/api/v1/reports{?sessions,location_id,q,start,end,username}]
 
 ### Session statistics [GET]
 
@@ -4383,7 +4383,6 @@ The currently available actions include:
     + sessions (required, boolean, `true`) ... Get the session stats
     + location_id (optional, integer, `872`) ... The numeric ID of the location you want to filter results for.
     + username (optional, string, `bob-marley`) ... The username of the session you wish to filter by.
-    + page (optional, integer, `1`) ... For pagination purposes.
     + q (optional, string, `search-query`) ... Search through the results as you query the API.
     + start (optional, intger, `1427710664`) ... Unix timestamp defining start of range required.
     + end (optional, intger, `1427730664`) ... Unix timestamp defining end of range required.
@@ -4422,8 +4421,6 @@ The currently available actions include:
 
     + clients (required, boolean, `true`) ... Get the wireless client stats
     + location_id (optional, integer, `872`) ... The numeric ID of the location you want to filter results for.
-    + username (optional, string, `bob-marley`) ... The username of the session you wish to filter by.
-    + page (optional, integer, `1`) ... For pagination purposes.
     + q (optional, string, `search-query`) ... Search through the results as you query the API.
     + start (optional, intger, `1427710664`) ... Unix timestamp defining start of range required.
     + end (optional, intger, `1427730664`) ... Unix timestamp defining end of range required.
@@ -4512,9 +4509,6 @@ The currently available actions include:
 
     + impressions (required, boolean, `true`) ... Get the stats for your page views / impressesions.
     + location_id (optional, integer, `872`) ... The numeric ID of the location you want to filter results for.
-    + username (optional, string, `bob-marley`) ... The username of the session you wish to filter by.
-    + page (optional, integer, `1`) ... For pagination purposes.
-    + q (optional, string, `search-query`) ... Search through the results as you query the API.
     + start (optional, intger, `1427710664`) ... Unix timestamp defining start of range required.
     + end (optional, intger, `1427730664`) ... Unix timestamp defining end of range required.
 
@@ -4548,8 +4542,6 @@ The currently available actions include:
 
     + codes (required, boolean, `true`) ... Get the stats for your vouchers generated
     + location_id (optional, integer, `872`) ... The numeric ID of the location you want to filter results for.
-    + username (optional, string, `bob-marley`) ... The username of the session you wish to filter by.
-    + page (optional, integer, `1`) ... For pagination purposes.
     + q (optional, string, `search-query`) ... Search through the results as you query the API.
     + start (optional, intger, `1427710664`) ... Unix timestamp defining start of range required.
     + end (optional, intger, `1427730664`) ... Unix timestamp defining end of range required.
@@ -4580,9 +4572,6 @@ The currently available actions include:
 
     + orders (required, boolean, `true`) ... Get the stats for any store orders
     + location_id (optional, integer, `872`) ... The numeric ID of the location you want to filter results for.
-    + username (optional, string, `bob-marley`) ... The username of the session you wish to filter by.
-    + page (optional, integer, `1`) ... For pagination purposes.
-    + q (optional, string, `search-query`) ... Search through the results as you query the API.
     + start (optional, intger, `1427710664`) ... Unix timestamp defining start of range required.
     + end (optional, intger, `1427730664`) ... Unix timestamp defining end of range required.
 
