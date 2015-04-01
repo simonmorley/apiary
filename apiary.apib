@@ -3237,6 +3237,52 @@ Whilst it's ok to send the whole location object back when updating the firewall
 
             { "message": "You have updated Derby Council" }
 
+# Group Logins
+
+The **Logins API** is specifically for use with the splash pages. This API is designed to log your customers in via a splash page.
+
+You may use our hosted splash page service or your own pages.
+
+The process is slightly different if you're using Cisco Meraki boxes as we can log your session in server-side. This quick guide assumes you're using CT boxes. A full walk-through will be available soon.
+
+After you have created the page, your users need to login. To do so you need to exchange their username and password for an encrypted challenge and response.
+
+All encryption happens within CT so you don't need to worry about hiding secrets etc. and facilitates the use of light-weight Javascript login pages.
+
+Please remember, even if you're using your own hosted splash solution, you still need to set up a splash page using this API or within CT. This is because all the access rules and settings are stored within the Splash Page object.
+
+If you've set your splash page settings to click through, you do not need to send a username or password. We will generate this for you automatically.
+
+The logins API only supports the POST action which logs the user in.
+
+A successfully login will contain the encrypted username and password (if using CT boxes). You will need this to authorise a session against the box (and radius server).
+
+TBC. There's also an API to display the welcome page which can be edited via the splash pages API or via the web interface.
+
+## Logins collection [/api/v1/logins{?username,password,challenge,request_uri,clientMac,apMac,loginUrl,token,userId,memberId,email,newsletter,signature,signatureVersion,signatureOrder}]
+
++ Parameters
+
+    + username (optional, string, `bob-marley`) ... Username for the user, not required if using clickthrough access
+    + password (optional, string, `password`) ... Password for the user, not required if using clickthrough access
+    + challenge (optional, string, `really-strong`) ... A challenge which you will find in the URL you're redirected to or from the JSON interface. Not required if using Meraki
+    + request_url (required, string, `polkaspots.my-wifi.co`) ... Your authorised domain as per your location settings. Required for security reasons - it prevents the unauthorised use of your splash pages
+    + clientMac (required, string, `11:22:33:44:55:66`) ... The mac address of the client
+    + apMac (required, string, `11:22:33:44:55:66`) ... The mac address of the access point / box
+    + loginUrl (optional, string, `meraki.net`) ... Only required for Meraki boxes. The full login_url as provided in the redirect.
+    + token (optional, string, `secret-token`) ... The auth_token for the users. Only required if you're using a social logins.
+    + email (optional, string, `bob@marley.com`) ... The email for the user if you're capturing emails.
+    + newsletter (optional, boolean, `true`) ... Whether the customer wants to subscribe to your newsletetr.
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+              "username": "your-encrypted-username",
+              "challengeResp": "an-encoded-passy"
+            }
+
 # Group Jobs
 
 Jobs, or events as they should really be named, are things that happen to your boxes. Jobs include device heartbeats, payload commands and more.
@@ -4373,6 +4419,7 @@ The currently available actions include:
 + impressesions - the number of impressions your splash pages receieve daily
 + codes - voucher code generation and usage
 + orders - a timeline of your online sales
++ social - your social media logins
 
 ## Analytics and stats [/api/v1/reports{?sessions,location_id,q,start,end,username}]
 
@@ -4593,6 +4640,63 @@ The currently available actions include:
                     "interval": "day",
                     "start": 1422403200,
                     "end": 1427756399
+                }
+            }
+
+### Social logins statistics [GET]
+
++ Parameters
+
+    + socials (required, boolean, `true`) ... Get stats on your social media logins.
+    + location_id (optional, integer, `872`) ... The numeric ID of the location you want to filter results for.
+    + start (optional, intger, `1427710664`) ... Unix timestamp defining start of range required.
+    + end (optional, intger, `1427730664`) ... Unix timestamp defining end of range required.
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "timeline": {
+                    "uniques": "[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.0, 0]"
+                },
+                "info": {
+                    "locations": [
+                        {
+                            "name": "London, United Kingdom",
+                            "total": 1
+                        }
+                    ],
+                    "genders": [
+                        [
+                            "female",
+                            1
+                        ],
+                        [
+                            "male",
+                            1
+                        ]
+                    ],
+                    "networks": [
+                        [
+                            "facebook",
+                            1
+                        ],
+                        [
+                            "google",
+                            1
+                        ]
+                    ],
+                    "info": {
+                        "total": 2,
+                        "avg": 1,
+                        "count": 2
+                    }
+                },
+                "_stats": {
+                    "interval": "day",
+                    "start": 1425254400,
+                    "end": 1427929199
                 }
             }
 
@@ -6526,6 +6630,228 @@ A list of all the store orders for your locations. Currently we do not the suppo
                 "location_name": "S*** got real",
                 "revoked": null,
                 "notes": null
+            }
+
+# Group Social
+
+This section relates to the **Social API**. If you are offering splash pages on your network and have enabled social logins, you can use this API to search your user data.
+
+Each time a user logs-in through a splash page with either Facebook, Google or LinkedIn enabled, we will use the user's credentials to fetch further information about them.
+
+In order to activate social logins, use the Splash Page API to enable. If you do not want to use our credientials - you want to create your own app - we will still capture the data. If you are using the LinkedIn API, you must provide us with your API secret too. Otherwise, we cannot query their API to fetch further profile information.
+
+**The Flow**
+
+The first time a user connects with their social account, we will create a unique user assigned to the location they signed in from.
+
+If you own multiple locations, you will notice multiple idential users. This is intended. You are able to use this API to filter the users by location ID if you require granular reports.
+
+When a user signs-in with the same social account, we will update only a few attributes. These include the location of the user, their email and their mac address. We will not update their gender. If a user changes gender, we will alway store the first variable set.
+
+We store an array of the users previous emails and locations as these can change frequently. 
+
+When a user signs in with a different social account, we will attempt to find the user in two ways:
+
+1. By email (any email that's been stored on their account)
+2. By clientMac
+
+The latter is therefore very important. During the creation process, we will also attempt to link the account with a client on your networks.
+
+This provides a rich data-set and you are able to identify your users behaviour fully.
+
+You will also find a convenient lonlat attribute. Please note the order, this attribute is an array formatted [lon,lat] in compliance with GeoJSON. http://geojson.org/
+
+Search is enabled on this API and you may query as described later using the standard *q* param.
+
+Finally, you may update ONLY the notes field on the user.
+
+**A social account has the following attributes:**
+
++ id - the unique if for the user
++ unique_id - a unique id for the order
++ created_at - time of creation in unix time
++ updated_at - last login in unix time
++ email - the current email of the user if they've given permission
++ location_id - the id of the location they signed-in from
++ location_name - the name of the location they logged in at
++ location_slug - the unique location slug
++ splash_ids - an array of splash page ids from which they have logged in from
++ facebookId -  the unique Facebook ID of the user
++ googleId - the unique Google+ ID of the user
++ linkedIn - the unique LinkedIn ID of the user
++ clientMac - an array of mac addresses for the client
++ gender - I'm a boy, you might be a girl
++ currentLocation - their current location, geocoded with country
++ firstName 
++ lastName
++ checkins - count of their logins
++ fbLink - a link to their Facebook profile
++ gLink - a link to their Google+ profile
++ liLink - a link to their LinkedIn profile
++ liHeadline - if LinkedIn, their headline from their profile
++ client_id - ID of the client (wireless client) that their associated with
++ lonlat - array of their longitude and latitude in line with geoJSON standard
++ notes - editable notes field
++ emails - an array containing all their email addresses
++ locations - an array of geocoded locations
++ networks - an array of accounts the user has logged-in with
+
+And, within the show object, you will also find the following fields (assuming we have linked to a client):
+
++ manufacturer - current device manufacturer
++ lastseen - last seen on network, will vary to login time
++ snr - current (or last if disconnected) signal in dBm
++ capabilities - 2.4Ghz or 5Ghz device support
++ online - boolean, whether they're connected to the network currently
++ ssid - current / last SSID
++ splash_connected - if they're connected via the splash pages
++ ap_slug - box slug for linking
++ ap_mac - box mac address
++ ap_description - a description of the box
++ downloaded - their currenty download value in bytes
+
+Supports:
+
+- `GET` - Retrieves an order
+- `PATCH` - Updates / refunds an order
+
+## Social Collection [/api/v1/social{?page,size,q,location_id}]
+
+A list of all your social users.
+
+### List all social users [GET]
+
++ Parameters
+
+    + page (optional, integer, `1`) ... For pagination purposes.
+    + size (optional, integer, `500`) ... The number of records you want to return. Max. value is 1000.
+    + q (optional, string, `search-term`) ... Search within your data-set
+    + location_id (optional, integer, `1813`) ... Filter results by location id
+
++ Response 200 (application/json)
+
+            {
+                "social": [
+                    {
+                        "id": "551adb944c697ab14b000000",
+                        "email": "bob@polkaspots.com",
+                        "location_id": 1813,
+                        "facebookId": null,
+                        "created_at": 1427823508,
+                        "updated_at": 1427823508,
+                        "googleId": "177286708788057480",
+                        "linkedinId": null,
+                        "gender": "male",
+                        "currentLocation": "London, United Kingdom",
+                        "firstName": "Bob",
+                        "lastName": "Marley",
+                        "checkins": 1,
+                        "google": "google",
+                        "lonlat": [
+                            -0.1277583,
+                            51.5073509
+                        ]
+                    },
+                    {
+                        "id": "551adbaa4c697ab14b010000",
+                        "email": "bob@me.com",
+                        "location_id": 1813,
+                        "facebookId": "6888888",
+                        "created_at": 1427823530,
+                        "updated_at": 1427823530,
+                        "googleId": null,
+                        "linkedinId": null,
+                        "gender": "female",
+                        "currentLocation": null,
+                        "firstName": "Bob",
+                        "lastName": "Cat",
+                        "checkins": 1,
+                        "facebook": "facebook",
+                        "lonlat": null
+                    }
+                ],
+                "_links": {
+                    "current_page": 1,
+                    "total_pages": 1,
+                    "next_page": null,
+                    "total_entries": 2
+                },
+                "_stats": {
+                    "genders": [
+                        {
+                            "key": "female",
+                            "value": 1
+                        },
+                        {
+                            "key": "male",
+                            "value": 1
+                        }
+                    ]
+                }
+            }
+
+## Social Object [/api/v1/users/{id}]
+
+Represents a user who's logged in via Facebook, Google or LinkedIn.
+
+### Full social details [GET]
+
++ Parameters
+
+    + id (required, string, `5555555555555555555`) ... Slug `slug` for your account, bob-marley.
+
++ Response 200 (application/json)
+
+    + Body
+            {
+                "social": {
+                    "id": "551adbaa4c697ab14b010000",
+                    "email": "bob@me.com",
+                    "location_id": 1813,
+                    "location_name": "S** got real",
+                    "location_slug": "shit-got-real-four-1c94fe7e-6823-46c4-8425-160c63c00aea",
+                    "facebookId": "604903",
+                    "created_at": 1427823530,
+                    "updated_at": 1427823530,
+                    "clientMacs": [
+                        "3C-15-C2-C0-B8-AE"
+                    ],
+                    "googleId": null,
+                    "linkedinId": null,
+                    "gender": "female",
+                    "currentLocation": null,
+                    "firstName": "Bob",
+                    "lastName": "Bob",
+                    "checkins": 6,
+                    "fbLink": "https://www.facebook.com/bob",
+                    "liLink": null,
+                    "gLink": null,
+                    "liHeadline": null,
+                    "client_id": null,
+                    "lonlat": [-0.1277583, 51.5073509],
+                    "notes": null,
+                    "splashIds": [
+                        "8888888888",
+                        "BBBBBBBBBB"
+                    ],
+                    "networks": [
+                      "google",
+                      "facebook"
+                    ]
+                },
+                "client": {
+                    "manufacturer": "Apple",
+                    "lastseen": 1427556695,
+                    "snr": 10,
+                    "capailities": "2.4Ghz",
+                    "online": true,
+                    "ssid": "PolkaSpots Supafly Wi-Fi",
+                    "splash_connected": false,
+                    "ap_slug": "ce445a1fa39bda2af958a59d2802033d",
+                    "ap_mac": "00-CC-22-50-5D-55",
+                    "ap_description": "Fourth floor",
+                    "downloaded": 184870
+                }
             }
 
 # Group Technologies
