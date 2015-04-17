@@ -1339,6 +1339,59 @@ These filter parameters allow you to view clients over a pre-set period.
 
 For clients which are currently connected via the captive portal, you can also disconnect them using the same API. Details are found below.
 
+**A client account has the following attributes:**
+
++ id - the unique if for the client
++ client_mac - client mac address
++ signalavg - avg signal in dBm
++ interface - current (last) interface associated with
++ notes - custom notes
++ signal - current (last) known signal, in dBm
++ device_name - name of the device
++ txbitrate - transmit rate in bytes/s
++ rxbitrate - receieve rate in bytes/s
++ noise - current noise in dBm
++ snr - signal to noise ratio
++ snr_alert - snr below 16dBm
++ rxbytes_session - session rx in bytes/s
++ txbytes_session - session tx in bytes/s
++ txbps - current download speed in bps
++ rxbytes - all-time rx (receive)
++ txbytes - all-time tx (transmit)
++ txfailed - failed transmissions
++ rxfailed - failed rx
++ rxpackets - packets received
++ txpackets - packets sent
++ txretries - tx retries for session
++ inactivetime
++ slug - unique id for the client
++ authorized - is authorised on the network
++ authenticated - is authenticated on the network
++ online - in online and currently active
++ lastseen - timestamp of last seen
++ firstseen - timestamp of first seen
++ ip - current IP address
++ manufacturer - device manufacturer
++ ssid - current SSID (network name)
++ ssids - all associated SSIDs
++ splash_usernames - any captive portal usernames
++ splash_connected - is connected via the splash pages
++ splash_status - captive portal status (dnat or pass)
++ splash_session - captive portal session time
++ splash_username - username of current session
++ splash_disconnecting - if the client is being disconnected
++ splash_in - data receieved whilst using captive portal
++ splash_out - data sent whilst using captive portal
++ description - notes
++ latlng - current latlng of client determined from box
++ channel - which channel they're using
++ capabilities - current 2.4g or 5g capability
++ full_capabilities - all the caps
++ location_id - the id for the location they're associated with
++ ap_mac - mac of the box they're connected to
++ name - a name for the client
++ social_id - any social network they're linked to
+
 **The clients API is only available for boxes which use the PolkaSpots Firmware.**
 
 ## List Location Clients [/api/v1/locations/{location_id}/clients{?distance,interval,ap_mac}]
@@ -2470,38 +2523,61 @@ Please see the location object for a list of parameters you can update. Some are
 
 + Response 200 (application/json)
 
-        [{
-            "id": 1687,
-            "location_name": "Cafe International",
-            "slug": "cafe-international-f84e1979-52e4-49ff-8d6e-ed808578b36a",
-            "created_at": "May 6 2014 11:47:08",
-            "network_name": "PolkaSpots",
-            "location_address": "12 High Lane",
-            "street": "12 High Lane",
-            "phone1": "02071831471",
-            "location_website": null,
-            "location_type": null,
-            "nas_count": 1,
-            "archived": false,
-            "development_mode": "Production",
-            "daily_limit": true
-        },
-        {
-            "id": 870,
-            "location_name": "Derby - City Council",
-            "slug": "derby-city-council",
-            "created_at": "August 19 2013 11:50:04",
-            "network_name": "Meraki",
-            "location_address": "Corporation Street Derby ",
-            "street": "",
-            "phone1": "01332293111",
-            "location_website": "www.surfthecity.co.uk",
-            "location_type": "186",
-            "nas_count": 5,
-            "archived": false,
-            "development_mode": "Production",
-            "daily_limit": true
-        }]
+        [
+             {
+                "locations": [
+                     {
+                        "id": "1854",
+                        "location_name": "My Awesome Company",
+                        "slug": "my-awesome-company-ejrphns0s2vabeetzteg2g",
+                        "location_address": "asdfasdfasdfasdf",
+                        "street": null,
+                        "phone1": null,
+                        "location_website": null,
+                        "location_type": null,
+                        "archived": false,
+                        "development_mode": "Production",
+                        "daily_limit": true,
+                        "created_at": 1428688923,
+                        "updated_at": 1428688923,
+                        "user_id": null,
+                        "lat": null,
+                        "lng": null,
+                        "clients_total": 0,
+                        "clients_online": 0,
+                        "boxes_count": 0
+                    },
+                     {
+                        "id": "1813",
+                        "location_name": "Stuff got real",
+                        "slug": "stuff-got-real-four-1c94fe7e-6823-46c4-8425-160c63c00aea",
+                        "location_address": "12 Hamilton Lane",
+                        "street": null,
+                        "phone1": null,
+                        "location_website": null,
+                        "location_type": null,
+                        "archived": false,
+                        "development_mode": "Beta",
+                        "daily_limit": true,
+                        "created_at": 1418395686,
+                        "updated_at": 1428624558,
+                        "user_id": 1,
+                        "lat": 40.4039,
+                        "lng": -121.971,
+                        "clients_total": 0,
+                        "clients_online": 0,
+                        "boxes_count": 8
+                    },
+                 ],
+                "_links": {
+                    "current_page": 1,
+                    "total_pages": 114,
+                    "next_page": 2,
+                    "total_entries": 1698,
+                    "size": 15
+                }
+            }
+        ]
 
 ## Locations Search [/api/v1/locations?q={search}]
 
@@ -3255,7 +3331,7 @@ If you've set your splash page settings to click through, you do not need to sen
 
 The logins API only supports the POST action which logs the user in.
 
-A successfully login will contain the encrypted username and password (if using CT boxes). You will need this to authorise a session against the box (and radius server).
+**A successfully login will contain the encrypted username and password as challengeResp (if using CT boxes). You will need this to authorise a session against the box (and radius server).**
 
 TBC. There's also an API to display the welcome page which can be edited via the splash pages API or via the web interface.
 
@@ -4126,7 +4202,7 @@ If you are upgrading a box, you can send the version of the firmware you want to
 
 + Parameters
 
-    + box_id (required, string, `ABCDEF`) ... Slug / ID of the box you want to request payloads for. Has example value.
+    + box_ids (required, string, `ABCDEF`) ... Slug / ID of the box you want to request payloads for. Can be comman separated list of slugs. Has example value.
 
 
 + Response 200 (application/json)
@@ -4181,9 +4257,8 @@ Please note, the params MUST be passed in the payloads object.
 
 + Parameters
 
-    + box_id (required, string, `ZOWso8IMhuwYTrdh`) ... Slug `slug` of the Box to perform action with. Has example value.
+    + box_ids (required, string, `ZOWso8IMhuwYTrdh`) ... Slug `slug` of the Box(es) to perform action with. Has example value.
     + command_id (optional, string, `JCyK7Zwh0ON_ZOWso8Mhuw`) ... Unique ID of the command you want to send to the box.
-    + box_ids (optsional, string, `HSKJHKJH,BMBCKJHS`) ... The slugs of the devices you want to receive the payloads.
     + upgrade (optional, boolean, `true`) ... Send a true value and we will upgrade all the boxes you have sent and ignore the command.
     + version (optional, string, `150112-0A`) ... If you're upgrading your box, you can send the firmware version you want to swap to.
     + scheduled (optional, string, `12am tomorrow`) ... Send the time you want the upgrade to occur. Applies to upgrades only.
@@ -4192,7 +4267,7 @@ Please note, the params MUST be passed in the payloads object.
 
         {
           payload: {
-            box_id: "ZOWso8IMhuwYTrdh",
+            box_ids: "ZOWso8IMhuwYTrdh,JushYY6--01",
             upgrade: true,
             scheduled: "Tomorrow at noon",
             version: "150912-B"
@@ -6650,7 +6725,7 @@ If you own multiple locations, you will notice multiple idential users. This is 
 
 When a user signs-in with the same social account, we will update only a few attributes. These include the location of the user, their email and their mac address. We will not update their gender. If a user changes gender, we will alway store the first variable set.
 
-We store an array of the users previous emails and locations as these can change frequently. 
+We store an array of the users previous emails and locations as these can change frequently.
 
 When a user signs in with a different social account, we will attempt to find the user in two ways:
 
@@ -6684,7 +6759,7 @@ Finally, you may update ONLY the notes field on the user.
 + clientMac - an array of mac addresses for the client
 + gender - I'm a boy, you might be a girl
 + currentLocation - their current location, geocoded with country
-+ firstName 
++ firstName
 + lastName
 + checkins - count of their logins
 + fbLink - a link to their Facebook profile
