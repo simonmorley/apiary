@@ -3443,322 +3443,6 @@ You can filter the log_level betweeen 1 and 3.
                 }
             }]
 
-# Group Metrics
-
-Get aggregated and serial reporting data about your networks and usage.
-
-This only available to enterprise users or those using the sense service.
-
-A stay is a representation of a completed visit for a specific box & client. Stays are used to determine dwell times.
-
-A stay has a start time and an end time and they are grouped by:
-
-- Client MAC
-- Box MAC
-- Date
-
-A stay is considered complete when the device has not been seen for more than 30 minutes.
-
-For example, a device is first seen at 10am. The device is seen every minute until 11am. After which they device leaves the access point. Cucumber Tony will automatically mark this as a completed stay. This may not be completed immediately.
-
-Should they come back after 30 minutes have passed, we will start a new stay for them.
-
-If the device is seen only once, we consider the device to have passed through - this does not affect your dwell times.
-
-Stays currently consider both associated and unassociated clients.
-
-You may pass in various parameters to filter the results in different ways. See below.
-
-The only end-point required is /api/v1/metrics - this provides all the required currently available public data. Filters are passed in as search params.
-
-You can pass in your location_ids & ap_macs to filter for each action.
-
-##Allowed HTTPs requests:
-
-- `GET` - Retrieves a resource or list of resources
-
-## Overview of Stays [/api/v1/metrics/{?location_ids,ap_macs,start,end}]
-
-Summary stats of your network dwell times and stays including the counts, averages, max and min. values. You can filter using your location_ids or ap_macs as arrays.
-
-+ Parameters
-
-    + location_ids (optional, integer, `1,2,3`) ... Comma separated list of location IDs to filter the results.
-    + ap_macs (optional, string, `11:22:11:22:22:11`) ... Comma separated list of mac addresses to filter the results.
-    + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 100 days ago.
-    + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to now.
-
-### Summary stats for dwells, stays and sessions [GET]
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {
-                "dwells": {
-                    "dwells": {
-                        "count": 4308144,
-                        "min": 8979,
-                        "max": 89987,
-                        "avg": 677.060867974701,
-                        "sum": 2916875716
-                    },
-                    "stays": {
-                        "count": 2269436,
-                        "min": 1,
-                        "max": 326,
-                        "avg": 2.066425314483422,
-                        "sum": 4689620
-                    },
-                    "sessions": {
-                        "count": 5874380,
-                        "min": 1,
-                        "max": 5077,
-                        "avg": 9.827615169600877,
-                        "sum": 57731146
-                    }
-                }
-            }
-
-## Aggregated sessions, dwells and stays [/api/v1/metrics/{?aggs,location_ids,start,end,key,ap_macs}]
-
-Aggregated summary data grouped by location_id. This provides a summary of dwell times for each invidivual location. Please use the locations api to determine full location information from the id. It is required you pass the search parameter "aggs" to use this end point. The key is equal to your location id
-
-+ Parameters
-
-    + aggs (required, boolean, `true`) ... Required to provide aggregated results.
-    + key (optional, boolean, `location_id`) ... Required to provide aggregated results by location_id.
-    + location_ids (optional, integer, `1,2,3`) ... Comma separated list of location IDs to filter the results.
-    + ap_macs (optional, string, `11:22:11:22:22:11`) ... Comma separated list of mac addresses to filter the results.
-    + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 100 days ago.
-    + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to now.
-
-### Aggregated data grouped by location_id [GET]
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {
-                "aggs": {
-                    "count": 3,
-                    "locations": [
-                        {
-                            "key": "32",
-                            "dwells": {
-                                "count": 3,
-                                "min": 1000,
-                                "max": 1000,
-                                "avg": 1000,
-                                "sum": 3000
-                            },
-                            "sessions": {
-                                "count": 3,
-                                "min": 1,
-                                "max": 1,
-                                "avg": 1,
-                                "sum": 3
-                            },
-                            "stays": {
-                                "count": 3,
-                                "min": 12,
-                                "max": 12,
-                                "avg": 12,
-                                "sum": 36
-                            }
-                        }
-                    ]
-                }
-            }
-
-## Aggregated by ap_mac [/api/v1/metrics/{?aggs,location_ids,ap_macs,start,end,key}]
-
-Aggregated summary data grouped by ap_mac. This provides a summary of dwell times for each invidivual access point.
-
-Pass key=ap_mac with the search params to group by ap_mac.
-
-+ Parameters
-
-    + aggs (required, boolean, `true`) ... Required to provide aggregated results.
-    + key (required, string, `ap_mac`) ... Required to provide aggregated results by mac address of access point.
-    + location_ids (optional, integer, `1,2,3`) ... Comma separated list of location IDs to filter the results.
-    + ap_macs (optional, string, `11:22:11:22:22:11`) ... Comma separated list of mac addresses to filter the results.
-    + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 100 days ago.
-    + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to now.
-
-### Aggregated data grouped by ap_mac [GET]
-
-+ Response 200 (application/json)
-
-## Aggregated by manufacturer [/api/v1/metrics/{?aggs,location_ids,ap_macs,start,end,key}]
-
-Aggregated summary data grouped by manufacturer. Pass key=man with query to activate.
-
-+ Parameters
-
-    + aggs (required, boolean, `true`) ... Required to provide aggregated results.
-    + key (required, string, `man`) ... Required to provide aggregated results by manufacturer.
-    + location_ids (optional, integer, `1,2,3`) ... Comma separated list of location IDs to filter the results.
-    + ap_macs (optional, string, `11:22:11:22:22:11`) ... Comma separated list of mac addresses to filter the results.
-    + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 100 days ago.
-    + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to now.
-
-### Aggregated data grouped by manufacturer [GET]
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {
-                "aggs": {
-                    "count": 3,
-                    "locations": [
-                        {
-                            "key": "apple",
-                            "dwells": {
-                                "count": 3,
-                                "min": 1000.0,
-                                "max": 1000.0,
-                                "avg": 1000.0,
-                                "sum": 3000.0
-                            },
-                            "sessions": {
-                                "count": 3,
-                                "min": 1.0,
-                                "max": 1.0,
-                                "avg": 1.0,
-                                "sum": 3.0
-                            },
-                            "stays": {
-                                "count": 3,
-                                "min": 12.0,
-                                "max": 12.0,
-                                "avg": 12.0,
-                                "sum": 36.0
-                            }
-                        }
-                    ]
-                }
-            }
-
-## Aggregated by time [/api/v1/metrics/{?aggs,location_ids,ap_macs,start,end,key}]
-
-Aggregated summary data grouped by time. You can pass in key=hour or key=day to group accordingly.
-
-The key will be the day number or hour.
-
-+ Parameters
-
-    + aggs (required, boolean, `true`) ... Required to provide aggregated results.
-    + key (required, string, `day`) ... Required to provide aggregated results by day or hour.
-    + location_ids (optional, integer, `1,2,3`) ... Comma separated list of location IDs to filter the results.
-    + ap_macs (optional, string, `11:22:11:22:22:11`) ... Comma separated list of mac addresses to filter the results.
-    + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 100 days ago.
-    + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to now.
-
-### Aggregated data grouped by time [GET]
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {
-                "aggs": {
-                    "count": 3,
-                    "locations": [
-                        {
-                            "key": 3,
-                            "dwells": {
-                                "count": 2,
-                                "min": 1000.0,
-                                "max": 1000.0,
-                                "avg": 1000.0,
-                                "sum": 2000.0
-                            },
-                            "sessions": {
-                                "count": 2,
-                                "min": 1.0,
-                                "max": 1.0,
-                                "avg": 1.0,
-                                "sum": 2.0
-                            },
-                            "stays": {
-                                "count": 2,
-                                "min": 12.0,
-                                "max": 12.0,
-                                "avg": 12.0,
-                                "sum": 24.0
-                            }
-                        },
-                        {
-                            "key": 4,
-                            "dwells": {
-                                "count": 1,
-                                "min": 1000.0,
-                                "max": 1000.0,
-                                "avg": 1000.0,
-                                "sum": 1000.0
-                            },
-                            "sessions": {
-                                "count": 1,
-                                "min": 1.0,
-                                "max": 1.0,
-                                "avg": 1.0,
-                                "sum": 1.0
-                            },
-                            "stays": {
-                                "count": 1,
-                                "min": 12.0,
-                                "max": 12.0,
-                                "avg": 12.0,
-                                "sum": 12.0
-                            }
-                        }
-                    ]
-                }
-
-## Histogram of sessions, dwells and stays grouped by day or hour [/api/v1/metrics/{?timeline,location_ids,ap_macs,start,end}]
-
-This provides a timeline of sessions for your locations or aps. Pass timeline = true with params. The key is linux / epoch time.
-
-+ Parameters
-
-    + timeline (required, boolean, `true`) ... Required to provide aggregated results.
-    + location_ids (optional, integer, `1,2,3`) ... Comma separated list of location IDs to filter the results.
-    + ap_macs (optional, string, `11:22:11:22:22:11`) ... Comma separated list of mac addresses to filter the results.
-    + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 100 days ago.
-    + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to now.
-
-### Timeline data grouped by date [GET]
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {
-                "timeline": {
-                    "count": 3,
-                    "timeline": [
-                        {
-                            "key": 1417046400000,
-                            "avg": 1,
-                            "total": 119298
-                        },
-                        {
-                            "key": 1417219200000,
-                            "avg": 1,
-                            "total": 131233
-                        },
-                        {
-                            "key": 1418601600000,
-                            "avg": 1,
-                            "total": 112311
-                        }
-                    ]
-                }
-            }
-
-
 # Group Networks
 
 Networks represent SSIDs. You can add up to 16 networks per location however, we rarely recommend doing so. The more networks you add, the lower the performance.
@@ -4780,6 +4464,103 @@ The currently available actions include:
                     "interval": "day",
                     "start": 1425254400,
                     "end": 1427929199
+                }
+            }
+
+# Group Sense
+
+For customers using Ruckus or Cisco Meraki boxes, you can now pipe your data into Cucumber Tony for analysis.
+
+This only available to enterprise users or those on Sense plans.
+
+We present a single end-point for the Sense API and you are required to pass in URL params to filter the results. This is a read-only end-point.
+
+**Basic Concepts**
+
+Firstly, you will need to enable the analytics API in your Cisco Meraki dashboard. Currently you need to point your traffic towards:
+
+https://api.polkaspots.com/api/v1/flume?id=11111111x
+
+Please contact Cucumber Tony support for your Unique ID and matching Secret.
+
+Once this is done, the data will be available immediately in your dashboard and via the API assuming you've set things up.
+
+We categorise the data into two groups:
+
+- Visits
+- Stats
+
+A visit is a one-off occurence - for example, someone who's passing by.
+
+A stay is a representation of someone who's been in your location for more than one visit. We will automatically mark a visitor as having left the vicinity if they're not seen for 30 minutes or more.
+
+A stay is a representation of a completed visit for a specific box & client. Stays are used to determine dwell times.
+
+A stay has a start time and an end time and they are grouped by:
+
+- Client MAC
+- Box MAC
+- Date
+
+A stay is considered complete when the device has not been seen for more than 30 minutes.
+
+For example, a device is first seen at 10am. The device is seen every minute until 11am. After which they device leaves the access point. Cucumber Tony will automatically mark this as a completed stay. This may not be completed immediately.
+
+Should they come back after 30 minutes have passed, we will start a new stay for them.
+
+If the device is seen only once, we consider the device to have passed through - this does not affect your dwell times.
+
+Stays currently consider both associated and unassociated clients.
+
+You may pass in various parameters to filter the results in different ways. See below.
+
+The only end-point required is /api/v1/metrics - this provides all the required currently available public data. Filters are passed in as search params.
+
+You can pass in your location_ids & ap_macs to filter for each action.
+
+##Allowed HTTPs requests:
+
+- `GET` - Retrieves a resource or list of resources
+
+**The following params may be passed to filter the data:**
+
+- type=connections - will show the number of connected and non-connected clients grouped by day
+- type=dwells - will show a timeline of your dwell times
+- type=stats - shows summary information including manufacturers
+
+Passing no params will give you the total visits and stays on a timeline. You can also pass in a period value (currently only 'daily') which will group the stats by day of week, starting Monday.
+
+You can filter the search further by including a string of location ids or mac addresses. Finally, you may pass start and end parameters as Unix time to restrict the range.
+
+## Overview of Stays [/api/v1/sense/{?location_ids,ap_macs,start,end}]
+
+Summary stats of your network dwell times and stays including the counts, averages, max and min. values. You can filter using your location_ids or ap_macs as arrays.
+
++ Parameters
+
+    + location_ids (optional, integer, `1,2,3`) ... Comma separated list of location IDs to filter the results.
+    + ap_macs (optional, string, `11:22:11:22:22:11`) ... Comma separated list of mac addresses to filter the results.
+    + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 100 days ago.
+    + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to now.
+
+### Summary stats showing the total visits, number of uniques and the average (mean) visits per day [GET]
+
+The results include a _stats object which dictates the start and end dates for the data including an interval if included.
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "timeline": {
+                    "avg": "[10.918001239440295, 11.069807775690128, 7.5131462799495585, 10.13379428007004, 8.352896732622455, 13.372330168483323, 13.626814496747524, 10.894068970010913, 10.912033700126536, 6.39321644150618, 6.556038064182357, 6.49443039036185, 6.516468058272834, 7.946789460220005, 6.744289775512205]",
+                    "total": "[61318.0, 62271.0, 63440.0, 66819.0, 70148.0, 61193.0, 31207.0, 61389.0, 62433.0, 62622.0, 63787.0, 71549.0, 61847.0, 31272.0, 61206.0, 70216.0, 67698.0, 60279.0, 73381.0, 62937.0, 29828.0, 60296.0]",
+                    "uniques": "[18622.0, 17636.0, 17912.0, 19480.0, 22390.0, 18960.0, 10236.0, 17800.0, 17960.0, 18486.0, 18592.0, 20491.0, 17938.0, 9927.0, 18434.0, 18755.0, 19688.0, 17634.0, 20856.0, 17767.0, 9612.0, 16662.0, 20213.0, 19445.0, 18421.0, 21878.0, 18907.0, 11063.0, 16314.0, 18620.0, 18150.0, 18372.0]"
+                },
+                "_stats": {
+                    "interval": null,
+                    "start": 1422835200,
+                    "end": 1430173084
                 }
             }
 
