@@ -4502,13 +4502,13 @@ A stay has a start time and an end time and they are grouped by:
 
 A stay is considered complete when the device has not been seen for more than 30 minutes.
 
-For example, a device is first seen at 10am. The device is seen every minute until 11am. After which they device leaves the access point. Cucumber Tony will automatically mark this as a completed stay. This may not be completed immediately.
+For example, a device is first seen at 10am. The device is seen every minute until 11am. After which the device leaves the access point. Cucumber Tony will automatically mark this as a completed stay. This may not be completed immediately.
 
 Should they come back after 30 minutes have passed, we will start a new stay for them.
 
 If the device is seen only once, we consider the device to have passed through - this does not affect your dwell times.
 
-Stays currently consider both associated and unassociated clients.
+Stays currently consider both associated and unassociated clients. The devices do not have to be connected to be registered in Cucumber Tony.
 
 You may pass in various parameters to filter the results in different ways. See below.
 
