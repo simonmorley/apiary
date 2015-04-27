@@ -4538,7 +4538,7 @@ The results include a _stats object which dictates the start and end dates for t
 
 + Parameters
 
-    + ap_macs (optional, boolean, `true`) ... Filter by AP mac address
+    + ap_mac (optional, string, `11:22:33:44:55:66`) ... Filter by AP mac address
     + location_id (optional, integer, `872`) ... The numeric ID of the location you want to filter results for.
     + start (optional, intger, `1427710664`) ... Unix timestamp defining start of range required.
     + end (optional, intger, `1427730664`) ... Unix timestamp defining end of range required.
@@ -4549,7 +4549,7 @@ The results include a _stats object which dictates the start and end dates for t
 
             {
               "location_ids": "1,2,3",
-              "ap_macs": "11:22:33:44:55:66",
+              "ap_mac": "11:22:33:44:55:66",
               "start": 1422835200,
               "end": 1430173084,
               "interval": "day"
@@ -4580,7 +4580,7 @@ The values returned are in minutes.
 
             {
               "location_ids": "1,2,3",
-              "ap_macs": "11:22:33:44:55:66",
+              "ap_mac": "11:22:33:44:55:66",
               "start": 1422835200,
               "end": 1430173084,
               "interval": "day",
@@ -4612,7 +4612,7 @@ An info object will also be returned which includes aggregated stats for your dw
 
             {
               "location_ids": "1,2,3",
-              "ap_macs": "11:22:33:44:55:66",
+              "ap_mac": "11:22:33:44:55:66",
               "start": 1422835200,
               "end": 1430173084,
               "interval": "day",
@@ -4689,7 +4689,7 @@ This end-point returns the number of people connected and passing by as a timeli
 
             {
               "location_ids": "1,2,3",
-              "ap_macs": "11:22:33:44:55:66",
+              "ap_mac": "11:22:33:44:55:66",
               "start": 1422835200,
               "end": 1430173084,
               "interval": "day",
@@ -4720,7 +4720,7 @@ Returns summary stats for your networks including the manufacturers, avg. dwell 
 
             {
               "location_ids": "1,2,3",
-              "ap_macs": "11:22:33:44:55:66",
+              "ap_mac": "11:22:33:44:55:66",
               "start": 1422835200,
               "end": 1430173084,
               "interval": "day",
