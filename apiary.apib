@@ -4532,7 +4532,7 @@ Passing no params will give you the total visits and stays on a timeline. You ca
 
 You can filter the search further by including a string of location ids or mac addresses. Finally, you may pass start and end parameters as Unix time to restrict the range.
 
-## Overview of Stays [/api/v1/sense/{?location_ids,ap_macs,start,end}]
+## Main Sense End Point [/api/v1/sense/{?location_ids,ap_macs,start,end}]
 
 Summary stats of your network dwell times and stays including the counts, averages, max and min. values. You can filter using your location_ids or ap mac addresses.
 
@@ -4544,6 +4544,8 @@ The results include a _stats object which dictates the start and end dates for t
     + location_id (optional, integer, `872`) ... The numeric ID of the location you want to filter results for.
     + start (optional, intger, `1427710664`) ... Unix timestamp defining start of range required.
     + end (optional, intger, `1427730664`) ... Unix timestamp defining end of range required.
+
+### List total visits, uniques and averages [GET]
 
 + Request (application/json)
 
