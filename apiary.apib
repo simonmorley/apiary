@@ -4547,6 +4547,14 @@ Summary stats of your network dwell times and stays including the counts, averag
 
 The results include a _stats object which dictates the start and end dates for the data including an interval if included.
 
++ Parameters
+
+    + ap_macs (optional, boolean, `true`) ... Filter by AP mac address
+    + location_id (optional, integer, `872`) ... The numeric ID of the location you want to filter results for.
+    + start (optional, intger, `1427710664`) ... Unix timestamp defining start of range required.
+    + end (optional, intger, `1427730664`) ... Unix timestamp defining end of range required.
+
+
 + Request (application/json)
 
             {
