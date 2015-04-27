@@ -4534,16 +4534,7 @@ You can filter the search further by including a string of location ids or mac a
 
 ## Overview of Stays [/api/v1/sense/{?location_ids,ap_macs,start,end}]
 
-Summary stats of your network dwell times and stays including the counts, averages, max and min. values. You can filter using your location_ids or ap_macs as arrays.
-
-+ Parameters
-
-    + location_ids (optional, integer, `1,2,3`) ... Comma separated list of location IDs to filter the results.
-    + ap_macs (optional, string, `11:22:11:22:22:11`) ... Comma separated list of mac addresses to filter the results.
-    + start (optional, integer, `1406329200`) ... Start date for the query in Epoch / Unix format. Defaults to 100 days ago.
-    + end (optional, integer, `1406329200`) ... End date for the query in Epoch / Unix format. Defaults to now.
-
-### Summary stats showing the total visits, number of uniques and the average (mean) visits per day [GET]
+Summary stats of your network dwell times and stays including the counts, averages, max and min. values. You can filter using your location_ids or ap mac addresses.
 
 The results include a _stats object which dictates the start and end dates for the data including an interval if included.
 
@@ -4553,7 +4544,6 @@ The results include a _stats object which dictates the start and end dates for t
     + location_id (optional, integer, `872`) ... The numeric ID of the location you want to filter results for.
     + start (optional, intger, `1427710664`) ... Unix timestamp defining start of range required.
     + end (optional, intger, `1427730664`) ... Unix timestamp defining end of range required.
-
 
 + Request (application/json)
 
