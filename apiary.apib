@@ -4547,6 +4547,16 @@ Summary stats of your network dwell times and stays including the counts, averag
 
 The results include a _stats object which dictates the start and end dates for the data including an interval if included.
 
++ Request (application/json)
+
+            {
+              "location_ids": "1,2,3",
+              "ap_macs": "11:22:33:44:55:66",
+              "start": 1422835200,
+              "end": 1430173084,
+              "interval": "day"
+            }
+
 + Response 200 (application/json)
 
     + Body
