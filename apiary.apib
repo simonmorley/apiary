@@ -4574,6 +4574,313 @@ The results include a _stats object which dictates the start and end dates for t
                 }
             }
 
+### Dwell times, as timeline object [GET]
+
+The values returned are in minutes.
+
++ Request (application/json)
+
+            {
+              "location_ids": "1,2,3",
+              "ap_macs": "11:22:33:44:55:66",
+              "start": 1422835200,
+              "end": 1430173084,
+              "interval": "day",
+              "type": "dwells"
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "timeline": {
+                    "avg": "[52.09679487179487, 55.78642719024245, 53.591408355795146, 34.55290844097815, 35.74672131147541, 40.60648533148533, 43.67615372246342, 65.87912135335749, 63.48248257980878, 41.04168475900999, 40.827140672782875, 39.89539563862929, 48.526260022909504, 48.49265649192657, 39.47470528455285, 40.56141459184938, 47.356061183041376, 53.03373845060412, 46.877084639498435, 42.2741270388238, 66.22251671442216, 0]"
+                },
+                "_stats": {
+                    "interval": null,
+                    "start": 1422835200,
+                    "end": 1430173084
+                }
+            }
+
+### Dwell times, as histogram grouped daily [GET]
+
+Dwell times are return in minutes, this end-point also returns the total visitors per day plus the number of unique visitors per day.
+
+An info object will also be returned which includes aggregated stats for your dwell times and the values are in seconds here.
+
++ Request (application/json)
+
+            {
+              "location_ids": "1,2,3",
+              "ap_macs": "11:22:33:44:55:66",
+              "start": 1422835200,
+              "end": 1430173084,
+              "interval": "day",
+              "type": "dwells",
+              "period": "daily"
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "dailies": {
+                    "dwells": "[12.517650999237615, 11.682847875100695, 9.83107991384886, 10.52395501033317, 9.934319534297076, 10.398329929422713, 17.33016260823711]",
+                    "uniques": [
+                        {
+                            "day": 1,
+                            "uniques": 91381,
+                            "total": 583695
+                        },
+                        {
+                            "day": 2,
+                            "uniques": 93323,
+                            "total": 629372
+                        },
+                        {
+                            "day": 3,
+                            "uniques": 87765,
+                            "total": 566021
+                        },
+                        {
+                            "day": 4,
+                            "uniques": 97199,
+                            "total": 604687
+                        },
+                        {
+                            "day": 5,
+                            "uniques": 113081,
+                            "total": 630044
+                        },
+                        {
+                            "day": 6,
+                            "uniques": 106259,
+                            "total": 502853
+                        },
+                        {
+                            "day": 0,
+                            "uniques": 66971,
+                            "total": 270548
+                        }
+                    ]
+                },
+                "info": {
+                    "stats": {
+                        "avg": 1240.7175411513563,
+                        "min": 0,
+                        "max": 86395,
+                        "sum": 4081268390
+                    }
+                },
+                "_stats": {
+                    "interval": null,
+                    "start": 1422835200,
+                    "end": 1430173084
+                }
+            }
+
+### Connected clients timeline [GET]
+
+This end-point returns the number of people connected and passing by as a timeline object.
+
+
++ Request (application/json)
+
+            {
+              "location_ids": "1,2,3",
+              "ap_macs": "11:22:33:44:55:66",
+              "start": 1422835200,
+              "end": 1430173084,
+              "interval": "day",
+              "type": "connection"
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "timeline": {
+                    "connected": "[43153.0, 45292.0, 41776.0, 38356.0, 40417.0, 36207.0, 35358.0, 47713.0, 47649.0, 10326.0, 13180.0, 13072.0, 14260.0, 11273.0, 12743.0, 22062.0, 31283.0, 30237.0, 32765.0, 32210.0, 32418.0, 35028.0, 37935.0, 41367.0, 41882.0, 37552.0, 29579.0, 31876.0, 31991.0, 34281.0, 35859.0, 39870.0, 33334.0, 22840.0, 29818.0, 42692.0]",
+                    "not_connected": "[630164.0, 641484.0, 617143.0, 630181.0, 617895.0, 537052.0, 388807.0, 622147.0, 638368.0, 385068.0, 404504.0, 453850.0, 386178.0, 238147.0, 400628.0, 483298.0, 475958.0, 422491.0, 517489.0, 427439.0, 261531.0, 437076.0, 473464.0, 470112.0, 479582.0, 521148.0, 369864.0, 274784.0, 339127.0, 372383.0, 377604.0"
+                },
+                "_stats": {
+                    "interval": null,
+                    "start": 1422835200,
+                    "end": 1430173084
+                }
+            }
+
+### Overview stats [GET]
+
+Returns summary stats for your networks including the manufacturers, avg. dwell times per location, a list of access points with corresponding totals. And the total number of visits.
+
++ Request (application/json)
+
+            {
+              "location_ids": "1,2,3",
+              "ap_macs": "11:22:33:44:55:66",
+              "start": 1422835200,
+              "end": 1430173084,
+              "interval": "day",
+              "type": "stats"
+            }
+
++ Response 200 (application/json)
+
+    + Body
+            {
+                "info": {
+                    "locations": [
+                        {
+                            "location_name": "Cafe - Red",
+                            "id": 2,
+                            "slug": "Cafe Red",
+                            "total": 462910,
+                            "avgVisits": 1.4,
+                            "avgDwell": 11.8,
+                            "maxDwell": 1439.8,
+                            "sumDwell": 5453679.8
+                        },
+                        {
+                            "location_name": "Museum One",
+                            "id": 44,
+                            "slug": "museum-0660091d-d9b8-44fe-90a0-5f213bcba649",
+                            "total": 3264327,
+                            "avgVisits": 1.6,
+                            "avgDwell": 11.1,
+                            "maxDwell": 1439.8,
+                            "sumDwell": 36100180.2
+                        }
+                    ],
+                    "aps": [
+                        {
+                            "ap_mac": "00-18-0A-15-98-E0",
+                            "total": 639259
+                        },
+                        {
+                            "ap_mac": "00-18-0A-15-AA-30",
+                            "total": 619941
+                        },
+                        {
+                            "ap_mac": "00-18-0A-15-D6-10",
+                            "total": 602791
+                        },
+                        {
+                            "ap_mac": "00-18-0A-15-5F-B0",
+                            "total": 585737
+                        },
+                        {
+                            "ap_mac": "00-18-0A-04-16-5E",
+                            "total": 439712
+                        },
+                        {
+                            "ap_mac": "00-18-0A-27-C5-1A",
+                            "total": 376887
+                        },
+                        {
+                            "ap_mac": "00-18-0A-15-DC-00",
+                            "total": 131182
+                        },
+                        {
+                            "ap_mac": "00-18-0A-04-16-A0",
+                            "total": 109064
+                        },
+                        {
+                            "ap_mac": "00-18-0A-15-B9-30",
+                            "total": 53036
+                        },
+                        {
+                            "ap_mac": "00-18-0A-AC-34-10",
+                            "total": 44726
+                        },
+                        {
+                            "ap_mac": "00-18-0A-15-E6-C0",
+                            "total": 43543
+                        },
+                        {
+                            "ap_mac": "00-18-0A-13-1E-E0",
+                            "total": 35594
+                        },
+                        {
+                            "ap_mac": "00-18-0A-14-F9-D0",
+                            "total": 31386
+                        },
+                        {
+                            "ap_mac": "00-18-0A-15-DA-D0",
+                            "total": 23386
+                        },
+                        {
+                            "ap_mac": "00-18-0A-14-FC-50",
+                            "total": 21154
+                        },
+                        {
+                            "ap_mac": "00-18-0A-AC-26-00",
+                            "total": 15257
+                        },
+                        {
+                            "ap_mac": "00-18-0A-15-90-F0",
+                            "total": 14565
+                        }
+                    ],
+                    "manufacturers": [
+                        [
+                            "Apple",
+                            236968
+                        ],
+                        [
+                            "Samsung",
+                            84560
+                        ],
+                        [
+                            "Sony Mobile...",
+                            29508
+                        ],
+                        [
+                            "HTC",
+                            26349
+                        ],
+                        [
+                            "Murata Manufactuaring",
+                            24205
+                        ],
+                        [
+                            "Motorola Mobility",
+                            14790
+                        ],
+                        [
+                            "Microsoft",
+                            13485
+                        ],
+                        [
+                            "LG Electronics",
+                            13227
+                        ],
+                        [
+                            "Samsung ELECTRO MECHANICS",
+                            7908
+                        ],
+                        [
+                            "Nokia",
+                            7888
+                        ]
+                    ],
+                    "visits": {
+                        "total": 37050293,
+                        "not_connected": 34111661,
+                        "connected": 2938632
+                    }
+                },
+                "_stats": {
+                    "interval": null,
+                    "start": 1422835200,
+                    "end": 1430174304
+                }
+            }
+
 # Group Speedtests
 
 Now depreciated in favour of the reports API.
