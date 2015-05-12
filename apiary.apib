@@ -3456,6 +3456,66 @@ The idea is that you can offer different networks in different parts of your bui
 
 If you are home user, you might never need 16 SSIDs but you may want a separate one for you kids. Alternatively, if you are a hotel, you could offer a network with captive portal only in certain areas of the hotel.
 
+**A network has the following attributes:**
+
++ unique_id - a unique id for the order
+
++ access_type - type of access, open, radius, password
++ beacon_interval - wireless beacon interval
++ bridge_to_switch_ports - available on boxes with switch ports
++ captive_portal_walledgardens - allowed whitelisted domains for the captive portal
++ captive_portal_enabled - whether the captive portal is enabled
++ captive_portal_url - captive portal URL
++ captive_portal_network - captive portal network
++ captive_portal_netmask - captive portal netmask
++ captive_portal_gateway - captive portal gateway
++ captive_portal_ps - disable to use your own captive portal URL
++ captive_portal_ssl_enabled - enforce SSL on the captive portal
++ captive_portal_roaming - roam between SSIDs and networks within a location
++ captive_portal_port - captive portal port number
++ captive_portal_uamsecret - captive portal UAM secret for encrypting the response
++ captive_portal_allowed_hosts - allowed hosts for captive portal users
++ captive_portal_allowed_macs - allowed mac for captive porta. Not available if mac auth enabled
++ content_filter - content filtering options
++ description - just some notes
++ dhcp_enabled -
++ dns_1 - network dns 1
++ dns_2 - network dns 2
++ dhcp_relay_on - relay DHCP from LAN
++ dhcp_end - dhcp start IP
++ dhcp_limit - dhcp limit - controls max devices
++ dhcp_start -dhcp start IP
++ dhcp_lease - dhcp lease time
++ encryption_type - encryption type - currenly on supports psk2 (WPA2)
++ encryption_key - SSID password
++ location_id - read-only location_id
++ isolate - enforce client isolation
++ interface_name - read only name of interface
++ interface_type - type of interface
++ interface_proto - static, dhcp or pppoe
++ interface_ipaddr - network IP address
++ interface_netmask - network subnet mask
++ make_part_of_lan - connect to your local network
++ network_radio_mode - station or ap
++ proxy_server_host - proxy host IP (not hostname)
++ proxy_server_port - proxy server port number
++ radius_host_1 - radius host 1
++ radius_host_2 - radius host 2
++ radius_secret_1 - radius host 1 secret
++ radius_secret_2 - radius host 2 secret
++ radius_8021x_host_1 - 8021x radius host 1
++ radius_8021x_secret_1 - 8021x radius host secret 1
++ radius_8021x_host_2 - 8021x radius host 2
++ radius_8021x_secret_2 - 8021x radius host secret 2
++ radius_8021x_port_1 - radius 8021.x port - server 1
++ radius_8021x_port_2 - radius 8021.x port - server 2
++ radius_8021x_interval - radius 8021.x accounting interval
++ ssid - network name - the SSID
++ ssid_disabled - SSID disabled
++ ssid_hidden - SSID active but hidden
++ use_ps_radius - disable to use your own radius with the captive portal
++ vlan_id - VLAN tag
+
 **Network Sync**
 
 After you create, update or destroy a network, we will try and sync your boxes. You have an opportunity after creation to delete / cancel the job and reschedule it later. For more information, please consult the update section.
