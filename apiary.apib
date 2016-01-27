@@ -1,19 +1,22 @@
 FORMAT: 1A
-HOST: https://api.polkaspots.com
+HOST: https://api.ctapp.io
 
-# PolkaSpots API Documentation for Cucumber Tony (Beta).
-
-##I'm doing it with Cucumber Tony's API, are you?##
+# API Documentation for Cucumber Tony.
 
 Cucumber Tony's API provides a way to manage, monitor your Wireless networks and clients programatically.
 
 Our API is based on REST principles, all you need to use it is your Cucumber Tony account. You must be authenticated and call HTTPs requests on the URLs listed below.
 
-Please create an application in Cucumber Tony and use your access token in all requests.
+Please create an application in Cucumber Tony and use your access token in all requests. The docs that explain how to create your first application can be found here:
 
-The API uses secure Oauth2 to authenicate. You need to create an application before you can use the end-points.
+http://docs.cucumberwifi.io/article/231-creating-your-first-application
 
-This is not the full documentation yet. We are adding as we finalise the sections, expect frequent changes alongside additions.
+The API uses secure Oauth2 to authenicate. Each request must include the access token in the header as so:
+
+```
+curl --header "Authorization: Bearer 624457b7ab1b" \
+     --url https://api.ctapp.io/api/v1/ping.json
+```
 
 >**Note:** Some resources trigger updates to your boxes. Sending invalid data may cause your boxes to crash.
 
@@ -41,11 +44,7 @@ This is not the full documentation yet. We are adding as we finalise the section
 
 To make use of the Cucumber Tony API, you will need an access token (and refresh token if building a more persistent application).
 
-For more information how to generate this, create an application here:
-
-https://mywifi.polkaspots.com/oauth/applications
-
-SSL is required.
+Access tokens are only valid for a short period of time however each authentication request will include a refresh token. Use this refresh token to reauthenticate with the API. Do this programatically via a cron or after a request receives a 401 unauthorised error.
 
 # Group Boxes
 
@@ -2213,17 +2212,15 @@ Please note, creating a new walled garden will force all your boxes to reload th
 
 # Group Guests
 
-The **Guests API** provides information about users who have registered to use your WiFi. Typically a guest might register while purchasing an Internet Voucher from your store.
-
-We'll shortly support a guest registration without requiring a voucher purchase.
+The **Guests API** provides information about users who have registered to use your WiFi.
 
 You may use this API to retrieve a list of your guests as well as specific information on a guest.
 
-The guest object is reasonably light. A guest may belong to one of more locations and the email address is their unique identifier. Their email address will be scrubbed - you are required to use the **Email API** to gather the emails of your customers and users.
+A guest may belong to one of more locations and the email address is their unique identifier.
 
-Should you require the history for a guest, you are required to use the **Sessions Api**. Simply pass the Guest ID with the request and we'll send you their session data.
+Should you require the session history for a guest, you are required to use the **Sessions Api**. Simply pass the Guest ID with the request and we'll send you their session data.
 
-There is no search facility for guests at the moment although we'll be introducing this shortly.
+The show action will include any registration data captured when the guest signed-up.
 
 This is a read-only end-point and supports the following only:
 
@@ -2240,30 +2237,26 @@ This is a read-only end-point and supports the following only:
 + Response 200 (application/json)
 
     + Body
+
             {
-                "guests": [
-                    {
-                        "id": "550f06f84c697a90ae020000",
-                        "username": "matt_emard",
-                        "created_at": 1427048184,
-                        "codes": 2
-                    },
-                    {
-                        "id": "550f06f94c697a90ae090000",
-                        "username": "americo.denesik",
-                        "created_at": 1427046185,
-                        "codes": 8
-                    },
-                ],
+                "guests": [{
+                        "id": "56a7f7556144fecf33000004",
+                        "username": "simon@google.com",
+                        "registered": true,
+                        "created_at": 1453848405,
+                        "location_id": 1813,
+                        "location_name": "Stuff got real"
+                }],
+                "more": false,
                 "_links": {
-                    "current_page": 1,
-                    "total_pages": 3,
-                    "next_page": 2,
-                    "total_entries": 250
+                        "current_page": 1,
+                        "total_pages": 1,
+                        "next_page": null,
+                        "total_entries": 1
                 }
             }
 
-## Guest Object [/api/v1/invites/{id}]
+## Guest Object [/api/v1/guests/{id}]
 
 View all the details about a guest. Should you require a guests session data and usernames, please use the Sesssions API and pass the guest_id as a parameter.
 
@@ -2276,12 +2269,27 @@ View all the details about a guest. Should you require a guests session data and
 + Response 200 (application/json)
 
     + Body
-
             {
-                "id": "550f07084c697a90aeea0000",
-                "username": "monroe_huel",
-                "created_at": 1427048200,
-                "codes": 1
+                "guest": {
+                        "id": "56a7f7556144fecf33000004",
+                        "username": "simon@google.com",
+                        "registered": true,
+                        "created_at": 1453848405,
+                        "codes": null,
+                        "splash_page_id": "56a7f7236144fed702000000"
+                },
+                "splash_page": {
+                        "splash_name": null,
+                        "id": "56a7f7236144fed702000000",
+                        "description": null
+                },
+                "registration_data": [{
+                        "_k": "country",
+                        "_v": "uk"
+                }, {
+                        "_k": "gender",
+                        "_v": "male"
+                }]
             }
 
 # Group Invites
